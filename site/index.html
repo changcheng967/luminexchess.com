@@ -35,7 +35,7 @@
     "applicationCategory": "GameApplication",
     "applicationSubCategory": "Chess engine",
     "operatingSystem": "Windows, Linux, macOS",
-    "softwareVersion": "6.3.0",
+    "softwareVersion": "6.4.0",
     "license": "https://www.gnu.org/licenses/gpl-3.0.html",
     "url": "https://luminexchess.com/",
     "downloadUrl": "https://github.com/changcheng967/Luminex/releases/latest",
@@ -120,7 +120,7 @@
           <div class="cta-row">
             <a class="btn btn-primary" href="#download">
               <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
-              <span>Download <span data-release-tag>v6.3.0</span></span>
+              <span>Download <span data-release-tag>v6.4.0</span></span>
             </a>
             <a class="btn btn-ghost" href="https://github.com/changcheng967/Luminex">
               <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
@@ -283,12 +283,12 @@
           <article class="card">
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
             <h3>Always a fallback</h3>
-            <p>Without a network file, a hand-crafted evaluation plays instead: material, piece-square tables, mobility, passed pawns and king safety. Builds from main say so in an info line rather than switching quietly.</p>
+            <p>Without a network file, a hand-crafted evaluation plays instead: material, piece-square tables, mobility, passed pawns and king safety. The engine says so in an info line rather than switching quietly.</p>
           </article>
           <article class="card">
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg></span>
             <h3>Speaks UCI</h3>
-            <p>Load it in Cute Chess, Arena, Banksia, En Croissant or any other UCI interface. Pondering and Polyglot opening books are built in; builds from main add MultiPV and win/draw/loss output.</p>
+            <p>Load it in Cute Chess, Arena, Banksia, En Croissant or any other UCI interface. MultiPV, pondering, win/draw/loss output and Polyglot opening books are built in.</p>
           </article>
         </div>
 
@@ -695,7 +695,7 @@
           </li>
           <li class="tl">
             <time datetime="2026-11">Nov 2026</time>
-            <div class="tl-body"><h3>OpenBench</h3><p>Every change now passes an SPRT on a pool of Xeon workers. The AVX-512 VNNI build adds 46 Elo on capable CPUs.</p></div>
+            <div class="tl-body"><h3>OpenBench, then v6.4</h3><p>Every change now passes an SPRT on a pool of Xeon workers. v6.4 ships the first week of them: the network loads by itself, and every download is built for the CPUs its name promises.</p></div>
           </li>
           <li class="tl is-next">
             <time>Next</time>
@@ -711,31 +711,31 @@
           <p class="kicker">Download</p>
           <h2 id="download-title">Get Luminex</h2>
           <p class="section-lede release-meta">
-            <span data-release-name>Luminex v6.3.0</span>, released <time data-release-date datetime="2026-10-27">27 October 2026</time>.
-            <a data-release-url href="https://github.com/changcheng967/Luminex/releases/tag/v6.3.0">Release notes</a>
+            <span data-release-name>Luminex v6.4.0</span>, released <time data-release-date datetime="2026-11-05">5 November 2026</time>.
+            <a data-release-url href="https://github.com/changcheng967/Luminex/releases/tag/v6.4.0">Release notes</a>
           </p>
         </header>
 
         <div class="downloads">
-          <a class="dl" data-os="windows" data-asset="luminex-windows-x86-64-modern.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.3.0/luminex-windows-x86-64-modern.exe">
+          <a class="dl" data-os="windows" data-asset="luminex-windows-x86-64-modern.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.4.0/luminex-windows-x86-64-modern.exe">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-window"/></svg></span>
             <span class="dl-os">Windows</span>
             <span class="dl-variant">AVX2, for most PCs from 2013 on</span>
-            <span class="dl-file"><span data-file>luminex-windows-x86-64-modern.exe</span> <span class="dl-size" data-size>566 KB</span></span>
+            <span class="dl-file"><span data-file>luminex-windows-x86-64-modern.exe</span> <span class="dl-size" data-size>597 KB</span></span>
           </a>
-          <a class="dl" data-os="linux" data-asset="luminex-linux-x86-64-modern" href="https://github.com/changcheng967/Luminex/releases/download/v6.3.0/luminex-linux-x86-64-modern">
+          <a class="dl" data-os="linux" data-asset="luminex-linux-x86-64-modern" href="https://github.com/changcheng967/Luminex/releases/download/v6.4.0/luminex-linux-x86-64-modern">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg></span>
             <span class="dl-os">Linux</span>
             <span class="dl-variant">AVX2, x86-64</span>
-            <span class="dl-file"><span data-file>luminex-linux-x86-64-modern</span> <span class="dl-size" data-size>388 KB</span></span>
+            <span class="dl-file"><span data-file>luminex-linux-x86-64-modern</span> <span class="dl-size" data-size>428 KB</span></span>
           </a>
-          <a class="dl" data-os="mac" data-asset="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.3.0/luminex-macos-arm64">
+          <a class="dl" data-os="mac" data-asset="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.4.0/luminex-macos-arm64">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-command"/></svg></span>
             <span class="dl-os">macOS</span>
             <span class="dl-variant">Apple silicon</span>
-            <span class="dl-file"><span data-file>luminex-macos-arm64</span> <span class="dl-size" data-size>350 KB</span></span>
+            <span class="dl-file"><span data-file>luminex-macos-arm64</span> <span class="dl-size" data-size>366 KB</span></span>
           </a>
-          <a class="dl dl-net" data-asset="luminex_sfq_i8.nnue" href="https://github.com/changcheng967/Luminex/releases/download/v6.3.0/luminex_sfq_i8.nnue">
+          <a class="dl dl-net" data-asset="luminex_sfq_i8.nnue" href="https://github.com/changcheng967/Luminex/releases/download/v6.4.0/luminex_sfq_i8.nnue">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-chip"/></svg></span>
             <span class="dl-os">Network</span>
             <span class="dl-variant">Needed for full strength, on every system</span>
@@ -743,20 +743,19 @@
           </a>
         </div>
         <p class="dl-more">
-          Older CPUs: <a data-asset-link="luminex-windows-x86-64.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.3.0/luminex-windows-x86-64.exe">Windows compatibility build</a>
-          and <a data-asset-link="luminex-linux-x86-64" href="https://github.com/changcheng967/Luminex/releases/download/v6.3.0/luminex-linux-x86-64">Linux SSE4.2 build</a>.
+          Older CPUs: <a data-asset-link="luminex-windows-x86-64.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.4.0/luminex-windows-x86-64.exe">Windows compatibility build</a>
+          and <a data-asset-link="luminex-linux-x86-64" href="https://github.com/changcheng967/Luminex/releases/download/v6.4.0/luminex-linux-x86-64">Linux SSE4.2 build</a>.
         </p>
 
         <div class="howto">
           <div class="howto-step">
             <h3>Run it</h3>
-            <p>Put <code>luminex_sfq_i8.nnue</code> in the same folder as the program, then add Luminex to your chess interface as a UCI engine.<span data-if-tag="v6.3.0"> In v6.3.0, also set the engine's <code>NNUEFile</code> option to the network's full path; builds from main find the file on their own.</span> Or talk to it directly:</p>
+            <p>Put <code>luminex_sfq_i8.nnue</code> in the same folder as the program and Luminex loads it by itself. Add Luminex to your chess interface as a UCI engine, or talk to it directly:</p>
             <div class="code">
               <button class="copy" type="button" data-copy="uci-demo" aria-label="Copy the UCI commands">
                 <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
               </button>
 <pre id="uci-demo"><code>uci
-setoption name NNUEFile value luminex_sfq_i8.nnue
 setoption name Threads value 4
 setoption name Hash value 256
 isready
@@ -794,11 +793,11 @@ cmake --build build --config Release</code></pre>
           </details>
           <details>
             <summary>Do I need the network file?</summary>
-            <p>For full strength, yes. Without it Luminex plays with its handcrafted evaluation, roughly 500 Elo weaker. Version 6.3.0 needs the <code>NNUEFile</code> option set to the file; builds from main look for <code>luminex_sfq_i8.nnue</code> in the working folder and next to the program.</p>
+            <p>For full strength, yes. Keep <code>luminex_sfq_i8.nnue</code> next to the program or in the working folder and Luminex loads it by itself; the <code>NNUEFile</code> option points it anywhere else. Without a network it plays with its handcrafted evaluation, roughly 500 Elo weaker. Version 6.3.0 loads a network only through <code>NNUEFile</code>.</p>
           </details>
           <details>
             <summary>Which download should I pick?</summary>
-            <p>The modern builds need AVX2, which almost every x86 PC from 2013 on has. On older processors, use the compatibility builds. Macs with Apple silicon use the macOS build. This page marks the one for your system.</p>
+            <p>The modern builds need AVX2, which almost every x86 PC from 2013 on has. On older processors, use the compatibility builds, which need only POPCNT (x86 CPUs from about 2008 on). Macs with Apple silicon use the macOS build. This page marks the one for your system.</p>
           </details>
           <details>
             <summary>Does it support Chess960 or endgame tablebases?</summary>
