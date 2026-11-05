@@ -23,8 +23,9 @@
   <meta property="og:image:alt" content="Luminex: UCI chess engine, NNUE, C++23">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="/assets/img/knight.webp" as="image" type="image/webp">
-  <link rel="stylesheet" href="/assets/css/style.css?v=1">
-  <script src="/assets/js/main.js?v=1" defer></script>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+  <script src="/assets/js/main.js?v=2" defer></script>
+  <script src="/assets/js/viewer.js?v=2" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -64,6 +65,21 @@
     <symbol id="i-copy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 9h11v11H9zM5 15H4V4h11v1"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.6v12.8a1 1 0 0 0 1.53.85l10.1-6.4a1 1 0 0 0 0-1.7L9.53 4.75A1 1 0 0 0 8 5.6z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3.6v14H7zm6.4 0H17v14h-3.6z"/></symbol>
+    <symbol id="i-first" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 5v14m12-14-8 7 8 7z"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m15 5-7 7 7 7"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-last" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M18 5v14M6 5l8 7-8 7z"/></symbol>
+    <symbol id="i-flip" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 4v14m0 0-3-3m3 3 3-3m7 6V6m0 0-3 3m3-3 3 3"/></symbol>
+
+    <!-- chess pieces, drawn for this site; fill and outline come from the .pc colour classes -->
+    <symbol id="p-K" viewBox="0 0 45 45"><path d="M21.2 5.5h2.6v3.6h3.4v2.6h-3.4V24h-2.6V11.7h-3.4V9.1h3.4z"/><path d="M12.8 33.6c-2.4-4.8-2.1-11.1 3.2-12.7 2.9-.9 5.3.5 6.5 3.2 1.2-2.7 3.6-4.1 6.5-3.2 5.3 1.6 5.6 7.9 3.2 12.7z"/><path d="M11 39.3h23a1.5 1.5 0 0 0 1.5-1.5v-1.6a2.6 2.6 0 0 0-2.6-2.6H12.1a2.6 2.6 0 0 0-2.6 2.6v1.6a1.5 1.5 0 0 0 1.5 1.5z"/><path fill="none" stroke="currentColor" d="M14 29.4h17"/></symbol>
+    <symbol id="p-Q" viewBox="0 0 45 45"><path d="m12.7 33.6-3.2-18.5 4.6 7.4 1.4-10.6 3.5 9.4 3.5-11.2 3.5 11.2 3.5-9.4 1.4 10.6 4.6-7.4-3.2 18.5z"/><circle cx="9.5" cy="13.4" r="2"/><circle cx="15.5" cy="10" r="2"/><circle cx="22.5" cy="8.3" r="2.1"/><circle cx="29.5" cy="10" r="2"/><circle cx="35.5" cy="13.4" r="2"/><path d="M11 39.3h23a1.5 1.5 0 0 0 1.5-1.5v-1.6a2.6 2.6 0 0 0-2.6-2.6H12.1a2.6 2.6 0 0 0-2.6 2.6v1.6a1.5 1.5 0 0 0 1.5 1.5z"/><path fill="none" stroke="currentColor" d="M13.6 29.4h17.8"/></symbol>
+    <symbol id="p-R" viewBox="0 0 45 45"><path d="m14.6 33.6 1.2-14h13.4l1.2 14z"/><path d="M13 19.6v-9h4.2v3h3.2v-3h4.2v3h3.2v-3H32v9z"/><path d="M11 39.3h23a1.5 1.5 0 0 0 1.5-1.5v-1.6a2.6 2.6 0 0 0-2.6-2.6H12.1a2.6 2.6 0 0 0-2.6 2.6v1.6a1.5 1.5 0 0 0 1.5 1.5z"/><path fill="none" stroke="currentColor" d="M15.6 22.6h13.8"/></symbol>
+    <symbol id="p-B" viewBox="0 0 45 45"><path d="M17 33.6c.4-2.7 1.4-4.7 2.6-6.1h5.8c1.2 1.4 2.2 3.4 2.6 6.1z"/><rect x="16.4" y="25" width="12.2" height="2.9" rx="1.45"/><path d="M22.5 8.6c-4.8 3.6-7.3 8-7.3 11.6 0 2.7 1.6 4.8 4.1 4.8h6.4c2.5 0 4.1-2.1 4.1-4.8 0-3.6-2.5-8-7.3-11.6z"/><circle cx="22.5" cy="6.5" r="2"/><path d="M12 39.3h21a1.5 1.5 0 0 0 1.5-1.5v-1.6a2.6 2.6 0 0 0-2.6-2.6H13.1a2.6 2.6 0 0 0-2.6 2.6v1.6a1.5 1.5 0 0 0 1.5 1.5z"/><path fill="none" stroke="currentColor" d="m25.4 13.1-4.6 5.5"/></symbol>
+    <symbol id="p-N" viewBox="0 0 45 45"><path d="M14.4 33.6c.3-3.4 1.8-6.1 4.4-8.2l1.6-1.3c-1.3.2-2.6.3-3.9.9l-2.6 1.3c-1 .5-2.1.1-2.6-.8l-1.5-2.6c-.5-.9-.3-2 .5-2.7l7.4-6.5 1.3-3.9 1.9 2.6 1.3-3.8 2.1 2.9c4.7.9 8.6 4.6 9.5 10.6.7 4.8-.4 8.9-1.5 11.5z"/><path d="M11 39.3h23a1.5 1.5 0 0 0 1.5-1.5v-1.6a2.6 2.6 0 0 0-2.6-2.6H12.1a2.6 2.6 0 0 0-2.6 2.6v1.6a1.5 1.5 0 0 0 1.5 1.5z"/><circle cx="18.2" cy="16.4" r="1.15" fill="currentColor" stroke="none"/><path fill="none" stroke="currentColor" d="M26.4 13.3c2.9 2.2 4.4 6 4.1 10.6"/></symbol>
+    <symbol id="p-P" viewBox="0 0 45 45"><path d="M16.6 34.2c.6-4.5 2.2-8.5 4.1-11.3h3.6c1.9 2.8 3.5 6.8 4.1 11.3z"/><rect x="17.4" y="20.4" width="10.2" height="2.9" rx="1.45"/><circle cx="22.5" cy="14.6" r="5.4"/><path d="M14 39.3h17a1.5 1.5 0 0 0 1.5-1.5v-1a2.1 2.1 0 0 0-2.1-2.1H14.6a2.1 2.1 0 0 0-2.1 2.1v1a1.5 1.5 0 0 0 1.5 1.5z"/></symbol>
   </svg>
 
   <a class="skip-link" href="#main">Skip to content</a>
@@ -79,7 +95,9 @@
         <span class="sr-only">Menu</span>
       </button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="#games">Games</a>
         <a href="#engine">Engine</a>
+        <a href="#strength">Strength</a>
         <a href="#network">Network</a>
         <a href="#testing">Testing</a>
         <a href="#download">Download</a>
@@ -108,6 +126,10 @@
               <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
               <span>Source on GitHub</span>
             </a>
+            <a class="btn btn-text" href="#games">
+              <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>
+              <span>Watch it beat Stash 29</span>
+            </a>
           </div>
           <p class="hero-note">GPL-3.0 <span aria-hidden="true">·</span> Windows, Linux and macOS <span aria-hidden="true">·</span> works in any UCI interface</p>
         </div>
@@ -135,14 +157,102 @@
           </div>
           <div class="stat">
             <dt>Testing</dt>
-            <dd><span class="stat-value">SPRT</span></dd>
-            <dd class="stat-note">Changes play thousands of games first</dd>
+            <dd><span class="stat-value">64K+</span> <span class="stat-unit">games</span></dd>
+            <dd class="stat-note">Played on OpenBench since 2 November</dd>
           </div>
         </dl>
       </div>
     </section>
 
-    <section class="section" id="engine" aria-labelledby="engine-title">
+    <section class="section" id="games" aria-labelledby="games-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker">See it play</p>
+          <h2 id="games-title">Two wins against a stronger engine</h2>
+          <p class="section-lede">In OpenBench test 20, Luminex played 1,004 games against Stash 29, which is rated about 100 Elo higher, and won 236 of them. Here are two, with each engine's own score at every move. Watch where the two scores part ways.</p>
+        </header>
+
+        <div class="viewer" data-src="/assets/data/games.json">
+          <div class="viewer-tabs" role="group" aria-label="Choose a game"></div>
+          <div class="viewer-grid">
+            <div class="viewer-board">
+              <div class="board" role="img" aria-label="Chess board"></div>
+              <div class="viewer-controls" role="group" aria-label="Move controls">
+                <button type="button" class="vc" data-act="first" aria-label="Starting position"><svg class="icon" aria-hidden="true"><use href="#i-first"/></svg></button>
+                <button type="button" class="vc" data-act="prev" aria-label="Previous move"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
+                <button type="button" class="vc vc-play" data-act="play" aria-label="Play"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
+                <button type="button" class="vc" data-act="next" aria-label="Next move"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+                <button type="button" class="vc" data-act="last" aria-label="Final position"><svg class="icon" aria-hidden="true"><use href="#i-last"/></svg></button>
+                <button type="button" class="vc" data-act="flip" aria-label="Flip the board"><svg class="icon" aria-hidden="true"><use href="#i-flip"/></svg></button>
+              </div>
+              <p class="viewer-hint">Arrow keys step through the moves, space plays and pauses.</p>
+            </div>
+
+            <div class="viewer-side">
+              <div class="viewer-meta">
+                <p class="viewer-players"><span data-v="white"></span><span class="vs">vs</span><span data-v="black"></span><span class="viewer-result" data-v="result"></span></p>
+                <h3 class="viewer-title" data-v="title">Loading the games…</h3>
+                <p class="viewer-story" data-v="story"></p>
+                <p class="viewer-opening" data-v="opening"></p>
+              </div>
+              <div class="evals">
+                <div class="evalcard is-lum">
+                  <span class="evalcard-who">Luminex <span data-v="lum-side"></span></span>
+                  <span class="evalcard-score" data-v="lum-score">–</span>
+                  <span class="evalcard-meta" data-v="lum-meta">its own score</span>
+                </div>
+                <div class="evalcard is-stash">
+                  <span class="evalcard-who">Stash 29 <span data-v="stash-side"></span></span>
+                  <span class="evalcard-score" data-v="stash-score">–</span>
+                  <span class="evalcard-meta" data-v="stash-meta">its own score</span>
+                </div>
+              </div>
+              <p class="evals-gap" data-v="gap" aria-live="polite"></p>
+              <div class="moment" data-v="moment-box" hidden>
+                <span class="moment-label" data-v="moment-label"></span>
+                <p data-v="moment"></p>
+              </div>
+              <div class="moment-chips" data-v="chips" role="group" aria-label="Key moments"></div>
+              <ol class="moves" data-v="moves" aria-label="Moves"></ol>
+            </div>
+          </div>
+
+          <div class="evalgraph">
+            <div class="evalgraph-plot" data-v="plot">
+              <svg viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="eg-grid" x1="0" x2="1000" y1="36.07" y2="36.07"/>
+                <line class="eg-grid" x1="0" x2="1000" y1="74.41" y2="74.41"/>
+                <line class="eg-zero" x1="0" x2="1000" y1="100" y2="100"/>
+                <line class="eg-grid" x1="0" x2="1000" y1="125.59" y2="125.59"/>
+                <line class="eg-grid" x1="0" x2="1000" y1="163.93" y2="163.93"/>
+                <path class="eg-lum-area" data-v="lum-area" d=""/>
+                <path class="eg-stash" data-v="stash-line" d=""/>
+                <path class="eg-lum" data-v="lum-line" d=""/>
+                <line class="eg-cursor" data-v="cursor" x1="0" x2="0" y1="0" y2="200"/>
+              </svg>
+              <span class="eg-axis eg-p3" aria-hidden="true">+3</span>
+              <span class="eg-axis eg-p1" aria-hidden="true">+1</span>
+              <span class="eg-axis eg-m1" aria-hidden="true">−1</span>
+              <span class="eg-axis eg-m3" aria-hidden="true">−3</span>
+              <div class="eg-marks" data-v="marks"></div>
+            </div>
+            <p class="evalgraph-legend">
+              <span class="lg lg-lum">Luminex's score</span>
+              <span class="lg lg-stash">Stash's score</span>
+              <span class="lg-note">Both from Luminex's side: above the middle line, Luminex is better. Click the graph to jump to a move.</span>
+            </p>
+          </div>
+          <p class="viewer-foot">
+            <a href="/assets/data/luminex-vs-stash29.pgn" download>Download both games as PGN</a>
+            <span aria-hidden="true">·</span>
+            <a href="https://bench.luminexchess.com/test/20/">The whole match on bench.luminexchess.com</a>
+          </p>
+        </div>
+        <p class="viewer-fallback">The game viewer needs JavaScript. You can still <a href="/assets/data/luminex-vs-stash29.pgn">download both games as PGN</a>, with both engines' scores in the move comments.</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="engine" aria-labelledby="engine-title">
       <div class="container">
         <header class="section-head">
           <p class="kicker">Inside the engine</p>
@@ -173,14 +283,189 @@
           <article class="card">
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
             <h3>Always a fallback</h3>
-            <p>Without a network file, a hand-crafted evaluation takes over: material, piece-square tables, mobility, passed pawns and king safety. The engine says so instead of failing quietly.</p>
+            <p>Without a network file, a hand-crafted evaluation plays instead: material, piece-square tables, mobility, passed pawns and king safety. Builds from main say so in an info line rather than switching quietly.</p>
           </article>
           <article class="card">
             <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg></span>
             <h3>Speaks UCI</h3>
-            <p>Load it in Cute Chess, Arena, Banksia, En Croissant or any other UCI interface. MultiPV, pondering, win/draw/loss output and Polyglot opening books are built in.</p>
+            <p>Load it in Cute Chess, Arena, Banksia, En Croissant or any other UCI interface. Pondering and Polyglot opening books are built in; builds from main add MultiPV and win/draw/loss output.</p>
           </article>
         </div>
+
+        <div class="engine-more">
+          <figure class="search s1 s2 s3 s4 s5 s6" aria-labelledby="search-title">
+            <figcaption class="panel-head">
+              <span class="panel-title" id="search-title">How the search spends its time</span>
+              <span class="panel-sub">An illustration of the ideas, not a real search tree.</span>
+            </figcaption>
+            <div class="search-steps" role="group" aria-label="Search steps">
+              <button type="button" class="search-step" data-step="1" aria-pressed="false"><span>1</span> Order</button>
+              <button type="button" class="search-step" data-step="2" aria-pressed="false"><span>2</span> First move</button>
+              <button type="button" class="search-step" data-step="3" aria-pressed="false"><span>3</span> Null window</button>
+              <button type="button" class="search-step" data-step="4" aria-pressed="false"><span>4</span> Reduce</button>
+              <button type="button" class="search-step" data-step="5" aria-pressed="false"><span>5</span> Prune</button>
+              <button type="button" class="search-step" data-step="6" aria-pressed="false"><span>6</span> Leaves</button>
+            </div>
+            <svg class="search-svg" viewBox="0 0 640 300" aria-hidden="true" focusable="false">
+              <g class="t-edges">
+                <path class="t-e pv" d="M320 34 80 112"/>
+                <path class="t-e zw" d="M320 34 200 112"/>
+                <path class="t-e zw" d="M320 34 320 112"/>
+                <path class="t-e zw lmr" d="M320 34 440 112"/>
+                <path class="t-e zw cut" d="M320 34 560 112"/>
+                <path class="t-e pv" d="M80 112 50 192M80 112l30 80"/>
+                <path class="t-e" d="M200 112l-30 80m30-80 30 80"/>
+                <path class="t-e" d="M320 112l-30 80"/>
+                <path class="t-e fut" d="M320 112l30 80"/>
+                <path class="t-e lmr" d="M440 112l-20 48m20-48 20 48"/>
+                <path class="t-e cut" d="M560 112l-30 80m30-80 30 80"/>
+              </g>
+              <g class="t-qs">
+                <path class="t-qe" d="M50 192v86M110 192v60M170 192v34M230 192v60M290 192v34M420 160v60M460 160v34"/>
+                <rect x="46" y="222" width="8" height="8" rx="1.5"/><rect x="46" y="248" width="8" height="8" rx="1.5"/>
+                <rect x="106" y="222" width="8" height="8" rx="1.5"/>
+                <rect x="226" y="222" width="8" height="8" rx="1.5"/>
+                <rect x="416" y="190" width="8" height="8" rx="1.5"/>
+                <path class="t-ev" d="m50 271 7 7-7 7-7-7zm60-26 7 7-7 7-7-7zm60-26 7 7-7 7-7-7zm60 26 7 7-7 7-7-7zm60-26 7 7-7 7-7-7zm130 0 7 7-7 7-7-7zm40-26 7 7-7 7-7-7z"/>
+              </g>
+              <g class="t-nodes">
+                <circle class="t-n t-root" cx="320" cy="34" r="17"/>
+                <circle class="t-n t-c pv c1" cx="80" cy="112" r="14"/>
+                <circle class="t-n t-c" cx="200" cy="112" r="14"/>
+                <circle class="t-n t-c" cx="320" cy="112" r="14"/>
+                <circle class="t-n t-c lmr" cx="440" cy="112" r="14"/>
+                <circle class="t-n t-c cut" cx="560" cy="112" r="14"/>
+                <circle class="t-n pv" cx="50" cy="192" r="9"/><circle class="t-n pv" cx="110" cy="192" r="9"/>
+                <circle class="t-n" cx="170" cy="192" r="9"/><circle class="t-n" cx="230" cy="192" r="9"/>
+                <circle class="t-n" cx="290" cy="192" r="9"/><circle class="t-n fut" cx="350" cy="192" r="9"/>
+                <circle class="t-n lmr" cx="420" cy="160" r="8"/><circle class="t-n lmr" cx="460" cy="160" r="8"/>
+                <circle class="t-n cut" cx="530" cy="192" r="9"/><circle class="t-n cut" cx="590" cy="192" r="9"/>
+              </g>
+              <g class="t-ord">
+                <text x="80" y="117">1</text><text x="200" y="117">2</text><text x="320" y="117">3</text><text x="440" y="117">4</text><text x="560" y="117">5</text>
+              </g>
+              <g class="t-x">
+                <path d="m544 150 32 32m0-32-32 32M341 183l18 18m0-18-18 18"/>
+              </g>
+              <g class="t-lbl">
+                <text class="l-ord" x="520" y="30">best guesses first</text>
+                <text class="l-pv" x="130" y="64">full window</text>
+                <text class="l-zw" x="470" y="64">null window</text>
+                <text class="l-lmr" x="440" y="206">less depth</text>
+                <text class="l-cut" x="560" y="236">pruned</text>
+                <text class="l-qs" x="230" y="294">captures, then the network</text>
+              </g>
+            </svg>
+            <div class="search-texts" aria-live="polite">
+              <p class="search-text" data-step="1"><strong>Order the moves.</strong> The move stored in the hash table goes first, then winning captures, killer moves, and quiet moves ranked by their history. A good first guess makes everything after it cheaper.</p>
+              <p class="search-text" data-step="2"><strong>Search the first move fully.</strong> Principal variation search gives it the whole window of scores. Its result is the score every other move has to beat.</p>
+              <p class="search-text" data-step="3"><strong>Test the rest with a null window.</strong> A later move only has to show it is no better, and a zero-width search answers that quickly. A move that turns out better is searched again in full.</p>
+              <p class="search-text" data-step="4"><strong>Reduce late moves.</strong> Quiet moves far down the list are searched less deeply. If one of them surprises, it gets the full depth after all.</p>
+              <p class="search-text" data-step="5"><strong>Prune what cannot matter.</strong> Null-move, futility and late-move pruning drop branches whose score cannot reach the window.</p>
+              <p class="search-text" data-step="6"><strong>Settle the captures, then ask the network.</strong> At the horizon, a quiescence search plays out the captures until the position is quiet, and the neural network scores what is left.</p>
+            </div>
+          </figure>
+
+          <figure class="speed" aria-labelledby="speed-title">
+            <figcaption class="panel-head">
+              <span class="panel-title" id="speed-title">Search speed</span>
+              <span class="panel-sub">Nodes per second on one thread of a Xeon Platinum 8562Y+ with AVX-512 VNNI, built from main</span>
+            </figcaption>
+            <ul class="bars" data-max="1400000">
+              <li class="bar" data-v="1157611"><span class="bar-label">Starting position</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-value">1,157,611</span></li>
+              <li class="bar" data-v="1122352"><span class="bar-label">Middlegame</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-value">1,122,352</span></li>
+              <li class="bar" data-v="1004862"><span class="bar-label">Sharp tactics</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-value">1,004,862</span></li>
+              <li class="bar" data-v="1304966"><span class="bar-label">Rook ending</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-value">1,304,966</span></li>
+              <li class="bar" data-v="1364405"><span class="bar-label">Pawn ending</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-value">1,364,405</span></li>
+            </ul>
+            <p class="panel-note">Speed is strength at fast time controls: the AVX-512 VNNI build alone was worth +45.8 Elo on the test workers (<a href="https://bench.luminexchess.com/test/27/">test 27</a>).</p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="strength" aria-labelledby="strength-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker">Strength</p>
+          <h2 id="strength-title">Where it stands</h2>
+          <p class="section-lede">Stash, by Morgan Houppin, has a release at almost every step of strength. Luminex beats every Stash up to version 26, plays level with Stash 27, and loses to Stash 29 by about 105 Elo. That puts it near 3030.</p>
+        </header>
+
+        <div class="strength-grid">
+          <ol class="ladder" aria-label="Match results against Stash releases, strongest first">
+            <li class="rung" data-wdl="236/237/531">
+              <span class="rung-name">Stash 29 <span class="rung-rating">3137</span></span>
+              <span class="rung-result"><span class="wdl" aria-hidden="true"><span class="wdl-w"></span><span class="wdl-d"></span><span class="wdl-l"></span></span><span class="rung-games">+236 =237 −531 · 1,004 games · development build</span></span>
+              <span class="rung-score">35%</span>
+              <span class="rung-elo is-minus">−105</span>
+            </li>
+            <li class="rung" data-wdl="19/11/20">
+              <span class="rung-name">Stash 27 <span class="rung-rating">3057</span></span>
+              <span class="rung-result"><span class="wdl" aria-hidden="true"><span class="wdl-w"></span><span class="wdl-d"></span><span class="wdl-l"></span></span><span class="rung-games">+19 =11 −20 · 50 games</span></span>
+              <span class="rung-score">49%</span>
+              <span class="rung-elo is-minus">−7</span>
+            </li>
+            <li class="rung is-lum">
+              <span class="rung-name">Luminex <span class="rung-rating">≈3030</span></span>
+              <span class="rung-result"><span class="rung-games">Estimated from these matches</span></span>
+              <span class="rung-score"></span>
+              <span class="rung-elo"></span>
+            </li>
+            <li class="rung" data-wdl="26/7/17">
+              <span class="rung-name">Stash 26 <span class="rung-rating">3000*</span></span>
+              <span class="rung-result"><span class="wdl" aria-hidden="true"><span class="wdl-w"></span><span class="wdl-d"></span><span class="wdl-l"></span></span><span class="rung-games">+26 =7 −17 · 50 games</span></span>
+              <span class="rung-score">59%</span>
+              <span class="rung-elo is-plus">+63</span>
+            </li>
+            <li class="rung" data-wdl="26/8/16">
+              <span class="rung-name">Stash 25 <span class="rung-rating">2937</span></span>
+              <span class="rung-result"><span class="wdl" aria-hidden="true"><span class="wdl-w"></span><span class="wdl-d"></span><span class="wdl-l"></span></span><span class="rung-games">+26 =8 −16 · 50 games</span></span>
+              <span class="rung-score">60%</span>
+              <span class="rung-elo is-plus">+70</span>
+            </li>
+            <li class="rung" data-wdl="22/12/16">
+              <span class="rung-name">Stash 24 <span class="rung-rating">2880*</span></span>
+              <span class="rung-result"><span class="wdl" aria-hidden="true"><span class="wdl-w"></span><span class="wdl-d"></span><span class="wdl-l"></span></span><span class="rung-games">+22 =12 −16 · 50 games</span></span>
+              <span class="rung-score">56%</span>
+              <span class="rung-elo is-plus">+42</span>
+            </li>
+            <li class="rung" data-wdl="27/8/15">
+              <span class="rung-name">Stash 23 <span class="rung-rating">2830*</span></span>
+              <span class="rung-result"><span class="wdl" aria-hidden="true"><span class="wdl-w"></span><span class="wdl-d"></span><span class="wdl-l"></span></span><span class="rung-games">+27 =8 −15 · 50 games</span></span>
+              <span class="rung-score">62%</span>
+              <span class="rung-elo is-plus">+85</span>
+            </li>
+            <li class="rung" data-wdl="34/7/9">
+              <span class="rung-name">Stash 22 <span class="rung-rating">2770*</span></span>
+              <span class="rung-result"><span class="wdl" aria-hidden="true"><span class="wdl-w"></span><span class="wdl-d"></span><span class="wdl-l"></span></span><span class="rung-games">+34 =7 −9 · 50 games</span></span>
+              <span class="rung-score">75%</span>
+              <span class="rung-elo is-plus">+192</span>
+            </li>
+            <li class="rung" data-wdl="34/4/12">
+              <span class="rung-name">Stash 21 <span class="rung-rating">2714</span></span>
+              <span class="rung-result"><span class="wdl" aria-hidden="true"><span class="wdl-w"></span><span class="wdl-d"></span><span class="wdl-l"></span></span><span class="rung-games">+34 =4 −12 · 50 games</span></span>
+              <span class="rung-score">72%</span>
+              <span class="rung-elo is-plus">+160</span>
+            </li>
+          </ol>
+
+          <div class="strength-cards">
+            <article class="fact">
+              <p class="fact-label">The long match</p>
+              <p class="fact-value">3032 <span>± 20</span></p>
+              <p>1,004 games against Stash 29, which CCRL Blitz rates 3137: 236 wins, 237 draws and 531 losses, or −105 ± 20 Elo. With so many games, this is the tightest measurement on the ladder.</p>
+              <a class="text-link" href="https://bench.luminexchess.com/test/20/"><span>Test 20 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </article>
+            <article class="fact">
+              <p class="fact-label">Since the release</p>
+              <p class="fact-value">+78.6 <span>± 20.6</span></p>
+              <p>The development build of 2 November against the v6.3.0 release, over 1,038 games. Gains in self-play usually shrink against other engines, so this is not added to the 3030.</p>
+              <a class="text-link" href="https://bench.luminexchess.com/test/21/"><span>Test 21 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </article>
+          </div>
+        </div>
+        <p class="strength-note">Ratings are CCRL Blitz values for each Stash release; * marks releases CCRL has not ranked, whose ratings are estimates. The 50-game matches were played by v6.3.0 at 10+0.1 with one thread and carry error bars of about ±85 Elo each. The Stash 29 match ran on OpenBench with the development build of 2 November, at 10+0.1 adjusted to the workers' speed.</p>
       </div>
     </section>
 
@@ -287,29 +572,87 @@
 
         <figure class="sprt">
           <figcaption>
-            <span class="sprt-title">Recent SPRT passes</span>
-            <span class="sprt-sub">Elo gain over the previous engine, with 95% confidence intervals</span>
+            <span class="sprt-title">Every test so far</span>
+            <span class="sprt-sub">Elo against the previous engine with 95% confidence intervals, newest first, as of 5 November 2026</span>
           </figcaption>
-          <div class="sprt-chart" data-min="-10" data-max="70">
+          <div class="sprt-chart" data-min="-20" data-max="60">
             <div class="sprt-axis" aria-hidden="true">
-              <span data-tick="0">0</span><span data-tick="20">+20</span><span data-tick="40">+40</span><span data-tick="60">+60</span>
+              <span data-tick="-20">−20</span><span data-tick="0">0</span><span data-tick="20">+20</span><span data-tick="40">+40</span><span data-tick="60">+60</span>
             </div>
-            <div class="sprt-row" data-elo="45.79" data-ci="14.77">
-              <a class="sprt-label" href="https://github.com/changcheng967/Luminex/pull/12">AVX-512 VNNI builds on capable CPUs <span>#12 · 1,328 games</span></a>
+            <div class="sprt-row is-run" data-elo="5.37" data-ci="5.30">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/21">King-move accumulators from a per-square refresh cache</a>
+                <span><a href="https://bench.luminexchess.com/test/28/">Test 28</a> · #21 · 9,058 games · <span class="sprt-status st-run">Running</span></span>
+              </div>
               <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
-              <span class="sprt-value">+45.8 ± 14.8</span>
+              <span class="sprt-value">+5.4 ± 5.3</span>
             </div>
-            <div class="sprt-row" data-elo="10.32" data-ci="6.51">
-              <a class="sprt-label" href="https://github.com/changcheng967/Luminex/pull/6">History sign, root-best leak and eval cache fixes <span>#6 · 6,602 games</span></a>
+            <div class="sprt-row" data-elo="45.79" data-ci="14.88">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/12">AVX-512 VNNI builds on capable CPUs</a>
+                <span><a href="https://bench.luminexchess.com/test/27/">Test 27</a> · #12 · 1,328 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
               <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
-              <span class="sprt-value">+10.3 ± 6.5</span>
+              <span class="sprt-value">+45.8 ± 14.9</span>
             </div>
             <div class="sprt-row" data-elo="8.25" data-ci="5.61">
-              <a class="sprt-label" href="https://github.com/changcheng967/Luminex/pull/16">Queen promotions searched with the captures <span>#16 · 8,632 games</span></a>
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/16">Queen promotions searched with the captures</a>
+                <span><a href="https://bench.luminexchess.com/test/24/">Test 24</a> · #16 · 8,632 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
               <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
               <span class="sprt-value">+8.3 ± 5.6</span>
             </div>
+            <div class="sprt-row is-fail" data-elo="-4.42" data-ci="5.68">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/10">Complete check detection, no double null moves</a>
+                <span><a href="https://bench.luminexchess.com/test/23/">Test 23</a> · #10 · 8,732 games · <span class="sprt-status st-merged">Merged, within error</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">−4.4 ± 5.7</span>
+            </div>
+            <div class="sprt-row is-fail" data-elo="-1.27" data-ci="4.07">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/11">Quiescence hash table, eval reuse, 50-move damping</a>
+                <span><a href="https://bench.luminexchess.com/test/22/">Test 22</a> · #11 · 17,492 games · <span class="sprt-status st-merged">Merged, within error</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">−1.3 ± 4.1</span>
+            </div>
+            <div class="sprt-row" data-elo="10.32" data-ci="6.51">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/6">History sign, root-best leak and eval cache fixes</a>
+                <span><a href="https://bench.luminexchess.com/test/19/">Test 19</a> · #6 · 6,602 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+10.3 ± 6.5</span>
+            </div>
+            <div class="sprt-row is-fail" data-elo="-6.99" data-ci="6.66">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/5">Hash table encoding, replacement and seven more repairs</a>
+                <span><a href="https://bench.luminexchess.com/test/18/">Test 18</a> · #5 · 6,314 games · <span class="sprt-status st-merged">Merged for correctness</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">−7.0 ± 6.7</span>
+            </div>
+            <div class="sprt-row" data-elo="20.71" data-ci="9.77">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/3">Capture history, razoring and quiescence repairs</a>
+                <span><a href="https://bench.luminexchess.com/test/3/">Test 3</a> · #3 · 3,006 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+20.7 ± 9.8</span>
+            </div>
+            <div class="sprt-row" data-elo="127.32" data-ci="27.23">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/2">Static exchange evaluation rewritten with exact x-rays</a>
+                <span><a href="https://bench.luminexchess.com/test/1/">Test 1</a> · #2 · 570 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+127.3 ± 27.2</span>
+            </div>
           </div>
+          <p class="sprt-note">Three changes were merged although their tests failed. #5 repaired correctness bugs at a measured cost, and #10 and #11 landed inside the error margin. The SEE rewrite, at +127, runs off the chart.</p>
           <a class="text-link" href="https://bench.luminexchess.com">
             <span>Every test, live on bench.luminexchess.com</span>
             <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
@@ -318,7 +661,51 @@
       </div>
     </section>
 
-    <section class="section section-alt" id="download" aria-labelledby="download-title">
+    <section class="section section-alt" id="history" aria-labelledby="history-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker">History</p>
+          <h2 id="history-title">From first commit to 3000</h2>
+          <p class="section-lede">Nine months and 1,646 commits, from a handcrafted engine to a neural one.</p>
+        </header>
+        <ol class="timeline">
+          <li class="tl">
+            <time datetime="2026-01">Jan 2026</time>
+            <div class="tl-body"><h3>First commit</h3><p>27 January: a handcrafted evaluation and an alpha-beta search.</p></div>
+          </li>
+          <li class="tl">
+            <time datetime="2026-04">Apr 2026</time>
+            <div class="tl-body"><h3>Version 5</h3><p>The evaluation is rewritten from scratch (v5.0, 9 April), then tuned release by release.</p></div>
+          </li>
+          <li class="tl">
+            <time datetime="2026-07">Jul 2026</time>
+            <div class="tl-body"><h3>The first network</h3><p>12 July: Luminex plays with an NNUE for the first time. SIMD work then takes the network from 81,000 to 982,000 nodes per second.</p></div>
+          </li>
+          <li class="tl">
+            <time datetime="2026-08">Aug 2026</time>
+            <div class="tl-body"><h3>The handcrafted peak <span class="tl-elo">≈2500</span></h3><p>Tuned by distillation, the classical evaluation reaches about 2500 on the Stash ladder (v5.16).</p></div>
+          </li>
+          <li class="tl">
+            <time datetime="2026-09">Sep 2026</time>
+            <div class="tl-body"><h3>gen768 <span class="tl-elo">≈2800</span></h3><p>A 768-wide network becomes the default and NNUE is switched on for everyone (v6.1).</p></div>
+          </li>
+          <li class="tl">
+            <time datetime="2026-10">Oct 2026</time>
+            <div class="tl-body"><h3>3000 crossed <span class="tl-elo">≈3030</span></h3><p>v6.3 ships a network trained on Leela positions labeled by Stockfish, with the loss weighted toward quiet positions.</p></div>
+          </li>
+          <li class="tl">
+            <time datetime="2026-11">Nov 2026</time>
+            <div class="tl-body"><h3>OpenBench</h3><p>Every change now passes an SPRT on a pool of Xeon workers. The AVX-512 VNNI build adds 46 Elo on capable CPUs.</p></div>
+          </li>
+          <li class="tl is-next">
+            <time>Next</time>
+            <div class="tl-body"><h3>A network from public data</h3><p>Training on the T91 positions, about 800 million of them, published on Hugging Face.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="download" aria-labelledby="download-title">
       <div class="container">
         <header class="section-head">
           <p class="kicker">Download</p>
@@ -363,12 +750,13 @@
         <div class="howto">
           <div class="howto-step">
             <h3>Run it</h3>
-            <p>Keep <code>luminex_sfq_i8.nnue</code> next to the program and the engine loads it by itself. Add Luminex to your chess interface as a UCI engine, or talk to it directly:</p>
+            <p>Put <code>luminex_sfq_i8.nnue</code> in the same folder as the program, then add Luminex to your chess interface as a UCI engine.<span data-if-tag="v6.3.0"> In v6.3.0, also set the engine's <code>NNUEFile</code> option to the network's full path; builds from main find the file on their own.</span> Or talk to it directly:</p>
             <div class="code">
               <button class="copy" type="button" data-copy="uci-demo" aria-label="Copy the UCI commands">
                 <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
               </button>
 <pre id="uci-demo"><code>uci
+setoption name NNUEFile value luminex_sfq_i8.nnue
 setoption name Threads value 4
 setoption name Hash value 256
 isready
@@ -392,6 +780,49 @@ cmake --build build --config Release</code></pre>
         </div>
       </div>
     </section>
+
+    <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker">Questions</p>
+          <h2 id="faq-title">Good to know</h2>
+        </header>
+        <div class="faq">
+          <details>
+            <summary>Is Luminex free?</summary>
+            <p>Yes. It is free software under the GNU General Public License v3: you can use it, study it, change it and share it. Parts of its foundation derive from Stockfish.</p>
+          </details>
+          <details>
+            <summary>Do I need the network file?</summary>
+            <p>For full strength, yes. Without it Luminex plays with its handcrafted evaluation, roughly 500 Elo weaker. Version 6.3.0 needs the <code>NNUEFile</code> option set to the file; builds from main look for <code>luminex_sfq_i8.nnue</code> in the working folder and next to the program.</p>
+          </details>
+          <details>
+            <summary>Which download should I pick?</summary>
+            <p>The modern builds need AVX2, which almost every x86 PC from 2013 on has. On older processors, use the compatibility builds. Macs with Apple silicon use the macOS build. This page marks the one for your system.</p>
+          </details>
+          <details>
+            <summary>Does it support Chess960 or endgame tablebases?</summary>
+            <p>Not yet. Luminex plays standard chess only, and it does not probe Syzygy tablebases. It accepts the <code>SyzygyPath</code> option so interfaces don't complain, then plays endgames with search and evaluation alone.</p>
+          </details>
+          <details>
+            <summary>Can it play weaker, for practice?</summary>
+            <p>Not yet. <code>Skill Level</code>, <code>UCI_LimitStrength</code> and <code>UCI_Elo</code> are accepted for compatibility but have no effect, so Luminex always plays at full strength.</p>
+          </details>
+          <details>
+            <summary>How strong is it, really?</summary>
+            <p>About 3030 Elo at blitz, measured against Stash releases with known ratings. That is an estimate from engine matches, not an entry on a rating list; see <a href="#strength">Strength</a> for the numbers.</p>
+          </details>
+          <details>
+            <summary>How are changes tested?</summary>
+            <p>On OpenBench, against the current engine, until an SPRT can separate a gain from noise. Every result, including the failures, is public on <a href="https://bench.luminexchess.com">bench.luminexchess.com</a>.</p>
+          </details>
+          <details>
+            <summary>How can I help?</summary>
+            <p>Report bugs or send pull requests on <a href="https://github.com/changcheng967/Luminex">GitHub</a>. Changes that affect play go through an SPRT before they merge.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -408,10 +839,11 @@ cmake --build build --config Release</code></pre>
         <a href="https://github.com/changcheng967/Luminex/releases">Releases</a>
         <a href="https://bench.luminexchess.com">OpenBench</a>
         <a href="https://huggingface.co/datasets/changcheng967/luminex-t91-training-data">Training data</a>
+        <a href="#faq">Questions</a>
       </nav>
     </div>
     <div class="container footer-base">
-      <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> estimated from blitz matches against the Stash engine ladder (ahead of Stash 26, level with Stash 27). It is not a rating-list figure.</p>
+      <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> estimated from blitz matches against Stash releases with CCRL Blitz ratings: ahead of Stash 26, level with Stash 27, and 105 Elo behind Stash 29 over 1,004 games. It is not a rating-list figure.</p>
       <p>© 2025–2026 Chang Cheng</p>
     </div>
   </footer>

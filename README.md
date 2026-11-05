@@ -7,6 +7,10 @@ The homepage of [Luminex](https://github.com/changcheng967/Luminex), an open-sou
   page ships v6.3.0 links as a fallback).
 - `tools/make_assets.py` regenerates the images in `site/assets/img` and `site/favicon.ico`
   from the engine's `luminex.jpg`.
+- `site/assets/data/` holds the two games in the viewer: `games.json`, read by
+  `site/assets/js/viewer.js`, and the same games as PGN. `tools/select_games.py` ranks
+  candidate wins in OpenBench PGNs and `tools/export_games.py` writes both files; their
+  docstrings say which archive the current games come from.
 
 ## Hosting
 
@@ -37,3 +41,5 @@ Then open http://localhost:8137.
   `site/index.html` when a new release ships.
 - After editing CSS or JavaScript, raise the `?v=` number on its `<link>` or `<script>` tag
   so browsers fetch the new file.
+- The test record, the Stash ladder and the speed figures are written into `site/index.html`
+  by hand, with an "as of" date; update them when new tests finish.

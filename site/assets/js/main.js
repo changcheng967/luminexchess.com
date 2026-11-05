@@ -8,6 +8,15 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+  // run fn once, when el first scrolls into view (at once without IntersectionObserver)
+  function onVisible(el, fn, threshold) {
+    if (!("IntersectionObserver" in window) || reduceMotion.matches) { fn(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { io.disconnect(); fn(); }
+    }, { threshold: threshold || 0.3 });
+    io.observe(el);
+  }
+
   /* ---------- header: solid background once the page scrolls ---------- */
   var header = document.querySelector(".site-header");
   function onScroll() {
@@ -38,6 +47,32 @@
   document.addEventListener("click", function (e) {
     if (nav.classList.contains("is-open") && !e.target.closest(".site-nav, .nav-toggle")) setNav(false);
   });
+
+  /* ---------- navigation: mark the section on screen ---------- */
+  (function scrollspy() {
+    if (!("IntersectionObserver" in window)) return;
+    var links = {}, order = [], showing = {};
+    nav.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      var id = a.getAttribute("href").slice(1), sec = document.getElementById(id);
+      if (!sec) return;
+      links[id] = a;
+      order.push(id);
+    });
+    function update() {
+      var active = null;
+      for (var i = 0; i < order.length; i++) if (showing[order[i]]) { active = order[i]; break; }
+      order.forEach(function (id) {
+        var on = id === active;
+        links[id].classList.toggle("is-active", on);
+        if (on) links[id].setAttribute("aria-current", "location"); else links[id].removeAttribute("aria-current");
+      });
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { showing[e.target.id] = e.isIntersecting; });
+      update();
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    order.forEach(function (id) { io.observe(document.getElementById(id)); });
+  })();
 
   /* ---------- hero: squares of light drifting off the knight ---------- */
   (function particles() {
@@ -174,28 +209,89 @@
       var elo = parseFloat(row.getAttribute("data-elo"));
       var ci = parseFloat(row.getAttribute("data-ci"));
       var track = row.querySelector(".sprt-track");
+      // intervals past the right edge are drawn to the edge and marked with an arrow
+      var lo = Math.max(min, Math.min(max - 4, elo - ci));
+      var hi = Math.min(max, elo + ci);
+      row.classList.toggle("is-clip", elo + ci > max);
+      row.classList.toggle("is-off", elo > max);
       track.style.setProperty("--zero", pct(0) + "%");
-      track.style.setProperty("--lo", pct(elo - ci) + "%");
-      track.style.setProperty("--w", (pct(elo + ci) - pct(elo - ci)) + "%");
-      track.style.setProperty("--pt", pct(elo) + "%");
+      track.style.setProperty("--lo", pct(lo) + "%");
+      track.style.setProperty("--w", Math.max(0, pct(hi) - pct(lo)) + "%");
+      track.style.setProperty("--pt", pct(Math.min(max, elo)) + "%");
     });
-    if (!("IntersectionObserver" in window) || reduceMotion.matches) {
-      chart.classList.add("is-ready");
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        chart.classList.add("is-ready");
-        io.disconnect();
+    onVisible(chart, function () { chart.classList.add("is-ready"); }, 0.2);
+  })();
+
+  /* ---------- strength ladder: win/draw/loss bars ---------- */
+  (function ladder() {
+    var list = document.querySelector(".ladder");
+    if (!list) return;
+    list.querySelectorAll("[data-wdl]").forEach(function (row) {
+      var n = row.getAttribute("data-wdl").split("/").map(Number);
+      var total = n[0] + n[1] + n[2];
+      if (!total) return;
+      row.style.setProperty("--w", (100 * n[0] / total) + "%");
+      row.style.setProperty("--d", (100 * n[1] / total) + "%");
+      row.style.setProperty("--l", (100 * n[2] / total) + "%");
+    });
+    onVisible(list, function () { list.classList.add("is-ready"); }, 0.2);
+  })();
+
+  /* ---------- search speed bars ---------- */
+  (function speed() {
+    var bars = document.querySelector(".bars");
+    if (!bars) return;
+    var max = parseFloat(bars.getAttribute("data-max"));
+    bars.querySelectorAll(".bar").forEach(function (b) {
+      b.style.setProperty("--v", (100 * parseFloat(b.getAttribute("data-v")) / max) + "%");
+    });
+    onVisible(bars, function () { bars.classList.add("is-ready"); }, 0.3);
+  })();
+
+  /* ---------- search illustration: one idea at a time ---------- */
+  (function search() {
+    var fig = document.querySelector(".search");
+    if (!fig) return;
+    var buttons = fig.querySelectorAll(".search-step");
+    var texts = fig.querySelectorAll(".search-text");
+    var current = 1, timer = 0, auto = true, onScreen = false;
+    function set(n) {
+      current = n;
+      for (var i = 1; i <= 6; i++) {          // s1..sN: ideas shown so far; now-N: the current one
+        fig.classList.toggle("s" + i, i <= n);
+        fig.classList.toggle("now-" + i, i === n);
       }
-    }, { threshold: 0.35 });
-    io.observe(chart);
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", Number(b.getAttribute("data-step")) === n ? "true" : "false");
+      });
+      texts.forEach(function (t) { t.hidden = Number(t.getAttribute("data-step")) !== n; });
+    }
+    function tick() {
+      clearTimeout(timer);
+      if (!auto || !onScreen || document.hidden || reduceMotion.matches) return;
+      timer = setTimeout(function () { set(current % 6 + 1); tick(); }, 4600);
+    }
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        auto = false;
+        clearTimeout(timer);
+        set(Number(b.getAttribute("data-step")));
+      });
+    });
+    set(1);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        if (onScreen) tick(); else clearTimeout(timer);
+      }, { threshold: 0.4 }).observe(fig);
+    }
+    document.addEventListener("visibilitychange", tick);
   })();
 
   /* ---------- reveal sections as they scroll in ---------- */
   (function reveal() {
     if (!("IntersectionObserver" in window) || reduceMotion.matches) return;
-    var els = document.querySelectorAll(".section-head, .card, .net, .split, .pipeline li, .sprt, .dl, .howto-step");
+    var els = document.querySelectorAll(".section-head, .card, .net, .split, .pipeline li, .sprt, .dl, .howto-step, .viewer, .search, .speed, .ladder, .fact, .tl, .faq details");
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
@@ -258,6 +354,8 @@
       if (!rel || !rel.tag_name || !rel.assets) return;
       var tag = rel.tag_name;
       document.querySelectorAll("[data-release-tag]").forEach(function (el) { el.textContent = tag; });
+      // notes that apply to one release only, such as setting NNUEFile by hand in v6.3.0
+      document.querySelectorAll("[data-if-tag]").forEach(function (el) { el.hidden = el.getAttribute("data-if-tag") !== tag; });
       document.querySelectorAll("[data-release-name]").forEach(function (el) { el.textContent = rel.name || ("Luminex " + tag); });
       var date = fmtDate(rel.published_at);
       document.querySelectorAll("[data-release-date]").forEach(function (el) {
