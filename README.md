@@ -30,10 +30,12 @@ elsewhere, behind a Cloudflare Tunnel, and is not part of this repository.
 ## Preview locally
 
 ```bash
-python -m http.server 8137 --directory site
+python -I tools/serve.py site 8137
 ```
 
-Then open http://localhost:8137.
+Then open http://127.0.0.1:8137. The server applies `site/_headers`, including the Content
+Security Policy, so anything the policy would block in production shows up in the browser
+console.
 
 ## Updating
 
