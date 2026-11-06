@@ -303,6 +303,7 @@ p { margin: 0; }
 .st-run::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--violet); animation: blink 1.6s ease-in-out infinite; }
 @keyframes blink { 50% { opacity: 0.2; } }
 .st-merged { color: #ffe3b0; border: 1px solid rgba(255, 211, 138, 0.45); }
+.st-stop { color: #c9d1e0; border: 1px solid rgba(201, 209, 224, 0.4); }
 .sprt-track {
   position: relative; height: 34px; border-radius: 10px;
   background:
