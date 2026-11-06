@@ -399,4 +399,251 @@
       })
       .catch(function () { clearTimeout(timer); });
   })();
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function svgEl(tag, attrs, cls) {
+    var e = document.createElementNS(SVGNS, tag);
+    if (cls) e.setAttribute("class", cls);
+    for (var k in attrs) if (Object.prototype.hasOwnProperty.call(attrs, k)) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  /* ---------- hero: a real win, replayed with Luminex's own score ---------- */
+  (function liveBoard() {
+    var fig = document.querySelector(".live");
+    if (!fig || !window.fetch || !window.JSON) return;
+    var board = fig.querySelector(".live-board");
+    var fill = fig.querySelector(".evalbar-fill");
+    var elMove = fig.querySelector("[data-live-move]");
+    var elEval = fig.querySelector("[data-live-eval]");
+    var elDepth = fig.querySelector("[data-live-depth]");
+    var elCap = fig.querySelector("[data-live-caption]");
+    var elTitle = fig.querySelector("[data-live-title]");
+    var STEP = 1150, HOLD = 4600, OPEN = 2600;
+    var games = [], gi = 0, ply = -1, timer = 0, on = false, seen = false, paused = false;
+    var live = {}, hlFrom, hlTo;
+
+    function setSq(e, f, r) { e.style.setProperty("--x", f); e.style.setProperty("--y", r); }
+    function piece(code) {
+      var svg = svgEl("svg", { viewBox: "0 0 45 45", "aria-hidden": "true", focusable: "false" }, "pc " + (code.charAt(0) === "w" ? "w" : "b"));
+      svg.appendChild(svgEl("use", { href: "#p-" + code.charAt(1) }));
+      svg.setAttribute("data-code", code);
+      return svg;
+    }
+    function parse(fen) {
+      var out = {}, rows = fen.split(" ")[0].split("/");
+      for (var r = 0; r < 8; r++) {
+        var f = 0;
+        for (var i = 0; i < rows[r].length; i++) {
+          var ch = rows[r].charAt(i);
+          if (ch >= "1" && ch <= "8") { f += +ch; continue; }
+          out[f + "," + r] = (ch === ch.toUpperCase() ? "w" : "b") + ch.toUpperCase();
+          f++;
+        }
+      }
+      return out;
+    }
+    function sqOf(s) { return [s.charCodeAt(0) - 97, 8 - (+s.charAt(1))]; }
+    // make the board match fen; animate the move from uci when given
+    function show(fen, uci) {
+      var want = parse(fen);
+      if (uci) {
+        var a = sqOf(uci.slice(0, 2)), b = sqOf(uci.slice(2, 4));
+        var ka = a[0] + "," + a[1], kb = b[0] + "," + b[1];
+        if (live[ka]) {
+          if (live[kb]) { board.removeChild(live[kb]); }
+          live[kb] = live[ka]; delete live[ka];
+          setSq(live[kb], b[0], b[1]);
+        }
+        setSq(hlFrom, a[0], a[1]); setSq(hlTo, b[0], b[1]);
+        hlFrom.hidden = hlTo.hidden = false;
+      } else {
+        hlFrom.hidden = hlTo.hidden = true;
+      }
+      // reconcile: castling rooks, en passant, promotions, or a fresh position
+      var k;
+      for (k in live) {
+        if (Object.prototype.hasOwnProperty.call(live, k) && live[k].getAttribute("data-code") !== want[k]) {
+          board.removeChild(live[k]); delete live[k];
+        }
+      }
+      for (k in want) {
+        if (Object.prototype.hasOwnProperty.call(want, k) && !live[k]) {
+          var p = piece(want[k]), xy = k.split(",");
+          setSq(p, +xy[0], +xy[1]);
+          board.appendChild(p); live[k] = p;
+        }
+      }
+    }
+    function reset(fen) {
+      board.textContent = "";
+      live = {};
+      hlFrom = document.createElement("span"); hlFrom.className = "hl"; hlFrom.hidden = true;
+      hlTo = document.createElement("span"); hlTo.className = "hl"; hlTo.hidden = true;
+      board.appendChild(hlFrom); board.appendChild(hlTo);
+      board.classList.add("is-instant");
+      show(fen, null);
+      board.getBoundingClientRect();
+      board.classList.remove("is-instant");
+    }
+    function lumIsWhite(g) { return g.white === "Luminex"; }
+    // each engine reports its own score after its move; turn it into Luminex's view
+    function lumScore(g, q) {
+      var mine = q.by === "l";
+      var cp = q.mate != null ? (q.mate > 0 ? 1 : -1) * 2000 : q.cp;
+      return mine ? cp : -cp;
+    }
+    function fmt(g, q) {
+      if (q.mate != null) { var m = q.by === "l" ? q.mate : -q.mate; return (m > 0 ? "#" : "#-") + Math.abs(m); }
+      var v = lumScore(g, q) / 100;
+      return (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(2);
+    }
+    function caption(text) {
+      if (!text || elCap.textContent === text) return;
+      elCap.classList.add("is-swapping");
+      setTimeout(function () { elCap.textContent = text; elCap.classList.remove("is-swapping"); }, 260);
+    }
+    function render() {
+      var g = games[gi], q = g.plies[ply];
+      show(q.fen, q.uci);
+      var s = lumScore(g, q), white = lumIsWhite(g) ? s : -s;
+      fill.style.setProperty("--h", (100 / (1 + Math.exp(-white / 260))).toFixed(1) + "%");
+      var wtm = (g.whiteFirst ? ply % 2 === 0 : ply % 2 === 1);
+      var no = g.startMove + Math.floor((ply + (g.whiteFirst ? 0 : 1)) / 2);
+      elMove.textContent = no + (wtm ? "." : "…") + " " + q.san;
+      elEval.textContent = fmt(g, q);
+      elEval.className = s > 30 ? "is-up" : s < -30 ? "is-down" : "";
+      if (q.depth) elDepth.textContent = q.depth;
+      var moment = g.moments && g.moments[String(ply)];
+      if (moment) caption(moment);
+      if (ply === g.plies.length - 1) caption((g.result === "1-0") === lumIsWhite(g) ? "Luminex wins, " + g.result.replace("-", "–") + ". " + g.story : g.story);
+    }
+    function load(i) {
+      gi = i; ply = -1;
+      var g = games[gi];
+      elTitle.innerHTML = "";
+      var a = document.createElement("b"); a.textContent = "Luminex";
+      elTitle.appendChild(a);
+      elTitle.appendChild(document.createTextNode(lumIsWhite(g) ? " vs " + g.black : " vs " + g.white + ", as Black"));
+      reset(g.startFen + " w - - 0 1");
+      fill.style.setProperty("--h", "50%");
+      elMove.textContent = g.startMove + ".";
+      elEval.textContent = "+0.00"; elEval.className = "";
+      caption(g.story);
+    }
+    function tick() {
+      timer = 0;
+      if (!on) return;
+      var g = games[gi];
+      if (ply >= g.plies.length - 1) { load((gi + 1) % games.length); timer = setTimeout(tick, OPEN); return; }
+      ply++;
+      render();
+      timer = setTimeout(tick, ply === g.plies.length - 1 ? HOLD : (g.moments && g.moments[String(ply)] ? STEP * 2.6 : STEP));
+    }
+    function update() {
+      var run = seen && !paused && !document.hidden;
+      if (run && !on) { on = true; fig.classList.add("is-playing"); if (!timer) timer = setTimeout(tick, ply < 0 ? OPEN : STEP); }
+      else if (!run && on) { on = false; fig.classList.remove("is-playing"); clearTimeout(timer); timer = 0; }
+    }
+    fetch(fig.getAttribute("data-src"))
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        games = (data || []).filter(function (g) { return g.plies && g.plies.length; });
+        if (!games.length) return;
+        load(0);
+        if (reduceMotion.matches) {
+          // one still frame: the first moment Luminex saw coming
+          var g = games[0], keys = Object.keys(g.moments || {}).map(Number).sort(function (a, b) { return a - b; });
+          ply = keys.length ? keys[0] : Math.min(20, g.plies.length - 1);
+          board.classList.add("is-instant");
+          render();
+          return;
+        }
+        fig.addEventListener("mouseenter", function () { paused = true; update(); });
+        fig.addEventListener("mouseleave", function () { paused = false; update(); });
+        fig.addEventListener("focusin", function () { paused = true; update(); });
+        fig.addEventListener("focusout", function () { paused = false; update(); });
+        document.addEventListener("visibilitychange", update);
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (es) { seen = es[0].isIntersecting; update(); }, { threshold: 0.25 }).observe(fig);
+        } else { seen = true; update(); }
+      })
+      .catch(function () { /* the static caption stays */ });
+  })();
+
+  /* ---------- history: the climb, rating by release ---------- */
+  (function climb() {
+    var fig = document.querySelector(".climb");
+    if (!fig) return;
+    var plot = fig.querySelector(".climb-plot");
+    var pts;
+    try { pts = JSON.parse(fig.getAttribute("data-points") || "[]"); } catch (e) { return; }
+    var goal = +fig.getAttribute("data-goal") || 0;
+    if (!plot || pts.length < 2) return;
+    var W = 880, H = 320, L = 52, R = 30, T = 30, B = 58, PAD = 34;
+    var minV = Math.min.apply(null, pts.map(function (p) { return p.elo; }));
+    var lo = Math.floor((minV - 200) / 100) * 100, hi = Math.ceil((Math.max(goal, pts[pts.length - 1].elo) + 100) / 100) * 100;
+    // points sit inside the axes so the first label never meets the scale
+    function x(i) { return L + PAD + i * (W - L - R - 2 * PAD) / (pts.length - 1); }
+    function y(v) { return T + (hi - v) / (hi - lo) * (H - T - B); }
+
+    var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-labelledby": "climb-title" }, "climb-svg");
+    var defs = svgEl("defs", {});
+    var lg = svgEl("linearGradient", { id: "climb-fill", x1: "0", y1: "0", x2: "0", y2: "1" });
+    lg.appendChild(svgEl("stop", { offset: "0", "stop-color": "#74e4f7", "stop-opacity": "0.26" }));
+    lg.appendChild(svgEl("stop", { offset: "1", "stop-color": "#74e4f7", "stop-opacity": "0" }));
+    defs.appendChild(lg); svg.appendChild(defs);
+
+    var grid = svgEl("g", {}, "c-grid"), axis = svgEl("g", {}, "c-axis");
+    for (var v = lo + 100; v <= hi; v += 200) {
+      grid.appendChild(svgEl("line", { x1: L, x2: W - R, y1: y(v), y2: y(v) }));
+      var t = svgEl("text", { x: L - 10, y: y(v) + 4, "text-anchor": "end" }); t.textContent = v; axis.appendChild(t);
+    }
+    svg.appendChild(grid); svg.appendChild(axis);
+
+    if (goal) {
+      var gg = svgEl("g", {}, "c-goal");
+      gg.appendChild(svgEl("line", { x1: L, x2: W - R, y1: y(goal), y2: y(goal) }));
+      var gt = svgEl("text", { x: W - R, y: y(goal) - 9, "text-anchor": "end" }); gt.textContent = "GOAL " + goal;
+      gg.appendChild(gt); svg.appendChild(gg);
+    }
+
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(p.elo).toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d + " L" + x(pts.length - 1) + " " + (H - B) + " L" + x(0) + " " + (H - B) + " Z" }, "c-area"));
+    svg.appendChild(svgEl("path", { d: d }, "c-glow"));
+    svg.appendChild(svgEl("path", { d: d }, "c-line"));
+
+    var tip = document.createElement("div");
+    tip.className = "climb-tip"; tip.setAttribute("aria-hidden", "true");
+    function showTip(i, g) {
+      var p = pts[i];
+      tip.textContent = "";
+      var b = document.createElement("b"); b.textContent = p.v + " · " + p.d; tip.appendChild(b);
+      var e = document.createElement("span"); e.className = "t-elo"; e.textContent = "≈" + p.elo + " Elo"; tip.appendChild(e);
+      tip.appendChild(document.createElement("br"));
+      tip.appendChild(document.createTextNode(p.t));
+      tip.style.setProperty("--tx", (x(i) / W * 100) + "%");
+      tip.style.setProperty("--ty", (y(p.elo) / H * 100) + "%");
+      tip.classList.add("is-on");
+      g.classList.add("is-hover");
+    }
+    function hideTip(g) { tip.classList.remove("is-on"); g.classList.remove("is-hover"); }
+
+    pts.forEach(function (p, i) {
+      var now = i === pts.length - 1;
+      var g = svgEl("g", { tabindex: "0", "aria-label": p.v + ", " + p.d + ": about " + p.elo + " Elo. " + p.t }, "c-pt" + (now ? " is-now" : ""));
+      g.appendChild(svgEl("circle", { cx: x(i), cy: y(p.elo), r: 22 }, "c-hit"));
+      g.appendChild(svgEl("circle", { cx: x(i), cy: y(p.elo), r: now ? 7.5 : 6 }));
+      var te = svgEl("text", { x: x(i), y: y(p.elo) - 16, "text-anchor": "middle" }, "c-elo"); te.textContent = "≈" + p.elo; g.appendChild(te);
+      var tv = svgEl("text", { x: x(i), y: H - B + 24, "text-anchor": "middle" }, "c-ver"); tv.textContent = p.v; g.appendChild(tv);
+      var td = svgEl("text", { x: x(i), y: H - B + 41, "text-anchor": "middle" }, "c-date"); td.textContent = p.d; g.appendChild(td);
+      g.addEventListener("mouseenter", function () { showTip(i, g); });
+      g.addEventListener("mouseleave", function () { hideTip(g); });
+      g.addEventListener("focus", function () { showTip(i, g); });
+      g.addEventListener("blur", function () { hideTip(g); });
+      svg.appendChild(g);
+    });
+    plot.appendChild(svg);
+    plot.appendChild(tip);
+  })();
 })();
