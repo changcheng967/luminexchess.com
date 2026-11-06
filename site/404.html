@@ -5,17 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Page not found — Luminex</title>
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#050b18">
-  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12110f" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script src="/assets/js/theme.js?v=4"></script>
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="stylesheet" href="/assets/css/style.css?v=1">
+  <link rel="stylesheet" href="/assets/css/bulletin.css?v=4">
 </head>
 <body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="p-K" viewBox="0 0 45 45"><path d="M21.2 5.5h2.6v3.6h3.4v2.6h-3.4V24h-2.6V11.7h-3.4V9.1h3.4z"/><path d="M12.8 33.6c-2.4-4.8-2.1-11.1 3.2-12.7 2.9-.9 5.3.5 6.5 3.2 1.2-2.7 3.6-4.1 6.5-3.2 5.3 1.6 5.6 7.9 3.2 12.7z"/><path d="M11 39.3h23a1.5 1.5 0 0 0 1.5-1.5v-1.6a2.6 2.6 0 0 0-2.6-2.6H12.1a2.6 2.6 0 0 0-2.6 2.6v1.6a1.5 1.5 0 0 0 1.5 1.5z"/><path fill="none" stroke="currentColor" d="M14 29.4h17"/></symbol>
+  </svg>
   <main class="notfound">
-    <img src="/assets/img/knight.webp" width="260" height="260" alt="">
-    <p class="kicker">404</p>
+    <a class="nf-brand" href="/">Luminex</a>
+    <p class="nf-code" aria-hidden="true">404</p>
     <h1>No legal move to this square</h1>
-    <p class="section-lede">The page you asked for is not here. It may have moved, or the address has a typo.</p>
+    <div class="board nf-board" role="img" aria-label="An empty board with a lone white king">
+      <span class="hl"></span>
+      <svg class="pc w" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-K"/></svg>
+    </div>
+    <p>The page you asked for is not here. It may have moved, or the address has a typo.</p>
     <a class="btn btn-primary" href="/">Back to luminexchess.com</a>
   </main>
 </body>

@@ -74,104 +74,6 @@
     order.forEach(function (id) { io.observe(document.getElementById(id)); });
   })();
 
-  /* ---------- hero: squares of light drifting off the knight ---------- */
-  (function particles() {
-    var canvas = document.querySelector(".hero-canvas");
-    var art = document.querySelector(".hero-art img");
-    if (!canvas || !art || !canvas.getContext) return;
-    var ctx = canvas.getContext("2d");
-    var dpr = 1, w = 0, h = 0, parts = [], raf = 0, visible = true;
-    var C0 = [110, 231, 249], C1 = [167, 139, 250];
-
-    function source() {
-      var a = art.getBoundingClientRect(), c = canvas.getBoundingClientRect();
-      return { x: a.left - c.left + a.width * 0.47, y: a.top - c.top + a.height * 0.47, s: a.width };
-    }
-    function spawn(o, fresh) {
-      // the logo's particles stream up and to the left of the knight's mane
-      var ang = -2.3 + (Math.random() - 0.5) * 1.0;
-      var speed = 0.12 + Math.random() * 0.42;
-      var p = {
-        x: o.x + (Math.random() - 0.65) * o.s * 0.32,
-        y: o.y + (Math.random() - 0.35) * o.s * 0.36,
-        vx: Math.cos(ang) * speed,
-        vy: Math.sin(ang) * speed,
-        size: 1.4 + Math.pow(Math.random(), 2) * 4.2,
-        max: 240 + Math.random() * 460,
-        life: 0,
-        t: Math.random()
-      };
-      if (fresh) p.life = Math.random() * p.max;
-      return p;
-    }
-    function count() {
-      return w < 700 ? 46 : 110;
-    }
-    function resize() {
-      var r = canvas.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = r.width; h = r.height;
-      canvas.width = Math.round(w * dpr);
-      canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var o = source();
-      parts = [];
-      for (var i = 0; i < count(); i++) parts.push(spawn(o, true));
-    }
-    function draw(step) {
-      var o = source();
-      ctx.clearRect(0, 0, w, h);
-      for (var i = 0; i < parts.length; i++) {
-        var p = parts[i];
-        if (step) {
-          p.life += 1;
-          p.x += p.vx * (1 + p.life / p.max);
-          p.y += p.vy * (1 + p.life / p.max);
-          if (p.life >= p.max || p.x < -20 || p.y < -20) { parts[i] = spawn(o, false); continue; }
-        }
-        var k = p.life / p.max;
-        var alpha = k < 0.15 ? k / 0.15 : k > 0.6 ? Math.max(0, (1 - k) / 0.4) : 1;
-        alpha *= 0.75;
-        var r = Math.round(C0[0] + (C1[0] - C0[0]) * p.t);
-        var g = Math.round(C0[1] + (C1[1] - C0[1]) * p.t);
-        var b = Math.round(C0[2] + (C1[2] - C0[2]) * p.t);
-        var x = Math.round(p.x), y = Math.round(p.y), s = p.size;
-        ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + (alpha * 0.18).toFixed(3) + ")";
-        ctx.fillRect(x - s, y - s, s * 3, s * 3);          // soft halo
-        ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + alpha.toFixed(3) + ")";
-        ctx.fillRect(x, y, s, s);
-      }
-    }
-    function frame() {
-      draw(true);
-      raf = window.requestAnimationFrame(frame);
-    }
-    function start() {
-      if (raf || reduceMotion.matches || !visible || document.hidden) return;
-      raf = window.requestAnimationFrame(frame);
-    }
-    function stop() {
-      if (raf) window.cancelAnimationFrame(raf);
-      raf = 0;
-    }
-    resize();
-    draw(false);
-    window.addEventListener("resize", function () { resize(); draw(false); });
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        visible = entries[0].isIntersecting;
-        if (visible) start(); else stop();
-      }).observe(canvas);
-    }
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden) stop(); else start();
-    });
-    reduceMotion.addEventListener && reduceMotion.addEventListener("change", function () {
-      if (reduceMotion.matches) { stop(); draw(false); } else start();
-    });
-    if (art.complete) start(); else art.addEventListener("load", function () { resize(); start(); });
-  })();
-
   /* ---------- network diagram: one detail panel for the selected layer ---------- */
   (function network() {
     var layers = document.querySelectorAll(".net-layer");
@@ -202,10 +104,17 @@
     var min = parseFloat(chart.getAttribute("data-min"));
     var max = parseFloat(chart.getAttribute("data-max"));
     function pct(v) { return ((v - min) / (max - min)) * 100; }
-    chart.querySelectorAll("[data-tick]").forEach(function (t) {
+    var ticks = chart.querySelectorAll("[data-tick]");
+    ticks.forEach(function (t) {
       t.style.setProperty("--x", pct(parseFloat(t.getAttribute("data-tick"))) + "%");
     });
-    chart.querySelectorAll(".sprt-row").forEach(function (row) {
+    // faint grid lines in every track, one per axis tick
+    if (ticks.length > 1) {
+      var step = parseFloat(ticks[1].getAttribute("data-tick")) - parseFloat(ticks[0].getAttribute("data-tick"));
+      chart.style.setProperty("--grid", (100 * step / (max - min)) + "%");
+    }
+    var rows = chart.querySelectorAll(".sprt-row");
+    rows.forEach(function (row) {
       var elo = parseFloat(row.getAttribute("data-elo"));
       var ci = parseFloat(row.getAttribute("data-ci"));
       var track = row.querySelector(".sprt-track");
@@ -220,6 +129,30 @@
       track.style.setProperty("--pt", pct(Math.min(max, elo)) + "%");
     });
     onVisible(chart, function () { chart.classList.add("is-ready"); }, 0.2);
+
+    // show the newest few tests; the rest wait behind a button (without JavaScript all rows show)
+    var KEEP = 6;
+    if (rows.length <= KEEP) return;
+    rows.forEach(function (row, i) { if (i >= KEEP) row.classList.add("is-extra"); });
+    chart.classList.add("is-collapsed");
+    var more = document.createElement("button");
+    more.type = "button";
+    more.className = "sprt-more";
+    if (chart.id) more.setAttribute("aria-controls", chart.id);
+    function label() {
+      var open = !chart.classList.contains("is-collapsed");
+      more.textContent = open ? "Show the newest " + KEEP : "Show all " + rows.length + " tests";
+      more.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    more.addEventListener("click", function () {
+      var closing = !chart.classList.contains("is-collapsed");
+      chart.classList.toggle("is-collapsed");
+      label();
+      // the list shrinks above the reader; keep the button where their eyes are
+      if (closing) more.scrollIntoView({ block: "nearest" });
+    });
+    label();
+    chart.parentNode.insertBefore(more, chart.nextSibling);
   })();
 
   /* ---------- strength ladder: win/draw/loss bars ---------- */
@@ -291,7 +224,7 @@
   /* ---------- reveal sections as they scroll in ---------- */
   (function reveal() {
     if (!("IntersectionObserver" in window) || reduceMotion.matches) return;
-    var els = document.querySelectorAll(".section-head, .card, .net, .split, .pipeline li, .sprt, .dl, .howto-step, .viewer, .search, .speed, .ladder, .fact, .tl, .faq details");
+    var els = document.querySelectorAll(".section-head, .sub-head, .spec-row, .net, .split, .pipeline li, .sprt, .dl, .howto-step, .viewer, .search, .speed, .ladder-col, .fact, .climb, .tl, .faq-col");
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
@@ -337,7 +270,7 @@
     });
   });
 
-  /* ---------- latest release from GitHub (static v6.3.0 links are the fallback) ---------- */
+  /* ---------- latest release from GitHub (the static links in the page are the fallback) ---------- */
   (function latestRelease() {
     var API = "https://api.github.com/repos/changcheng967/Luminex/releases/latest";
     var KEY = "lux-release-v1";
@@ -419,9 +352,53 @@
     var elDepth = fig.querySelector("[data-live-depth]");
     var elCap = fig.querySelector("[data-live-caption]");
     var elTitle = fig.querySelector("[data-live-title]");
+    var sheet = fig.querySelector("[data-live-sheet]");
     var STEP = 1150, HOLD = 4600, OPEN = 2600;
     var games = [], gi = 0, ply = -1, timer = 0, on = false, seen = false, paused = false;
     var live = {}, hlFrom, hlTo;
+    var sheetRow = null, sheetNow = null, sheetPly = -1;
+
+    /* the scoresheet: book moves first, then each move as it is played */
+    function cell(text, cls) {
+      var c = document.createElement("span");
+      c.className = cls;
+      c.textContent = text;
+      return c;
+    }
+    function sheetClear(g) {
+      if (!sheet) return;
+      sheet.textContent = "";
+      sheetRow = null; sheetNow = null; sheetPly = -1;
+      var opening = g.opening || "", m, re = /(\d+)\.\s*(\S+)\s+(\S+)/g;
+      var book = opening.slice(opening.indexOf(",") + 1);   // "a random two-move opening, 1.h3 e6 2.Rh2 Qf6"
+      while ((m = re.exec(book))) {
+        var li = document.createElement("li");
+        li.className = "is-book";
+        li.appendChild(cell(m[1] + ".", "sm-n"));
+        li.appendChild(cell(m[2], "sm-mv"));
+        li.appendChild(cell(m[3], "sm-mv"));
+        sheet.appendChild(li);
+      }
+    }
+    function sheetTo(g, upto) {
+      if (!sheet) return;
+      for (var k = sheetPly + 1; k <= upto; k++) {
+        var white = g.whiteFirst ? k % 2 === 0 : k % 2 === 1;
+        if (white || !sheetRow) {
+          sheetRow = document.createElement("li");
+          sheetRow.appendChild(cell(g.startMove + Math.floor((k + (g.whiteFirst ? 0 : 1)) / 2) + ".", "sm-n"));
+          if (!white) sheetRow.appendChild(cell("…", "sm-mv"));
+          sheet.appendChild(sheetRow);
+        }
+        var mv = cell(g.plies[k].san, g.moments && g.moments[String(k)] ? "sm-mv is-moment" : "sm-mv");
+        sheetRow.appendChild(mv);
+        if (sheetNow) sheetNow.classList.remove("is-now");
+        mv.classList.add("is-now");
+        sheetNow = mv;
+      }
+      if (upto > sheetPly) sheetPly = upto;
+      sheet.scrollTop = sheet.scrollHeight;
+    }
 
     function setSq(e, f, r) { e.style.setProperty("--x", f); e.style.setProperty("--y", r); }
     function piece(code) {
@@ -506,6 +483,7 @@
     function render() {
       var g = games[gi], q = g.plies[ply];
       show(q.fen, q.uci);
+      sheetTo(g, ply);
       var s = lumScore(g, q), white = lumIsWhite(g) ? s : -s;
       fill.style.setProperty("--h", (100 / (1 + Math.exp(-white / 260))).toFixed(1) + "%");
       var wtm = (g.whiteFirst ? ply % 2 === 0 : ply % 2 === 1);
@@ -526,6 +504,7 @@
       elTitle.appendChild(a);
       elTitle.appendChild(document.createTextNode(lumIsWhite(g) ? " vs " + g.black : " vs " + g.white + ", as Black"));
       reset(g.startFen + " w - - 0 1");
+      sheetClear(g);
       fill.style.setProperty("--h", "50%");
       elMove.textContent = g.startMove + ".";
       elEval.textContent = "+0.00"; elEval.className = "";
@@ -589,9 +568,10 @@
 
     var svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-labelledby": "climb-title" }, "climb-svg");
     var defs = svgEl("defs", {});
+    // the stops take their colour from the stylesheet, so both editions get their own red
     var lg = svgEl("linearGradient", { id: "climb-fill", x1: "0", y1: "0", x2: "0", y2: "1" });
-    lg.appendChild(svgEl("stop", { offset: "0", "stop-color": "#74e4f7", "stop-opacity": "0.26" }));
-    lg.appendChild(svgEl("stop", { offset: "1", "stop-color": "#74e4f7", "stop-opacity": "0" }));
+    lg.appendChild(svgEl("stop", { offset: "0" }, "c-stop-a"));
+    lg.appendChild(svgEl("stop", { offset: "1" }, "c-stop-b"));
     defs.appendChild(lg); svg.appendChild(defs);
 
     var grid = svgEl("g", {}, "c-grid"), axis = svgEl("g", {}, "c-axis");
@@ -610,7 +590,6 @@
 
     var d = pts.map(function (p, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(p.elo).toFixed(1); }).join(" ");
     svg.appendChild(svgEl("path", { d: d + " L" + x(pts.length - 1) + " " + (H - B) + " L" + x(0) + " " + (H - B) + " Z" }, "c-area"));
-    svg.appendChild(svgEl("path", { d: d }, "c-glow"));
     svg.appendChild(svgEl("path", { d: d }, "c-line"));
 
     var tip = document.createElement("div");

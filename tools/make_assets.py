@@ -2,9 +2,9 @@
 
     python -I tools/make_assets.py path/to/Luminex/luminex.jpg site
 
-Writes into the site directory: favicon.ico, assets/img/{knight.webp,
-mark-64.png, apple-touch-icon.png, icon-192.png, icon-512.png, og.png}.
-Needs Pillow with WebP support. The Open Graph text uses Segoe UI from
+Writes into the site directory: favicon.ico, assets/img/{mark-64.png,
+apple-touch-icon.png, icon-192.png, icon-512.png, og.png}.
+Needs Pillow. The Open Graph text uses Segoe UI from
 C:\\Windows\\Fonts; point FONTS elsewhere on other systems.
 """
 import os
@@ -18,9 +18,6 @@ IMG = os.path.join(SITE, "assets", "img")
 os.makedirs(IMG, exist_ok=True)
 
 logo = Image.open(SRC).convert("RGB")
-
-# Hero image: the full logo, downscaled (the page feathers its square edges with a CSS mask).
-logo.resize((720, 720), Image.LANCZOS).save(os.path.join(IMG, "knight.webp"), "WEBP", quality=84, method=6)
 
 # Square crop around the knight and its particles for icons.
 crop = logo.crop((236, 196, 796, 756))          # 560 x 560
