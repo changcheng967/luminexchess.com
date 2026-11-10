@@ -643,6 +643,12 @@ code {
 .st-merged::before { background: var(--warn); transform: rotate(45deg) scale(0.85); }
 .st-stop { color: var(--stop); }
 .st-stop::before { border: 1.5px solid var(--stop); }
+.st-fail { color: var(--muted); }
+.st-fail::before {   /* a small cross: failed and not merged */
+  background:
+    linear-gradient(45deg, transparent 41%, currentColor 41% 59%, transparent 59%),
+    linear-gradient(-45deg, transparent 41%, currentColor 41% 59%, transparent 59%);
+}
 .st-run { color: var(--ink); }
 .st-run::before { border-radius: 50%; background: var(--red); animation: blink 1.5s ease-in-out infinite; }
 .sprt-track { position: relative; height: 30px; background: repeating-linear-gradient(90deg, var(--rule-soft) 0 1px, transparent 1px var(--grid, 14.2857%)); }
@@ -904,6 +910,7 @@ code {
 .split-text h4 { margin: 0 0 12px; font: 500 1.6rem/1.15 var(--serif); }
 .split-text p { color: var(--muted); }
 .split-text p + p { margin-top: 12px; }
+.split-text p + h4 { margin-top: 32px; }
 .link-card {
   grid-column: 6 / -1;
   position: relative; display: flex; flex-direction: column; gap: 6px; padding: 20px 22px 22px;

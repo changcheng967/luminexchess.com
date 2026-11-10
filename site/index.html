@@ -27,7 +27,7 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/bulletin.css?v=4">
+  <link rel="stylesheet" href="/assets/css/bulletin.css?v=5">
   <script src="/assets/js/main.js?v=4" defer></script>
   <script src="/assets/js/viewer.js?v=4" defer></script>
   <script type="application/ld+json">
@@ -153,7 +153,7 @@
           <dl class="proof">
             <div><dt>Strength<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd class="is-red">≈3255<span class="u">Elo</span></dd></div>
             <div><dt>Since v6.4</dt><dd>+145<span class="u">Elo</span></dd></div>
-            <div><dt>Test games</dt><dd>96,540</dd></div>
+            <div><dt>Test games</dt><dd>453,624</dd></div>
             <div><dt>Speed</dt><dd>1.2M<span class="u">nodes/s</span></dd></div>
           </dl>
         </div>
@@ -245,6 +245,12 @@
               <p>The v6.5.0 release candidate against v6.4.0, over 2,020 games: 1,063 wins, 693 draws and 264 losses. Gains in self-play usually shrink against other engines, so the ladder, not this, sets the estimate.</p>
               <a class="text-link" href="https://bench.luminexchess.com/test/40/"><span>Test 40 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </article>
+            <article class="fact">
+              <p class="fact-label">Computer Chess Index</p>
+              <p class="fact-value">3017<span>at 60+0.6</span></p>
+              <p>CCI's first list with the network built in rates v6.5.1 at 2612, 3017 and 3155 at 8+0.08, 60+0.6 and 2m24+1.12, on an Intel E-core without AVX-512. That is 487 to 585 above v6.5.0, which its setup had run without the network file. CCI has its own scale, anchored at a random mover, so these are not CCRL Blitz values.</p>
+              <a class="text-link" href="https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md"><span>Luminex on the CCI</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </article>
           </div>
         </div>
 
@@ -293,17 +299,169 @@
         <figure class="sprt">
           <figcaption>
             <span class="sprt-title">Every test so far</span>
-            <span class="sprt-sub">Elo against the previous engine with 95% confidence intervals, newest first, as of 6 November 2026</span>
+            <span class="sprt-sub">Elo against the engine each change would replace, with 95% confidence intervals, newest first, as of 10 November 2026</span>
           </figcaption>
           <dl class="sprt-totals">
-            <div><dt>SPRTs run</dt><dd>15</dd></div>
-            <div><dt>Passed</dt><dd class="is-red">10</dd></div>
-            <div><dt>OpenBench games</dt><dd>96,540</dd></div>
+            <div><dt>SPRTs run</dt><dd>36</dd></div>
+            <div><dt>Passed</dt><dd class="is-red">24</dd></div>
+            <div><dt>OpenBench games</dt><dd>453,624</dd></div>
             <div><dt>Since v6.4</dt><dd>+145</dd></div>
           </dl>
-          <div class="sprt-chart" id="sprt-chart" data-min="-20" data-max="120">
+          <div class="sprt-chart" id="sprt-chart" data-min="-40" data-max="120">
             <div class="sprt-axis" aria-hidden="true">
-              <span data-tick="-20">−20</span><span data-tick="0">0</span><span data-tick="20">+20</span><span data-tick="40">+40</span><span data-tick="60">+60</span><span data-tick="80">+80</span><span data-tick="100">+100</span><span data-tick="120">+120</span>
+              <span data-tick="-40">−40</span><span data-tick="-20">−20</span><span data-tick="0">0</span><span data-tick="20">+20</span><span data-tick="40">+40</span><span data-tick="60">+60</span><span data-tick="80">+80</span><span data-tick="100">+100</span><span data-tick="120">+120</span>
+            </div>
+            <div class="sprt-row" data-elo="54.50" data-ci="14.91">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/blob/main/nnue/V3-GEN768R.md">A network with eight output buckets, trained on 2.5 billion T91 positions</a>
+                <span><a href="https://bench.luminexchess.com/test/63/">Test 63</a> · network · 964 games · <span class="sprt-status st-pass">Passed; ships after its retune</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+54.5 ± 14.9</span>
+            </div>
+            <div class="sprt-row is-fail" data-elo="-21.65" data-ci="9.02">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/54">Correct the int8 tail biases for rounding</a>
+                <span><a href="https://bench.luminexchess.com/test/61/">Test 61</a> · #54 · 2,346 games · <span class="sprt-status st-fail">Failed, closed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">−21.7 ± 9.0</span>
+            </div>
+            <div class="sprt-row" data-elo="5.88" data-ci="4.15">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/55">Set the search constants to the tune 54 values</a>
+                <span><a href="https://bench.luminexchess.com/test/60/">Test 60</a> · #55 · 10,642 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+5.9 ± 4.1</span>
+            </div>
+            <div class="sprt-row" data-elo="28.75" data-ci="9.26">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/44">Time management at 144+1.12, the longest CCI control</a>
+                <span><a href="https://bench.luminexchess.com/test/58/">Test 58</a> · #44 #45 · 1,296 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+28.8 ± 9.3</span>
+            </div>
+            <div class="sprt-row" data-elo="11.01" data-ci="6.21">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/47">Moves-to-go clocks spent by value of time (40 moves in 10 s)</a>
+                <span><a href="https://bench.luminexchess.com/test/57/">Test 57</a> · #47 · 4,796 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+11.0 ± 6.2</span>
+            </div>
+            <div class="sprt-row" data-elo="5.60" data-ci="4.16">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/47">Zero-increment clocks spent by value of time (10+0)</a>
+                <span><a href="https://bench.luminexchess.com/test/56/">Test 56</a> · #47 · 12,666 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+5.6 ± 4.2</span>
+            </div>
+            <div class="sprt-row" data-elo="37.46" data-ci="10.96">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/44">Time management at 60+0.6, the long CCI control</a>
+                <span><a href="https://bench.luminexchess.com/test/55/">Test 55</a> · #44 #45 · 1,052 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+37.5 ± 11.0</span>
+            </div>
+            <div class="sprt-row is-fail" data-elo="-4.74" data-ci="5.02">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/45">A time schedule from the untempered phase values</a>
+                <span><a href="https://bench.luminexchess.com/test/53/">Test 53</a> · #45 · 7,104 games · <span class="sprt-status st-fail">Failed, variant dropped</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">−4.7 ± 5.0</span>
+            </div>
+            <div class="sprt-row" data-elo="8.32" data-ci="5.29">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/45">Stop the search by measured best-move stability</a>
+                <span><a href="https://bench.luminexchess.com/test/52/">Test 52</a> · #45 · 6,812 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+8.3 ± 5.3</span>
+            </div>
+            <div class="sprt-row" data-elo="72.22" data-ci="16.68">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/44">Spend the clock by a solved time schedule</a>
+                <span><a href="https://bench.luminexchess.com/test/51/">Test 51</a> · #44 · 732 games · <span class="sprt-status st-pass">Passed, the default</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+72.2 ± 16.7</span>
+            </div>
+            <div class="sprt-row" data-elo="32.22" data-ci="11.15">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/44">The solved schedule, first variant</a>
+                <span><a href="https://bench.luminexchess.com/test/50/">Test 50</a> · #44 · 1,514 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+32.2 ± 11.2</span>
+            </div>
+            <div class="sprt-row is-fail" data-elo="-1.87" data-ci="3.84">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/43">Keep checking moves out of history pruning</a>
+                <span><a href="https://bench.luminexchess.com/test/49/">Test 49</a> · #43 · 13,588 games · <span class="sprt-status st-fail">Failed, closed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">−1.9 ± 3.8</span>
+            </div>
+            <div class="sprt-row is-fail" data-elo="-4.37" data-ci="4.97">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/42">Prune more quiet moves by futility from depth 3</a>
+                <span><a href="https://bench.luminexchess.com/test/48/">Test 48</a> · #42 · 8,102 games · <span class="sprt-status st-fail">Failed, closed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">−4.4 ± 5.0</span>
+            </div>
+            <div class="sprt-row" data-elo="4.00" data-ci="3.12">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/41">Require a margin over beta for shallow null moves</a>
+                <span><a href="https://bench.luminexchess.com/test/47/">Test 47</a> · #41 · 20,664 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+4.0 ± 3.1</span>
+            </div>
+            <div class="sprt-row" data-elo="26.49" data-ci="10.36">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/40">Set the search constants to the tune 45 values</a>
+                <span><a href="https://bench.luminexchess.com/test/46/">Test 46</a> · #40 · 1,958 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+26.5 ± 10.4</span>
+            </div>
+            <div class="sprt-row" data-elo="1.23" data-ci="3.61">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/31">Re-search reduced fail-highs with a zero window first</a>
+                <span><a href="https://bench.luminexchess.com/test/44/">Test 44</a> · #31 · 16,644 games · <span class="sprt-status st-pass">Passed, no-regression test</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+1.2 ± 3.6</span>
+            </div>
+            <div class="sprt-row" data-elo="4.86" data-ci="3.74">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/32">Prune late quiet moves without a history escape</a>
+                <span><a href="https://bench.luminexchess.com/test/43/">Test 43</a> · #32 · 16,290 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+4.9 ± 3.7</span>
+            </div>
+            <div class="sprt-row" data-elo="61.41" data-ci="15.73">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/33">Key correction history by side to move</a>
+                <span><a href="https://bench.luminexchess.com/test/42/">Test 42</a> · #33 · 886 games · <span class="sprt-status st-pass">Passed</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+61.4 ± 15.7</span>
+            </div>
+            <div class="sprt-row is-stop" data-elo="1.95" data-ci="2.11">
+              <div class="sprt-label">
+                <a href="https://github.com/changcheng967/Luminex/pull/31">Re-search reduced fail-highs with a zero window first</a>
+                <span><a href="https://bench.luminexchess.com/test/41/">Test 41</a> · #31 · 46,332 games · <span class="sprt-status st-stop">Stopped, unresolved; re-run as test 44</span></span>
+              </div>
+              <div class="sprt-track" aria-hidden="true"><span class="sprt-bar"></span><span class="sprt-dot"></span></div>
+              <span class="sprt-value">+1.9 ± 2.1</span>
             </div>
             <div class="sprt-row" data-elo="29.81" data-ci="11.15">
               <div class="sprt-label">
@@ -426,7 +584,7 @@
               <span class="sprt-value">+127.3 ± 27.2</span>
             </div>
           </div>
-          <p class="sprt-note">Three changes were merged although their tests failed. #5 repaired correctness bugs at a measured cost, and #10 and #11 landed inside the error margin. The SEE rewrite, at +127, runs off the chart.</p>
+          <p class="sprt-note">Three changes were merged although their tests failed: #5 repaired correctness bugs at a measured cost, and #10 and #11 landed inside the error margin. Changes that failed since were closed. The SEE rewrite, at +127, runs off the chart. Two training experiments are left off: test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped), and test 66, which compared two candidate networks. Between the tests, two SPSA runs of 80,000 games each retuned the search constants, 27 and then 29 of them; a third, for the new network, is running.</p>
           <a class="text-link" href="https://bench.luminexchess.com">
             <span>Every test, live on bench.luminexchess.com</span>
             <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
@@ -703,13 +861,15 @@
           <div class="split">
             <div class="split-text">
               <h4>How it is trained</h4>
-              <p>By distillation: positions from Leela Chess Zero self-play, each relabeled with the score of a deep Stockfish search. The loss weights quiet positions, the ones the search actually evaluates, above captures and leaves positions in check out.</p>
-              <p>The released network, <code>luminex_sfq_i8.nnue</code>, was trained this way. The data for the next round is public.</p>
+              <p>By distillation: positions from Leela Chess Zero self-play, each relabeled with the score of a deep Stockfish search. The loss weights quiet positions, the ones the search actually evaluates, above captures and leaves positions in check out. The released network, <code>luminex_sfq_i8.nnue</code>, was trained this way.</p>
+              <h4>The next network</h4>
+              <p>The same inputs and accumulators, with eight output buckets: a separate 16 → 32 → 1 tail for each band of four pieces on the board, at no extra cost per evaluation. Tail neurons that had died in earlier training were revived before the run.</p>
+              <p>It trained for 230,000 steps of 131,072 positions, about 30 billion samples, on 2.5 billion positions from Leela's test91 self-play, February to May 2026, scored by that run's own networks; January's games were held out to check it. Against the released network it scored +54.5 ± 14.9 Elo (<a href="https://bench.luminexchess.com/test/63/">test 63</a>). Before it ships, the search constants are retuned for it in an 80,000-game SPSA run.</p>
             </div>
-            <a class="link-card" href="https://huggingface.co/datasets/changcheng967/luminex-t91-training-data">
+            <a class="link-card" href="https://huggingface.co/datasets/xushawn/t91-binpacks-raw-old">
               <span class="link-card-label">Training data on Hugging Face</span>
-              <span class="link-card-title">luminex-t91-training-data</span>
-              <span class="link-card-meta">About 800 million positions, April and May 2026</span>
+              <span class="link-card-title">t91-binpacks-raw-old</span>
+              <span class="link-card-meta">Leela test91 self-play, January to May 2026, about 4.5 billion positions</span>
               <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
             </a>
           </div>
@@ -722,7 +882,7 @@
         <header class="section-head">
           <p class="kicker"><span class="sec-n">§5</span>Chronicle</p>
           <h2 id="history-title">From first commit to <em>3255</em></h2>
-          <p class="section-lede">Nine months and 1,676 commits, from a handcrafted engine to a neural one, and every step since November measured on OpenBench.</p>
+          <p class="section-lede">Nine months and 1,704 commits, from a handcrafted engine to a neural one, and every step since November measured on OpenBench.</p>
         </header>
         <ol class="timeline">
           <li class="tl">
@@ -757,9 +917,17 @@
             <time datetime="2026-11-06">Nov 2026</time>
             <div class="tl-body"><h3>v6.5 <span class="tl-elo">≈3255</span></h3><p>A day of search work, each change through an SPRT: history that learns from failed moves, a hash table that keeps its best move, leaner extensions. +145 Elo over v6.4, and Stash 32 beaten. v6.5.1 puts the network inside every download.</p></div>
           </li>
+          <li class="tl">
+            <time datetime="2026-11-08">Nov 2026</time>
+            <div class="tl-body"><h3>Time, measured</h3><p>On main since v6.5.1: a time schedule solved from the measured value of time, +72 Elo at 10+0.1 and +37.5 at CCI's 60+0.6, and a stop rule from best-move stability, +8.3. Two SPSA runs of 80,000 games each retune the search constants.</p></div>
+          </li>
+          <li class="tl">
+            <time datetime="2026-11-10">Nov 2026</time>
+            <div class="tl-body"><h3>The next network <span class="tl-elo">+54.5</span></h3><p>Eight output buckets, revived tail neurons and 2.5 billion T91 positions: +54.5 Elo against the released network in self-play. Its search constants are being retuned before it ships.</p></div>
+          </li>
           <li class="tl is-next">
             <time>Next</time>
-            <div class="tl-body"><h3>A network from public data</h3><p>Training on the T91 positions, about 800 million of them, published on Hugging Face.</p></div>
+            <div class="tl-body"><h3>The next release</h3><p>The new network with its retuned search, together with the time management work.</p></div>
           </li>
         </ol>
       </div>
