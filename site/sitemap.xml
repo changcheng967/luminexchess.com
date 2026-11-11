@@ -4,4 +4,20 @@
     <loc>https://luminexchess.com/</loc>
     <lastmod>2026-11-10</lastmod>
   </url>
+  <url>
+    <loc>https://luminexchess.com/games/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://luminexchess.com/tests/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://luminexchess.com/engine/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://luminexchess.com/download/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
 </urlset>
