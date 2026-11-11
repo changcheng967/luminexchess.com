@@ -111,9 +111,9 @@
         <h1 id="tests-title" class="h-xl" data-split><em>Measured,</em> not guessed</h1>
         <p class="lede" data-reveal data-d="3">Luminex runs its own OpenBench instance. A candidate change plays the current engine until a sequential probability ratio test can tell a gain from noise.</p>
         <dl class="totals totals-hero">
-          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>42</span></dd></div>
-          <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>29</span></dd></div>
-          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>578,432</span></dd></div>
+          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>43</span></dd></div>
+          <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>30</span></dd></div>
+          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>579,272</span></dd></div>
           <div data-reveal data-d="7"><dt>Since v6.4</dt><dd class="num"><span data-odo>+145</span></dd></div>
         </dl>
       </div>
@@ -163,8 +163,8 @@
           <div class="record-bar">
             <div class="filters" role="group" aria-label="Show tests by outcome">
               <!-- @tests-filters -->
-              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">42</span></button>
-              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">29</span></button>
+              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">43</span></button>
+              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">30</span></button>
               <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">6</span></button>
               <button type="button" class="chip" data-filter="merged" aria-pressed="false">Merged anyway <span class="num">4</span></button>
               <button type="button" class="chip" data-filter="stop" aria-pressed="false">Stopped <span class="num">3</span></button>
@@ -215,6 +215,25 @@
                 </g>
               </svg>
               <p class="trow-value num">+8.7 ± 5.1</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; not shipped yet</span></p>
+            </li>
+            <li class="trow is-pass" id="t71" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://bench.luminexchess.com/test/71/">Quantization-aware training against the same fine-tune without it</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/71/">Test 71</a> · network · 1,912 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="115.6" x2="153.43" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M134.51 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+23.3 ± 8.9</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; not shipped yet</span></p>
             </li>
             <li class="trow is-pass" id="t70" data-status="pass">
@@ -983,7 +1002,7 @@
 
         <div class="record-notes prose" data-reveal>
           <p class="note">Four changes were merged although their tests failed: #5 repaired correctness bugs at a measured cost, and #10, #11 and the retuned constants in #57 landed inside the error margin. The other changes that failed were closed or dropped. The SEE rewrite, at +127, runs off the chart. One training experiment is left off: test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped).</p>
-          <p class="note">Between the tests, three SPSA runs of 80,000 games each retuned the search constants: 27 of them, then all 29, then all 29 again with the new network. One more test, 71, is still running. The count of games is every game played on OpenBench, the tuning runs included.</p>
+          <p class="note">Between the tests, three SPSA runs of 80,000 games each retuned the search constants: 27 of them, then all 29, then all 29 again with the new network. The count of games is every game played on OpenBench, the tuning runs included.</p>
           <p>
             <a class="link" href="https://bench.luminexchess.com"><span>Every test, live on bench.luminexchess.com</span><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
           </p>

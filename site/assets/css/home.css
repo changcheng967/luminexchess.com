@@ -212,10 +212,20 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
 .fact-pm { font-size: 1rem; font-weight: 400; letter-spacing: 0; color: var(--muted); }
 .fact > p:not([class]) { font-size: 0.95rem; color: var(--muted); }
 .fact .link { justify-self: start; font-size: 0.92rem; }
+/* a first look that is not yet a ladder measurement: set apart from the estimate */
+.preview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(20px, 3vw, 48px); align-items: center; margin-top: 16px; }
+.preview-head { display: grid; gap: 14px; justify-items: start; }
+.preview-head > p:not([class]) { font-size: 0.95rem; color: var(--muted); }
+.preview-head .link { font-size: 0.92rem; }
+.preview-rows { display: grid; gap: 8px; }
+.preview-row { background: var(--paper); }
+.preview-row .wdl rect { stroke: var(--paper); }
+@media (min-width: 641px) { .preview-row { grid-template-columns: minmax(104px, 0.9fr) minmax(0, 1.5fr) 3.6rem 5.6rem; } }
 @media (max-width: 980px) {
   .climbing { grid-template-columns: 1fr; }
   .standing { position: static; }
   .facts { grid-template-columns: 1fr; }
+  .preview { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .ladder-cols { display: none; }

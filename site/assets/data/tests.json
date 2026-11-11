@@ -31,6 +31,18 @@
    "label": "Passed; not shipped yet"
   },
   {
+   "test": 71,
+   "title": "Quantization-aware training against the same fine-tune without it",
+   "href": "https://bench.luminexchess.com/test/71/",
+   "ref": "network",
+   "games": 1912,
+   "elo": 23.3,
+   "ci": 8.9,
+   "text": "+23.3 ± 8.9",
+   "status": "pass",
+   "label": "Passed; not shipped yet"
+  },
+  {
    "test": 70,
    "title": "A quantization-aware fine-tune of the new network",
    "href": "https://bench.luminexchess.com/test/70/",

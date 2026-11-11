@@ -1,15 +1,17 @@
-"""Rank Luminex wins in OpenBench PGNs, for picking the homepage's showcase games.
+"""Rank Luminex wins in a match PGN, for picking the site's showcase games.
 
     python -X utf8 -I tools/select_games.py candidates.json GAME.pgn [GAME.pgn ...]
 
-Prints the balanced-start Luminex wins in which Luminex's own score saw the win
-coming earliest, compared with Stash's, and writes the top twelve to
+Works on any PGN whose move comments start with the mover's score and depth
+("+0.82/15 ..."), as OpenBench and fastchess write them. Prints the
+balanced-start Luminex wins in which Luminex's own score saw the win coming
+earliest, compared with the opponent's, and writes the top twelve to
 candidates.json: per ply the SAN, the FEN after the move, and the mover's score
 and depth, converted to White's point of view. Needs python-chess.
 
-The current showcase games come from the PGN archive of OpenBench test 20
-(https://bench.luminexchess.com/test/20/), files 20.35.1041.pgn and
-20.36.1241.pgn, given in that order.
+The current showcase games come from the 100-game match against Stash 37
+played with fastchess on 10 November 2026 (luminex_vs_stash37_20261110.pgn,
+kept in the engine repository's out/ folder): games 57 and 33 of that file.
 """
 import json
 import re
@@ -69,8 +71,8 @@ def export(game, gid):
         node = nxt
     return {
         "id": gid,
-        "white": "Luminex" if lum_white else "Stash 29",
-        "black": "Stash 29" if lum_white else "Luminex",
+        "white": "Luminex" if lum_white else h["White"],      # the opponent under the name the PGN gives it
+        "black": h["Black"] if lum_white else "Luminex",
         "result": h.get("Result"),
         "date": h.get("Date"),
         "timeControl": h.get("TimeControl"),
@@ -118,7 +120,7 @@ def main():
     print(f"{len(games)} games, {len(wins)} balanced-start Luminex wins with eval trails")
     for lead, hope, e in wins[:15]:
         print(f"  game {e['id']:4d} {e['white']:>8} vs {e['black']:<8} plies {len(e['plies']):3d} "
-              f"lead {lead:3d} plies, Stash's best self-eval before {hope:+5d} cp, mate={e['checkmate']}")
+              f"lead {lead:3d} plies, the opponent's best self-eval before {hope:+5d} cp, mate={e['checkmate']}")
     with open(out, "w", encoding="utf-8") as fh:
         json.dump([e for _, _, e in wins[:12]], fh)
 

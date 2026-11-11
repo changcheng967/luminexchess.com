@@ -93,6 +93,7 @@
       function ownSign(by) { return (by === "l") === lumWhite ? 1 : -1; }
       function own(p) {
         var sgn = ownSign(p.by);
+        if (/#$/.test(p.san || "")) return { text: "#", meta: "checkmate", cp: 3000 };   // the mating move itself
         if (p.mate !== null && p.mate !== undefined) {
           var m = p.mate * sgn;
           if (m === 0) return { text: "#", meta: "checkmate", cp: 3000 };

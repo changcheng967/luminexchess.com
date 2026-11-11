@@ -11,7 +11,7 @@ pages carry v6.5.1 links as a fallback).
 | Address | File | What it holds |
 |---|---|---|
 | `/` | `site/index.html` | The opening (a real game, played by scrolling), the Stash ladder, the method, three scenes from inside the engine, the chronicle with the rating chart, downloads |
-| `/games/` | `site/games/index.html` | The game viewer: two wins over Stash 29 with both engines' scores |
+| `/games/` | `site/games/index.html` | The game viewer: two wins over Stash 37 with both engines' scores |
 | `/tests/` | `site/tests/index.html` | The four steps a change goes through, and the record of every SPRT |
 | `/engine/` | `site/engine/index.html` | The six parts, the search explained step by step, speed, the network, training |
 | `/download/` | `site/download/index.html` | Every build, how to run and build it, questions |

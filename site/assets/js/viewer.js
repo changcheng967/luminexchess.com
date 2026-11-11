@@ -30,6 +30,7 @@
   function ownSign(g, by) { return (by === "l") === (g.white === "Luminex") ? 1 : -1; }
   function formatScore(g, p) {
     var s = ownSign(g, p.by);
+    if (/#$/.test(p.san || "")) return { text: "#", meta: "checkmate", cp: 3000 };   // the mating move itself
     if (p.mate !== null) {
       var m = p.mate * s;
       if (m === 0) return { text: "#", meta: "checkmate", cp: 3000 };
