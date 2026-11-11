@@ -116,6 +116,7 @@
 .thead, .trow { display: grid; grid-template-columns: var(--cols); column-gap: clamp(16px, 2.4vw, 32px); align-items: center; padding-inline: 20px; }
 .thead { position: sticky; top: 0; z-index: 5; padding-block: 14px 12px; font: 400 0.66rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); background: var(--paper-3); }
 .thead span:last-child { text-align: right; }
+body:has(.hdr:not(.is-away)) .thead { top: 78px; }      /* step below the header while it is showing */
 .taxis { display: flex; justify-content: space-between; letter-spacing: 0; }
 .taxis i { display: flex; justify-content: center; width: 0; font-style: normal; white-space: nowrap; }
 .trows { display: grid; gap: 6px; }
@@ -138,10 +139,11 @@
 .tp-dot { stroke-width: 11; }
 .is-pass .tp-ci, .is-pass .tp-dot, .is-pass .tp-off { stroke: var(--mark); }
 .trow.is-target { box-shadow: inset 0 0 0 2px var(--accent), 0 20px 44px -26px rgba(var(--glow-rgb), 0.9); }
-.motion .trow { transition: opacity 0.7s var(--ease-out), transform 0.8s var(--ease-out), box-shadow 0.4s; transition-delay: calc(var(--i, 0) * 38ms), calc(var(--i, 0) * 38ms), 0s; }
-.motion .trow:not(.is-in) { opacity: 0; transform: translate3d(0, 16px, 0); }
-.motion .trow .tp-mark { transform-origin: 25% 50%; transition: transform 1s var(--ease-out); transition-delay: calc(var(--i, 0) * 38ms + 180ms); }
-.motion .trow:not(.is-in) .tp-mark { transform: scaleX(0); }
+/* armed by tests.js, so the rows are never left hidden if it does not run */
+.motion .is-armed .trow { transition: opacity 0.7s var(--ease-out), transform 0.8s var(--ease-out), box-shadow 0.4s; transition-delay: calc(var(--i, 0) * 38ms), calc(var(--i, 0) * 38ms), 0s; }
+.motion .is-armed .trow:not(.is-in) { opacity: 0; transform: translate3d(0, 16px, 0); }
+.motion .is-armed .trow .tp-mark { transform-origin: 25% 50%; transition: transform 1s var(--ease-out); transition-delay: calc(var(--i, 0) * 38ms + 180ms); }
+.motion .is-armed .trow:not(.is-in) .tp-mark { transform: scaleX(0); }
 .record-notes { display: grid; gap: 14px; margin-top: 28px; }
 .record-notes .note a { color: var(--ink); }
 @media (max-width: 760px) {
@@ -212,6 +214,7 @@
 @media (max-width: 900px) {
   .scrolly { grid-template-columns: 1fr; gap: 20px; }
   .scrolly-fig { top: 10px; z-index: 3; padding: 10px 8px 12px; background: #0c0c0e; box-shadow: inset 0 0 0 1px var(--line-2), 0 24px 40px -20px #000; }
+  body:has(.hdr:not(.is-away)) .scrolly-fig { top: 72px; }
   .tr-lbl { font-size: 19px; }
   .step-dots { margin-top: 8px; }
   .step-dots a { width: 28px; height: 28px; }
@@ -230,8 +233,8 @@
 .bar-track { width: 100%; height: 12px; border-radius: 0 4px 4px 0; background: var(--line-2); }
 .bar-fill { fill: var(--mark); }
 .bar-value { text-align: right; font-weight: 600; }
-.motion .speed .bar-fill { transform: scaleX(0); transform-origin: 0 50%; transition: transform 1.3s var(--ease-out); transition-delay: calc(var(--i, 0) * 90ms); }
-.motion .speed.is-in .bar-fill { transform: none; }
+.motion .speed.is-armed .bar-fill { transform: scaleX(0); transform-origin: 0 50%; transition: transform 1.3s var(--ease-out); transition-delay: calc(var(--i, 0) * 90ms); }
+.motion .speed.is-armed.is-in .bar-fill { transform: none; }
 @media (max-width: 900px) { .speed-grid { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .bar { grid-template-columns: 1fr auto; } .bar-track { grid-column: 1 / -1; grid-row: 2; } }
 

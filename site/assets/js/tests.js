@@ -48,6 +48,7 @@
   });
 
   if (motion && "IntersectionObserver" in window) {
+    rec.classList.add("is-armed");
     var io = new IntersectionObserver(function (entries) {
       var arriving = [];
       entries.forEach(function (e) {

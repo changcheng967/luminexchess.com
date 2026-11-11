@@ -14,6 +14,9 @@
   // addresses from the time the site was one page
   var moved = { "#games": "/games/", "#network": "/engine/#network", "#faq": "/download/#faq" };
   if (moved[location.hash]) { location.replace(moved[location.hash]); return; }
+  window.addEventListener("hashchange", function () {
+    if (moved[location.hash]) location.replace(moved[location.hash]);
+  });
 
   function svgEl(tag, attrs, cls) {
     var e = document.createElementNS(SVGNS, tag);
@@ -237,8 +240,9 @@
         timer = 0;
         if (shown === target) { boardEl.classList.remove("is-fast"); return; }
         var gap = Math.abs(target - shown), dir = target > shown ? 1 : -1;
-        var jump = gap > 30 ? Math.ceil(gap / 10) : 1;
-        render(shown + dir * jump, true, gap > 2);
+        // far behind (a jump down the page): cut to a dozen moves short, then play those
+        if (gap > 30) render(target - dir * 12, false, true);
+        else render(shown + dir, true, gap > 2);
         timer = setTimeout(loop, gap > 2 ? 48 : 110);
       }
       function update() {
@@ -265,6 +269,7 @@
         window.scrollTo({ top: y, behavior: "smooth" });
       }
 
+      sec.classList.add("is-live");
       layout();
       update();
       window.addEventListener("scroll", ask, { passive: true });
@@ -338,7 +343,10 @@
       b.style.setProperty("--i", i);
       if (parseFloat(b.getAttribute("data-text").replace("−", "-")) < 0) b.classList.add("is-neg");
     });
-    if (motion) Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.3);
+    if (motion) {
+      fig.classList.add("is-armed");
+      Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.3);
+    }
 
     // one tooltip, shared by every bar; the same details are in each bar's label
     var tip = el("div", "tip");

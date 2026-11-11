@@ -70,6 +70,7 @@
     var fig = $("[data-speed]");
     if (!fig || !motion) return;
     $$(".bar", fig).forEach(function (b, i) { b.style.setProperty("--i", i); });
+    fig.classList.add("is-armed");
     Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.35);
   })();
 })();

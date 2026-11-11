@@ -214,7 +214,7 @@
   // show another value; digits roll when the new text has the same shape, and
   // roll up from zero when it has a new one
   Odo.prototype.set = function (text) {
-    if (text === this.text) return;
+    if (text === this.text) { this.roll(); return; }
     if (text.replace(/\d/g, "0") !== this.shape) {
       this.build(text, true);
       var self = this;
