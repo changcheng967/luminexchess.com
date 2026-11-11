@@ -65,13 +65,13 @@
   --paper-3: #ebe7dc;          /* sunken */
   --ink: #131210;
   --muted: #5e594f;
-  --faint: #6f6a5f;
+  --faint: #686358;            /* 4.8:1 on the tinted paper, 5.3:1 on paper */
   --line: rgba(19, 18, 16, 0.16);
   --line-2: rgba(19, 18, 16, 0.08);
   --accent: #8a5a00;           /* accent text */
   --mark: #b27400;             /* Luminex in charts (validated on paper) */
   --mark-2: #2a6bc2;           /* the opponent in charts */
-  --mark-0: #b7b1a3;           /* a draw, or a test that did not light up */
+  --mark-0: #958f82;           /* a draw, or a test that did not light up (3:1 on a card) */
   --glow-rgb: 178, 116, 0;
   --btn: #131210;
   --btn-ink: #f4f1ea;
