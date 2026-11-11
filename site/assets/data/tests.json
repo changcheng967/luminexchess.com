@@ -7,6 +7,102 @@
  },
  "tests": [
   {
+   "test": 73,
+   "title": "A quantization-aware fine-tune of the continued network",
+   "href": "https://bench.luminexchess.com/test/73/",
+   "ref": "network",
+   "games": 3296,
+   "elo": 13.4,
+   "ci": 6.5,
+   "text": "+13.4 ± 6.5",
+   "status": "pass",
+   "label": "Passed; not shipped yet"
+  },
+  {
+   "test": 72,
+   "title": "A second 230,000-step training cycle on top of the new network",
+   "href": "https://bench.luminexchess.com/test/72/",
+   "ref": "network",
+   "games": 5684,
+   "elo": 8.7,
+   "ci": 5.1,
+   "text": "+8.7 ± 5.1",
+   "status": "pass",
+   "label": "Passed; not shipped yet"
+  },
+  {
+   "test": 70,
+   "title": "A quantization-aware fine-tune of the new network",
+   "href": "https://bench.luminexchess.com/test/70/",
+   "ref": "network",
+   "games": 4474,
+   "elo": 10.4,
+   "ci": 5.6,
+   "text": "+10.4 ± 5.6",
+   "status": "pass",
+   "label": "Passed; not shipped yet"
+  },
+  {
+   "test": 69,
+   "title": "The tune 65 search constants against tune 54's, both with the new network",
+   "href": "https://github.com/changcheng967/Luminex/pull/57",
+   "ref": "#57",
+   "games": 12484,
+   "elo": -1.81,
+   "ci": 3.45,
+   "text": "−1.8 ± 3.5",
+   "status": "merged",
+   "label": "Merged, within error"
+  },
+  {
+   "test": 68,
+   "title": "The new network together with the tune 65 search constants",
+   "href": "https://github.com/changcheng967/Luminex/pull/57",
+   "ref": "#57",
+   "games": 876,
+   "elo": 60.08,
+   "ci": 15.43,
+   "text": "+60.1 ± 15.4",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 67,
+   "title": "A training loss with power 3.0 instead of 2.6",
+   "href": "https://bench.luminexchess.com/test/67/",
+   "ref": "network",
+   "games": 30522,
+   "elo": 3.0,
+   "ci": 2.3,
+   "text": "+3.0 ± 2.3",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 66,
+   "title": "A training loss with power 2.0 instead of 2.6",
+   "href": "https://bench.luminexchess.com/test/66/",
+   "ref": "network",
+   "games": 2986,
+   "elo": -14.2,
+   "ci": 7.8,
+   "text": "−14.2 ± 7.8",
+   "status": "fail",
+   "label": "Failed"
+  },
+  {
+   "test": 64,
+   "title": "The 13 centipawn margins scaled by 1.2 for the new network",
+   "href": "https://bench.luminexchess.com/test/64/",
+   "ref": "search",
+   "games": 3006,
+   "elo": -5.0,
+   "ci": 7.0,
+   "text": "−5.0 ± 7.0",
+   "status": "fail",
+   "label": "Failed"
+  },
+  {
    "test": 63,
    "title": "A network with eight output buckets, trained on 2.5 billion T91 positions",
    "href": "https://github.com/changcheng967/Luminex/blob/main/nnue/V3-GEN768R.md",
@@ -16,7 +112,7 @@
    "ci": 14.91,
    "text": "+54.5 ± 14.9",
    "status": "pass",
-   "label": "Passed; on main with its retuned search"
+   "label": "Passed; on main since test 68"
   },
   {
    "test": 61,

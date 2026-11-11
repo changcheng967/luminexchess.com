@@ -117,9 +117,8 @@ def region_tests_strip(data, indent):
         cx = L + slot * (i + 0.5)
         x0 = cx - bw / 2
         top, bot = t["elo"] + t["ci"], t["elo"] - t["ci"]
-        word = "a gain" if t["elo"] > 0 else "a loss"
-        label = "Test %d, %s: %s Elo over %s games, %s. %s." % (
-            t["test"], t["title"], t["text"], "{:,}".format(t["games"]), word, t["label"])
+        label = "Test %d, %s: %s Elo over %s games. %s." % (
+            t["test"], t["title"], t["text"], "{:,}".format(t["games"]), t["label"])
         a('    <a class="sbar is-%s%s" href="/tests/#t%d" aria-label="%s" data-test="%d" data-title="%s" data-text="%s" data-games="%s" data-label="%s">'
           % (t["status"], " is-neg" if t["elo"] < 0 else "", t["test"], esc(label), t["test"], esc(t["title"]), esc(t["text"]), "{:,}".format(t["games"]), esc(t["label"])))
         a('      <rect class="sbar-hit" x="%s" y="%d" width="%s" height="%d"/>' % (num(cx - slot / 2), T, num(slot), ph))
@@ -130,7 +129,7 @@ def region_tests_strip(data, indent):
         a("    </a>")
     a("  </svg>")
     a("</div>")
-    a('<p class="strip-legend"><span><i class="k-pass"></i>Passed</span><span><i class="k-rest"></i>Failed, stopped, or merged inside the error margin</span><span><i class="k-ci"></i>95% confidence interval</span></p>')
+    a('<p class="strip-legend"><span><i class="k-pass"></i>Passed</span><span><i class="k-rest"></i>Failed, stopped, or merged anyway</span><span><i class="k-ci"></i>95% confidence interval</span></p>')
     return "\n".join(indent + line for line in o)
 
 
