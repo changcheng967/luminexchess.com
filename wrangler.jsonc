@@ -1,0 +1,14 @@
+// Cloudflare Workers configuration for luminexchess.com.
+// The site is static files only: there is no Worker script, just the assets in site/.
+{
+  "name": "luminexchess-com",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./site",
+    // An address that matches no file gets site/404.html with status 404, not an empty response.
+    "not_found_handling": "404-page"
+  },
+  // `wrangler preview`, which Cloudflare runs for every branch but main, refuses to run without
+  // this block. An empty one is enough: the assets and the date above apply to previews too.
+  "previews": {}
+}
