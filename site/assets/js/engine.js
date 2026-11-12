@@ -3,6 +3,7 @@
      steps scroll past, and it shows what has been explained so far;
    - the network: one detail panel for the selected layer;
    - the speed bars grow when they come on screen.
+   - the network's generations: what each adds arrives card by card.
    Without scripts the tree is complete and every text is in the page. */
 (function () {
   "use strict";
@@ -72,5 +73,14 @@
     $$(".bar", fig).forEach(function (b, i) { b.style.setProperty("--i", i); });
     fig.classList.add("is-armed");
     Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.35);
+  })();
+
+  // the generations: what each one adds to the last arrives card by card
+  (function generations() {
+    var list = $("[data-gens]");
+    if (!list || !motion) return;
+    $$(".gen", list).forEach(function (g, i) { g.style.setProperty("--i", i); });
+    list.classList.add("is-armed");
+    Lux.onVisible(list, function () { list.classList.add("is-in"); }, 0.2);
   })();
 })();

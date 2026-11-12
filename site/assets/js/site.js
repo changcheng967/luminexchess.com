@@ -458,53 +458,38 @@
       if (isNaN(d)) return null;
       return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
     }
-    // One request per kind, kept for `ttl` ms in this tab. `pick` chooses the release in the answer.
+    function slim(rel) {
+      if (!rel || !rel.tag_name) return null;
+      return {
+        tag_name: rel.tag_name, name: rel.name, published_at: rel.published_at, html_url: rel.html_url,
+        assets: (rel.assets || []).map(function (a) {
+          return { name: a.name, size: a.size, browser_download_url: a.browser_download_url };
+        })
+      };
+    }
+    // One request a page at most, kept for `ttl` ms in this tab. `pick` turns the answer into what is kept.
     function load(url, key, ttl, pick, use) {
       try {
         var cached = JSON.parse(sessionStorage.getItem(key) || "null");
-        if (cached && Date.now() - cached.at < ttl) { use(cached.rel); return; }
+        if (cached && cached.data && Date.now() - cached.at < ttl) { use(cached.data); return; }
       } catch (e) { /* storage unavailable */ }
       if (!window.fetch) return;
       var ctrl = window.AbortController ? new AbortController() : null;
       var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 6000) : 0;
       fetch(url, { headers: { Accept: "application/vnd.github+json" }, signal: ctrl ? ctrl.signal : undefined })
         .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (data) {
+        .then(function (json) {
           clearTimeout(timer);
-          var rel = data && pick(data);
-          if (!rel || !rel.tag_name) return;
-          var slim = {
-            tag_name: rel.tag_name, name: rel.name, published_at: rel.published_at, html_url: rel.html_url,
-            assets: (rel.assets || []).map(function (a) {
-              return { name: a.name, size: a.size, browser_download_url: a.browser_download_url };
-            })
-          };
-          try { sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), rel: slim })); } catch (e) { /* ignore */ }
-          use(slim);
+          var data = json && pick(json);
+          if (!data) return;
+          try { sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), data: data })); } catch (e) { /* ignore */ }
+          use(data);
         })
         .catch(function () { clearTimeout(timer); });
     }
 
-    // The development build is a pre-release that every push to main replaces. Its name changes
-    // with it, so the page links to the list of releases and only says which build is there now.
-    if ($("[data-dev]")) {
-      load(API + "?per_page=12", "lux-dev-v1", 600000, function (list) {
-        if (!Array.isArray(list)) return null;
-        for (var i = 0; i < list.length; i++) {
-          if (list[i] && list[i].prerelease && /^luminex-dev-/.test(list[i].tag_name || "")) return list[i];
-        }
-        return null;
-      }, function (rel) {
-        var date = fmtDate(rel.published_at);
-        if (!rel.tag_name || !date) return;
-        $$("[data-dev-name]").forEach(function (n) { n.textContent = rel.tag_name; });
-        $$("[data-dev-date]").forEach(function (n) { n.textContent = date; n.setAttribute("datetime", rel.published_at.slice(0, 10)); });
-        $$("[data-dev]").forEach(function (n) { n.hidden = false; });
-      });
-    }
-
-    if (!$("[data-release-tag], [data-asset], [data-release-url]")) return;
-    function apply(rel) {
+    // the numbered release: names, dates, sizes and download links
+    function applyStable(rel) {
       if (!rel || !rel.tag_name || !rel.assets) return;
       var tag = rel.tag_name;
       $$("[data-release-tag]").forEach(function (n) { n.textContent = tag; });
@@ -529,7 +514,33 @@
         if (a) link.href = a.browser_download_url;
       });
     }
-    load(API + "/latest", "lux-release-v1", 3600000, function (rel) { return rel; }, apply);
+    // The development build is a pre-release that every push to main replaces. Its name changes
+    // with it, so the page links to the list of releases and only says which build is there now.
+    function applyDev(rel) {
+      var date = rel && fmtDate(rel.published_at);
+      if (!rel || !rel.tag_name || !date) return;
+      $$("[data-dev-name]").forEach(function (n) { n.textContent = rel.tag_name; });
+      $$("[data-dev-date]").forEach(function (n) { n.textContent = date; n.setAttribute("datetime", rel.published_at.slice(0, 10)); });
+      $$("[data-dev]").forEach(function (n) { n.hidden = false; });
+    }
+
+    if ($("[data-dev]")) {
+      // The download page asks once for the newest few releases: the first that is not a
+      // pre-release is the numbered one, the first named luminex-dev-… is the development build.
+      load(API + "?per_page=6", "lux-releases-v2", 600000, function (list) {
+        if (!Array.isArray(list)) return null;
+        var both = { stable: null, dev: null };
+        list.forEach(function (rel) {
+          if (!rel || rel.draft) return;
+          if (!rel.prerelease) { if (!both.stable) both.stable = slim(rel); }
+          else if (!both.dev && /^luminex-dev-/.test(rel.tag_name || "")) both.dev = slim(rel);
+        });
+        return both.stable || both.dev ? both : null;
+      }, function (both) { applyStable(both.stable); applyDev(both.dev); });
+      return;
+    }
+    if (!$("[data-release-tag], [data-asset], [data-release-url]")) return;
+    load(API + "/latest", "lux-release-v2", 3600000, slim, applyStable);
   })();
 
   /* ---------- the pointer: a point of light, with a ring that trails it ----------

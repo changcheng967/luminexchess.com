@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=8"></script>
+  <script src="/assets/js/theme.js?v=9"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,10 +25,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=8">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=8">
-  <script src="/assets/js/site.js?v=8" defer></script>
-  <script src="/assets/js/engine.js?v=8" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=9">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=9">
+  <script src="/assets/js/site.js?v=9" defer></script>
+  <script src="/assets/js/engine.js?v=9" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -307,7 +307,7 @@
               <span class="net-size num">16</span>
               <span class="net-name">Hidden layer</span>
             </button>
-            <p class="net-text">int8 weights. On AVX-512 VNNI hardware one instruction multiplies and accumulates 64 byte pairs.</p>
+            <p class="net-text">int8 weights. On AVX-512 VNNI hardware one instruction multiplies and accumulates 64 byte pairs. From gen768r on, this layer and the two after it exist eight times, one set for each band of four pieces on the board.</p>
           </li>
           <li class="net-layer" data-layer="4" data-reveal data-d="4">
             <button type="button" class="net-btn" aria-controls="net-detail" aria-pressed="false">
@@ -327,6 +327,46 @@
           </li>
         </ol>
         <p class="net-detail" id="net-detail" aria-live="polite"></p>
+
+        <div class="gens-head">
+          <h3 class="h-m" id="generations" data-reveal>Four generations of one design</h3>
+          <p data-reveal data-d="1">The accumulators have kept their shape since gen768; what changes from one generation to the next is mostly what stands behind them. Each has its specification in the repository's <a href="https://github.com/changcheng967/Luminex/tree/main/nnue">nnue folder</a>, beside a <a href="https://github.com/changcheng967/Luminex/blob/main/nnue/DEVLOG.md">development log</a> that also covers the 512-wide networks that came before.</p>
+          <p class="legend gens-legend" data-reveal data-d="2"><span><i class="k-add"></i>New in this generation</span><span><i class="k-plan"></i>Specified, not built</span><span><i class="k-keep"></i>Carried over</span></p>
+        </div>
+        <ol class="gens" data-gens aria-labelledby="generations">
+          <li class="card gen" data-glow data-reveal>
+            <p class="gen-status"><i aria-hidden="true"></i><span class="gen-v">V1</span> Released, v6.1 to v6.5.1</p>
+            <h4 class="gen-name">gen768</h4>
+            <svg class="gen-fig" viewBox="0 0 240 100" aria-hidden="true" focusable="false"><rect class="g-in is-add" x="6" y="10" width="9" height="80" rx="2.5"/><rect class="g-add" x="26" y="10" width="8" height="80" rx="2.5"/><rect class="g-add" x="38" y="10" width="8" height="80" rx="2.5"/><path class="g-wire is-on" d="M15 50H26"/><path class="g-wire g-new is-on" d="M46 50H120"/><rect class="g-add g-new" x="120" y="35.0" width="9" height="30" rx="2.5"/><path class="g-wire is-on" d="M129 50H152"/><rect class="g-add g-new" x="152" y="28.0" width="9" height="44" rx="2.5"/><path class="g-wire is-on" d="M161 50H184.5"/><circle class="g-add g-new" cx="190" cy="50" r="5.5"/></svg>
+            <p class="gen-shape mono">2 × 768 → 16 → 32 → 1</p>
+            <p>One pair of accumulators and one small tail behind them. Its 24,576 inputs a side, its squared clipped ReLU and its output scale are still those of gen768r and gen768s. All releases from v6.1 to v6.5.1 carry a network of this shape.</p>
+            <a class="link" href="https://github.com/changcheng967/Luminex/blob/main/nnue/V1-GEN768.md"><span>Specification<span class="sr-only"> of gen768</span></span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </li>
+          <li class="card gen is-shelved" data-glow data-reveal data-d="1">
+            <p class="gen-status"><i aria-hidden="true"></i><span class="gen-v">V2</span> Specified, never shipped</p>
+            <h4 class="gen-name">gen768q</h4>
+            <svg class="gen-fig" viewBox="0 0 240 100" aria-hidden="true" focusable="false"><rect class="g-in" x="6" y="10" width="9" height="52" rx="2.5"/><rect class="g-acc" x="26" y="10" width="8" height="80" rx="2.5"/><rect class="g-acc" x="38" y="10" width="8" height="80" rx="2.5"/><path class="g-wire" d="M15 50H26"/><rect class="g-plan g-new" x="6" y="68" width="9" height="22" rx="2.5"/><path class="g-wire is-plan g-new" d="M15 79H26"/><path class="g-wire is-plan" d="M46 50C60 50 62 12 78 12"/><rect class="g-plan g-new" x="78" y="8" width="8" height="8" rx="2"/><path class="g-wire is-plan" d="M46 50C60 50 62 23 78 23"/><rect class="g-plan g-new" x="78" y="19" width="8" height="8" rx="2"/><path class="g-wire is-plan is-sel" d="M46 50C60 50 62 34 78 34"/><rect class="g-plan g-new" x="78" y="30" width="8" height="8" rx="2"/><path class="g-wire is-plan" d="M46 50C60 50 62 45 78 45"/><rect class="g-plan g-new" x="78" y="41" width="8" height="8" rx="2"/><path class="g-wire is-plan" d="M46 50C60 50 62 56 78 56"/><rect class="g-plan g-new" x="78" y="52" width="8" height="8" rx="2"/><path class="g-wire is-plan" d="M46 50C60 50 62 67 78 67"/><rect class="g-plan g-new" x="78" y="63" width="8" height="8" rx="2"/><path class="g-wire is-plan" d="M46 50C60 50 62 78 78 78"/><rect class="g-plan g-new" x="78" y="74" width="8" height="8" rx="2"/><path class="g-wire is-plan" d="M46 50C60 50 62 89 78 89"/><rect class="g-plan g-new" x="78" y="85" width="8" height="8" rx="2"/><path class="g-wire" d="M86 34C102 34 104 50 120 50"/><rect class="g-tail" x="120" y="35.0" width="9" height="30" rx="2.5"/><path class="g-wire" d="M129 50H152"/><rect class="g-tail" x="152" y="28.0" width="9" height="44" rx="2.5"/><path class="g-wire" d="M161 50H184.5"/><circle class="g-tail" cx="190" cy="50" r="5.5"/></svg>
+            <p class="gen-shape mono">+ pawn inputs → 8 × (16 → 32 → 1)</p>
+            <p>Written in October with v6.4 in mind: pawn-structure inputs beside the piece-square ones, passed pawns first, and eight tails chosen by the number of pieces, each addition gated by a measurement of its own. It never shipped. gen768r kept the eight tails and left the inputs as they were.</p>
+            <a class="link" href="https://github.com/changcheng967/Luminex/blob/main/nnue/V2-GEN768Q.md"><span>Specification<span class="sr-only"> of gen768q</span></span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </li>
+          <li class="card gen is-now" data-glow data-reveal data-d="2">
+            <p class="gen-status"><i aria-hidden="true"></i><span class="gen-v">V3</span> On main, for 6.6</p>
+            <h4 class="gen-name">gen768r</h4>
+            <svg class="gen-fig" viewBox="0 0 240 100" aria-hidden="true" focusable="false"><rect class="g-in" x="6" y="10" width="9" height="80" rx="2.5"/><rect class="g-acc" x="26" y="10" width="8" height="80" rx="2.5"/><rect class="g-acc" x="38" y="10" width="8" height="80" rx="2.5"/><path class="g-wire" d="M15 50H26"/><path class="g-wire" d="M46 50C60 50 62 12 78 12"/><rect class="g-new g-add-o" x="78" y="8" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 23 78 23"/><rect class="g-new g-add-o" x="78" y="19" width="8" height="8" rx="2"/><path class="g-wire is-sel" d="M46 50C60 50 62 34 78 34"/><rect class="g-new g-add" x="78" y="30" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 45 78 45"/><rect class="g-new g-add-o" x="78" y="41" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 56 78 56"/><rect class="g-new g-add-o" x="78" y="52" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 67 78 67"/><rect class="g-new g-add-o" x="78" y="63" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 78 78 78"/><rect class="g-new g-add-o" x="78" y="74" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 89 78 89"/><rect class="g-new g-add-o" x="78" y="85" width="8" height="8" rx="2"/><path class="g-wire is-on g-new" d="M86 34C102 34 104 50 120 50"/><rect class="g-tail" x="120" y="35.0" width="9" height="30" rx="2.5"/><path class="g-wire" d="M129 50H152"/><rect class="g-tail" x="152" y="28.0" width="9" height="44" rx="2.5"/><path class="g-wire" d="M161 50H184.5"/><circle class="g-tail" cx="190" cy="50" r="5.5"/></svg>
+            <p class="gen-shape mono">2 × 768 → 8 × (16 → 32 → 1)</p>
+            <p>The same inputs and accumulators, then eight tails, one for each band of four pieces on the board, each with its own int8 scales. Choosing the tail costs one popcount. Tail units that had died in earlier training were revived first. gen768r_04q is the network on main.</p>
+            <a class="link" href="https://github.com/changcheng967/Luminex/blob/main/nnue/V3-GEN768R.md"><span>Specification<span class="sr-only"> of gen768r</span></span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </li>
+          <li class="card gen is-plan" data-glow data-reveal data-d="3">
+            <p class="gen-status"><i aria-hidden="true"></i><span class="gen-v">V4</span> Designed, for 6.7</p>
+            <h4 class="gen-name">gen768s</h4>
+            <svg class="gen-fig" viewBox="0 0 240 100" aria-hidden="true" focusable="false"><rect class="g-in" x="6" y="10" width="9" height="80" rx="2.5"/><rect class="g-acc" x="26" y="10" width="8" height="80" rx="2.5"/><rect class="g-acc" x="38" y="10" width="8" height="80" rx="2.5"/><path class="g-wire" d="M15 50H26"/><path class="g-wire" d="M46 50C60 50 62 12 78 12"/><rect class="g-box" x="78" y="8" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 23 78 23"/><rect class="g-box" x="78" y="19" width="8" height="8" rx="2"/><path class="g-wire is-sel" d="M46 50C60 50 62 34 78 34"/><rect class="g-box is-sel" x="78" y="30" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 45 78 45"/><rect class="g-box" x="78" y="41" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 56 78 56"/><rect class="g-box" x="78" y="52" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 67 78 67"/><rect class="g-box" x="78" y="63" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 78 78 78"/><rect class="g-box" x="78" y="74" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 89 78 89"/><rect class="g-box" x="78" y="85" width="8" height="8" rx="2"/><path class="g-wire" d="M86 34C100 34 104 30 120 30"/><rect class="g-tail" x="120" y="18.0" width="9" height="24" rx="2.5"/><path class="g-wire" d="M129 30H152"/><rect class="g-tail" x="152" y="12.5" width="9" height="35" rx="2.5"/><path class="g-wire" d="M161 30H184.5"/><circle class="g-tail" cx="190" cy="30" r="5.5"/><path class="g-wire is-plan g-new" d="M86 34C100 34 102 78 120 78"/><rect class="g-plan g-new" x="120" y="70" width="9" height="16" rx="2.5"/><path class="g-wire is-plan g-new" d="M129 78H147"/><circle class="g-plan g-new" cx="152" cy="78" r="4.5"/><text class="g-label" x="203" y="33">value</text><text class="g-label g-new" x="163" y="81">error</text></svg>
+            <p class="gen-shape mono">… + 8 × (1,536 → 8 → 1)</p>
+            <p>gen768r with a second, smaller head in every bucket. It predicts, in centipawns, how far the static evaluation is from what a deep search would say, and is computed only where the search's pruning margins read it. Today the search makes that guess from correction history, for a whole class of positions at once. The design allows the head 3% of the speed, and asks for an offline test and then an SPRT. It is in review; nothing is built.</p>
+            <a class="link" href="https://github.com/changcheng967/Luminex/pull/67"><span>The design<span class="sr-only"> of gen768s</span>, pull request #67</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </li>
+        </ol>
       </div>
     </section>
 

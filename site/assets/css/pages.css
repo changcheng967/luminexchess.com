@@ -262,6 +262,49 @@ body:has(.hdr:not(.is-away)) .thead { top: 78px; }      /* step below the header
 @media (max-width: 980px) { .net { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .net { grid-template-columns: repeat(2, minmax(0, 1fr)); } .net-glyph { height: 52px; } }
 
+/* the network's generations: amber is what a generation adds, dashes are what was specified and not built */
+.gens-head { display: grid; gap: 16px; max-width: 78ch; margin-block: clamp(60px, 8vw, 112px) clamp(24px, 3vw, 40px); }
+.gens-head > p:not([class]) { color: var(--muted); }
+.gens-head > p a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
+.gens-head > p a:hover { text-decoration-color: currentColor; }
+.gens-legend { margin: 0; }
+.k-add { background: var(--mark); }
+.k-plan { box-shadow: inset 0 0 0 1.5px var(--mark); background: repeating-linear-gradient(135deg, transparent 0 2px, rgba(var(--glow-rgb), 0.5) 2px 4px); }
+.k-keep { background: var(--mark-0); }
+.gens { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.gen { display: grid; grid-template-rows: auto auto auto auto 1fr auto; gap: 12px; align-content: start; padding: 22px 22px 24px; transition: transform 0.45s var(--ease-out), box-shadow 0.3s; }
+.gen:hover { transform: translateY(-4px); }
+.gen.is-now { box-shadow: inset 0 0 0 1.5px var(--accent), 0 22px 44px -28px rgba(var(--glow-rgb), 0.9); }
+.gen-status { display: flex; align-items: center; gap: 8px; font: 400 0.66rem/1.3 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.gen-status i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--mark-0); }
+.gen-v { color: var(--ink); }
+.gen.is-now .gen-status { color: var(--accent); }
+.gen.is-now .gen-status i { background: var(--mark); box-shadow: 0 0 0 4px rgba(var(--glow-rgb), 0.22); }
+.gen.is-plan .gen-status i { background: none; box-shadow: inset 0 0 0 1.5px var(--mark); }
+.gen.is-shelved .gen-status i { background: none; box-shadow: inset 0 0 0 1.5px var(--mark-0); }
+.gen-name { font: 400 clamp(1.8rem, 2.4vw, 2.2rem)/1.05 var(--serif); letter-spacing: -0.012em; }
+.gen-fig { display: block; width: min(100%, 300px); height: auto; margin-block: 2px 0; overflow: visible; }
+.gen-fig .g-in { fill: var(--mark-0); opacity: 0.28; }
+.gen-fig .g-in.is-add { fill: var(--mark); opacity: 0.3; }
+.gen-fig .g-acc, .gen-fig .g-tail { fill: var(--mark-0); }
+.gen-fig .g-box { fill: none; stroke: var(--mark-0); stroke-width: 1.2; }
+.gen-fig .g-box.is-sel { fill: var(--mark-0); }
+.gen-fig .g-add { fill: var(--mark); }
+.gen-fig .g-add-o { fill: none; stroke: var(--mark); stroke-width: 1.3; }
+.gen-fig .g-plan { fill: none; stroke: var(--mark); stroke-width: 1.3; stroke-dasharray: 3 2.5; }
+.gen-fig .g-wire { fill: none; stroke: var(--mark-0); stroke-width: 1; opacity: 0.7; }
+.gen-fig .g-wire.is-on { stroke: var(--mark); stroke-width: 1.4; opacity: 1; }
+.gen-fig .g-wire.is-plan { stroke: var(--mark); stroke-dasharray: 3 2.5; opacity: 1; }
+.gen-fig .g-label { font: 400 9.5px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; fill: var(--faint); }
+.gen-shape { font-size: 0.72rem; line-height: 1.5; color: var(--ink); }
+.gen > p:not([class]) { font-size: 0.92rem; color: var(--muted); }
+.gen .link { justify-self: start; margin-top: 2px; font-size: 0.9rem; }
+/* what a generation adds arrives after its card: left to right, card by card */
+.motion .gens.is-armed .g-new { transition: opacity 0.7s, transform 0.9s var(--ease-out); transition-delay: calc(var(--i, 0) * 170ms + 380ms); }
+.motion .gens.is-armed:not(.is-in) .g-new { opacity: 0; transform: translate3d(-10px, 0, 0); }
+@media (max-width: 1100px) { .gens { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .gens { grid-template-columns: minmax(0, 1fr); } }
+
 .totals-train { margin-block: 0 clamp(36px, 5vw, 64px); }
 /* the training run, phase by phase: a table on wide screens, one block a phase on narrow ones */
 .phases { margin: 0 0 clamp(48px, 6.5vw, 92px); }

@@ -296,7 +296,7 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
 .ticks-2 i:nth-child(4n + 1) { height: 20px; background: var(--stage-faint); }
 .ticks-2 i:nth-child(6n + 2) { background: var(--lumen); }
 .speed-num { font: 500 clamp(2.2rem, 3.8vw, 3.2rem)/1 var(--sans); letter-spacing: -0.04em; }
-.inside-more { display: flex; justify-content: center; margin-top: clamp(36px, 5vw, 64px); }
+.inside-more { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: clamp(36px, 5vw, 64px); }
 @keyframes net-cell { 0%, 100% { opacity: 0.15; } 8%, 22% { opacity: 1; } 40% { opacity: 0.15; } }
 @keyframes net-node { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
 @keyframes net-p1 { 0%, 10% { transform: translate(0, 0); opacity: 0; } 14% { opacity: 1; } 32% { transform: translate(104px, -8px); opacity: 1; } 36%, 100% { transform: translate(104px, -8px); opacity: 0; } }
