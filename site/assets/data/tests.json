@@ -1,14 +1,38 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "10 November 2026",
+ "asOf": "11 November 2026",
  "axis": {
   "min": -40,
   "max": 120
  },
  "tests": [
   {
+   "test": 82,
+   "title": "gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions",
+   "href": "https://bench.luminexchess.com/test/82/",
+   "ref": "network",
+   "games": 3394,
+   "elo": 13.31,
+   "ci": 6.55,
+   "text": "+13.3 ± 6.6",
+   "status": "pass",
+   "label": "Passed; on main"
+  },
+  {
+   "test": 74,
+   "title": "gen768r_03q against gen768r_03 at 60+0.6, the long CCI control",
+   "href": "https://bench.luminexchess.com/test/74/",
+   "ref": "network",
+   "games": 712,
+   "elo": 9.76,
+   "ci": 11.08,
+   "text": "+9.8 ± 11.1",
+   "status": "stop",
+   "label": "Stopped, unresolved"
+  },
+  {
    "test": 73,
-   "title": "A quantization-aware fine-tune of the continued network",
+   "title": "gen768r_03q: a quantization-aware fine-tune of the continued network",
    "href": "https://bench.luminexchess.com/test/73/",
    "ref": "network",
    "games": 3296,
@@ -16,11 +40,11 @@
    "ci": 6.5,
    "text": "+13.4 ± 6.5",
    "status": "pass",
-   "label": "Passed; not shipped yet"
+   "label": "Passed; since replaced by gen768r_04q"
   },
   {
    "test": 72,
-   "title": "A second 230,000-step training cycle on top of the new network",
+   "title": "gen768r_03 continued: a second 230,000-step training cycle",
    "href": "https://bench.luminexchess.com/test/72/",
    "ref": "network",
    "games": 5684,
@@ -28,7 +52,7 @@
    "ci": 5.1,
    "text": "+8.7 ± 5.1",
    "status": "pass",
-   "label": "Passed; not shipped yet"
+   "label": "Passed; the base of gen768r_03q"
   },
   {
    "test": 71,
@@ -40,11 +64,11 @@
    "ci": 8.9,
    "text": "+23.3 ± 8.9",
    "status": "pass",
-   "label": "Passed; not shipped yet"
+   "label": "Passed"
   },
   {
    "test": 70,
-   "title": "A quantization-aware fine-tune of the new network",
+   "title": "A quantization-aware fine-tune of gen768r_03",
    "href": "https://bench.luminexchess.com/test/70/",
    "ref": "network",
    "games": 4474,
@@ -52,11 +76,11 @@
    "ci": 5.6,
    "text": "+10.4 ± 5.6",
    "status": "pass",
-   "label": "Passed; not shipped yet"
+   "label": "Passed; superseded by gen768r_03q"
   },
   {
    "test": 69,
-   "title": "The tune 65 search constants against tune 54's, both with the new network",
+   "title": "The tune 65 search constants against tune 54's, both with gen768r_03",
    "href": "https://github.com/changcheng967/Luminex/pull/57",
    "ref": "#57",
    "games": 12484,
@@ -68,7 +92,7 @@
   },
   {
    "test": 68,
-   "title": "The new network together with the tune 65 search constants",
+   "title": "gen768r_03 together with the tune 65 search constants",
    "href": "https://github.com/changcheng967/Luminex/pull/57",
    "ref": "#57",
    "games": 876,
@@ -104,7 +128,7 @@
   },
   {
    "test": 64,
-   "title": "The 13 centipawn margins scaled by 1.2 for the new network",
+   "title": "The 13 centipawn margins scaled by 1.2 for gen768r_03",
    "href": "https://bench.luminexchess.com/test/64/",
    "ref": "search",
    "games": 3006,
@@ -112,11 +136,11 @@
    "ci": 7.0,
    "text": "−5.0 ± 7.0",
    "status": "fail",
-   "label": "Failed"
+   "label": "Failed; a fixed-length match"
   },
   {
    "test": 63,
-   "title": "A network with eight output buckets, trained on 2.5 billion T91 positions",
+   "title": "gen768r_03: eight output buckets, trained on 2.5 billion T91 positions",
    "href": "https://github.com/changcheng967/Luminex/blob/main/nnue/V3-GEN768R.md",
    "ref": "network",
    "games": 964,
@@ -124,7 +148,7 @@
    "ci": 14.91,
    "text": "+54.5 ± 14.9",
    "status": "pass",
-   "label": "Passed; on main since test 68"
+   "label": "Passed; since replaced by gen768r_03q"
   },
   {
    "test": 61,

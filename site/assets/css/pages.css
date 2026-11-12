@@ -11,6 +11,7 @@
 .stage-page { padding-bottom: clamp(80px, 10vw, 140px); }
 .stage-page > section { position: relative; z-index: 1; }
 .totals-hero { width: 100%; margin-block: clamp(20px, 4vw, 48px) 0; }
+.statline { max-width: 82ch; font-size: 0.92rem; line-height: 1.6; color: var(--muted); }
 @media (max-width: 760px) { .phero.has-dissolve { padding-bottom: calc(56px + 37.5vw); } }
 
 @keyframes swap-in { from { opacity: 0; transform: translate3d(0, 12px, 0); } }
@@ -261,7 +262,32 @@ body:has(.hdr:not(.is-away)) .thead { top: 78px; }      /* step below the header
 @media (max-width: 980px) { .net { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .net { grid-template-columns: repeat(2, minmax(0, 1fr)); } .net-glyph { height: 52px; } }
 
+.totals-train { margin-block: 0 clamp(36px, 5vw, 64px); }
+/* the training run, phase by phase: a table on wide screens, one block a phase on narrow ones */
+.phases { margin: 0 0 clamp(48px, 6.5vw, 92px); }
+.phases-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.phases-table th, .phases-table td { padding: 15px 22px 15px 0; text-align: left; vertical-align: baseline; border-top: 1px solid var(--line-2); }
+.phases-table tr > :last-child { padding-right: 0; }
+.phases-table thead th { padding-block: 0 11px; border-top: 0; font: 400 0.68rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.phases-table tbody th { font-weight: 600; }
+.phases-table td { color: var(--muted); }
+.phases-table .n { white-space: nowrap; font-variant-numeric: lining-nums; color: var(--ink); }
+.phases-table tfoot th, .phases-table tfoot td { border-top-color: var(--line); font-weight: 600; }
+.phases-table tfoot .n { color: var(--accent); }
+@media (max-width: 760px) {
+  .phases-table, .phases-table tbody, .phases-table tfoot { display: block; }
+  .phases-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .phases-table tr { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding-block: 18px; border-top: 1px solid var(--line-2); }
+  .phases-table tfoot tr { border-top-color: var(--line); }
+  .phases-table th, .phases-table td { display: block; padding: 0; border: 0; }
+  .phases-table tbody th, .phases-table tfoot th { grid-column: 1 / -1; }
+  .phases-table td::before { content: attr(data-th); display: block; margin-bottom: 4px; font: 400 0.64rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+  .phases-table td.is-empty { display: none; }
+  .phases-table td:not(.n) { grid-column: 1 / -1; grid-row: 3; }
+  .phases-table td.n { white-space: normal; }
+}
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 76px); }
+.prose-stack { display: grid; gap: clamp(28px, 4vw, 52px); align-content: start; }
 .prose h3 { margin-bottom: 16px; }
 .prose p { color: var(--muted); }
 .prose p a { color: var(--ink); }
@@ -280,6 +306,18 @@ body:has(.hdr:not(.is-away)) .thead { top: 78px; }      /* step below the header
 .downloads { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; width: 100%; margin-top: clamp(16px, 3vw, 36px); }
 .dl-more { font-size: 0.96rem; color: var(--muted); }
 .dl-more a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+/* the development build sits beside the release and must not pass for it: a dashed frame, a label, no download cards */
+.devbuild { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.5fr) auto; gap: 18px clamp(24px, 3.4vw, 52px); align-items: center; width: 100%; margin-top: clamp(8px, 1.6vw, 20px); padding: clamp(20px, 2.4vw, 28px); border: 1px dashed rgba(var(--glow-rgb), 0.5); border-radius: var(--r-l); background: rgba(243, 240, 233, 0.025); }
+.devbuild-head { display: grid; gap: 12px; }
+.devbuild-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 0.7rem; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.devbuild-tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.devbuild-title { font: 400 clamp(1.45rem, 2.1vw, 1.8rem)/1.15 var(--serif); letter-spacing: -0.012em; }
+.devbuild-now { font-size: 0.72rem; line-height: 1.5; color: var(--muted); overflow-wrap: anywhere; }
+.devbuild-text { display: grid; gap: 10px; font-size: 0.95rem; color: var(--muted); }
+.devbuild-fine { font-size: 0.84rem; line-height: 1.6; }
+.devbuild-fine code { padding: 0.1em 0.38em; border-radius: 5px; font-size: 0.92em; background: rgba(243, 240, 233, 0.08); }
+.devbuild-go { justify-self: start; white-space: nowrap; }
+@media (max-width: 1100px) { .devbuild { grid-template-columns: 1fr; } }
 .howto { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); }
 .howto-step { display: grid; gap: 16px; align-content: start; min-width: 0; }
 .howto-step p { color: var(--muted); }

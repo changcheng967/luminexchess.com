@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/download/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=7"></script>
+  <script src="/assets/js/theme.js?v=8"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,9 +25,9 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=7">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=7">
-  <script src="/assets/js/site.js?v=7" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=8">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=8">
+  <script src="/assets/js/site.js?v=8" defer></script>
 </head>
 <body class="page-download">
   <!-- @sprite -->
@@ -147,6 +147,21 @@
           Older CPUs: <a data-asset-link="luminex-windows-x86-64.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.5.1/luminex-windows-x86-64.exe">Windows compatibility build</a>
           and <a data-asset-link="luminex-linux-x86-64" href="https://github.com/changcheng967/Luminex/releases/download/v6.5.1/luminex-linux-x86-64">Linux SSE4.2 build</a>.
         </p>
+        <aside class="devbuild" id="dev" data-reveal data-d="8" aria-labelledby="dev-title">
+          <div class="devbuild-head">
+            <p class="devbuild-tag mono">Development build</p>
+            <h2 class="devbuild-title" id="dev-title">Newer than v6.5.1, rebuilt with every change</h2>
+            <p class="devbuild-now mono" data-dev hidden>Now <span data-dev-name></span> · <time data-dev-date></time></p>
+          </div>
+          <div class="devbuild-text">
+            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main. On 11 November main measured 173 to 202 Elo ahead of v6.5.1 in self-play, at CCI's three time controls. It is not a numbered release: the downloads above stay v6.5.1.</p>
+            <p class="devbuild-fine">Seven builds: Linux and Windows, each for AVX2 and as a compatibility build, both Linux builds again for systems with glibc 2.35, and macOS for Apple silicon. The network is there as a file of its own. The program names itself <code>Luminex dev-YYYYMMDD-</code> and the first eight characters of its commit.</p>
+          </div>
+          <a class="btn btn-ghost devbuild-go" href="https://github.com/changcheng967/Luminex/releases">
+            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
+            <span>Development build on GitHub</span>
+          </a>
+        </aside>
       </div>
       <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
@@ -209,6 +224,10 @@ cmake --build build --config Release</code></pre>
             <details data-reveal>
               <summary><span>Which download should I pick?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
               <p>The modern builds need AVX2, which almost every x86 PC from 2013 on has. On older processors, use the compatibility builds, which need only POPCNT (x86 CPUs from about 2008 on). Macs with Apple silicon use the macOS build. This page marks the one for your system.</p>
+            </details>
+            <details data-reveal>
+              <summary><span>What is the development build?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+              <p>The engine as it stands on main, published automatically after every change that passes the build checks. On 11 November it measured 173 to 202 Elo ahead of v6.5.1 in self-play, at CCI's three time controls, but it is replaced with every push and named by date and commit, not by version. For anything that needs a fixed version, use v6.5.1. <a href="#dev">The development build</a> is on this page.</p>
             </details>
             <details data-reveal>
               <summary><span>Does it support Chess960 or endgame tablebases?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>

@@ -446,11 +446,9 @@
     });
   });
 
-  /* ---------- latest release from GitHub (the links in the page are the fallback) ---------- */
-  (function latestRelease() {
-    if (!$("[data-release-tag], [data-asset], [data-release-url]")) return;
-    var API = "https://api.github.com/repos/changcheng967/Luminex/releases/latest";
-    var KEY = "lux-release-v1";
+  /* ---------- releases from GitHub (the links in the page are the fallback) ---------- */
+  (function releases() {
+    var API = "https://api.github.com/repos/changcheng967/Luminex/releases";
     function fmtSize(bytes) {
       if (bytes >= 1048576) return Math.round(bytes / 1048576) + " MB";
       return Math.round(bytes / 1024) + " KB";
@@ -460,6 +458,52 @@
       if (isNaN(d)) return null;
       return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
     }
+    // One request per kind, kept for `ttl` ms in this tab. `pick` chooses the release in the answer.
+    function load(url, key, ttl, pick, use) {
+      try {
+        var cached = JSON.parse(sessionStorage.getItem(key) || "null");
+        if (cached && Date.now() - cached.at < ttl) { use(cached.rel); return; }
+      } catch (e) { /* storage unavailable */ }
+      if (!window.fetch) return;
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 6000) : 0;
+      fetch(url, { headers: { Accept: "application/vnd.github+json" }, signal: ctrl ? ctrl.signal : undefined })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          clearTimeout(timer);
+          var rel = data && pick(data);
+          if (!rel || !rel.tag_name) return;
+          var slim = {
+            tag_name: rel.tag_name, name: rel.name, published_at: rel.published_at, html_url: rel.html_url,
+            assets: (rel.assets || []).map(function (a) {
+              return { name: a.name, size: a.size, browser_download_url: a.browser_download_url };
+            })
+          };
+          try { sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), rel: slim })); } catch (e) { /* ignore */ }
+          use(slim);
+        })
+        .catch(function () { clearTimeout(timer); });
+    }
+
+    // The development build is a pre-release that every push to main replaces. Its name changes
+    // with it, so the page links to the list of releases and only says which build is there now.
+    if ($("[data-dev]")) {
+      load(API + "?per_page=12", "lux-dev-v1", 600000, function (list) {
+        if (!Array.isArray(list)) return null;
+        for (var i = 0; i < list.length; i++) {
+          if (list[i] && list[i].prerelease && /^luminex-dev-/.test(list[i].tag_name || "")) return list[i];
+        }
+        return null;
+      }, function (rel) {
+        var date = fmtDate(rel.published_at);
+        if (!rel.tag_name || !date) return;
+        $$("[data-dev-name]").forEach(function (n) { n.textContent = rel.tag_name; });
+        $$("[data-dev-date]").forEach(function (n) { n.textContent = date; n.setAttribute("datetime", rel.published_at.slice(0, 10)); });
+        $$("[data-dev]").forEach(function (n) { n.hidden = false; });
+      });
+    }
+
+    if (!$("[data-release-tag], [data-asset], [data-release-url]")) return;
     function apply(rel) {
       if (!rel || !rel.tag_name || !rel.assets) return;
       var tag = rel.tag_name;
@@ -485,28 +529,7 @@
         if (a) link.href = a.browser_download_url;
       });
     }
-    try {
-      var cached = JSON.parse(sessionStorage.getItem(KEY) || "null");
-      if (cached && Date.now() - cached.at < 3600000) { apply(cached.rel); return; }
-    } catch (e) { /* storage unavailable */ }
-    if (!window.fetch) return;
-    var ctrl = window.AbortController ? new AbortController() : null;
-    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 6000) : 0;
-    fetch(API, { headers: { Accept: "application/vnd.github+json" }, signal: ctrl ? ctrl.signal : undefined })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (rel) {
-        clearTimeout(timer);
-        if (!rel) return;
-        var slim = {
-          tag_name: rel.tag_name, name: rel.name, published_at: rel.published_at, html_url: rel.html_url,
-          assets: (rel.assets || []).map(function (a) {
-            return { name: a.name, size: a.size, browser_download_url: a.browser_download_url };
-          })
-        };
-        try { sessionStorage.setItem(KEY, JSON.stringify({ at: Date.now(), rel: slim })); } catch (e) { /* ignore */ }
-        apply(slim);
-      })
-      .catch(function () { clearTimeout(timer); });
+    load(API + "/latest", "lux-release-v1", 3600000, function (rel) { return rel; }, apply);
   })();
 
   /* ---------- the pointer: a point of light, with a ring that trails it ----------

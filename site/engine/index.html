@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=7"></script>
+  <script src="/assets/js/theme.js?v=8"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,10 +25,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=7">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=7">
-  <script src="/assets/js/site.js?v=7" defer></script>
-  <script src="/assets/js/engine.js?v=7" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=8">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=8">
+  <script src="/assets/js/site.js?v=8" defer></script>
+  <script src="/assets/js/engine.js?v=8" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -336,17 +336,56 @@
           <p class="kicker" data-reveal><span class="kicker-n">5.</span> Training</p>
           <h2 id="training-title" class="h-l" data-split>Where the network <em>learns</em></h2>
         </header>
+        <dl class="totals totals-train">
+          <div data-reveal><dt>Training positions</dt><dd class="num"><span data-odo>3.73</span><span class="totals-u">billion</span></dd></div>
+          <div data-reveal data-d="1"><dt>Training steps</dt><dd class="num"><span data-odo>890,000</span></dd></div>
+          <div data-reveal data-d="2"><dt>Positions shown</dt><dd class="num is-lit"><span data-odo>116.7</span><span class="totals-u">billion</span></dd></div>
+          <div data-reveal data-d="3"><dt>Steps a second</dt><dd class="num"><span data-odo>53.7</span></dd></div>
+        </dl>
+        <figure class="phases" data-reveal>
+          <figcaption class="fig-head">
+            <span class="fig-title" id="phases-title">The run behind gen768r_04q, phase by phase</span>
+            <span class="fig-sub">Counted from step 0 of the gen768r run. A step is a batch of 131,072 positions, so the positions shown count every repeat.</span>
+          </figcaption>
+          <table class="phases-table" role="table" aria-labelledby="phases-title">
+            <thead role="rowgroup">
+              <tr role="row"><th role="columnheader" scope="col">Phase</th><th role="columnheader" scope="col">Steps</th><th role="columnheader" scope="col">Positions shown</th><th role="columnheader" scope="col">Drawn from</th><th role="columnheader" scope="col">Passes</th></tr>
+            </thead>
+            <tbody role="rowgroup">
+              <tr role="row"><th role="rowheader" scope="row">gen768r_03</th><td role="cell" data-th="Steps" class="n">0 → 230,000</td><td role="cell" data-th="Positions shown" class="n">30.15 billion</td><td role="cell" data-th="Drawn from">test91, February to May 2026: 2.50 billion positions</td><td role="cell" data-th="Passes" class="n">about 12</td></tr>
+              <tr role="row"><th role="rowheader" scope="row">gen768r_03c, its continuation</th><td role="cell" data-th="Steps" class="n">230,000 → 460,000</td><td role="cell" data-th="Positions shown" class="n">30.15 billion</td><td role="cell" data-th="Drawn from">the same 2.50 billion</td><td role="cell" data-th="Passes" class="n">about 12</td></tr>
+              <tr role="row"><th role="rowheader" scope="row">Run 04, in floating point</th><td role="cell" data-th="Steps" class="n">460,000 → 860,000</td><td role="cell" data-th="Positions shown" class="n">52.43 billion</td><td role="cell" data-th="Drawn from">test91, February to August and October 2026: 3.73 billion positions</td><td role="cell" data-th="Passes" class="n">14.1</td></tr>
+              <tr role="row"><th role="rowheader" scope="row">Run 04, quantization-aware: gen768r_04q</th><td role="cell" data-th="Steps" class="n">860,000 → 890,000</td><td role="cell" data-th="Positions shown" class="n">3.93 billion</td><td role="cell" data-th="Drawn from">the same 3.73 billion</td><td role="cell" data-th="Passes" class="n">1.06</td></tr>
+            </tbody>
+            <tfoot role="rowgroup">
+              <tr role="row"><th role="rowheader" scope="row">In all</th><td role="cell" data-th="Steps" class="n">890,000</td><td role="cell" data-th="Positions shown" class="n">116.65 billion</td><td role="cell" class="is-empty"></td><td role="cell" class="is-empty"></td></tr>
+            </tfoot>
+          </table>
+        </figure>
         <div class="split">
           <div class="prose" data-reveal>
             <h3 class="h-m">How it is trained</h3>
             <p>By distillation: positions from Leela Chess Zero self-play, each relabeled with the score of a deep Stockfish search. The loss weights quiet positions, the ones the search actually evaluates, above captures and leaves positions in check out. The released network, <code>luminex_sfq_i8.nnue</code>, was trained this way.</p>
           </div>
           <div class="prose" data-reveal data-d="1">
-            <h3 class="h-m" id="next-network">The next network</h3>
+            <h3 class="h-m" id="machine">The training machine</h3>
+            <p>One RTX PRO 6000 Blackwell with 96 GB of memory. The trainer keeps 2.5 billion positions on the card and the rest in the host's memory (<a href="https://github.com/changcheng967/Luminex/pull/61">#61</a>), and it runs the feature layer as dense matrix products on the card's tensor cores (<a href="https://github.com/changcheng967/Luminex/pull/59">#59</a>), which took training from 21.2 to 53.7 steps a second. The last run, 400,000 steps, took about 2.2 hours. Quantization-aware training is <a href="https://github.com/changcheng967/Luminex/pull/58">#58</a>, and <a href="https://github.com/changcheng967/Luminex/pull/60">#60</a> converts Leela's T91 data. The engine itself is unchanged by these.</p>
+          </div>
+          <div class="prose" data-reveal>
+            <h3 class="h-m" id="gen768r-03">Eight output buckets: gen768r_03</h3>
             <p>The same inputs and accumulators, with eight output buckets: a separate 16 → 32 → 1 tail for each band of four pieces on the board, at no extra cost per evaluation. Tail neurons that had died in earlier training were revived before the run.</p>
             <p>It trained for 230,000 steps of 131,072 positions, about 30 billion samples, on 2.5 billion positions from Leela's test91 self-play, February to May 2026, scored by that run's own networks; January's games were held out to check it. Against the released network it scored +54.5 ± 14.9 Elo (<a href="https://bench.luminexchess.com/test/63/">test 63</a>).</p>
-            <p>A third SPSA run of 80,000 games then retuned the search constants for it. Network and constants went into main together on 10 November: +60.08 ± 15.43 Elo over the previous main in 876 games (<a href="https://bench.luminexchess.com/test/68/">test 68</a>). The retuning alone, with the new network on both sides, measured −1.81 ± 3.45 over 12,484 games (<a href="https://bench.luminexchess.com/test/69/">test 69</a>): that test failed, and the constants went in with the network inside the error margin. Both ship with the next release.</p>
-            <p>Since then four more network tests have passed (tests 70 to 73): a second 230,000-step cycle and quantization-aware fine-tunes. The leading candidate, a quantization-aware fine-tune, is not shipped yet. The trainer on main gained quantization-aware training (<a href="https://github.com/changcheng967/Luminex/pull/58">#58</a>), a dense feature layer that makes a training step 2.5 times faster, 47 to 18.6 ms (<a href="https://github.com/changcheng967/Luminex/pull/59">#59</a>), a data pool in host memory for datasets beyond the card's roughly 2.8 billion positions (<a href="https://github.com/changcheng967/Luminex/pull/61">#61</a>), and a converter for Leela's T91 data (<a href="https://github.com/changcheng967/Luminex/pull/60">#60</a>). The engine itself is unchanged by these.</p>
+            <p>A third SPSA run of 80,000 games then retuned the search constants for it. Network and constants went into main together on 10 November: +60.08 ± 15.43 Elo over the previous main in 876 games (<a href="https://bench.luminexchess.com/test/68/">test 68</a>). The retuning alone, with gen768r_03 on both sides, measured −1.81 ± 3.45 over 12,484 games (<a href="https://bench.luminexchess.com/test/69/">test 69</a>): that test failed, and the constants went in with the network inside the error margin.</p>
+          </div>
+          <div class="prose-stack">
+            <div class="prose" data-reveal data-d="1">
+              <h3 class="h-m" id="gen768r-03q">Trained through its own rounding: gen768r_03q</h3>
+              <p>The same network trained on to 460,000 steps on the same data, then 30,000 steps of quantization-aware training, which trains through the engine's own int8 rounding. Against gen768r_03 it scored +13.39 ± 6.48 Elo over 3,296 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/73/">test 73</a>); at 60+0.6 the same pair stood at +9.76 ± 11.08 after 712 games when the test was stopped (<a href="https://bench.luminexchess.com/test/74/">test 74</a>). With it, main stood 173 to 202 Elo above v6.5.1 in self-play at CCI's three time controls (<a href="/#strength">the three matches</a>).</p>
+            </div>
+            <div class="prose" data-reveal data-d="2">
+              <h3 class="h-m" id="next-network">On main now: gen768r_04q</h3>
+              <p>It continues the same run from 460,000 to 860,000 steps, now on 3.73 billion positions from test91's February to August and October 2026 games, with a loss power of 3.0 instead of 2.6, then 30,000 quantization-aware steps. Against gen768r_03q it scored +13.31 ± 6.55 Elo over 3,394 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/82/">test 82</a>). It is the network on main and in every development build. An SPSA run of 80,000 games is now retuning 13 search margins for it (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>).</p>
+            </div>
           </div>
         </div>
         <a class="card link-card" data-glow data-reveal href="https://huggingface.co/datasets/xushawn/t91-binpacks-raw-old">
