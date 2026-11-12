@@ -504,10 +504,16 @@
       rel.assets.forEach(function (a) { byName[a.name] = a; });
       $$("[data-asset]").forEach(function (card) {
         var a = byName[card.getAttribute("data-asset")];
+        // A file whose name changes from release to release (the network) is found by its ending instead.
+        var ext = card.getAttribute("data-asset-ext");
+        if (!a && ext) {
+          a = rel.assets.filter(function (x) { return x.name.slice(-ext.length) === ext; })[0];
+        }
         if (!a) return;
         card.href = a.browser_download_url;
-        var size = $("[data-size]", card);
+        var size = $("[data-size]", card), file = $("[data-file]", card);
         if (size) size.textContent = fmtSize(a.size);
+        if (file) file.textContent = a.name;
       });
       $$("[data-asset-link]").forEach(function (link) {
         var a = byName[link.getAttribute("data-asset-link")];

@@ -18,7 +18,7 @@
 
 /* ---------- 2. games: the viewer ---------- */
 .page-games .phero { padding-bottom: clamp(36px, 5vw, 64px); }
-.viewer { display: grid; gap: clamp(20px, 2.6vw, 32px); }
+.viewer { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(20px, 2.6vw, 32px); }
 .no-js .viewer { display: none; }
 .viewer-fallback { display: none; color: var(--muted); }
 .no-js .viewer-fallback { display: block; }
@@ -41,6 +41,12 @@
 .vc-play { width: 58px; height: 58px; background: var(--lumen); color: #14110a; box-shadow: 0 12px 30px -12px rgba(var(--lumen-rgb), 0.8); }
 .vc-play:hover:not(:disabled) { color: #14110a; box-shadow: 0 16px 36px -12px rgba(var(--lumen-rgb), 0.95); }
 .viewer-hint { margin: 12px 0 0 22px; text-align: center; font-size: 0.82rem; color: var(--faint); }
+/* six round buttons in a row need 350 px: on narrower phones they shrink instead of pushing the page sideways */
+@media (max-width: 380px) {
+  .viewer-controls { gap: 4px; }
+  .vc { width: 38px; height: 38px; }
+  .vc-play { width: 46px; height: 46px; }
+}
 .viewer-side { display: grid; gap: 16px; align-content: start; min-width: 0; }
 .viewer-meta { display: grid; gap: 10px; }
 .viewer-players { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 0.98rem; color: var(--muted); }
@@ -112,7 +118,7 @@
 /* ---------- 3. tests: the record ---------- */
 .record { --cols: minmax(0, 1.35fr) minmax(170px, 1fr) 7.4rem; }
 .record-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-bottom: 20px; }
-.chip .num { margin-left: 4px; opacity: 0.7; }
+.chip .num { margin-left: 4px; }
 .record-count { font-size: 0.86rem; color: var(--muted); }
 .thead, .trow { display: grid; grid-template-columns: var(--cols); column-gap: clamp(16px, 2.4vw, 32px); align-items: center; padding-inline: 20px; }
 .thead { position: sticky; top: 0; z-index: 5; padding-block: 14px 12px; font: 400 0.66rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); background: var(--paper-3); }
@@ -126,7 +132,7 @@ body:has(.hdr:not(.is-away)) .thead { top: 78px; }      /* step below the header
 .trow-status { grid-area: 2 / 1; display: inline-flex; align-items: center; gap: 7px; font-size: 0.84rem; color: var(--muted); }
 .trow-plot { grid-area: 1 / 2 / 3 / 3; width: 100%; height: 28px; overflow: visible; }
 .trow-value { grid-area: 1 / 3 / 3 / 4; text-align: right; font-weight: 600; white-space: nowrap; font-variant-numeric: lining-nums tabular-nums; }
-.trow-title { justify-self: start; font-weight: 500; line-height: 1.35; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.4s var(--ease-out); }
+.trow-title { justify-self: start; min-height: 24px; font-weight: 500; line-height: 1.42; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.4s var(--ease-out); }
 .trow-title:hover { background-size: 100% 1px; }
 .trow-meta { font: 400 0.72rem/1.4 var(--mono); color: var(--faint); }
 .trow-meta a { color: inherit; text-underline-offset: 3px; }
@@ -238,6 +244,26 @@ body:has(.hdr:not(.is-away)) .thead { top: 78px; }      /* step below the header
 .motion .speed.is-armed.is-in .bar-fill { transform: none; }
 @media (max-width: 900px) { .speed-grid { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .bar { grid-template-columns: 1fr auto; } .bar-track { grid-column: 1 / -1; grid-row: 2; } }
+
+/* the clock: measure, solve, stop, and what each earned in games */
+.clock-scene { overflow: hidden; }
+.clock-scene .fx-lamp { background: radial-gradient(46% 44% at 74% 26%, rgba(var(--lumen-rgb), 0.15), rgba(var(--lumen-rgb), 0) 72%); }
+.clock-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.clock-step { display: grid; grid-template-rows: auto auto 1fr auto; gap: 14px; align-content: start; background: rgba(243, 240, 233, 0.035); box-shadow: inset 0 0 0 1px var(--line-2), inset 0 1px 0 rgba(255, 255, 255, 0.05); }
+.clock-n { font-size: 0.72rem; line-height: 1; letter-spacing: 0.12em; color: var(--accent); }
+.clock-step > p:not([class]) { font-size: 0.95rem; color: var(--muted); }
+.clock-fig { margin: 6px 0 0; padding-top: 18px; border-top: 1px solid var(--line-2); }
+.clock-cap { display: grid; gap: 8px; margin-bottom: 16px; font-size: 0.8rem; line-height: 1.45; color: var(--faint); }
+.clock-legend { margin: 0; font-size: 0.78rem; }
+.clock-step .bars { gap: 12px; }
+.clock-step .bar { grid-template-columns: 6.6rem minmax(0, 1fr) 4.6rem; gap: 12px; font-size: 0.88rem; }
+.clock-step .bar-track { grid-column: auto; grid-row: auto; }
+.clock-step .bar-value { white-space: nowrap; }
+.bar-track.is-pair { height: 16px; background: none; }
+.bar-fill.is-old { fill: var(--mark-0); }
+.clock-results { margin-block: clamp(44px, 6vw, 80px) clamp(20px, 3vw, 32px); }
+.clock-note a { color: var(--ink); }
+@media (max-width: 1080px) { .clock-steps { grid-template-columns: minmax(0, 1fr); } .clock-step { grid-template-rows: none; } }
 
 .net { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
 .net-btn { display: grid; gap: 8px; justify-items: start; width: 100%; padding: 16px 16px 18px; border-radius: 18px; text-align: left; background: var(--paper-2); box-shadow: inset 0 0 0 1px var(--line-2); transition: transform 0.4s var(--ease-out), box-shadow 0.3s; }

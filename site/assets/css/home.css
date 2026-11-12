@@ -252,6 +252,13 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
 .strip { margin: 0; }
 .strip-scroll { overflow-x: auto; margin-inline: -6px; padding: 2px 6px 6px; }
 .strip-svg { display: block; width: 100%; min-width: 780px; height: auto; overflow: visible; }
+/* under a finger every bar is at least 24 px wide: the strip grows with the number of tests (--bars) and scrolls */
+@media (pointer: coarse) { .strip-svg { min-width: max(780px, calc(var(--bars, 46) * 25.4px)); } }
+/* when the strip scrolls sideways, the script keeps a copy of its scale at the left edge */
+.strip-axis { display: none; }
+.strip.has-axis .strip-axis { display: block; position: absolute; left: 0; top: 0; pointer-events: none; }
+.strip-axis::before { content: ""; position: absolute; left: 0; top: calc(var(--t, 0px) - 14px); width: calc(clamp(22px, 2.6vw, 34px) + 4.2rem); height: calc(var(--b, 0px) - var(--t, 0px) + 28px); background: linear-gradient(90deg, var(--paper-2) 72%, transparent); }
+.strip-axis span { position: absolute; left: clamp(22px, 2.6vw, 34px); top: var(--y, 0); transform: translateY(-50%); padding: 3px 8px 3px 0; border-radius: 0 6px 6px 0; font: 400 0.72rem/1 var(--mono); white-space: nowrap; color: var(--faint); background: var(--paper-2); }
 .strip-grid line { stroke: var(--line-2); stroke-width: 1; }
 .strip-grid .is-zero { stroke: var(--faint); }
 .strip-grid text { font: 400 12.5px var(--mono); fill: var(--faint); }

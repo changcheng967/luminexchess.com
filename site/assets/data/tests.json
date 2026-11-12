@@ -1,11 +1,27 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "11 November 2026",
+ "asOf": "12 November 2026",
+ "leftOff": [
+  59
+ ],
+ "leftOffNote": "SPRTs on the bench that the record leaves off on purpose: 59 trained on a filtered dump (see the note under the record).",
  "axis": {
   "min": -40,
   "max": 120
  },
  "tests": [
+  {
+   "test": 84,
+   "title": "The 13 search margins set to the tune 83 values",
+   "href": "https://github.com/changcheng967/Luminex/pull/70",
+   "ref": "#70",
+   "games": 1026,
+   "elo": -1.35,
+   "ci": 11.1,
+   "text": "−1.4 ± 11.1",
+   "status": "stop",
+   "label": "Stopped: the tune's drift was noise"
+  },
   {
    "test": 82,
    "title": "gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions",

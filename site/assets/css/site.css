@@ -268,7 +268,7 @@ code, pre, kbd { font-family: var(--mono); font-size: 0.92em; }
   min-height: 54px; padding: 0 8px 0 10px;
   border-radius: 999px;
   color: var(--stage-ink);
-  background: rgba(15, 15, 18, 0.74);
+  background: rgba(15, 15, 18, 0.84);   /* dark enough that the quiet links keep 4.5:1 over a light page behind it */
   -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5);
   box-shadow: inset 0 0 0 1px rgba(243, 240, 233, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 14px 44px -16px rgba(0, 0, 0, 0.7);
 }
@@ -542,9 +542,9 @@ html:not(.motion) .dissolve i:nth-child(-n + 16):nth-child(4n + 2) { opacity: 1;
 .board.is-fast .pc, .board.is-fast .hl { transition-duration: 0.12s; }
 .coord {
   z-index: 1; display: flex; padding: 3px 4px; pointer-events: none;
-  font: 400 clamp(8px, 1.1vw, 11px)/1 var(--mono); color: #6d6453;
+  font: 400 clamp(9px, 1.1vw, 11px)/1 var(--mono); color: #5f5747;   /* 5.7:1 on a light square */
 }
-.coord.on-dark { color: #efe9da; }
+.coord.on-dark { color: #2b261e; }   /* the dark squares are a mid tone: dark letters reach 5.5:1 there, light ones 2.2:1 */
 .coord-f { align-items: flex-end; justify-content: flex-end; }
 .coord-r { align-items: flex-start; justify-content: flex-start; }
 .x0 { --x: 0; } .x1 { --x: 1; } .x2 { --x: 2; } .x3 { --x: 3; } .x4 { --x: 4; } .x5 { --x: 5; } .x6 { --x: 6; } .x7 { --x: 7; }

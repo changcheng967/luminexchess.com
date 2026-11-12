@@ -348,6 +348,34 @@
       fig.classList.add("is-armed");
       Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.3);
     }
+    // The stylesheet sizes the strip from the number of bars where a finger needs room. The newest
+    // tests are at the right end, so a strip wider than its frame starts scrolled there.
+    fig.style.setProperty("--bars", bars.length);
+    var scroller = $(".strip-scroll", fig);
+    if (scroller && scroller.scrollWidth > scroller.clientWidth + 4) scroller.scrollLeft = scroller.scrollWidth;
+    // A strip that scrolls sideways takes its scale with it, so a copy of the scale stays at the left edge.
+    var ticks = $$(".strip-grid text:not(.strip-end)", fig), axis = null;
+    function placeAxis() {
+      var wide = !!scroller && scroller.scrollWidth > scroller.clientWidth + 4;
+      fig.classList.toggle("has-axis", wide);
+      if (!wide) return;
+      if (!axis) {
+        axis = el("div", "strip-axis");
+        axis.setAttribute("aria-hidden", "true");
+        ticks.forEach(function (t) { axis.appendChild(el("span", "", t.textContent)); });
+        fig.appendChild(axis);
+      }
+      var fr = fig.getBoundingClientRect(), top = 1e9, bottom = -1e9;
+      ticks.forEach(function (t, i) {
+        var r = t.getBoundingClientRect(), y = r.top + r.height / 2 - fr.top;
+        axis.children[i].style.setProperty("--y", y.toFixed(1) + "px");
+        top = Math.min(top, y); bottom = Math.max(bottom, y);
+      });
+      axis.style.setProperty("--t", top.toFixed(1) + "px");      // the plot's extent, for the veil behind the labels
+      axis.style.setProperty("--b", bottom.toFixed(1) + "px");
+    }
+    placeAxis();
+    window.addEventListener("resize", placeAxis);
 
     // one tooltip, shared by every bar; the same details are in each bar's label
     var tip = el("div", "tip");

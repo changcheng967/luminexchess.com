@@ -67,12 +67,14 @@
     select(layers[1], true);
   })();
 
-  (function speed() {
-    var fig = $("[data-speed]");
-    if (!fig || !motion) return;
-    $$(".bar", fig).forEach(function (b, i) { b.style.setProperty("--i", i); });
-    fig.classList.add("is-armed");
-    Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.35);
+  // every figure of bars (speed, and the three of the clock) grows when it comes on screen
+  (function bars() {
+    if (!motion) return;
+    $$("[data-speed]").forEach(function (fig) {
+      $$(".bar", fig).forEach(function (b, i) { b.style.setProperty("--i", i); });
+      fig.classList.add("is-armed");
+      Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.35);
+    });
   })();
 
   // the generations: what each one adds to the last arrives card by card
