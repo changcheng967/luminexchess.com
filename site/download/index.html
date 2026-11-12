@@ -154,7 +154,7 @@
             <p class="devbuild-now mono" data-dev hidden>Now <span data-dev-name></span> · <time data-dev-date></time></p>
           </div>
           <div class="devbuild-text">
-            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main. On 11 November main measured 173 to 202 Elo ahead of v6.5.1 in self-play, at CCI's three time controls. It is not a numbered release: the downloads above stay v6.5.1.</p>
+            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main, at present gen768r_04q. On 11 November main, then with gen768r_03q, measured 173 to 202 Elo ahead of v6.5.1 in self-play, at CCI's three time controls. It is not a numbered release: the downloads above stay v6.5.1.</p>
             <p class="devbuild-fine">Seven builds: Linux and Windows, each for AVX2 and as a compatibility build, both Linux builds again for systems with glibc 2.35, and macOS for Apple silicon. The network is there as a file of its own. The program names itself <code>Luminex dev-YYYYMMDD-</code> and the first eight characters of its commit.</p>
           </div>
           <a class="btn btn-ghost devbuild-go" href="https://github.com/changcheng967/Luminex/releases">
@@ -227,7 +227,7 @@ cmake --build build --config Release</code></pre>
             </details>
             <details data-reveal>
               <summary><span>What is the development build?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>The engine as it stands on main, published automatically after every change that passes the build checks. On 11 November it measured 173 to 202 Elo ahead of v6.5.1 in self-play, at CCI's three time controls, but it is replaced with every push and named by date and commit, not by version. For anything that needs a fixed version, use v6.5.1. <a href="#dev">The development build</a> is on this page.</p>
+              <p>The engine as it stands on main, published automatically after every change that passes the build checks. On 11 November, with the gen768r_03q network, it measured 173 to 202 Elo ahead of v6.5.1 in self-play, at CCI's three time controls, but it is replaced with every push and named by date and commit, not by version. For anything that needs a fixed version, use v6.5.1. <a href="#dev">The development build</a> is on this page.</p>
             </details>
             <details data-reveal>
               <summary><span>Does it support Chess960 or endgame tablebases?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
