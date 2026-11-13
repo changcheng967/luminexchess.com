@@ -92,6 +92,18 @@ status 404) and the `previews` block that `wrangler preview` refuses to run with
 the cache lifetimes. The OpenBench instance at https://bench.luminexchess.com runs
 elsewhere, behind a Cloudflare Tunnel, and is not part of this repository.
 
+The policy admits one script from outside: Cloudflare's Web Analytics beacon
+(`https://static.cloudflareinsights.com`). Cloudflare adds its `<script>` tag to every page
+at its edge, for browsers only, so it is in no file of this repository and `curl` does not
+see it; the beacon reports to the site's own `/cdn-cgi/rum`, which `connect-src 'self'`
+covers. Without the entry the policy blocks the script, every page logs an error in the
+console, and Cloudflare counts no page views. To stop counting instead, turn Web Analytics
+off for the site in the Cloudflare dashboard and take the host out of `script-src`.
+
+A check of the live site needs a real browser for that reason: file hashes compared from
+another machine miss what Cloudflare adds. From a network that cannot reach the domain,
+open `ssh -N -D 1085 <server>` and point the browser at `socks5://127.0.0.1:1085`.
+
 ## Preview locally
 
 ```bash
