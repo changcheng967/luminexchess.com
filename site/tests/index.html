@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/tests/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=10"></script>
+  <script src="/assets/js/theme.js?v=11"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,10 +25,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=10">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=10">
-  <script src="/assets/js/site.js?v=10" defer></script>
-  <script src="/assets/js/tests.js?v=10" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=11">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=11">
+  <script src="/assets/js/site.js?v=11" defer></script>
+  <script src="/assets/js/tests.js?v=11" defer></script>
 </head>
 <body class="page-tests">
   <!-- @sprite -->
@@ -111,12 +111,12 @@
         <h1 id="tests-title" class="h-xl" data-split><em>Measured,</em> not guessed</h1>
         <p class="lede" data-reveal data-d="3">Luminex runs its own OpenBench instance. A candidate change plays the current engine until a sequential probability ratio test can tell a gain from noise.</p>
         <dl class="totals totals-hero">
-          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>46</span></dd></div>
+          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>47</span></dd></div>
           <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>31</span></dd></div>
-          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>671,876</span></dd></div>
+          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>707,334</span></dd></div>
           <div data-reveal data-d="7"><dt>Since v6.4</dt><dd class="num"><span data-odo>+145</span></dd></div>
         </dl>
-        <p class="statline" data-reveal data-d="8">64 tests and tuning runs are on OpenBench's list, one of them still running: 47 SPRTs, 13 fixed-length matches and 4 SPSA tuning runs. The SPRTs played 329,598 of the games, the tuning runs 320,000 and the matches 18,802; another 3,476 were played in runs since deleted from the list.</p>
+        <p class="statline" data-reveal data-d="8">OpenBench's list holds 69 runs, 3 of them not finished: 48 SPRTs, 15 fixed-length matches, 2 gauntlets and 4 SPSA tuning runs. The SPRTs played 353,446 of the games, the tuning runs 320,000, the matches 20,544 and the gauntlets 9,868; another 3,476 were played in runs since deleted from the list.</p>
       </div>
       <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
@@ -164,10 +164,10 @@
           <div class="record-bar">
             <div class="filters" role="group" aria-label="Show tests by outcome">
               <!-- @tests-filters -->
-              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">46</span></button>
+              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">47</span></button>
               <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">31</span></button>
               <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">6</span></button>
-              <button type="button" class="chip" data-filter="merged" aria-pressed="false">Merged anyway <span class="num">4</span></button>
+              <button type="button" class="chip" data-filter="merged" aria-pressed="false">Merged anyway <span class="num">5</span></button>
               <button type="button" class="chip" data-filter="stop" aria-pressed="false">Stopped <span class="num">5</span></button>
               <!-- /@tests-filters -->
             </div>
@@ -180,6 +180,25 @@
           </div>
           <ol class="trows" data-rows>
             <!-- @tests-rows -->
+            <li class="trow is-merged" id="t85" data-status="merged">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/69">Keep quiescence search&#x27;s capture cutoffs in the hash table</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/85/">Test 85</a> · #69 · 24,230 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="82.68" x2="92.8" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M87.74 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+1.3 ± 2.4</p>
+              <p class="trow-status st-merged"><svg class="icon" aria-hidden="true"><use href="#i-merge"/></svg><span>Stopped undecided; merged as no regression</span></p>
+            </li>
             <li class="trow is-stop" id="t84" data-status="stop">
               <div class="trow-label">
                 <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/70">The 13 search margins set to the tune 83 values</a>
@@ -1059,8 +1078,8 @@
         </div>
 
         <div class="record-notes prose" data-reveal>
-          <p class="note">Four changes were merged although their tests failed: #5 repaired correctness bugs at a measured cost, and #10, #11 and the retuned constants in #57 landed inside the error margin. The other changes that failed were closed or dropped. The SEE rewrite, at +127, runs off the chart. One SPRT is left off: test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped). Test 64 is listed although it was a match of a fixed 3,006 games, not an SPRT.</p>
-          <p class="note">Between the tests, four SPSA runs of 80,000 games each retuned search constants: 27 of them, then all 29, then all 29 again with gen768r_03, then 13 margins with gen768r_04q (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>). That last run moved no margin beyond noise: the SPRT of its values was stopped after 1,026 games (<a href="https://bench.luminexchess.com/test/84/">test 84</a>) and main kept its margins. The other fixed-length matches are not listed: the Stash ladder (tests 35 to 39), v6.5.0 against v6.4.0 (test 40) and main against v6.5.1 at three time controls (tests 77 to 79) are on <a href="/#strength">the home page</a>. The count of games is OpenBench's own count of every game played, the tuning runs included.</p>
+          <p class="note">Five changes were merged without a passing test. Four had failed: #5 repaired correctness bugs at a measured cost, and #10, #11 and the retuned constants in #57 landed inside the error margin. The fifth, #69, was stopped undecided at +1.3 ± 2.4 after 24,230 games, which rules out a loss of more than about one Elo, and went in as a no-regression change. The other changes that failed were closed or dropped. The SEE rewrite, at +127, runs off the chart. One SPRT is left off: test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped). Test 64 is listed although it was a match of a fixed 3,006 games, not an SPRT.</p>
+          <p class="note">Between the tests, four SPSA runs of 80,000 games each retuned search constants: 27 of them, then all 29, then all 29 again with gen768r_03, then 13 margins with gen768r_04q (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>). That last run moved no margin beyond noise: the SPRT of its values was stopped after 1,026 games (<a href="https://bench.luminexchess.com/test/84/">test 84</a>) and main kept its margins. The other fixed-length matches are not listed: the Stash ladder (tests 35 to 39), v6.5.0 against v6.4.0 (test 40) and main against v6.5.1 at three time controls (tests 77 to 79) are on <a href="/#strength">the home page</a>. Gauntlets rate a build against other engines instead of testing a change, and are on the home page as well: the first full one put main at 3448 ± 24 on the CCRL Blitz scale (<a href="/#gauntlet">the gauntlet</a>). The count of games is OpenBench's own count of every game played, the tuning runs and gauntlets included.</p>
           <p>
             <a class="link" href="https://bench.luminexchess.com"><span>Every test, live on bench.luminexchess.com</span><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
           </p>
@@ -1099,7 +1118,7 @@
         </nav>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. It is not a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release is estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. The development build is rated by a gauntlet of 9,612 games at 10+0.1 against twelve engines with CCRL Blitz ratings. Neither is a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>

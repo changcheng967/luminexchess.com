@@ -334,6 +334,18 @@
   })();
 
   /* =====================================================================
+     Strength: the gauntlet. When it comes on screen the result bars grow,
+     the implied ratings appear, and Luminex takes its place among the engines.
+     ===================================================================== */
+  (function gauntlet() {
+    var fig = $("[data-gauntlet]");
+    if (!fig || !motion) return;
+    $$(".gnt-row", fig).forEach(function (row, i) { row.style.setProperty("--i", i); });
+    fig.classList.add("is-armed");
+    Lux.onVisible($(".gnt-rows", fig) || fig, function () { fig.classList.add("is-in"); }, 0.12);
+  })();
+
+  /* =====================================================================
      Method: the four steps, and the strip of every test
      ===================================================================== */
   (function strip() {
@@ -438,7 +450,8 @@
       if (goal) {
         var gg = svgEl("g", {}, "c-goal");
         gg.appendChild(svgEl("line", { x1: Lm, x2: W - Rm, y1: y(goal), y2: y(goal) }));
-        var gt = svgEl("text", { x: W - Rm, y: y(goal) - 9, "text-anchor": "end" }); gt.textContent = "GOAL " + goal;
+        // at the left end, clear of the newest point's label, which climbs toward the line
+        var gt = svgEl("text", { x: Lm + 6, y: y(goal) - 9, "text-anchor": "start" }); gt.textContent = "GOAL " + goal;
         gg.appendChild(gt); base.appendChild(gg);
       }
       plot.appendChild(base);
@@ -452,13 +465,16 @@
       plot.appendChild(draw);
 
       var top = svgEl("svg", { viewBox: box, role: "img", "aria-labelledby": "climb-title" });
+      var slot = (W - Lm - Rm - 2 * PAD) / (pts.length - 1);      // dates lose their year where the points stand close
       groups = pts.map(function (p, i) {
         var gEl = svgEl("g", {}, "c-pt");
         gEl.appendChild(svgEl("circle", { cx: x(i), cy: y(p.elo), r: 7 }, "c-halo"));
         gEl.appendChild(svgEl("circle", { cx: x(i), cy: y(p.elo), r: 6.5 }));
-        var te = svgEl("text", { x: x(i), y: y(p.elo) - 15, "text-anchor": "middle" }, "c-elo"); te.textContent = "≈" + p.elo; gEl.appendChild(te);
+        var ly = y(p.elo) - 15;
+        if (goal && y(goal) > ly - 14 && y(goal) < ly + 4) ly = y(p.elo) + 25;      // it would sit on the goal line: below its point instead
+        var te = svgEl("text", { x: x(i), y: ly, "text-anchor": "middle" }, "c-elo"); te.textContent = "≈" + p.elo; gEl.appendChild(te);
         var tv = svgEl("text", { x: x(i), y: H - B + 22, "text-anchor": "middle" }, "c-ver"); tv.textContent = p.v; gEl.appendChild(tv);
-        var td = svgEl("text", { x: x(i), y: H - B + 39, "text-anchor": "middle" }, "c-date"); td.textContent = W < 420 ? p.d.replace(" 2026", "") : p.d; gEl.appendChild(td);
+        var td = svgEl("text", { x: x(i), y: H - B + 39, "text-anchor": "middle" }, "c-date"); td.textContent = slot < 104 ? p.d.replace(/ \d{4}$/, "") : p.d; gEl.appendChild(td);
         top.appendChild(gEl);
         return gEl;
       });

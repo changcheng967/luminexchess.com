@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=10"></script>
+  <script src="/assets/js/theme.js?v=11"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,10 +25,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=10">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=10">
-  <script src="/assets/js/site.js?v=10" defer></script>
-  <script src="/assets/js/engine.js?v=10" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=11">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=11">
+  <script src="/assets/js/site.js?v=11" defer></script>
+  <script src="/assets/js/engine.js?v=11" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -491,7 +491,7 @@
             </div>
             <div class="prose" data-reveal data-d="2">
               <h3 class="h-m" id="next-network">On main now: gen768r_04q</h3>
-              <p>It continues the same run from 460,000 to 860,000 steps, now on 3.73 billion positions from test91's February to August and October 2026 games, with a loss power of 3.0 instead of 2.6, then 30,000 quantization-aware steps. Against gen768r_03q it scored +13.31 ± 6.55 Elo over 3,394 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/82/">test 82</a>). It is the network on main and in every development build, and OpenBench's default. An SPSA run of 80,000 games then retuned 13 search margins for it (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>), but none moved beyond noise; the SPRT of its values was stopped (<a href="https://bench.luminexchess.com/test/84/">test 84</a>) and main keeps its margins.</p>
+              <p>It continues the same run from 460,000 to 860,000 steps, now on 3.73 billion positions from test91's February to August and October 2026 games, with a loss power of 3.0 instead of 2.6, then 30,000 quantization-aware steps. Against gen768r_03q it scored +13.31 ± 6.55 Elo over 3,394 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/82/">test 82</a>). It is the network on main and in every development build, and OpenBench's default. An SPSA run of 80,000 games then retuned 13 search margins for it (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>), but none moved beyond noise; the SPRT of its values was stopped (<a href="https://bench.luminexchess.com/test/84/">test 84</a>) and main keeps its margins. With this network, a gauntlet against twelve rated engines put main at 3448 ± 24 on the CCRL Blitz scale (<a href="/#gauntlet">the table</a>).</p>
             </div>
           </div>
         </div>
@@ -535,7 +535,7 @@
         </nav>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. It is not a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release is estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. The development build is rated by a gauntlet of 9,612 games at 10+0.1 against twelve engines with CCRL Blitz ratings. Neither is a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>

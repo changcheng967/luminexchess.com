@@ -212,6 +212,80 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
 .fact-pm { font-size: 1rem; font-weight: 400; letter-spacing: 0; color: var(--muted); }
 .fact > p:not([class]) { font-size: 0.95rem; color: var(--muted); }
 .fact .link { justify-self: start; font-size: 0.92rem; }
+
+/* ---------- strength: the gauntlet, a rating against other engines ----------
+   A row an opponent, strongest first, Luminex where its rating puts it. Each row ends in a small
+   plot on one shared scale: the rating that opponent's games alone imply (dot and interval) over
+   the band of the fitted rating. Drawn from assets/data/gauntlet.json by tools/stamp.py. */
+.gnt { display: grid; gap: clamp(20px, 2.6vw, 30px); margin: clamp(40px, 6vw, 80px) 0 0; }
+.gnt-head { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr); gap: clamp(20px, 4vw, 64px); align-items: end; }
+.gnt-num { display: flex; align-items: baseline; gap: 12px; margin: 14px 0 6px -0.04em; font: 500 clamp(3.6rem, 7.6vw, 6.6rem)/0.92 var(--sans); letter-spacing: -0.05em; }
+.gnt-pm { font-size: 0.3em; font-weight: 400; letter-spacing: -0.01em; color: var(--muted); }
+.gnt-on { color: var(--muted); }
+.gnt-also { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-2); font-size: 0.95rem; color: var(--muted); }
+.gnt-also .num { margin-right: 4px; font-weight: 600; color: var(--ink); }
+.gnt-text { display: grid; gap: 12px; justify-items: start; }
+.gnt-text p { max-width: 66ch; font-size: 0.97rem; color: var(--muted); }
+.gnt-text .link { font-size: 0.92rem; }
+.gnt-legend { margin: 0; }
+.k-dot { border-radius: 50%; background: var(--mark); }
+.k-band { background: rgba(var(--glow-rgb), 0.3); box-shadow: inset 0 0 0 1px rgba(var(--glow-rgb), 0.55); }
+.gnt-cols, .gnt-row { display: grid; grid-template-columns: minmax(180px, 1.2fr) minmax(0, 1.5fr) 3.6rem minmax(170px, 1fr) 5.4rem; gap: 18px; align-items: center; padding-inline: 20px; }
+.gnt-cols { align-items: end; margin-bottom: -8px; font: 400 0.66rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.gnt-cols span:nth-child(3), .gnt-cols span:last-child, .gnt-score, .gnt-implied { text-align: right; }
+.gnt-axis { display: block; width: 100%; height: auto; overflow: visible; }
+.gnt-axis text { font: 400 9.5px var(--mono); letter-spacing: 0; fill: var(--faint); }
+.gnt-rows { --row: 64px; display: grid; gap: 6px; }
+.gnt-row { height: 58px; border-radius: var(--r-m); background: var(--paper); box-shadow: inset 0 0 0 1px var(--line-2); }
+.gnt-row:hover { box-shadow: inset 0 0 0 1px var(--line); }
+.gnt-row.is-lum, .gnt-row.is-lum:hover { position: relative; z-index: 1; background: linear-gradient(90deg, rgba(var(--glow-rgb), 0.26), rgba(var(--glow-rgb), 0.1)), var(--paper); box-shadow: inset 0 0 0 1.5px rgba(var(--glow-rgb), 0.7), 0 18px 40px -22px rgba(var(--glow-rgb), 0.8); }
+.gnt-name { min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gnt-name a { display: inline-block; min-height: 24px; line-height: 24px; vertical-align: middle; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 92% / 0 1px no-repeat; transition: background-size 0.4s var(--ease-out); }
+.gnt-name a:hover { background-size: 100% 1px; }
+.gnt-rating { margin-left: 8px; font-weight: 400; color: var(--muted); }
+.is-lum .gnt-rating { font-weight: 600; color: var(--ink); }
+.gnt-result { display: grid; gap: 7px; min-width: 0; }
+.gnt-row .wdl rect { stroke: var(--paper); }
+.gnt-games { font: 400 0.72rem/1.2 var(--mono); color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gnt-score, .gnt-implied { font-weight: 600; white-space: nowrap; }
+.gnt-err { font-weight: 400; color: var(--muted); }
+.gnt-says { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }   /* the column's heading says it on wide screens */
+.gnt-forest { display: block; width: 100%; height: auto; overflow: visible; }
+.gf-band { fill: rgba(var(--glow-rgb), 0.15); }
+.gf-fit { stroke: var(--mark); stroke-width: 1; }
+.gf-whisk { stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; }
+.gf-dot { fill: var(--mark); stroke: var(--paper); stroke-width: 2; }
+.gf-pool { fill: var(--ink); }
+.is-lum .gf-band { fill: rgba(var(--glow-rgb), 0.36); }
+.gnt-note { max-width: 88ch; }
+.motion .gnt.is-armed .wdl { transform-origin: 0 50%; transition: transform 1s var(--ease-out); transition-delay: calc(var(--i, 0) * 45ms); }
+.motion .gnt.is-armed:not(.is-in) .wdl { transform: scaleX(0); }
+.motion .gnt.is-armed :is(.gf-dot, .gf-whisk, .gf-pool) { transition: opacity 0.6s; transition-delay: calc(var(--i, 0) * 45ms + 450ms); }
+.motion .gnt.is-armed:not(.is-in) :is(.gf-dot, .gf-whisk, .gf-pool) { opacity: 0; }
+/* Luminex starts one place lower and passes the engine below it */
+.motion .gnt.is-armed :is(.is-lum, .is-under) { transition: transform 1s var(--ease-out) 1.2s; }
+.motion .gnt.is-armed:not(.is-in) .is-lum { transform: translate3d(0, var(--row), 0); }
+.motion .gnt.is-armed:not(.is-in) .is-under { transform: translate3d(0, calc(var(--row) * -1), 0); }
+@media (max-width: 860px) {
+  .gnt-head { grid-template-columns: minmax(0, 1fr); }
+  .gnt-cols { display: none; }
+  .gnt-rows { --row: 108px; }
+  /* three lines a row: name and score; the bar; the games and what they imply */
+  .gnt-row { grid-template-columns: minmax(0, 1fr) auto auto; gap: 7px 10px; height: 102px; padding-inline: 16px; align-content: center; }
+  .gnt-result { display: contents; }
+  .gnt-name { grid-area: 1 / 1 / 2 / 3; }
+  .gnt-score { grid-area: 1 / 3; }
+  .gnt-row .wdl { grid-area: 2 / 1 / 3 / 4; }
+  .gnt-games { grid-area: 3 / 1; }
+  .gnt-n { display: none; }
+  .gnt-implied { grid-area: 3 / 2 / 4 / 4; font-size: 0.86rem; }
+  .gnt-says { position: static; width: auto; height: auto; overflow: visible; clip-path: none; font-weight: 400; color: var(--faint); }
+  .gnt-forest { display: none; }
+  .is-lum .gnt-name { grid-area: 1 / 1 / 2 / 4; }
+  .is-lum .gnt-games { grid-area: 2 / 1 / 3 / 4; font-size: 0.78rem; white-space: normal; }
+  .is-lum :is(.gnt-score, .gnt-implied) { display: none; }
+}
+
 /* the development build: measured, but not yet a ladder measurement, so set apart from the estimate */
 .preview { display: grid; gap: clamp(22px, 3vw, 34px); margin-top: 16px; }
 .preview-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; }
@@ -250,10 +324,10 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
 
 /* ---------- method: the strip of every test ---------- */
 .strip { margin: 0; }
-.strip-scroll { overflow-x: auto; margin-inline: -6px; padding: 2px 6px 6px; }
-.strip-svg { display: block; width: 100%; min-width: 780px; height: auto; overflow: visible; }
-/* under a finger every bar is at least 24 px wide: the strip grows with the number of tests (--bars) and scrolls */
-@media (pointer: coarse) { .strip-svg { min-width: max(780px, calc(var(--bars, 46) * 25.4px)); } }
+.strip-scroll { overflow-x: auto; margin-inline: -6px; padding: 2px 6px 6px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+/* Every bar stays at least 24 px wide, for a finger or a mouse: the strip grows with the number of tests
+   (--bars, set by the script) and scrolls sideways once they no longer fit, starting at the newest. */
+.strip-svg { display: block; width: 100%; min-width: max(780px, calc(var(--bars, 60) * 25.4px)); height: auto; overflow: visible; }
 /* when the strip scrolls sideways, the script keeps a copy of its scale at the left edge */
 .strip-axis { display: none; }
 .strip.has-axis .strip-axis { display: block; position: absolute; left: 0; top: 0; pointer-events: none; }

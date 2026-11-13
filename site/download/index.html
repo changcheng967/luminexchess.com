@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/download/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=10"></script>
+  <script src="/assets/js/theme.js?v=11"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,9 +25,9 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=10">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=10">
-  <script src="/assets/js/site.js?v=10" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=11">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=11">
+  <script src="/assets/js/site.js?v=11" defer></script>
 </head>
 <body class="page-download">
   <!-- @sprite -->
@@ -154,7 +154,7 @@
             <p class="devbuild-now mono" data-dev hidden>Now <span data-dev-name></span> · <time data-dev-date></time></p>
           </div>
           <div class="devbuild-text">
-            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main, at present gen768r_04q. On 11 November main, then with gen768r_03q, measured 173 to 202 Elo ahead of v6.5.1 in self-play, at CCI's three time controls. It is not a numbered release: the downloads above stay v6.5.1.</p>
+            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main, at present gen768r_04q. <a href="/#gauntlet">A gauntlet</a> against twelve rated engines put the build of 12 November at 3448 ± 24 on the CCRL Blitz scale, where the release is estimated near 3255. It is not a numbered release: the downloads above stay v6.5.1.</p>
             <p class="devbuild-fine">Seven builds: Linux and Windows, each for AVX2 and as a compatibility build, both Linux builds again for systems with glibc 2.35, and macOS for Apple silicon. The network is there as a file of its own. The program names itself <code>Luminex dev-YYYYMMDD-</code> and the first eight characters of its commit.</p>
           </div>
           <a class="btn btn-ghost devbuild-go" href="https://github.com/changcheng967/Luminex/releases">
@@ -227,7 +227,7 @@ cmake --build build --config Release</code></pre>
             </details>
             <details data-reveal>
               <summary><span>What is the development build?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>The engine as it stands on main, published automatically after every change that passes the build checks. On 11 November, with the gen768r_03q network, it measured 173 to 202 Elo ahead of v6.5.1 in self-play, at CCI's three time controls, but it is replaced with every push and named by date and commit, not by version. For anything that needs a fixed version, use v6.5.1. <a href="#dev">The development build</a> is on this page.</p>
+              <p>The engine as it stands on main, published automatically after every change that passes the build checks. A gauntlet against twelve rated engines put the build of 12 November at 3448 ± 24 on the CCRL Blitz scale, against about 3255 for the release, but it is replaced with every push and named by date and commit, not by version. For anything that needs a fixed version, use v6.5.1. <a href="#dev">The development build</a> is on this page.</p>
             </details>
             <details data-reveal>
               <summary><span>Does it support Chess960 or endgame tablebases?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -241,7 +241,7 @@ cmake --build build --config Release</code></pre>
             </details>
             <details data-reveal>
               <summary><span>How strong is it, really?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>About 3255 Elo at blitz, measured against Stash releases with known ratings. That is an estimate from engine matches, not an entry on a rating list; see <a href="/#strength">Strength</a> for the numbers.</p>
+              <p>The release, v6.5.1: about 3255 Elo at blitz, estimated from matches against Stash releases with known ratings. The development build: 3448 ± 24 on the same CCRL Blitz scale, from a gauntlet of 9,612 games against twelve rated engines. Both are measured on OpenBench and are not entries on a rating list; see <a href="/#strength">Strength</a> for the numbers.</p>
             </details>
             <details data-reveal>
               <summary><span>How are changes tested?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -287,7 +287,7 @@ cmake --build build --config Release</code></pre>
         </nav>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. It is not a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release is estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. The development build is rated by a gauntlet of 9,612 games at 10+0.1 against twelve engines with CCRL Blitz ratings. Neither is a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>

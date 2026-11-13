@@ -11,6 +11,18 @@
  },
  "tests": [
   {
+   "test": 85,
+   "title": "Keep quiescence search's capture cutoffs in the hash table",
+   "href": "https://github.com/changcheng967/Luminex/pull/69",
+   "ref": "#69",
+   "games": 24230,
+   "elo": 1.29,
+   "ci": 2.38,
+   "text": "+1.3 ± 2.4",
+   "status": "merged",
+   "label": "Stopped undecided; merged as no regression"
+  },
+  {
    "test": 84,
    "title": "The 13 search margins set to the tune 83 values",
    "href": "https://github.com/changcheng967/Luminex/pull/70",
