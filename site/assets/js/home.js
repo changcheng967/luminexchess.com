@@ -50,10 +50,14 @@
       boardEl.classList.add("is-live");
     }
 
+    // with motion on, the scene takes thousands of pixels of scroll track once the game is here:
+    // a visitor who arrived at an anchor further down is held there until that has happened
+    var settled = Lux.wait();
     fetch(sec.getAttribute("data-src"), { credentials: "same-origin" })
       .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
       .then(function (games) { if (games && games[0] && games[0].plies) start(games[0]); })
-      .catch(function () { /* the board keeps its starting position */ });
+      .catch(function () { /* the board keeps its starting position */ })
+      .then(settled);
 
     function start(game) {
       var lumWhite = game.white === "Luminex";
@@ -318,7 +322,8 @@
       // the row carries the same reading as the big number while it climbs
       var reading = s === 0 ? "" : s < 5 ? ">" + ratings[s - 1] : final.num;
       if (lumRating) lumRating.textContent = reading || "…";
-      if (s === 0) { odo.set(">" + ratings[0].replace(/\d/g, "0")); stepEl.textContent = "Five matches, one release at a time"; }
+      // before the climb the digits stand at zero, ready to roll: a screen reader hears the estimate itself
+      if (s === 0) { odo.set(">" + ratings[0].replace(/\d/g, "0"), final.num); stepEl.textContent = "Five matches, one release at a time"; }
       else if (s < 5) { odo.set(">" + ratings[s - 1]); stepEl.textContent = "Beats " + names[s - 1] + ": above " + ratings[s - 1]; }
       else { odo.set(final.num); stepEl.textContent = final.text; }
     }
@@ -424,6 +429,8 @@
     try { pts = JSON.parse(fig.getAttribute("data-points") || "[]"); } catch (e) { return; }
     var goal = +fig.getAttribute("data-goal") || 0;
     if (!plot || pts.length < 2) return;
+    // an estimate from the ladder is written with ≈; a rating measured with an interval ("pm") is written plain, its ± beside it
+    function shown(p) { return p.pm ? String(p.elo) : "≈" + p.elo; }
 
     // The chart is drawn at the size it is shown, so its labels are never scaled down.
     var W, H, Lm = 42, Rm = 22, T = 28, B = 52, PAD, draw, groups;
@@ -472,7 +479,7 @@
         gEl.appendChild(svgEl("circle", { cx: x(i), cy: y(p.elo), r: 6.5 }));
         var ly = y(p.elo) - 15;
         if (goal && y(goal) > ly - 14 && y(goal) < ly + 4) ly = y(p.elo) + 25;      // it would sit on the goal line: below its point instead
-        var te = svgEl("text", { x: x(i), y: ly, "text-anchor": "middle" }, "c-elo"); te.textContent = "≈" + p.elo; gEl.appendChild(te);
+        var te = svgEl("text", { x: x(i), y: ly, "text-anchor": "middle" }, "c-elo"); te.textContent = shown(p); gEl.appendChild(te);
         var tv = svgEl("text", { x: x(i), y: H - B + 22, "text-anchor": "middle" }, "c-ver"); tv.textContent = p.v; gEl.appendChild(tv);
         var td = svgEl("text", { x: x(i), y: H - B + 39, "text-anchor": "middle" }, "c-date"); td.textContent = slot < 104 ? p.d.replace(/ \d{4}$/, "") : p.d; gEl.appendChild(td);
         top.appendChild(gEl);
@@ -482,7 +489,7 @@
     }
     build();
 
-    var numEl = $("[data-climb-odo]", fig), atEl = $("[data-climb-at]", fig), textEl = $("[data-climb-text]", fig);
+    var numEl = $("[data-climb-odo]", fig), pmEl = $("[data-climb-pm]", fig), atEl = $("[data-climb-at]", fig), textEl = $("[data-climb-text]", fig);
     var last = pts.length - 1;
     function still() {
       draw.style.setProperty("--draw", "1");
@@ -515,10 +522,12 @@
       groups.forEach(function (gEl, k) { gEl.classList.toggle("is-on", k <= i); gEl.classList.toggle("is-now", k === i); });
       if (a < 0) {
         odo.set("—");
+        if (pmEl) pmEl.textContent = "";
         atEl.textContent = "The chart begins in August 2026";
         textEl.textContent = "";
       } else {
-        odo.set("≈" + pts[i].elo);
+        odo.set(shown(pts[i]));
+        if (pmEl) pmEl.textContent = pts[i].pm ? "± " + pts[i].pm : "";
         atEl.textContent = pts[i].v + " · " + pts[i].d;
         textEl.textContent = pts[i].t;
       }

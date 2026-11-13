@@ -168,7 +168,9 @@ html {
   scroll-padding-top: 96px;
   background: var(--stage);
 }
-.motion { scroll-behavior: smooth; }
+/* gliding between anchors starts once site.js has seen the page settle (is-settled): an arrival at
+   an anchor is placed at once, and kept there while the page is still taking its size */
+.motion.is-settled { scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100vh;
@@ -249,7 +251,9 @@ code, pre, kbd { font-family: var(--mono); font-size: 0.92em; }
 .sec-tint { background: var(--paper-3); }
 .sec-head { display: grid; gap: clamp(18px, 2.2vw, 28px); margin-bottom: clamp(44px, 6vw, 84px); }
 .sec-head .lede { margin-top: 2px; }
-[id] { scroll-margin-top: 96px; }
+/* an anchor's target stops 120px from the top: the page's scroll-padding (96px, clear of the header)
+   and this. The two used to add up to 192px, a fifth of a screen of the block before */
+[id] { scroll-margin-top: 24px; }
 
 /* ---------- 6. header, rail, footer ---------- */
 .hdr {

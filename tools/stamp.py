@@ -289,8 +289,9 @@ def region_gauntlet(g, indent):
         '  </div>',
         '</figcaption>',
         '<p class="legend gnt-legend"><span><i class="k-w"></i>Luminex wins</span><span><i class="k-d"></i>Draws</span>'
-        '<span><i class="k-l"></i>Opponent wins</span><span><i class="k-dot"></i>The rating one opponent\'s games imply, with its 95% interval</span>'
-        '<span><i class="k-band"></i>The fitted rating and its interval</span></p>',
+        # the last two explain the small plots, which narrow screens do not draw (of-plot hides them there)
+        '<span><i class="k-l"></i>Opponent wins</span><span class="of-plot"><i class="k-dot"></i>The rating one opponent\'s games imply, with its 95% interval</span>'
+        '<span class="of-plot"><i class="k-band"></i>The fitted rating and its interval</span></p>',
         '<div class="gnt-cols" aria-hidden="true"><span>Opponent · %s</span><span>Results for Luminex</span><span>Score</span>'
         '<svg class="gnt-axis" viewBox="0 0 %d 14" focusable="false">%s</svg><span>Implies</span></div>' % (esc(g["list"]), W, ticks),
         '<ol class="gnt-rows" aria-label="Results against %s rated engines, strongest first, with Luminex where its rating puts it">' % count,

@@ -107,6 +107,81 @@
     new IntersectionObserver(function (entries) { fn(entries[0].isIntersecting); }, { threshold: threshold || 0 }).observe(element);
   };
 
+  /* ---------- arriving at an anchor ----------
+     A link from another page to an anchor (/#gauntlet) is followed while the page is still being
+     put together. The browser scrolls to the target; then whatever takes its full size later (the
+     opening's scroll track, a late font) pushes the target away again, by thousands of pixels on
+     the home page. So on a fresh arrival the target is put back after every change of the page's
+     height, until the page has settled or the visitor moves it themselves. Gliding between anchors
+     (scroll-behavior: smooth, which the stylesheet keys on is-settled) starts only after that, so
+     an arrival never flies over the whole page towards a place that is about to move. */
+  (function arrival() {
+    var target = null, over = false, watch = null, timer = 0, lastY = 0;
+    var loaded = document.readyState === "complete", waits = 0;
+    var inputs = ["wheel", "touchstart", "pointerdown", "keydown"];
+    // the browser's own place for an anchor: its top below the page's scroll-padding and its scroll-margin
+    function put() {
+      if (over || !target) return;
+      target.scrollIntoView();
+      lastY = window.scrollY;
+    }
+    function end() {
+      if (over) return;
+      over = true;
+      if (watch) watch.disconnect();
+      clearTimeout(timer);
+      inputs.forEach(function (ev) { window.removeEventListener(ev, end, true); });
+      window.removeEventListener("scroll", moved);
+      root.classList.add("is-settled");
+    }
+    // a scroll that is neither ours nor one of the browser's small corrections is the visitor's (a dragged scrollbar)
+    function moved() { if (Math.abs(window.scrollY - lastY) > 48) end(); }
+    // everything has loaded and no scene is still waiting for its data: a moment more for late fonts, then done
+    function calm() {
+      if (over || waits || !loaded) return;
+      put();
+      clearTimeout(timer);
+      timer = setTimeout(end, 1500);
+    }
+
+    var entry = window.performance && performance.getEntriesByType ? performance.getEntriesByType("navigation")[0] : null;
+    var id = "";
+    try { id = decodeURIComponent((location.hash || "").slice(1)); } catch (e) { /* not an anchor */ }
+    var first = id ? document.getElementById(id) : null;
+    // on a reload or a step back in history the browser restores the old place by itself
+    if (!first || !entry || entry.type !== "navigate") {
+      end();
+    } else {
+      target = first;
+      inputs.forEach(function (ev) { window.addEventListener(ev, end, { capture: true, passive: true }); });
+      window.addEventListener("scroll", moved, { passive: true });
+      if ("ResizeObserver" in window) { watch = new ResizeObserver(put); watch.observe(document.body); }
+      if (!loaded) window.addEventListener("load", function () { loaded = true; calm(); });
+      put();
+      calm();
+    }
+
+    /* scroll to a target the page script has just made visible (a row of the record that a filter
+       had hidden); on arrival it is then the one that is kept in place */
+    Lux.land = function (node) {
+      if (over) { node.scrollIntoView(); return; }
+      target = node;
+      put();
+    };
+    /* a scene that changes the page's height once its data has arrived asks the arrival to wait
+       for it; it calls the function it gets back when that is done, or will never happen */
+    Lux.wait = function () {
+      var open = !over;
+      if (open) waits++;
+      return function () {
+        if (!open) return;
+        open = false;
+        waits--;
+        calm();
+      };
+    };
+  })();
+
   /* ---------- header: leaves on the way down, returns on the way up ---------- */
   var hdr = $(".hdr"), nav = $("#nav"), toggle = $(".nav-toggle");
   var lastY = window.scrollY, run = 0;
@@ -212,8 +287,10 @@
     this.digits.forEach(function (d) { d.r.style.setProperty("--v", d.v); });
   };
   // show another value; digits roll when the new text has the same shape, and
-  // roll up from zero when it has a new one
-  Odo.prototype.set = function (text) {
+  // roll up from zero when it has a new one. The copy a screen reader hears follows the
+  // value shown, unless `spoken` gives other words for a placeholder that says nothing
+  Odo.prototype.set = function (text, spoken) {
+    this.sr.textContent = spoken == null ? text : spoken;
     if (text === this.text) { this.roll(); return; }
     if (text.replace(/\d/g, "0") !== this.shape) {
       this.build(text, true);

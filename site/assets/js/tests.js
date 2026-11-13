@@ -69,7 +69,7 @@
     if (!row || !row.classList.contains("trow")) return;
     if (row.hidden) apply("all", true);
     row.classList.add("is-in", "is-target");
-    row.scrollIntoView({ block: "center" });
+    Lux.land(row);   // where the browser puts an anchor; on arrival it is kept there while the page settles
     setTimeout(function () { row.classList.remove("is-target"); }, 3200);
   }
   window.addEventListener("hashchange", openTarget);

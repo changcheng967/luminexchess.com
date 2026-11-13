@@ -39,6 +39,14 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
 - Animations move `transform` and `opacity` only. The Content Security Policy allows no
   inline styles, so scripts place things by setting CSS custom properties
   (`element.style.setProperty`).
+- A link from another page to an anchor (`/#gauntlet`) arrives while the page is still
+  taking its size: the home page's opening gets its scroll track, thousands of pixels, only
+  when its game file is here. `site.js` therefore keeps the target in place until the page
+  has settled or the visitor does something, and only then marks the document `is-settled`,
+  which switches on smooth scrolling between anchors. A scene that changes the page's height
+  after its data arrives asks for that wait with `Lux.wait()` and calls what it gets back
+  when it is done. An anchor's target stops 120 px from the top (`scroll-padding-top` on the
+  page plus `scroll-margin-top` on `[id]`).
 
 ## Tools
 
