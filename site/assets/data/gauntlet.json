@@ -257,5 +257,6 @@
    "impliedError": 13,
    "expected": 56.2
   }
- ]
+ ],
+ "since": "Since then main has moved to the gen768r_05q network, which scored +22.0 ± 8.5 Elo against gen768r_04q in self-play (test 112). No gauntlet has rated that build yet."
 }

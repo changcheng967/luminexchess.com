@@ -22,13 +22,17 @@ What it reports
 What --write changes
     - "Test games" in the home page's opening and the three totals on the home and tests pages;
     - the sentence under the tests page's totals (how many of each kind, and the games by kind);
-    - the "as of" date in tests.json, on the home page's chart and on the tests page.
+    - the "as of" date in tests.json, on the home page's chart and on the tests page (the UTC
+      date, like every other date on the site: GitHub's, the bench's, the development builds').
     Titles, labels and the notes under the record stay hand-written.
 
 What --gauntlet N changes
     - site/assets/data/gauntlet.json, which tools/stamp.py draws the home page's gauntlet figure
       from. The rating also stands in three hand-written places on the home page (the opening's
       "Development build", the chronicle's chart point and its entry): the script names them.
+      One field of that file is hand-written and kept: "since", a sentence the figure shows
+      about what main has become after the gauntlet (a newer network, say). Remove it when a
+      new gauntlet makes it untrue.
 
 After either, run `python -I tools/stamp.py site`.
 
@@ -168,9 +172,10 @@ def main():
     ap.add_argument("--gauntlet", type=int, default=0, help="write gauntlet.json from this gauntlet's page")
     ap.add_argument("--from", dest="src", default="", help="a folder of saved pages: index1.html ..., users.html, gauntletN.html")
     ap.add_argument("--via", default="ssh -n oracle", help='command that runs curl elsewhere ("" = fetch from here)')
-    ap.add_argument("--date", default="", help='the date to write, e.g. "12 November 2026" (default: today)')
+    ap.add_argument("--date", default="", help='the date to write, e.g. "12 November 2026" (default: today, in UTC)')
     a = ap.parse_args()
-    today = a.date or datetime.date.today().strftime("%d %B %Y").lstrip("0")
+    # UTC, like the bench's and GitHub's own dates and the names of the development builds
+    today = a.date or datetime.datetime.now(datetime.timezone.utc).strftime("%d %B %Y").lstrip("0")
 
     if a.gauntlet:
         page = (open(os.path.join(a.src, "gauntlet%d.html" % a.gauntlet), encoding="utf-8", errors="replace").read() if a.src
@@ -178,13 +183,17 @@ def main():
         if 'id="opponents"' not in page:
             sys.exit("Gauntlet %d's page did not come back, or it changed shape." % a.gauntlet)
         path = os.path.join(ROOT, "assets", "data", "gauntlet.json")
-        date = today
-        if os.path.exists(path) and not a.date:           # the same gauntlet keeps the date it was first read
+        date, since = today, None
+        if os.path.exists(path):
             with open(path, encoding="utf-8") as fh:
                 old = json.load(fh)
             if old.get("id") == a.gauntlet:
-                date = old.get("date", today)
+                since = old.get("since")                  # the hand-written sentence about main since then stays
+                if not a.date:                            # and the same gauntlet keeps the date it was first read
+                    date = old.get("date", today)
         data = read_gauntlet(a.gauntlet, page, date)
+        if since:
+            data["since"] = since
         with open(path, "w", encoding="utf-8", newline="\n") as fh:
             json.dump(data, fh, ensure_ascii=False, indent=1)
             fh.write("\n")

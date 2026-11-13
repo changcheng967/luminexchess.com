@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=11"></script>
+  <script src="/assets/js/theme.js?v=12"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -28,11 +28,11 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=11">
-  <link rel="stylesheet" href="/assets/css/home.css?v=11">
-  <script src="/assets/js/site.js?v=11" defer></script>
-  <script src="/assets/js/board.js?v=11" defer></script>
-  <script src="/assets/js/home.js?v=11" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=12">
+  <link rel="stylesheet" href="/assets/css/home.css?v=12">
+  <script src="/assets/js/site.js?v=12" defer></script>
+  <script src="/assets/js/board.js?v=12" defer></script>
+  <script src="/assets/js/home.js?v=12" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -256,7 +256,7 @@
             <dl class="proof" data-reveal data-d="6">
               <div><dt>The release<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo>≈3255</span><span class="u">Elo</span></dd></div>
               <div><dt>Development build<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo>3448</span><span class="u">± 24</span></dd></div>
-              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>711,226</span></dd></div>
+              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>716,394</span></dd></div>
               <div><dt>Speed</dt><dd><span class="proof-n" data-odo>1.2M</span><span class="u">nodes/s</span></dd></div>
             </dl>
             <p class="scroll-cue" data-cue aria-hidden="true"><span>Scroll to play a real game</span><i></i></p>
@@ -377,6 +377,7 @@
               <div class="gnt-text">
                 <p>Main of 12 November, with the gen768r_04q network, played 800 games against each of twelve engines that CCRL rates, at 10+0.1 on one thread: 9,612 games, none lost on time and no crash. The rating is the one at which the points expected against all twelve equal the points scored.</p>
                 <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between 3405 and 3486, where the games by themselves would leave ± 7. More opponents near Luminex would narrow it; more games would not.</p>
+                <p class="gnt-since">Since then main has moved to the gen768r_05q network, which scored +22.0 ± 8.5 Elo against gen768r_04q in self-play (test 112). No gauntlet has rated that build yet.</p>
                 <a class="link" href="https://bench.luminexchess.com/gauntlet/2/"><span>Gauntlet 2 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </figcaption>
@@ -595,14 +596,14 @@
         <dl class="totals">
           <div data-reveal><dt>SPRTs run</dt><dd class="num"><span data-odo>48</span></dd></div>
           <div data-reveal data-d="1"><dt>Passed</dt><dd class="num is-lit"><span data-odo>32</span></dd></div>
-          <div data-reveal data-d="2"><dt>OpenBench games</dt><dd class="num"><span data-odo>711,226</span></dd></div>
+          <div data-reveal data-d="2"><dt>OpenBench games</dt><dd class="num"><span data-odo>716,394</span></dd></div>
           <div data-reveal data-d="3"><dt>Since v6.4</dt><dd class="num"><span data-odo>+145</span></dd></div>
         </dl>
 
         <figure class="card strip" data-strip>
           <figcaption class="fig-head">
             <span class="fig-title">Every test so far</span>
-            <span class="fig-sub">Elo against the engine each change would replace, oldest on the left, as of 12 November 2026. A test that passed is lit.</span>
+            <span class="fig-sub">Elo against the engine each change would replace, oldest on the left, as of 13 November 2026. A test that passed is lit.</span>
           </figcaption>
           <!-- @tests-strip -->
           <div class="strip-scroll">
@@ -842,7 +843,7 @@
                 <line class="sbar-ci" x1="903.12" x2="903.12" y1="139.19" y2="167.17"/>
                 <path class="sbar-fill" d="M897.25 165.5V157.18Q897.25 153.18 901.25 153.18H905Q909 153.18 909 157.18V165.5Z"/>
               </a>
-              <a class="sbar is-pass" href="/tests/#t82" aria-label="Test 82, gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions: +13.3 ± 6.6 Elo over 3,394 games. Passed; on main." data-test="82" data-title="gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions" data-text="+13.3 ± 6.6" data-games="3,394" data-label="Passed; on main">
+              <a class="sbar is-pass" href="/tests/#t82" aria-label="Test 82, gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions: +13.3 ± 6.6 Elo over 3,394 games. Passed; since replaced by gen768r_05q." data-test="82" data-title="gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions" data-text="+13.3 ± 6.6" data-games="3,394" data-label="Passed; since replaced by gen768r_05q">
                 <rect class="sbar-hit" x="913" y="14" width="19.75" height="202"/>
                 <line class="sbar-ci" x1="922.88" x2="922.88" y1="140.43" y2="156.97"/>
                 <path class="sbar-fill" d="M917 165.5V152.7Q917 148.7 921 148.7H924.75Q928.75 148.7 928.75 152.7V165.5Z"/>
@@ -857,7 +858,7 @@
                 <line class="sbar-ci" x1="962.38" x2="962.38" y1="160.87" y2="166.88"/>
                 <path class="sbar-fill" d="M956.5 165.5V165.5Q956.5 163.87 958.13 163.87H966.62Q968.25 163.87 968.25 165.5V165.5Z"/>
               </a>
-              <a class="sbar is-pass" href="/tests/#t112" aria-label="Test 112, gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions: +22.0 ± 8.5 Elo over 1,912 games. Passed; not on main yet." data-test="112" data-title="gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions" data-text="+22.0 ± 8.5" data-games="1,912" data-label="Passed; not on main yet">
+              <a class="sbar is-pass" href="/tests/#t112" aria-label="Test 112, gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions: +22.0 ± 8.5 Elo over 1,912 games. Passed; on main." data-test="112" data-title="gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions" data-text="+22.0 ± 8.5" data-games="1,912" data-label="Passed; on main">
                 <rect class="sbar-hit" x="972.25" y="14" width="19.75" height="202"/>
                 <line class="sbar-ci" x1="982.12" x2="982.12" y1="126.94" y2="148.46"/>
                 <path class="sbar-fill" d="M976.25 165.5V141.7Q976.25 137.7 980.25 137.7H984Q988 137.7 988 141.7V165.5Z"/>
@@ -907,7 +908,7 @@
             </svg>
             <p class="trio-sizes mono" aria-hidden="true"><span>2 × 768</span><span>16</span><span>32</span><span>1</span></p>
             <h3 class="h-m">A network that follows the pieces</h3>
-            <p>A 768-wide neural network scores every position. A move changes only a few of its inputs, so the first layer is updated with a few additions instead of being computed again. In training, the network on main has been shown about 117 billion positions.</p>
+            <p>A 768-wide neural network scores every position. A move changes only a few of its inputs, so the first layer is updated with a few additions instead of being computed again. In training, the network on main has been shown about 201 billion positions.</p>
           </article>
 
           <article class="card trio-card" data-glow data-reveal data-d="1" data-live>
@@ -1029,11 +1030,15 @@
             </li>
             <li class="tl" data-pt="4">
               <time datetime="2026-11-11">Nov 2026</time>
-              <div class="tl-body"><h3>More positions, more steps <span class="tl-elo num">+13.3</span></h3><p>gen768r_04q: the same run continued to 860,000 steps, now on 3.73 billion positions and with a loss power of 3.0 instead of 2.6, then 30,000 quantization-aware steps. +13.3 Elo against gen768r_03q, and now the network on main.</p></div>
+              <div class="tl-body"><h3>More positions, more steps <span class="tl-elo num">+13.3</span></h3><p>gen768r_04q: the same run continued to 860,000 steps, now on 3.73 billion positions and with a loss power of 3.0 instead of 2.6, then 30,000 quantization-aware steps. +13.3 Elo against gen768r_03q, which it replaced on main.</p></div>
             </li>
             <li class="tl" data-pt="5">
               <time datetime="2026-11-12">Nov 2026</time>
               <div class="tl-body"><h3>Rated against twelve engines <span class="tl-elo num">3448</span></h3><p>Gauntlets on OpenBench now rate a build against other engines. The first full one: main with gen768r_04q, 9,612 games at 10+0.1 against twelve engines rated from 3417 to 3773. 3448 ± 24 on the CCRL Blitz scale, and 57.5% against Stash 37.</p></div>
+            </li>
+            <li class="tl" data-pt="5">
+              <time datetime="2026-11-13">Nov 2026</time>
+              <div class="tl-body"><h3>Two more months of games <span class="tl-elo num">+22.0</span></h3><p>gen768r_05q: the run continued to 1.5 million steps on 6.6 billion positions, 4.2 billion of them from two months of games the network had not seen, then 30,000 quantization-aware steps. +22.0 Elo against gen768r_04q, and now the network on main.</p></div>
             </li>
             <li class="tl is-next" data-pt="6">
               <time>Next</time>
@@ -1113,7 +1118,7 @@
         </nav>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release is estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. The development build is rated by a gauntlet of 9,612 games at 10+0.1 against twelve engines with CCRL Blitz ratings. Neither is a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release is estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. The development build of 12 November was rated by a gauntlet of 9,612 games at 10+0.1 against twelve engines with CCRL Blitz ratings. Neither is a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>

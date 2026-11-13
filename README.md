@@ -57,7 +57,8 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   figure from `site/assets/data/gauntlet.json`. It then reports anything the Content
   Security Policy would block and any local link that leads nowhere, and dates the pages in
   `sitemap.xml` (today for a page with uncommitted changes, otherwise its last commit).
-  **Run it after editing a part, a page or a data file.**
+  **Run it after editing a part, a page or a data file.** Dates the tools write are UTC,
+  like GitHub's, the bench's and the names of the development builds.
 - `tools/bench_update.py` reads OpenBench and reports what the site should say: the totals
   (SPRTs run, passed, games), any finished SPRT that `tests.json` does not have yet (as an
   entry ready to paste, with the title left for you), any row that no longer matches, and
@@ -119,7 +120,15 @@ console.
   `gauntlet.json`. The rating also stands in places written by hand, which the script
   names: the opening's "Development build" number and the chronicle's last chart point and
   entry in `site/index.html`, plus the sentences that quote it on the engine, download,
-  tests and games pages and in the footnote (search for the old number).
+  tests and games pages and in the footnote (search for the old number). Take the `since`
+  sentence out of `gauntlet.json` if the new gauntlet makes it untrue.
+- **A new network on main.** In `site/assets/data/tests.json`, label its test "Passed; on
+  main" and the one before it "Passed; since replaced by …". On `/engine/`: the four
+  training counters, the table of phases (a step is 131,072 positions) and the blocks under
+  them, where the newest keeps the heading "On main now". On the home page: the sentence
+  about positions shown, a chronicle entry, and the `since` sentence in `gauntlet.json`
+  (shown under the gauntlet's text) until a gauntlet has rated the new build. On
+  `/download/`: the network the development build carries.
 - **Strength.** The Stash ladder, the three fact cards and the rating chart's points
   (`data-points`) are in `site/index.html`; the footnote is in `tools/parts/footer.html`.
 - **The engine.** Speed figures, the clock section, the network's layers and generations

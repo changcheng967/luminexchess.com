@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "12 November 2026",
+ "asOf": "13 November 2026",
  "leftOff": [
   59
  ],
@@ -20,7 +20,7 @@
    "ci": 8.52,
    "text": "+22.0 ± 8.5",
    "status": "pass",
-   "label": "Passed; not on main yet"
+   "label": "Passed; on main"
   },
   {
    "test": 85,
@@ -56,7 +56,7 @@
    "ci": 6.55,
    "text": "+13.3 ± 6.6",
    "status": "pass",
-   "label": "Passed; on main"
+   "label": "Passed; since replaced by gen768r_05q"
   },
   {
    "test": 74,

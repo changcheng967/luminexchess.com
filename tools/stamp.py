@@ -285,6 +285,8 @@ def region_gauntlet(g, indent):
         '    <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between %d and %d, '
         'where the games by themselves would leave ± %d. More opponents near Luminex would narrow it; more games would not.</p>'
         % (min(implied), max(implied), g["fromGames"]),
+        # what has changed on main since the gauntlet was played, if the data file says so ("since")
+        *(['    <p class="gnt-since">%s</p>' % esc(g["since"])] if g.get("since") else []),
         '    <a class="link" href="%s"><span>Gauntlet %d on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>'
         % (esc(g["href"]), g["id"]),
         '  </div>',
@@ -383,7 +385,8 @@ def check(root, rel, text):
 def sitemap_dates(root):
     """Set each page's <lastmod> in sitemap.xml: today if the page differs from the last commit, else that commit's date.
 
-    Needs git; without it (or outside a checkout) the sitemap is left alone. Returns a word for the report.
+    Dates are UTC, like the other dates on the site. Needs git; without it (or outside a checkout) the
+    sitemap is left alone. Returns a word for the report.
     """
     path = os.path.join(root, "sitemap.xml")
     if not os.path.exists(path):
@@ -391,7 +394,8 @@ def sitemap_dates(root):
 
     def git(*args):
         try:
-            done = subprocess.run(["git", "-C", root] + list(args), capture_output=True, text=True, timeout=30)
+            done = subprocess.run(["git", "-C", root] + list(args), capture_output=True, text=True, timeout=30,
+                                  env=dict(os.environ, TZ="UTC"))
         except (OSError, subprocess.SubprocessError):
             return None
         return done.stdout.strip() if done.returncode == 0 else None
@@ -404,7 +408,8 @@ def sitemap_dates(root):
     def date(m):
         rel = m.group(1).split("/", 3)[3] if m.group(1).count("/") >= 3 else ""      # the path after https://host/
         rel = rel + "index.html" if rel == "" or rel.endswith("/") else rel
-        day = datetime.date.today().isoformat() if git("status", "--porcelain", "--", rel) else git("log", "-1", "--format=%cs", "--", rel)
+        today = datetime.datetime.now(datetime.timezone.utc).date().isoformat()
+        day = today if git("status", "--porcelain", "--", rel) else git("log", "-1", "--date=format-local:%Y-%m-%d", "--format=%cd", "--", rel)
         return m.group(0) if not day else "<loc>%s</loc>%s<lastmod>%s</lastmod>" % (m.group(1), m.group(2), day)
 
     after = re.sub(r"<loc>([^<]+)</loc>(\s*)<lastmod>[^<]*</lastmod>", date, before)
