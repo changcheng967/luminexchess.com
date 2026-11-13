@@ -11,6 +11,18 @@
  },
  "tests": [
   {
+   "test": 113,
+   "title": "Widen reverse futility's margin as material comes off",
+   "href": "https://github.com/changcheng967/Luminex/pull/71",
+   "ref": "#71",
+   "games": 8088,
+   "elo": -3.48,
+   "ci": 4.1,
+   "text": "−3.5 ± 4.1",
+   "status": "fail",
+   "label": "Failed, closed"
+  },
+  {
    "test": 112,
    "title": "gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions",
    "href": "https://bench.luminexchess.com/test/112/",
