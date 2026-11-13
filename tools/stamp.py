@@ -118,8 +118,9 @@ def region_tests_strip(data, indent):
         a('      <line%s x1="%d" x2="%d" y1="%s" y2="%s"/>' % (cls, L, W - R, num(y(v)), num(y(v))))
         label = "0" if v == 0 else ("+%d" % v if v > 0 else "−%d" % -v)
         a('      <text x="%d" y="%s" text-anchor="end">%s</text>' % (L - 10, num(y(v) + 4), label))
-    a('      <text class="strip-end" x="%d" y="%d">Test %d</text>' % (L, H - 8, tests[0]["test"]))
-    a('      <text class="strip-end" x="%d" y="%d" text-anchor="end">Test %d</text>' % (W - R, H - 8, tests[-1]["test"]))
+    # the labels of the two ends; home.js hides the one whose end is scrolled out of the frame
+    a('      <text class="strip-end is-first" x="%d" y="%d">Test %d</text>' % (L, H - 8, tests[0]["test"]))
+    a('      <text class="strip-end is-last" x="%d" y="%d" text-anchor="end">Test %d</text>' % (W - R, H - 8, tests[-1]["test"]))
     a("    </g>")
     for i, t in enumerate(tests):
         cx = L + slot * (i + 0.5)

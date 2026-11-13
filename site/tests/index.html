@@ -111,12 +111,12 @@
         <h1 id="tests-title" class="h-xl" data-split><em>Measured,</em> not guessed</h1>
         <p class="lede" data-reveal data-d="3">Luminex runs its own OpenBench instance. A candidate change plays the current engine until a sequential probability ratio test can tell a gain from noise.</p>
         <dl class="totals totals-hero">
-          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>47</span></dd></div>
-          <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>31</span></dd></div>
-          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>707,334</span></dd></div>
+          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>48</span></dd></div>
+          <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>32</span></dd></div>
+          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>711,226</span></dd></div>
           <div data-reveal data-d="7"><dt>Since v6.4</dt><dd class="num"><span data-odo>+145</span></dd></div>
         </dl>
-        <p class="statline" data-reveal data-d="8">OpenBench's list holds 69 runs, 3 of them not finished: 48 SPRTs, 15 fixed-length matches, 2 gauntlets and 4 SPSA tuning runs. The SPRTs played 353,446 of the games, the tuning runs 320,000, the matches 20,544 and the gauntlets 9,868; another 3,476 were played in runs since deleted from the list.</p>
+        <p class="statline" data-reveal data-d="8">OpenBench's list holds 70 runs, 3 of them not finished: 49 SPRTs, 15 fixed-length matches, 2 gauntlets and 4 SPSA tuning runs. The SPRTs played 355,358 of the games, the tuning runs 320,000, the matches 22,524 and the gauntlets 9,868; another 3,476 were played in runs since deleted from the list.</p>
       </div>
       <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
@@ -164,8 +164,8 @@
           <div class="record-bar">
             <div class="filters" role="group" aria-label="Show tests by outcome">
               <!-- @tests-filters -->
-              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">47</span></button>
-              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">31</span></button>
+              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">48</span></button>
+              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">32</span></button>
               <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">6</span></button>
               <button type="button" class="chip" data-filter="merged" aria-pressed="false">Merged anyway <span class="num">5</span></button>
               <button type="button" class="chip" data-filter="stop" aria-pressed="false">Stopped <span class="num">5</span></button>
@@ -180,6 +180,25 @@
           </div>
           <ol class="trows" data-rows>
             <!-- @tests-rows -->
+            <li class="trow is-pass" id="t112" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://bench.luminexchess.com/test/112/">gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/112/">Test 112</a> · network · 1,912 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="113.69" x2="149.9" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M131.79 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+22.0 ± 8.5</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; not on main yet</span></p>
+            </li>
             <li class="trow is-merged" id="t85" data-status="merged">
               <div class="trow-label">
                 <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/69">Keep quiescence search&#x27;s capture cutoffs in the hash table</a>

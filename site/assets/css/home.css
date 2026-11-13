@@ -345,6 +345,9 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
 .strip-grid line { stroke: var(--line-2); stroke-width: 1; }
 .strip-grid .is-zero { stroke: var(--faint); }
 .strip-grid text { font: 400 12.5px var(--mono); fill: var(--faint); }
+/* a strip scrolled away from one of its ends would show that end's label cut in half at the edge */
+.strip-end { transition: opacity 0.2s; }
+.strip.is-off-first .strip-end.is-first, .strip.is-off-last .strip-end.is-last { opacity: 0; }
 .sbar { outline: none; }
 .sbar-hit { fill: transparent; }
 .sbar-ci, .sbar-off { fill: none; stroke: var(--faint); stroke-width: 1.5; stroke-linecap: round; }

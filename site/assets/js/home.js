@@ -391,8 +391,18 @@
       axis.style.setProperty("--t", top.toFixed(1) + "px");      // the plot's extent, for the veil behind the labels
       axis.style.setProperty("--b", bottom.toFixed(1) + "px");
     }
+    // "Test 1" and the newest test's label stand at the strip's two ends: one that is scrolled
+    // partly out of the frame is hidden rather than shown cut in half
+    function ends() {
+      if (!scroller) return;
+      var max = scroller.scrollWidth - scroller.clientWidth;
+      fig.classList.toggle("is-off-first", scroller.scrollLeft > 4);
+      fig.classList.toggle("is-off-last", scroller.scrollLeft < max - 4);
+    }
+    if (scroller) scroller.addEventListener("scroll", ends, { passive: true });
     placeAxis();
-    window.addEventListener("resize", placeAxis);
+    ends();
+    window.addEventListener("resize", function () { placeAxis(); ends(); });
 
     // one tooltip, shared by every bar; the same details are in each bar's label
     var tip = el("div", "tip");

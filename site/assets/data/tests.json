@@ -11,6 +11,18 @@
  },
  "tests": [
   {
+   "test": 112,
+   "title": "gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions",
+   "href": "https://bench.luminexchess.com/test/112/",
+   "ref": "network",
+   "games": 1912,
+   "elo": 22.02,
+   "ci": 8.52,
+   "text": "+22.0 ± 8.5",
+   "status": "pass",
+   "label": "Passed; not on main yet"
+  },
+  {
    "test": 85,
    "title": "Keep quiescence search's capture cutoffs in the hash table",
    "href": "https://github.com/changcheng967/Luminex/pull/69",

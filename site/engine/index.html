@@ -493,6 +493,10 @@
               <h3 class="h-m" id="next-network">On main now: gen768r_04q</h3>
               <p>It continues the same run from 460,000 to 860,000 steps, now on 3.73 billion positions from test91's February to August and October 2026 games, with a loss power of 3.0 instead of 2.6, then 30,000 quantization-aware steps. Against gen768r_03q it scored +13.31 ± 6.55 Elo over 3,394 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/82/">test 82</a>). It is the network on main and in every development build, and OpenBench's default. An SPSA run of 80,000 games then retuned 13 search margins for it (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>), but none moved beyond noise; the SPRT of its values was stopped (<a href="https://bench.luminexchess.com/test/84/">test 84</a>) and main keeps its margins. With this network, a gauntlet against twelve rated engines put main at 3448 ± 24 on the CCRL Blitz scale (<a href="/#gauntlet">the table</a>).</p>
             </div>
+            <div class="prose" data-reveal data-d="3">
+              <h3 class="h-m" id="gen768r-05q">Passed, not yet on main: gen768r_05q</h3>
+              <p>The run went on from 860,000 steps to 1.5 million, on 6.6 billion positions: test91's games of November and December 2025, which the network had not seen, beside those of February to May 2026. Then 30,000 quantization-aware steps. On January's games, which every run has left out, its loss before rounding is 4.3% below gen768r_04's. Against gen768r_04q it scored +22.02 ± 8.52 Elo over 1,912 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/112/">test 112</a>), and passed. Main still carries gen768r_04q.</p>
+            </div>
           </div>
         </div>
         <a class="card link-card" data-glow data-reveal href="https://huggingface.co/datasets/xushawn/t91-binpacks-raw-old">
