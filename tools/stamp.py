@@ -293,7 +293,8 @@ def region_gauntlet(g, indent):
     out = [
         '<figcaption class="gnt-head">',
         '  <div class="gnt-score-box">',
-        '    <p class="fact-label" id="gauntlet-title">The development build, against %s engines</p>' % count,
+        # the heading is the data file's ("title") when it has one: a release is not "the development build"
+        '    <p class="fact-label" id="gauntlet-title">%s</p>' % esc(g.get("title") or "The development build, against %s engines" % count),
         '    <p class="gnt-num num"><span data-odo>%d</span><span class="gnt-pm">± %d</span></p>' % (g["rating"], g["error"]),
         '    <p class="gnt-on">on the %s scale</p>' % esc(g["list"]),
     ] + ([
@@ -325,9 +326,8 @@ def region_gauntlet(g, indent):
     ] + rows + [
         '</ol>',
         '<p class="note gnt-note">Opponent ratings are %s values for one CPU. The gaps in these games are wider than the list\'s: '
-        'one Elo point here is worth %s points of the list, which the fit measures from the same games. '
-        'The release was not in this gauntlet; its estimate comes from the Stash ladder above.</p>'
-        % (esc(g["list"]), ("%.2f" % g["scale"]).rstrip("0").rstrip(".")),
+        'one Elo point here is worth %s points of the list, which the fit measures from the same games.%s</p>'
+        % (esc(g["list"]), ("%.2f" % g["scale"]).rstrip("0").rstrip("."), (" " + esc(g["noteEnd"])) if g.get("noteEnd") else ""),
     ]
     return "\n".join(indent + "  " + line for chunk in out for line in chunk.split("\n"))
 

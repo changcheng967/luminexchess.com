@@ -17,13 +17,17 @@ What it reports
       includes games of workloads that were deleted later; the list's sum does not);
     - finished SPRTs that are missing from site/assets/data/tests.json, each as an entry ready
       to paste (the title is yours to write: one plain line saying what the change was);
-    - rows of tests.json whose games no longer match the bench.
+    - rows of tests.json whose games no longer match the bench;
+    - rows whose Elo, interval or games differ from the test's own page. Every row's page is read
+      for this (one remote call), because the site quotes each Elo as its page shows it, with two
+      decimals, and the bench's intervals have changed with its code before. --no-pages skips it.
 
 What --write changes
     - "Test games" in the home page's opening and the three totals on the home and tests pages;
     - the sentence under the tests page's totals (how many of each kind, and the games by kind);
     - the "as of" date in tests.json, on the home page's chart and on the tests page (the UTC
-      date, like every other date on the site: GitHub's, the bench's, the development builds').
+      date, like every other date on the site: GitHub's, the bench's, the development builds');
+    - the Elo, interval, games and text of every row that differs from its test page.
     Titles, labels and the notes under the record stay hand-written.
 
 What --gauntlet N changes
@@ -56,6 +60,11 @@ BENCH = "https://bench.luminexchess.com"
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 N = "{:,}".format
 KINDS = ("sprt", "fixed", "gauntlet", "tune")
+# fields of gauntlet.json that are written by hand and kept when the same gauntlet is read again:
+#   title    the figure's heading, e.g. "Against twelve rated engines" (default: "The development build, against … engines")
+#   since    a sentence shown after the figure's text: what the engine has become since the gauntlet
+#   noteEnd  a sentence added to the note under the rows
+HAND_WRITTEN = ("title", "since", "noteEnd")
 
 
 def fetch(url, via):
@@ -102,9 +111,39 @@ def workloads(pages):
     return out
 
 
-def signed(v, digits=1):
+def signed(v, digits=2):
     s = ("%+." + str(digits) + "f") % v
     return s.replace("-", "−")          # a real minus sign, as in tests.json
+
+
+def shown(elo, ci):
+    """An Elo result as its test page shows it: two decimals, with the 95% interval."""
+    return "%s ± %.2f" % (signed(elo), ci)
+
+
+def page_result(page):
+    """(Elo, interval, games) from a test's own page, or None if the page has no result."""
+    t = text_of(page)
+    e = re.search(r"Elo \| (-?[\d.]+) \+- ([\d.]+)", t)
+    g = re.search(r"Games \| N: (\d+)", t)
+    return (float(e.group(1)), float(e.group(2)), int(g.group(1))) if e and g else None
+
+
+def fetch_tests(ids, via):
+    """The pages of these tests, keyed by id. Through `via` they come back in one remote call."""
+    ids = list(ids)
+    if not ids:
+        return {}
+    if not via:
+        return {i: fetch("%s/test/%d/" % (BENCH, i), via) for i in ids}
+    remote = "for i in %s; do echo \"@@@PAGE $i\"; curl -sL --max-time 40 %s/test/$i/; echo; done" % (" ".join(str(i) for i in ids), BENCH)
+    out = subprocess.run(via.split() + [remote], capture_output=True, timeout=900).stdout.decode("utf-8", "replace")
+    pages = {}
+    for chunk in out.split("@@@PAGE ")[1:]:
+        head, _, body = chunk.partition("\n")
+        if head.strip().isdigit():
+            pages[int(head.strip())] = body
+    return pages
 
 
 # ---------------------------------------------------------------- a gauntlet's page
@@ -206,6 +245,7 @@ def main():
     ap.add_argument("--from", dest="src", default="", help="a folder of saved pages: index1.html ..., users.html, gauntletN.html")
     ap.add_argument("--via", default="ssh -n oracle", help='command that runs curl elsewhere ("" = fetch from here)')
     ap.add_argument("--date", default="", help='the date to write, e.g. "12 November 2026" (default: today, in UTC)')
+    ap.add_argument("--no-pages", action="store_true", help="do not read every row's test page (faster; Elo figures are then not checked)")
     a = ap.parse_args()
     # UTC, like the bench's and GitHub's own dates and the names of the development builds
     today = a.date or datetime.datetime.now(datetime.timezone.utc).strftime("%d %B %Y").lstrip("0")
@@ -216,12 +256,12 @@ def main():
         if 'id="opponents"' not in page:
             sys.exit("Gauntlet %d's page did not come back, or it changed shape." % a.gauntlet)
         path = os.path.join(ROOT, "assets", "data", "gauntlet.json")
-        date, since, previous = today, None, None
+        date, kept, previous = today, {}, None
         if os.path.exists(path):
             with open(path, encoding="utf-8") as fh:
                 old = json.load(fh)
             if old.get("id") == a.gauntlet:
-                since = old.get("since")                  # the hand-written sentence about main since then stays,
+                kept = {k: old[k] for k in HAND_WRITTEN if old.get(k)}      # what was written by hand stays,
                 previous = old.get("previous")            # and so does the gauntlet it is compared with
                 if not a.date:                            # and the same gauntlet keeps the date it was first read
                     date = old.get("date", today)
@@ -231,8 +271,7 @@ def main():
                                                 "list", "rating", "error", "fromGames") if k in old}
                 previous["opponents"] = sorted(o["name"] for o in old.get("opponents", []))
         data = read_gauntlet(a.gauntlet, page, date)
-        if since:
-            data["since"] = since
+        data.update(kept)
         if previous:
             data["previous"] = previous
         with open(path, "w", encoding="utf-8", newline="\n") as fh:
@@ -319,7 +358,7 @@ def main():
                 if mo:
                     w["elo"], w["ci"] = float(mo.group(1)), float(mo.group(2))
             label = {"pass": "Passed", "fail": "Failed", "stop": "Stopped, unresolved"}[w["status"]]
-            text = "%s ± %.1f" % (signed(w["elo"]), w["ci"]) if w["elo"] is not None else "TODO: Elo ± interval from the test's page"
+            text = shown(w["elo"], w["ci"]) if w["elo"] is not None else "TODO: Elo ± interval from the test's page"
             print(json.dumps({"test": w["id"], "title": "TODO: what the change was, in one plain line", "href": BENCH + "/test/%d/" % w["id"],
                               "ref": "TODO", "games": w["games"], "elo": w["elo"], "ci": w["ci"],
                               "text": text, "status": w["status"], "label": label}, ensure_ascii=False) + ",")
@@ -335,14 +374,30 @@ def main():
     unlisted = [t["test"] for t in data["tests"] if t["test"] not in tests_on_bench]
     if unlisted:
         print("\nin tests.json but no longer on the bench's list: %s" % ", ".join(str(n) for n in unlisted))
-    if not (missing or stale or unlisted):
-        print("\ntests.json matches the bench.")
+    # Every Elo the record shows is its test page's: the page is read for each row. (The list gives
+    # an SPRT's LLR, not its Elo, and the bench's intervals have changed with its code before.)
+    off = []
+    if not a.src and not a.no_pages:
+        pages_by_id = fetch_tests([t["test"] for t in data["tests"]], a.via)
+        for t in data["tests"]:
+            got = page_result(pages_by_id.get(t["test"], ""))
+            if not got:
+                off.append((t, None))
+            elif abs(got[0] - t["elo"]) > 0.004 or abs(got[1] - t["ci"]) > 0.004 or got[2] != t["games"] or t.get("text") != shown(got[0], got[1]):
+                off.append((t, got))
+        if off:
+            print("\nrows of tests.json that differ from their test page%s:" % (" (corrected below)" if a.write else "; --write corrects them"))
+            for t, got in off:
+                print("  test %d: tests.json %s, %s games; the page %s" % (
+                    t["test"], t.get("text"), N(t["games"]), "has no result" if not got else "%s, %s games" % (shown(got[0], got[1]), N(got[2]))))
+    if not (missing or stale or unlisted or off):
+        print("\ntests.json matches the bench%s." % ("" if a.src or a.no_pages else ", and every row its test page"))
     if kinds["gauntlet"]:
         gpath = os.path.join(ROOT, "assets", "data", "gauntlet.json")
-        shown = json.load(open(gpath, encoding="utf-8")).get("id") if os.path.exists(gpath) else None
+        on_site = json.load(open(gpath, encoding="utf-8")).get("id") if os.path.exists(gpath) else None
         newest = max(w["id"] for w in kinds["gauntlet"] if w["section"] == "Finished") if any(w["section"] == "Finished" for w in kinds["gauntlet"]) else None
-        if newest and newest != shown:
-            print("\nthe newest finished gauntlet is %d; the site shows %s (python -I tools/bench_update.py --gauntlet %d)" % (newest, shown or "none", newest))
+        if newest and newest != on_site:
+            print("\nthe newest finished gauntlet is %d; the site shows %s (python -I tools/bench_update.py --gauntlet %d)" % (newest, on_site or "none", newest))
 
     if not a.write:
         print("\nnothing written (pass --write to update the counters and dates)")
@@ -384,6 +439,9 @@ def main():
             % (len(ws), still, ", ".join(parts[:-1]), parts[-1], ", ".join(played_by[:-1]), played_by[-1], rest))
     tests = sub(tests, r'(<p class="statline"[^>]*>)[^<]*(</p>)', lambda mo: mo.group(1) + line + mo.group(2), 1, "tests")
     data["asOf"] = today
+    for t, got in off:                                    # the rows take their page's figures
+        if got:
+            t["elo"], t["ci"], t["games"], t["text"] = got[0], got[1], got[2], shown(got[0], got[1])
 
     with open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8", newline="\n") as fh:
         fh.write(home)

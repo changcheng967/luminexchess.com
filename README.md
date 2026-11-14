@@ -64,9 +64,11 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   like GitHub's, the bench's and the names of the development builds.
 - `tools/bench_update.py` reads OpenBench and reports what the site should say: the totals
   (SPRTs run, passed, games), any finished SPRT that `tests.json` does not have yet (as an
-  entry ready to paste, with the title left for you), any row that no longer matches, and
+  entry ready to paste, with the title left for you), any row that no longer matches the
+  list or its own test page (every row's page is read; `--no-pages` skips that), and
   a finished gauntlet newer than the one shown. With `--write` it also writes the totals,
-  the sentence under them on the tests page and the "as of" date. With `--gauntlet N` it
+  the sentence under them on the tests page, the "as of" date, and the Elo, interval and
+  games of every row that differs from its test page. With `--gauntlet N` it
   writes `gauntlet.json` from that gauntlet's page, keeps the gauntlet shown until then in
   it as `previous`, and lists the lines that still quote that one. It fetches through `ssh -n oracle` by
   default (`--via ""` fetches from this machine). The count of games is the bench's own
@@ -120,12 +122,29 @@ console.
 
 ## Updating
 
-- **A new release.** Release names, dates, links and sizes update themselves from GitHub,
-  and the download page's Network card finds the release's `.nnue` file by its ending, so
-  a renamed network is followed. Bump the fallbacks (search for the old tag) in
-  `site/index.html` and `site/download/index.html`, and `softwareVersion` in the home
-  page's JSON-LD. Then read the pages for what the release changes in words: the ladder,
-  "on main now", the generation cards on `/engine/`, the released network's file name.
+- **A new release.** Release names, dates, links and sizes update themselves from GitHub
+  in the visitor's browser, and the download page's Network card finds the release's
+  `.nnue` file by its ending, so a renamed network is followed. The pages' own text is the
+  fallback and has to be brought along by hand: the tag, date, links and sizes in
+  `site/index.html` and `site/download/index.html` (search for the old tag), and
+  `softwareVersion` in the home page's JSON-LD. The source for the words is the release's
+  notes on GitHub. Then, page by page:
+  - `/download/`: the four cards, the table of every build (file, processor, what it
+    needs: the notes' Downloads table), the network card's file name, the questions. A
+    network is always written by its real file name (`luminex_gen768r_06q_i8.nnue`), never
+    by an older network's name or a neutral one.
+  - `/`: the opening's pill and numbers, "Where it stands" (the gauntlet's `title` and
+    `since` in `gauntlet.json`, the three facts, the release against the one before), the
+    chart's point for the release (`data-points`, the headline, the hidden table), a
+    chronicle entry and the "Next" entry, the download section.
+  - `/engine/`: the generation cards, the training counters, the table of phases and the
+    blocks under it; `/tests/`: the fourth total and the notes under the record;
+    `tools/parts/footer.html`: the footnote.
+- **Elo figures.** Every Elo on the site is its OpenBench test page's figure: two
+  decimals, with the 95% interval (+246.55 ± 13.37). `tools/bench_update.py` reads every
+  row's page and corrects the record; figures in sentences are checked by hand against the
+  page they link. The bench's intervals have changed with its code before, so an old
+  figure in a commit message or a note is not a source.
 - **A finished test.** Run `tools/bench_update.py`: it prints an entry for every finished
   SPRT that `site/assets/data/tests.json` lacks. Give it a title and a label, paste it in,
   run `tools/bench_update.py --write` for the totals and the date, then `tools/stamp.py`,
@@ -141,8 +160,12 @@ console.
   `site/index.html`: the chronicle chart's last point (`data-points`, the headline under
   the chart's title and the hidden table) and a chronicle entry. The script then lists
   every line that still quotes the gauntlet before; history may stay (the chronicle, the
-  block of the network that was rated), anything else is stale. A new `gauntlet.json` has
-  no `since` sentence.
+  block of the network that was rated), anything else is stale. Three fields of
+  `gauntlet.json` are written by hand and kept when the same gauntlet is read again:
+  `title` (the figure's heading; without it, "The development build, against … engines"),
+  `since` (a sentence after the figure's text: what the engine has become since) and
+  `noteEnd` (a sentence added to the note under the rows). A new gauntlet starts without
+  them.
 - **A new network on main.** In `site/assets/data/tests.json`, label its test "Passed; on
   main" and the one before it "Passed; since replaced by …". On `/engine/`: the four
   training counters, the table of phases (a step is 131,072 positions) and the blocks under
