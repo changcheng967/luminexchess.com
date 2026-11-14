@@ -285,5 +285,7 @@
    "Smallbrain 7.0.0",
    "Stash v37.0"
   ]
- }
+ },
+ "title": "Against twelve rated engines",
+ "since": "v6.6.0 is this engine with the next network, gen768r_06q, which scored +3.09 ± 2.46 Elo against gen768r_05q in self-play (test 128). That is less than a repeat gauntlet resolves, so the rating stands for the release."
 }

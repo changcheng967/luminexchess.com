@@ -4,7 +4,8 @@
 /* ---------- 1. page heroes ---------- */
 .phero { position: relative; overflow: hidden; padding-block: clamp(150px, 19vw, 220px) clamp(56px, 8vw, 96px); }
 .phero.has-dissolve { padding-bottom: calc(clamp(56px, 8vw, 96px) + 18.75vw); }
-.phero > .wrap { display: grid; gap: clamp(18px, 2.2vw, 28px); justify-items: start; }
+/* one column that cannot grow past the page: a block that will not shrink must not widen it for the others, because the hero clips */
+.phero > .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(18px, 2.2vw, 28px); justify-items: start; }
 .phero .h-xl { font-size: clamp(2.9rem, 8.2vw, 7.2rem); }
 .phero .lede { max-width: 62ch; }
 .phero .lede a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 4px; }
@@ -373,8 +374,26 @@ body:has(.hdr:not(.is-away)) .thead { top: 78px; }      /* step below the header
 /* ---------- 5. download ---------- */
 .release-meta a { margin-left: 6px; }
 .downloads { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; width: 100%; margin-top: clamp(16px, 3vw, 36px); }
-.dl-more { font-size: 0.96rem; color: var(--muted); }
-.dl-more a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+/* every build of the release, with the processor and the system it needs */
+.builds { display: grid; gap: 14px; width: 100%; margin-top: clamp(8px, 1.6vw, 20px); }
+.builds-title { font: 400 0.72rem/1.2 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+.builds-lede { max-width: 82ch; font-size: 0.96rem; color: var(--muted); }
+.builds-lede code { padding: 0.1em 0.38em; border-radius: 5px; font-size: 0.92em; background: rgba(243, 240, 233, 0.08); }
+.builds-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.builds-table th, .builds-table td { padding: 9px 22px 9px 0; text-align: left; vertical-align: baseline; border-top: 1px solid var(--line-2); }
+.builds-table tr > :last-child { padding-right: 0; }
+.builds-table thead th { padding-block: 0 10px; border-top: 0; font: 400 0.68rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.builds-table tbody th { font-weight: 600; white-space: nowrap; }
+.builds-table td { color: var(--muted); }
+.builds-table a { display: inline-block; min-height: 24px; font: 400 0.84rem/24px var(--mono); color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; overflow-wrap: anywhere; transition: text-decoration-color 0.2s; }
+.builds-table a:hover { text-decoration-color: var(--accent); }
+@media (max-width: 860px) {
+  .builds-table, .builds-table tbody { display: block; }
+  .builds-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .builds-table tr { display: grid; gap: 6px; padding-block: 16px; border-top: 1px solid var(--line-2); }
+  .builds-table th, .builds-table td { display: block; padding: 0; border: 0; }
+  .builds-table td[data-th="Processor"]::before, .builds-table td[data-th="Needs"]::before { content: attr(data-th) ": "; font: 400 0.64rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+}
 /* the development build sits beside the release and must not pass for it: a dashed frame, a label, no download cards */
 .devbuild { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.5fr) auto; gap: 18px clamp(24px, 3.4vw, 52px); align-items: center; width: 100%; margin-top: clamp(8px, 1.6vw, 20px); padding: clamp(20px, 2.4vw, 28px); border: 1px dashed rgba(var(--glow-rgb), 0.5); border-radius: var(--r-l); background: rgba(243, 240, 233, 0.025); }
 .devbuild-head { display: grid; gap: 12px; }
@@ -386,7 +405,7 @@ body:has(.hdr:not(.is-away)) .thead { top: 78px; }      /* step below the header
 .devbuild-fine { font-size: 0.84rem; line-height: 1.6; }
 .devbuild-fine code { padding: 0.1em 0.38em; border-radius: 5px; font-size: 0.92em; background: rgba(243, 240, 233, 0.08); }
 .devbuild-go { justify-self: start; white-space: nowrap; }
-@media (max-width: 1100px) { .devbuild { grid-template-columns: 1fr; } }
+@media (max-width: 1100px) { .devbuild { grid-template-columns: minmax(0, 1fr); } .devbuild-go { max-width: 100%; white-space: normal; } }
 .howto { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); }
 .howto-step { display: grid; gap: 16px; align-content: start; min-width: 0; }
 .howto-step p { color: var(--muted); }

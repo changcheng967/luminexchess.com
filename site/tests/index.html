@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/tests/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=13"></script>
+  <script src="/assets/js/theme.js?v=14"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,10 +25,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=13">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=13">
-  <script src="/assets/js/site.js?v=13" defer></script>
-  <script src="/assets/js/tests.js?v=13" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=14">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=14">
+  <script src="/assets/js/site.js?v=14" defer></script>
+  <script src="/assets/js/tests.js?v=14" defer></script>
 </head>
 <body class="page-tests">
   <!-- @sprite -->
@@ -111,12 +111,12 @@
         <h1 id="tests-title" class="h-xl" data-split><em>Measured,</em> not guessed</h1>
         <p class="lede" data-reveal data-d="3">Luminex runs its own OpenBench instance. A candidate change plays the current engine until a sequential probability ratio test can tell a gain from noise.</p>
         <dl class="totals totals-hero">
-          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>49</span></dd></div>
-          <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>32</span></dd></div>
-          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>731,772</span></dd></div>
-          <div data-reveal data-d="7"><dt>Since v6.4</dt><dd class="num"><span data-odo>+145</span></dd></div>
+          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>52</span></dd></div>
+          <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>33</span></dd></div>
+          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>777,868</span></dd></div>
+          <div data-reveal data-d="7"><dt>Over v6.5.1</dt><dd class="num"><span data-odo>+246.55</span></dd></div>
         </dl>
-        <p class="statline" data-reveal data-d="8">OpenBench's list holds 73 runs, one of them not finished: 49 SPRTs, 17 fixed-length matches, 3 gauntlets and 4 SPSA tuning runs. The SPRTs played 363,446 of the games, the tuning runs 320,000, the matches 25,380 and the gauntlets 19,470; another 3,476 were played in runs since deleted from the list.</p>
+        <p class="statline" data-reveal data-d="8">OpenBench's list holds 78 runs, one of them not finished: 53 SPRTs, 18 fixed-length matches, 3 gauntlets and 4 SPSA tuning runs. The SPRTs played 406,084 of the games, the tuning runs 320,000, the matches 28,838 and the gauntlets 19,470; another 3,476 were played in runs since deleted from the list.</p>
       </div>
       <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
@@ -164,9 +164,9 @@
           <div class="record-bar">
             <div class="filters" role="group" aria-label="Show tests by outcome">
               <!-- @tests-filters -->
-              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">49</span></button>
-              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">32</span></button>
-              <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">7</span></button>
+              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">52</span></button>
+              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">33</span></button>
+              <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">9</span></button>
               <button type="button" class="chip" data-filter="merged" aria-pressed="false">Merged anyway <span class="num">5</span></button>
               <button type="button" class="chip" data-filter="stop" aria-pressed="false">Stopped <span class="num">5</span></button>
               <!-- /@tests-filters -->
@@ -180,6 +180,63 @@
           </div>
           <ol class="trows" data-rows>
             <!-- @tests-rows -->
+            <li class="trow is-fail" id="t130" data-status="fail">
+              <div class="trow-label">
+                <a class="trow-title" href="https://bench.luminexchess.com/test/130/">The 8-bit feature layer alone: gen768r_06q8 on main&#x27;s own accumulators</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/130/">Test 130</a> · network · 12,188 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="74.08" x2="88.19" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M81.13 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">−1.82 ± 3.32</p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed</span></p>
+            </li>
+            <li class="trow is-fail" id="t129" data-status="fail">
+              <div class="trow-label">
+                <a class="trow-title" href="https://bench.luminexchess.com/test/129/">An 8-bit feature layer (gen768r_06q8) on a branch with wider accumulators</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/129/">Test 129</a> · network · 5,858 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="63.54" x2="84.02" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M73.78 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">−5.28 ± 4.82</p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed; re-run without the wider accumulators as test 130</span></p>
+            </li>
+            <li class="trow is-pass" id="t128" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/75">gen768r_06q: the run continued to 1.98 million steps, the last network of its line</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/128/">Test 128</a> · #75 · 22,846 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="86.34" x2="96.79" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M91.57 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+3.09 ± 2.46</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; released in v6.6.0</span></p>
+            </li>
             <li class="trow is-fail" id="t113" data-status="fail">
               <div class="trow-label">
                 <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/71">Widen reverse futility&#x27;s margin as material comes off</a>
@@ -196,13 +253,13 @@
                   <path class="tp-dot" d="M77.61 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−3.5 ± 4.1</p>
+              <p class="trow-value num">−3.48 ± 4.10</p>
               <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed, closed</span></p>
             </li>
             <li class="trow is-pass" id="t112" data-status="pass">
               <div class="trow-label">
-                <a class="trow-title" href="https://bench.luminexchess.com/test/112/">gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions</a>
-                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/112/">Test 112</a> · network · 1,912 games</p>
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/72">gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/112/">Test 112</a> · #72 · 1,912 games</p>
               </div>
               <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                 <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
@@ -215,8 +272,8 @@
                   <path class="tp-dot" d="M131.79 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+22.0 ± 8.5</p>
-              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; on main</span></p>
+              <p class="trow-value num">+22.02 ± 8.52</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; since replaced by gen768r_06q</span></p>
             </li>
             <li class="trow is-merged" id="t85" data-status="merged">
               <div class="trow-label">
@@ -234,7 +291,7 @@
                   <path class="tp-dot" d="M87.74 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+1.3 ± 2.4</p>
+              <p class="trow-value num">+1.29 ± 2.38</p>
               <p class="trow-status st-merged"><svg class="icon" aria-hidden="true"><use href="#i-merge"/></svg><span>Stopped undecided; merged as no regression</span></p>
             </li>
             <li class="trow is-stop" id="t84" data-status="stop">
@@ -253,13 +310,13 @@
                   <path class="tp-dot" d="M82.13 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−1.4 ± 11.1</p>
+              <p class="trow-value num">−1.35 ± 11.10</p>
               <p class="trow-status st-stop"><svg class="icon" aria-hidden="true"><use href="#i-stop"/></svg><span>Stopped: the tune&#x27;s drift was noise</span></p>
             </li>
             <li class="trow is-pass" id="t82" data-status="pass">
               <div class="trow-label">
-                <a class="trow-title" href="https://bench.luminexchess.com/test/82/">gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions</a>
-                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/82/">Test 82</a> · network · 3,394 games</p>
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/68">gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/82/">Test 82</a> · #68 · 3,394 games</p>
               </div>
               <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                 <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
@@ -272,7 +329,7 @@
                   <path class="tp-dot" d="M113.28 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+13.3 ± 6.6</p>
+              <p class="trow-value num">+13.31 ± 6.55</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; since replaced by gen768r_05q</span></p>
             </li>
             <li class="trow is-stop" id="t74" data-status="stop">
@@ -291,13 +348,13 @@
                   <path class="tp-dot" d="M105.74 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+9.8 ± 11.1</p>
+              <p class="trow-value num">+9.76 ± 11.08</p>
               <p class="trow-status st-stop"><svg class="icon" aria-hidden="true"><use href="#i-stop"/></svg><span>Stopped, unresolved</span></p>
             </li>
             <li class="trow is-pass" id="t73" data-status="pass">
               <div class="trow-label">
-                <a class="trow-title" href="https://bench.luminexchess.com/test/73/">gen768r_03q: a quantization-aware fine-tune of the continued network</a>
-                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/73/">Test 73</a> · network · 3,296 games</p>
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/64">gen768r_03q: a quantization-aware fine-tune of the continued network</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/73/">Test 73</a> · #64 · 3,296 games</p>
               </div>
               <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                 <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
@@ -306,11 +363,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="99.66" x2="127.29" y1="14" y2="14"/>
-                  <path class="tp-dot" d="M113.47 14h.01"/>
+                  <line class="tp-ci" x1="99.68" x2="127.22" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M113.45 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+13.4 ± 6.5</p>
+              <p class="trow-value num">+13.39 ± 6.48</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; since replaced by gen768r_04q</span></p>
             </li>
             <li class="trow is-pass" id="t72" data-status="pass">
@@ -325,11 +382,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="92.65" x2="114.33" y1="14" y2="14"/>
-                  <path class="tp-dot" d="M103.49 14h.01"/>
+                  <line class="tp-ci" x1="92.76" x2="114.39" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M103.57 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+8.7 ± 5.1</p>
+              <p class="trow-value num">+8.74 ± 5.09</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; the base of gen768r_03q</span></p>
             </li>
             <li class="trow is-pass" id="t71" data-status="pass">
@@ -344,11 +401,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="115.6" x2="153.43" y1="14" y2="14"/>
-                  <path class="tp-dot" d="M134.51 14h.01"/>
+                  <line class="tp-ci" x1="115.45" x2="153.53" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M134.49 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+23.3 ± 8.9</p>
+              <p class="trow-value num">+23.29 ± 8.96</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t70" data-status="pass">
@@ -363,11 +420,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="95.2" x2="119" y1="14" y2="14"/>
-                  <path class="tp-dot" d="M107.1 14h.01"/>
+                  <line class="tp-ci" x1="95.14" x2="119.11" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M107.12 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+10.4 ± 5.6</p>
+              <p class="trow-value num">+10.41 ± 5.64</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; superseded by gen768r_03q</span></p>
             </li>
             <li class="trow is-merged" id="t69" data-status="merged">
@@ -386,7 +443,7 @@
                   <path class="tp-dot" d="M81.15 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−1.8 ± 3.5</p>
+              <p class="trow-value num">−1.81 ± 3.45</p>
               <p class="trow-status st-merged"><svg class="icon" aria-hidden="true"><use href="#i-merge"/></svg><span>Merged, within error</span></p>
             </li>
             <li class="trow is-pass" id="t68" data-status="pass">
@@ -401,11 +458,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="179.88" x2="245.46" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="179.63" x2="245.71" y1="14" y2="14"/>
                   <path class="tp-dot" d="M212.67 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+60.1 ± 15.4</p>
+              <p class="trow-value num">+60.08 ± 15.55</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t67" data-status="pass">
@@ -420,11 +477,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="86.49" x2="96.26" y1="14" y2="14"/>
-                  <path class="tp-dot" d="M91.38 14h.01"/>
+                  <line class="tp-ci" x1="86.3" x2="96.24" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M91.27 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+3.0 ± 2.3</p>
+              <p class="trow-value num">+2.95 ± 2.34</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-fail" id="t66" data-status="fail">
@@ -439,11 +496,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="38.25" x2="71.4" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="38.23" x2="71.42" y1="14" y2="14"/>
                   <path class="tp-dot" d="M54.83 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−14.2 ± 7.8</p>
+              <p class="trow-value num">−14.20 ± 7.81</p>
               <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed</span></p>
             </li>
             <li class="trow is-fail" id="t64" data-status="fail">
@@ -458,11 +515,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="59.5" x2="89.25" y1="14" y2="14"/>
-                  <path class="tp-dot" d="M74.38 14h.01"/>
+                  <line class="tp-ci" x1="59.63" x2="89.25" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M74.44 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−5.0 ± 7.0</p>
+              <p class="trow-value num">−4.97 ± 6.97</p>
               <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed; a fixed-length match</span></p>
             </li>
             <li class="trow is-pass" id="t63" data-status="pass">
@@ -477,11 +534,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="169.13" x2="232.5" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="168.92" x2="232.71" y1="14" y2="14"/>
                   <path class="tp-dot" d="M200.81 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+54.5 ± 14.9</p>
+              <p class="trow-value num">+54.50 ± 15.01</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; since replaced by gen768r_03q</span></p>
             </li>
             <li class="trow is-fail" id="t61" data-status="fail">
@@ -496,11 +553,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="19.83" x2="58.16" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="19.8" x2="58.18" y1="14" y2="14"/>
                   <path class="tp-dot" d="M38.99 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−21.7 ± 9.0</p>
+              <p class="trow-value num">−21.65 ± 9.03</p>
               <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed, closed</span></p>
             </li>
             <li class="trow is-pass" id="t60" data-status="pass">
@@ -519,7 +576,7 @@
                   <path class="tp-dot" d="M97.5 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+5.9 ± 4.1</p>
+              <p class="trow-value num">+5.88 ± 4.15</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t58" data-status="pass">
@@ -534,11 +591,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="126.42" x2="165.77" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="126.37" x2="165.81" y1="14" y2="14"/>
                   <path class="tp-dot" d="M146.09 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+28.8 ± 9.3</p>
+              <p class="trow-value num">+28.75 ± 9.28</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t57" data-status="pass">
@@ -557,7 +614,7 @@
                   <path class="tp-dot" d="M108.4 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+11.0 ± 6.2</p>
+              <p class="trow-value num">+11.01 ± 6.21</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t56" data-status="pass">
@@ -572,11 +629,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="88.06" x2="105.74" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="88.04" x2="105.76" y1="14" y2="14"/>
                   <path class="tp-dot" d="M96.9 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+5.6 ± 4.2</p>
+              <p class="trow-value num">+5.60 ± 4.17</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t55" data-status="pass">
@@ -591,11 +648,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="141.31" x2="187.89" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="141.23" x2="187.98" y1="14" y2="14"/>
                   <path class="tp-dot" d="M164.6 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+37.5 ± 11.0</p>
+              <p class="trow-value num">+37.46 ± 11.00</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-fail" id="t53" data-status="fail">
@@ -614,7 +671,7 @@
                   <path class="tp-dot" d="M74.93 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−4.7 ± 5.0</p>
+              <p class="trow-value num">−4.74 ± 5.02</p>
               <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed, variant dropped</span></p>
             </li>
             <li class="trow is-pass" id="t52" data-status="pass">
@@ -633,7 +690,7 @@
                   <path class="tp-dot" d="M102.68 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+8.3 ± 5.3</p>
+              <p class="trow-value num">+8.32 ± 5.29</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t51" data-status="pass">
@@ -648,11 +705,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="203.02" x2="273.91" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="202.68" x2="274.25" y1="14" y2="14"/>
                   <path class="tp-dot" d="M238.47 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+72.2 ± 16.7</p>
+              <p class="trow-value num">+72.22 ± 16.84</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed, the default</span></p>
             </li>
             <li class="trow is-pass" id="t50" data-status="pass">
@@ -667,11 +724,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="129.77" x2="177.16" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="129.69" x2="177.25" y1="14" y2="14"/>
                   <path class="tp-dot" d="M153.47 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+32.2 ± 11.2</p>
+              <p class="trow-value num">+32.22 ± 11.19</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-fail" id="t49" data-status="fail">
@@ -690,7 +747,7 @@
                   <path class="tp-dot" d="M81.03 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−1.9 ± 3.8</p>
+              <p class="trow-value num">−1.87 ± 3.84</p>
               <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed, closed</span></p>
             </li>
             <li class="trow is-fail" id="t48" data-status="fail">
@@ -709,7 +766,7 @@
                   <path class="tp-dot" d="M75.71 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−4.4 ± 5.0</p>
+              <p class="trow-value num">−4.37 ± 4.97</p>
               <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed, closed</span></p>
             </li>
             <li class="trow is-pass" id="t47" data-status="pass">
@@ -728,7 +785,7 @@
                   <path class="tp-dot" d="M93.5 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+4.0 ± 3.1</p>
+              <p class="trow-value num">+4.00 ± 3.12</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t46" data-status="pass">
@@ -743,11 +800,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="119.28" x2="163.31" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="119.23" x2="163.35" y1="14" y2="14"/>
                   <path class="tp-dot" d="M141.29 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+26.5 ± 10.4</p>
+              <p class="trow-value num">+26.49 ± 10.38</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t44" data-status="pass">
@@ -766,7 +823,7 @@
                   <path class="tp-dot" d="M87.61 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+1.2 ± 3.6</p>
+              <p class="trow-value num">+1.23 ± 3.61</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed, no-regression test</span></p>
             </li>
             <li class="trow is-pass" id="t43" data-status="pass">
@@ -785,7 +842,7 @@
                   <path class="tp-dot" d="M95.33 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+4.9 ± 3.7</p>
+              <p class="trow-value num">+4.86 ± 3.74</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t42" data-status="pass">
@@ -800,11 +857,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="182.07" x2="248.92" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="181.81" x2="249.18" y1="14" y2="14"/>
                   <path class="tp-dot" d="M215.5 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+61.4 ± 15.7</p>
+              <p class="trow-value num">+61.41 ± 15.85</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-stop" id="t41" data-status="stop">
@@ -823,7 +880,7 @@
                   <path class="tp-dot" d="M89.14 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+1.9 ± 2.1</p>
+              <p class="trow-value num">+1.95 ± 2.11</p>
               <p class="trow-status st-stop"><svg class="icon" aria-hidden="true"><use href="#i-stop"/></svg><span>Stopped, unresolved; re-run as test 44</span></p>
             </li>
             <li class="trow is-pass" id="t34" data-status="pass">
@@ -838,11 +895,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="124.65" x2="172.04" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="124.57" x2="172.12" y1="14" y2="14"/>
                   <path class="tp-dot" d="M148.35 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+29.8 ± 11.2</p>
+              <p class="trow-value num">+29.81 ± 11.19</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t33" data-status="pass">
@@ -861,7 +918,7 @@
                   <path class="tp-dot" d="M96.65 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+5.5 ± 5.7</p>
+              <p class="trow-value num">+5.48 ± 5.70</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed, no-regression test</span></p>
             </li>
             <li class="trow is-pass" id="t32" data-status="pass">
@@ -876,11 +933,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="239.13" x2="324.76" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="238.32" x2="325.57" y1="14" y2="14"/>
                   <path class="tp-dot" d="M281.95 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+92.7 ± 20.1</p>
+              <p class="trow-value num">+92.68 ± 20.53</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-stop" id="t31" data-status="stop">
@@ -895,11 +952,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="131.47" x2="245.25" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="130.33" x2="246.39" y1="14" y2="14"/>
                   <path class="tp-dot" d="M188.36 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+48.6 ± 26.8</p>
+              <p class="trow-value num">+48.64 ± 27.31</p>
               <p class="trow-status st-stop"><svg class="icon" aria-hidden="true"><use href="#i-stop"/></svg><span>Stopped: a bench bug stretched the time control</span></p>
             </li>
             <li class="trow is-stop" id="t30" data-status="stop">
@@ -918,7 +975,7 @@
                   <path class="tp-dot" d="M88.57 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+1.7 ± 5.0</p>
+              <p class="trow-value num">+1.68 ± 4.95</p>
               <p class="trow-status st-stop"><svg class="icon" aria-hidden="true"><use href="#i-stop"/></svg><span>Stopped, unresolved; re-run as test 33</span></p>
             </li>
             <li class="trow is-pass" id="t29" data-status="pass">
@@ -933,11 +990,11 @@
                 <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
                 <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
                 <g class="tp-mark">
-                  <line class="tp-ci" x1="101.04" x2="136.15" y1="14" y2="14"/>
+                  <line class="tp-ci" x1="101.02" x2="136.17" y1="14" y2="14"/>
                   <path class="tp-dot" d="M118.6 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+15.8 ± 8.3</p>
+              <p class="trow-value num">+15.81 ± 8.27</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t28" data-status="pass">
@@ -956,7 +1013,7 @@
                   <path class="tp-dot" d="M99.79 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+7.0 ± 5.0</p>
+              <p class="trow-value num">+6.96 ± 4.96</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t27" data-status="pass">
@@ -975,7 +1032,7 @@
                   <path class="tp-dot" d="M182.3 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+45.8 ± 14.9</p>
+              <p class="trow-value num">+45.79 ± 14.88</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass" id="t24" data-status="pass">
@@ -994,7 +1051,7 @@
                   <path class="tp-dot" d="M102.53 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+8.3 ± 5.6</p>
+              <p class="trow-value num">+8.25 ± 5.61</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-merged" id="t23" data-status="merged">
@@ -1013,7 +1070,7 @@
                   <path class="tp-dot" d="M75.61 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−4.4 ± 5.7</p>
+              <p class="trow-value num">−4.42 ± 5.68</p>
               <p class="trow-status st-merged"><svg class="icon" aria-hidden="true"><use href="#i-merge"/></svg><span>Merged, within error</span></p>
             </li>
             <li class="trow is-merged" id="t22" data-status="merged">
@@ -1032,7 +1089,7 @@
                   <path class="tp-dot" d="M82.3 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−1.3 ± 4.1</p>
+              <p class="trow-value num">−1.27 ± 4.07</p>
               <p class="trow-status st-merged"><svg class="icon" aria-hidden="true"><use href="#i-merge"/></svg><span>Merged, within error</span></p>
             </li>
             <li class="trow is-pass" id="t19" data-status="pass">
@@ -1051,7 +1108,7 @@
                   <path class="tp-dot" d="M106.93 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+10.3 ± 6.5</p>
+              <p class="trow-value num">+10.32 ± 6.51</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-merged" id="t18" data-status="merged">
@@ -1070,7 +1127,7 @@
                   <path class="tp-dot" d="M70.15 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">−7.0 ± 6.7</p>
+              <p class="trow-value num">−6.99 ± 6.66</p>
               <p class="trow-status st-merged"><svg class="icon" aria-hidden="true"><use href="#i-merge"/></svg><span>Merged for correctness</span></p>
             </li>
             <li class="trow is-pass" id="t3" data-status="pass">
@@ -1089,7 +1146,7 @@
                   <path class="tp-dot" d="M129.01 14h.01"/>
                 </g>
               </svg>
-              <p class="trow-value num">+20.7 ± 9.8</p>
+              <p class="trow-value num">+20.71 ± 9.77</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <li class="trow is-pass is-clip" id="t1" data-status="pass">
@@ -1108,7 +1165,7 @@
                   <path class="tp-off" d="M333 9L339 14L333 19"/>
                 </g>
               </svg>
-              <p class="trow-value num">+127.3 ± 27.2</p>
+              <p class="trow-value num">+127.32 ± 27.23</p>
               <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
             </li>
             <!-- /@tests-rows -->
@@ -1116,8 +1173,8 @@
         </div>
 
         <div class="record-notes prose" data-reveal>
-          <p class="note">Five changes were merged without a passing test. Four had failed: #5 repaired correctness bugs at a measured cost, and #10, #11 and the retuned constants in #57 landed inside the error margin. The fifth, #69, was stopped undecided at +1.3 ± 2.4 after 24,230 games, which rules out a loss of more than about one Elo, and went in as a no-regression change. The other changes that failed were closed or dropped. The SEE rewrite, at +127, runs off the chart. One SPRT is left off: test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped). Test 64 is listed although it was a match of a fixed 3,006 games, not an SPRT.</p>
-          <p class="note">Between the tests, four SPSA runs of 80,000 games each retuned search constants: 27 of them, then all 29, then all 29 again with gen768r_03, then 13 margins with gen768r_04q (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>). That last run moved no margin beyond noise: the SPRT of its values was stopped after 1,026 games (<a href="https://bench.luminexchess.com/test/84/">test 84</a>) and main kept its margins. The other fixed-length matches are not listed: the Stash ladder (tests 35 to 39), v6.5.0 against v6.4.0 (test 40) and main against v6.5.1 at three time controls (tests 77 to 79) are on <a href="/#strength">the home page</a>. Gauntlets rate a build against other engines instead of testing a change, and are on the home page as well: the newest put main at <!--@g:rating-->3471 ± 16<!--/@g:rating--> on the CCRL Blitz scale (<a href="/#gauntlet">the gauntlet</a>). The count of games is OpenBench's own count of every game played, the tuning runs and gauntlets included.</p>
+          <p class="note">Five changes were merged without a passing test. Four had failed: #5 repaired correctness bugs at a measured cost, and #10, #11 and the retuned constants in #57 landed inside the error margin. The fifth, #69, was stopped undecided at +1.29 ± 2.38 after 24,230 games, which rules out a loss of more than about one Elo, and went in as a no-regression change. The other changes that failed were closed or dropped. The SEE rewrite, at +127.32, runs off the chart. One SPRT is left off: test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped). Test 64 is listed although it was a match of a fixed 3,006 games, not an SPRT.</p>
+          <p class="note">Between the tests, four SPSA runs of 80,000 games each retuned search constants: 27 of them, then all 29, then all 29 again with gen768r_03, then 13 margins with gen768r_04q (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>). That last run moved no margin beyond noise: the SPRT of its values was stopped after 1,026 games (<a href="https://bench.luminexchess.com/test/84/">test 84</a>) and main kept its margins. The other fixed-length matches are not listed. v6.6.0 against v6.5.1 (test 131), main against v6.5.1 at three time controls (tests 77 to 79), the Stash ladder (tests 35 to 39) and v6.5.0 against v6.4.0 (test 40) are on <a href="/#strength">the home page</a>. The rest were checks and measurements, not candidates: an early match against Stash 29 (test 20), v6.4's gain over v6.3.0 (test 21), an offset in the network's output (test 62), and the speed price of wider layers and of 8-bit weights (tests 110, 111, 114 and 127). Gauntlets rate a build against other engines instead of testing a change, and are on the home page as well: the newest gave <!--@g:rating-->3471 ± 16<!--/@g:rating--> on the CCRL Blitz scale, the rating v6.6.0 carries (<a href="/#gauntlet">the gauntlet</a>). The count of games is OpenBench's own count of every game played, the tuning runs and gauntlets included.</p>
           <p>
             <a class="link" href="https://bench.luminexchess.com"><span>Every test, live on bench.luminexchess.com</span><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
           </p>
@@ -1152,11 +1209,11 @@
           <a href="https://github.com/changcheng967/Luminex">GitHub</a>
           <a href="https://github.com/changcheng967/Luminex/releases">Releases</a>
           <a href="https://bench.luminexchess.com">OpenBench</a>
-          <a href="https://huggingface.co/datasets/xushawn/t91-binpacks-raw-old">Training data</a>
+          <a href="https://huggingface.co/datasets/xushawn/t91-lgs">Training data</a>
         </nav>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release is estimated from blitz matches against Stash releases with CCRL Blitz ratings, about 1,000 games each: ahead of every release from Stash 29 to Stash 32 and 13 Elo behind Stash 33. The development build of <!--@g:day-->13 November<!--/@g:day--> was rated by a gauntlet of <!--@g:games-->9,602<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->twelve<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings. Neither is a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release's rating is that of a gauntlet of <!--@g:games-->9,602<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->twelve<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings. The development build of <!--@g:day-->13 November<!--/@g:day--> played it, one network before the release's; that network, gen768r_06q, adds +3.09 ± 2.46 Elo in self-play. It is not a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>
