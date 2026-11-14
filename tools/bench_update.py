@@ -28,8 +28,11 @@ What --write changes
 
 What --gauntlet N changes
     - site/assets/data/gauntlet.json, which tools/stamp.py draws the home page's gauntlet figure
-      from. The rating also stands in three hand-written places on the home page (the opening's
-      "Development build", the chronicle's chart point and its entry): the script names them.
+      from, and from which it fills every <!--@g:...--> value in the pages and the footer (the
+      rating, the build's date, the count of games). The gauntlet shown until then is kept in
+      the file as "previous": the figure compares the two. The chronicle's chart point and its
+      entry on the home page are written by hand, and the script lists every line that still
+      quotes the gauntlet before.
       One field of that file is hand-written and kept: "since", a sentence the figure shows
       about what main has become after the gauntlet (a newer network, say). Remove it when a
       new gauntlet makes it untrue.
@@ -164,9 +167,39 @@ def read_gauntlet(gid, page, date):
     }
 
 
+def still_quoting(previous):
+    """Lines of the pages and parts that quote the gauntlet shown before: its rating or its count of games.
+
+    The figure and the footer are left out: tools/stamp.py rewrites both.
+    """
+    needles = ["%s ± %s" % (previous.get("rating"), previous.get("error")), N(previous.get("games", 0))]
+    files = []
+    for folder, _, names in os.walk(ROOT):
+        files += [os.path.join(folder, n) for n in names if n.endswith(".html")]
+    parts = os.path.join(os.path.dirname(os.path.abspath(__file__)), "parts")
+    files += [os.path.join(parts, n) for n in sorted(os.listdir(parts)) if n.endswith(".html")]
+    found = []
+    for path in sorted(files):
+        with open(path, encoding="utf-8") as fh:
+            text = fh.read()
+        for region in ("gauntlet", "footer"):
+            text = re.sub(r"<!-- @%s -->.*?<!-- /@%s -->" % (region, region),
+                          lambda m: "\n" * m.group(0).count("\n"), text, flags=re.S)          # keep the line numbers
+        for no, line in enumerate(text.split("\n"), 1):
+            for needle in needles:
+                at = line.find(needle)
+                if at >= 0:
+                    plain = re.sub(r"<[^>]+>", "", line[max(0, at - 70): at + len(needle) + 50]).strip()
+                    found.append("%s:%d  ...%s..." % (os.path.relpath(path, os.path.dirname(ROOT)).replace(os.sep, "/"), no, plain))
+                    break
+    return found
+
+
 # ---------------------------------------------------------------- main
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="replace")          # a console that cannot show a character prints "?" for it
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--write", action="store_true", help="write the counters and dates into the pages")
     ap.add_argument("--gauntlet", type=int, default=0, help="write gauntlet.json from this gauntlet's page")
@@ -183,24 +216,40 @@ def main():
         if 'id="opponents"' not in page:
             sys.exit("Gauntlet %d's page did not come back, or it changed shape." % a.gauntlet)
         path = os.path.join(ROOT, "assets", "data", "gauntlet.json")
-        date, since = today, None
+        date, since, previous = today, None, None
         if os.path.exists(path):
             with open(path, encoding="utf-8") as fh:
                 old = json.load(fh)
             if old.get("id") == a.gauntlet:
-                since = old.get("since")                  # the hand-written sentence about main since then stays
+                since = old.get("since")                  # the hand-written sentence about main since then stays,
+                previous = old.get("previous")            # and so does the gauntlet it is compared with
                 if not a.date:                            # and the same gauntlet keeps the date it was first read
                     date = old.get("date", today)
+            elif old.get("id"):
+                # a new gauntlet: the one shown until now becomes the one the figure compares it with
+                previous = {k: old[k] for k in ("id", "href", "date", "sha", "network", "tc", "each", "games",
+                                                "list", "rating", "error", "fromGames") if k in old}
+                previous["opponents"] = sorted(o["name"] for o in old.get("opponents", []))
         data = read_gauntlet(a.gauntlet, page, date)
         if since:
             data["since"] = since
+        if previous:
+            data["previous"] = previous
         with open(path, "w", encoding="utf-8", newline="\n") as fh:
             json.dump(data, fh, ensure_ascii=False, indent=1)
             fh.write("\n")
         print("gauntlet %d: %s ± %s on %s, %s games against %d opponents (%s, %s); written to assets/data/gauntlet.json"
               % (a.gauntlet, data["rating"], data["error"], data["list"], N(data["games"]), len(data["opponents"]), data["sha"][:8], data["network"]))
-        print("by hand on the home page: the opening's \"Development build\" number, the chronicle chart's last point")
-        print("(data-points and its hidden table) and the chronicle entry that quotes the rating. Then: python -I tools/stamp.py site")
+        print("tools/stamp.py redraws the figure and fills every <!--@g:...--> value in the pages and the footer.")
+        print("By hand on the home page: the chronicle chart's last point (data-points, its headline and its hidden")
+        print("table) and a chronicle entry. Then: python -I tools/stamp.py site")
+        if previous:
+            quoting = still_quoting(previous)
+            if quoting:
+                print("\nlines that still quote gauntlet %s (%s ± %s, %s games); history may stay, anything else is stale:"
+                      % (previous.get("id"), previous.get("rating"), previous.get("error"), N(previous.get("games", 0))))
+                for line in quoting:
+                    print("  " + line)
         return
 
     # ---- read the bench

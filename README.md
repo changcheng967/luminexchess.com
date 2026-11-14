@@ -54,7 +54,10 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   a region with `<!-- @name -->` and `<!-- /@name -->`; the tool rewrites what is between
   them: the icon sprite, header and footer from `tools/parts/`, the starting position's
   pieces, the test charts and rows from `site/assets/data/tests.json`, and the gauntlet
-  figure from `site/assets/data/gauntlet.json`. It then reports anything the Content
+  figure from `site/assets/data/gauntlet.json`. Inside a sentence, a value between
+  `<!--@g:key-->` and `<!--/@g:key-->` is filled from `gauntlet.json` too (keys: `rating`,
+  `n`, `e`, `games`, `day`, `count`, `tc`, `list`, `network`), so the pages and the
+  footer quote the newest gauntlet without an edit. It then reports anything the Content
   Security Policy would block and any local link that leads nowhere, and dates the pages in
   `sitemap.xml` (today for a page with uncommitted changes, otherwise its last commit).
   **Run it after editing a part, a page or a data file.** Dates the tools write are UTC,
@@ -64,7 +67,8 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   entry ready to paste, with the title left for you), any row that no longer matches, and
   a finished gauntlet newer than the one shown. With `--write` it also writes the totals,
   the sentence under them on the tests page and the "as of" date. With `--gauntlet N` it
-  writes `gauntlet.json` from that gauntlet's page. It fetches through `ssh -n oracle` by
+  writes `gauntlet.json` from that gauntlet's page, keeps the gauntlet shown until then in
+  it as `previous`, and lists the lines that still quote that one. It fetches through `ssh -n oracle` by
   default (`--via ""` fetches from this machine). The count of games is the bench's own
   (its Users page), which includes games of workloads deleted later; the sum over the
   listed workloads does not.
@@ -127,13 +131,18 @@ console.
   run `tools/bench_update.py --write` for the totals and the date, then `tools/stamp.py`,
   which redraws the chart on the home page and the rows on `/tests/`. The notes under the
   record on `/tests/` are written by hand.
-- **A new gauntlet.** Run `tools/bench_update.py --gauntlet N`, then `tools/stamp.py`: the
-  figure on the home page (the rating, its text and every opponent's row) is redrawn from
-  `gauntlet.json`. The rating also stands in places written by hand, which the script
-  names: the opening's "Development build" number and the chronicle's last chart point and
-  entry in `site/index.html`, plus the sentences that quote it on the engine, download,
-  tests and games pages and in the footnote (search for the old number). Take the `since`
-  sentence out of `gauntlet.json` if the new gauntlet makes it untrue.
+- **A new gauntlet.** Run `tools/bench_update.py --gauntlet N --date "13 November 2026"`
+  (the date of the build that was rated), then `tools/stamp.py`. That redraws the figure on
+  the home page from `gauntlet.json` (the rating, its text, every opponent's row, and a
+  sentence comparing it with the gauntlet shown before, which the file keeps as
+  `previous`), and fills every value the pages quote between `<!--@g:rating-->` and
+  `<!--/@g:rating-->` markers: the opening's pill and "Development build" number, the
+  sentences on the tests and download pages, the footnote. Written by hand, in
+  `site/index.html`: the chronicle chart's last point (`data-points`, the headline under
+  the chart's title and the hidden table) and a chronicle entry. The script then lists
+  every line that still quotes the gauntlet before; history may stay (the chronicle, the
+  block of the network that was rated), anything else is stale. A new `gauntlet.json` has
+  no `since` sentence.
 - **A new network on main.** In `site/assets/data/tests.json`, label its test "Passed; on
   main" and the one before it "Passed; since replaced by …". On `/engine/`: the four
   training counters, the table of phases (a step is 131,072 positions) and the blocks under

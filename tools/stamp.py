@@ -20,6 +20,10 @@ Regions:
 The three tests-* regions are drawn from site/assets/data/tests.json, the gauntlet
 from site/assets/data/gauntlet.json (written by tools/bench_update.py --gauntlet N).
 
+Values: inside a sentence, <!--@g:rating-->3471 ± 16<!--/@g:rating--> is filled from
+gauntlet.json as well, so the pages and the footer quote the newest gauntlet without
+an edit. Keys: rating, n, e, games, day, count, tc, list, network.
+
 After stamping it checks every page for what the Content Security Policy would
 block (inline styles, inline scripts) and for local links that lead nowhere, and
 exits with status 1 if it finds any. It also keeps sitemap.xml's dates in step:
@@ -268,6 +272,24 @@ def region_gauntlet(g, indent):
     other = next((l for l in g["lists"] if l["list"] != g["list"] and l["list"].startswith("CCRL")), None)
     clean = ", none lost on time and no crash" if not g.get("lostOnTimeOrCrashed") else ""
     day = re.sub(r" \d{4}$", "", g["date"])
+    # the gauntlet before: with the same opponents and clock, the two ratings compare far more closely
+    # than either is known, because what each opponent implies is in both
+    prev, before = g.get("previous"), ""
+    if prev and prev.get("rating"):
+        diff = g["rating"] - prev["rating"]
+        gap = "the same rating" if not diff else "%d points %s" % (abs(diff), "less" if diff > 0 else "more")
+        link = '<a href="%s">The gauntlet before it</a>' % esc(prev["href"])
+        when = re.sub(r" \d{4}$", "", prev["date"])
+        if prev.get("opponents") == sorted(o["name"] for o in ops) and prev.get("tc") == g["tc"]:
+            before = ("%s, on main of %s with the %s network, gave %d ± %d against the same %s engines: %s. "
+                      "The opponents' disagreement is in both ratings and largely cancels between them, so the difference "
+                      "is surer than either rating: the games alone leave it about ± %d."
+                      % (link, when, esc(prev["network"]), prev["rating"], prev["error"], count, gap,
+                         int(round(math.hypot(g["fromGames"], prev.get("fromGames", 0))))))
+        else:
+            before = ("%s, on main of %s with the %s network, gave %d ± %d, against a different set of engines or "
+                      "at another time control, so the two do not compare directly."
+                      % (link, when, esc(prev["network"]), prev["rating"], prev["error"]))
     out = [
         '<figcaption class="gnt-head">',
         '  <div class="gnt-score-box">',
@@ -285,6 +307,8 @@ def region_gauntlet(g, indent):
         '    <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between %d and %d, '
         'where the games by themselves would leave ± %d. More opponents near Luminex would narrow it; more games would not.</p>'
         % (min(implied), max(implied), g["fromGames"]),
+        # the gauntlet shown before this one, if the data file has it ("previous")
+        *(['    <p class="gnt-before">%s</p>' % before] if before else []),
         # what has changed on main since the gauntlet was played, if the data file says so ("since")
         *(['    <p class="gnt-since">%s</p>' % esc(g["since"])] if g.get("since") else []),
         '    <a class="link" href="%s"><span>Gauntlet %d on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>'
@@ -311,6 +335,24 @@ def region_gauntlet(g, indent):
 # ---------------------------------------------------------------- stamping
 
 REGION = re.compile(r"(?P<indent>[ \t]*)<!-- @(?P<name>[\w-]+) -->.*?<!-- /@(?P=name) -->", re.S)
+# a value inside a sentence: <!--@g:rating-->3471 ± 16<!--/@g:rating-->, filled from gauntlet.json
+VALUE = re.compile(r"<!--@g:(?P<key>[a-z]+)-->.*?<!--/@g:(?P=key)-->", re.S)
+
+
+def gauntlet_values(g):
+    """What <!--@g:key--> may ask for: the newest gauntlet's figures, as the pages quote them."""
+    n = len(g["opponents"])
+    return {
+        "rating": "%d ± %d" % (g["rating"], g["error"]),      # 3471 ± 16
+        "n": "%d" % g["rating"],                               # 3471
+        "e": "%d" % g["error"],                                # 16
+        "games": "{:,}".format(g["games"]),                    # 9,602
+        "day": re.sub(r" \d{4}$", "", g["date"]),              # 13 November: the day of the build that was rated
+        "count": WORDS[n] if n < len(WORDS) else str(n),       # twelve
+        "tc": g["tc"],                                         # 10+0.1
+        "list": g["list"],                                     # CCRL Blitz
+        "network": g["network"],                               # gen768r_05q
+    }
 
 
 def stamp(text, page_url, data, gauntlet=None):
@@ -335,7 +377,17 @@ def stamp(text, page_url, data, gauntlet=None):
         else:
             raise SystemExit("unknown region @%s in %s" % (name, page_url))
         return "%s<!-- @%s -->\n%s\n%s<!-- /@%s -->" % (indent, name, body, indent, name)
-    return REGION.sub(fill, text)
+
+    def value(m):
+        key = m.group("key")
+        if gauntlet is None:
+            raise SystemExit("<!--@g:%s--> in %s, but assets/data/gauntlet.json is missing" % (key, page_url))
+        values = gauntlet_values(gauntlet)
+        if key not in values:
+            raise SystemExit("unknown value <!--@g:%s--> in %s (known: %s)" % (key, page_url, ", ".join(sorted(values))))
+        return "<!--@g:%s-->%s<!--/@g:%s-->" % (key, esc(values[key]), key)
+    # the parts first (the footer brings values of its own), then the values everywhere
+    return VALUE.sub(value, REGION.sub(fill, text))
 
 
 # ---------------------------------------------------------------- checks
