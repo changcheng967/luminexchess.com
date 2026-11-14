@@ -11,9 +11,9 @@ a fallback).
 
 | Address | File | What it holds |
 |---|---|---|
-| `/` | `site/index.html` | The opening (a real game, played by scrolling), the Stash ladder for the release, the gauntlet for the development build, the method, three scenes from inside the engine, the chronicle with the rating chart, downloads |
+| `/` | `site/index.html` | The opening (a real game, played by scrolling), the release's strength (the gauntlet, and the match against the release before it), the method, three scenes from inside the engine, the chronicle with the rating chart, downloads |
 | `/games/` | `site/games/index.html` | The game viewer: two wins over Stash 37 with both engines' scores |
-| `/tests/` | `site/tests/index.html` | The four steps a change goes through, and the record of every SPRT |
+| `/tests/` | `site/tests/index.html` | The record of every SPRT, and what is not in it |
 | `/engine/` | `site/engine/index.html` | The six parts, the search explained step by step, speed, the clock, the network and its four generations, training |
 | `/download/` | `site/download/index.html` | Every build of the release, the development build, how to run and build it, questions |
 | any missing page | `site/404.html` | A lone knight |
@@ -134,12 +134,16 @@ console.
     network is always written by its real file name (`luminex_gen768r_06q_i8.nnue`), never
     by an older network's name or a neutral one.
   - `/`: the opening's pill and numbers, "Where it stands" (the gauntlet's `title` and
-    `since` in `gauntlet.json`, the three facts, the release against the one before), the
-    chart's point for the release (`data-points`, the headline, the hidden table), a
-    chronicle entry and the "Next" entry, the download section.
+    `since` in `gauntlet.json`, and the release against the one before it as one result
+    row), the chart's point for the release (`data-points`, the headline, the hidden
+    table), a chronicle entry and the "Next" entry, the download section.
   - `/engine/`: the generation cards, the training counters, the table of phases and the
-    blocks under it; `/tests/`: the fourth total and the notes under the record;
+    table of networks under it; `/tests/`: the notes under the record;
     `tools/parts/footer.html`: the footnote.
+- **Say a thing once.** The home page states where the release stands; the chronicle keeps
+  the history, a line an event; the engine page has the tables. A block that repeats
+  another, or shows an older state beside the current one (the Stash ladder that placed
+  v6.5, a match of an earlier build), goes when the release moves on: git keeps it.
 - **Elo figures.** Every Elo on the site is its OpenBench test page's figure: two
   decimals, with the 95% interval (+246.55 ± 13.37). `tools/bench_update.py` reads every
   row's page and corrects the record; figures in sentences are checked by hand against the
@@ -154,7 +158,7 @@ console.
   (the date of the build that was rated), then `tools/stamp.py`. That redraws the figure on
   the home page from `gauntlet.json` (the rating, its text, every opponent's row, and a
   sentence comparing it with the gauntlet shown before, which the file keeps as
-  `previous`), and fills every value the pages quote between `<!--@g:rating-->` and
+  `previous`; delete that field to leave the comparison out), and fills every value the pages quote between `<!--@g:rating-->` and
   `<!--/@g:rating-->` markers: the opening's pill and "Development build" number, the
   sentences on the tests and download pages, the footnote. Written by hand, in
   `site/index.html`: the chronicle chart's last point (`data-points`, the headline under
@@ -168,13 +172,14 @@ console.
   them.
 - **A new network on main.** In `site/assets/data/tests.json`, label its test "Passed; on
   main" and the one before it "Passed; since replaced by …". On `/engine/`: the four
-  training counters, the table of phases (a step is 131,072 positions) and the blocks under
-  them, where the newest keeps the heading "On main now". On the home page: the sentence
+  training counters, the table of phases (a step is 131,072 positions) and a row in the
+  table of networks. On the home page: the sentence
   about positions shown, a chronicle entry, and the `since` sentence in `gauntlet.json`
   (shown under the gauntlet's text) until a gauntlet has rated the new build. On
   `/download/`: the network the development build carries.
-- **Strength.** The Stash ladder, the three fact cards and the rating chart's points
-  (`data-points`) are in `site/index.html`; the footnote is in `tools/parts/footer.html`.
+- **Strength.** The release's match against the one before it and the rating chart's
+  points (`data-points`) are in `site/index.html`; the gauntlet figure comes from
+  `gauntlet.json`; the footnote is in `tools/parts/footer.html`.
 - **The engine.** Speed figures, the clock section, the network's layers and generations
   and the training text are in `site/engine/index.html`; the chronicle is in
   `site/index.html`.

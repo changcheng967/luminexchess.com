@@ -287,10 +287,9 @@
     this.digits.forEach(function (d) { d.r.style.setProperty("--v", d.v); });
   };
   // show another value; digits roll when the new text has the same shape, and
-  // roll up from zero when it has a new one. The copy a screen reader hears follows the
-  // value shown, unless `spoken` gives other words for a placeholder that says nothing
-  Odo.prototype.set = function (text, spoken) {
-    this.sr.textContent = spoken == null ? text : spoken;
+  // roll up from zero when it has a new one. The copy a screen reader hears follows it.
+  Odo.prototype.set = function (text) {
+    this.sr.textContent = text;
     if (text === this.text) { this.roll(); return; }
     if (text.replace(/\d/g, "0") !== this.shape) {
       this.build(text, true);

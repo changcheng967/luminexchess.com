@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/download/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=14"></script>
+  <script src="/assets/js/theme.js?v=15"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,9 +25,9 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=14">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=14">
-  <script src="/assets/js/site.js?v=14" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=15">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=15">
+  <script src="/assets/js/site.js?v=15" defer></script>
 </head>
 <body class="page-download">
   <!-- @sprite -->
@@ -238,10 +238,6 @@ cmake --build build --config Release</code></pre>
             <details data-reveal>
               <summary><span>Which download should I pick?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
               <p>A <code>-modern</code> build, unless the processor lacks AVX2 (Intel Core since 2013, AMD since 2015): then the build without <code>-modern</code> in its name, which needs SSE4.2 and POPCNT on Linux and POPCNT on Windows. On Linux, the plain builds need Ubuntu 24.04 or newer (glibc 2.38); from Ubuntu 22.04 (glibc 2.35) take the <code>glibc235</code> builds. On Windows the program needs the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist">Visual C++ 2015–2022 Redistributable</a>. Macs need Apple silicon and macOS 26 or newer. <a href="#builds-title">The table</a> lists every build, and this page marks the one for your system.</p>
-            </details>
-            <details data-reveal>
-              <summary><span>What is the development build?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>The engine as it stands on main, published automatically after every change that passes the build checks, and replaced with every push. It is named by date and commit, not by version. Right after a release the two are the same engine. For anything that needs a fixed version, use v6.6.0. <a href="#dev">The development build</a> is on this page.</p>
             </details>
             <details data-reveal>
               <summary><span>Does it support Chess960 or endgame tablebases?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>

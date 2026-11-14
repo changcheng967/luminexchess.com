@@ -167,52 +167,21 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
   .skip-scene .icon { width: 18px; height: 18px; }
 }
 
-/* ---------- strength: the ladder ---------- */
-.climbing { display: grid; grid-template-columns: minmax(230px, 0.78fr) minmax(0, 2fr); gap: clamp(28px, 5vw, 84px); align-items: start; }
-.standing { position: sticky; top: 116px; display: grid; gap: 14px; }
-.standing-label { font: 400 0.72rem/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
-.standing-num { font: 500 clamp(4rem, 8.6vw, 7.4rem)/0.9 var(--sans); letter-spacing: -0.05em; margin-left: -0.04em; }
-.standing-step { min-height: 1.6em; color: var(--muted); }
-.standing-rungs { display: flex; gap: 6px; }
-.standing-rungs li { width: 30px; height: 4px; border-radius: 2px; background: var(--mark); transform-origin: 0 50%; transition: transform 0.6s var(--ease-out), opacity 0.4s; }
-.motion .standing-rungs li:not(.is-on) { opacity: 0.22; transform: scaleX(0.5); }
+/* ---------- strength: a match as one row (its result bar, the score, the Elo) ---------- */
 .legend { margin-bottom: 18px; }
-.ladder-cols, .rung { display: grid; grid-template-columns: minmax(140px, 1.05fr) minmax(0, 2.3fr) 3.6rem 8.6rem; gap: 18px; align-items: center; padding-inline: 20px; }
-.ladder-cols { padding-bottom: 10px; font: 400 0.66rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
-.ladder-cols span:nth-child(n + 3), .rung-score, .rung-elo { text-align: right; }
-.ladder { --h: 80px; display: grid; gap: 8px; margin-bottom: 22px; }
-.rung { height: 72px; border-radius: var(--r-m); background: var(--paper-2); box-shadow: inset 0 0 0 1px var(--line-2); }
-.rung.is-lum { position: relative; z-index: 1; background: linear-gradient(90deg, rgba(var(--glow-rgb), 0.26), rgba(var(--glow-rgb), 0.1)), var(--paper-2); box-shadow: inset 0 0 0 1.5px rgba(var(--glow-rgb), 0.7), 0 18px 40px -22px rgba(var(--glow-rgb), 0.8); }
+.fact-label { font: 400 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+.rung { display: grid; grid-template-columns: minmax(112px, 0.7fr) minmax(0, 1.5fr) 3.6rem 9rem; gap: 18px; align-items: center; height: 72px; padding-inline: 20px; border-radius: var(--r-m); background: var(--paper); box-shadow: inset 0 0 0 1px var(--line-2); }
 .rung-name { font-weight: 600; white-space: nowrap; }
-.rung-rating { margin-left: 8px; font-weight: 400; color: var(--muted); }
-.is-lum .rung-rating { color: var(--ink); font-weight: 600; }
+.rung-rating { display: block; margin: 2px 0 0; font-size: 0.86rem; font-weight: 400; color: var(--muted); }
 .rung-result { display: grid; gap: 8px; min-width: 0; }
 .wdl { width: 100%; height: 10px; border-radius: 5px; overflow: hidden; }
 .wdl rect { stroke: var(--paper-2); stroke-width: 2; vector-effect: non-scaling-stroke; }
 .wdl-w { fill: var(--mark); } .wdl-d { fill: var(--mark-0); } .wdl-l { fill: var(--mark-2); }
+.rung .wdl rect { stroke: var(--paper); }
 .rung-games { font: 400 0.72rem/1.2 var(--mono); color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.rung-score, .rung-elo { font-weight: 600; white-space: nowrap; }
+/* an Elo is written as its test page shows it, two decimals and the interval, and stays on one line */
+.rung-score, .rung-elo { font-weight: 600; text-align: right; white-space: nowrap; }
 .rung-pm { font-weight: 400; color: var(--muted); }
-.motion .ladder.is-armed .rung { transition: transform 0.9s var(--ease-out); }
-.motion .ladder.is-armed .rung:not(.is-lum) .wdl { transform-origin: 0 50%; transition: transform 1.1s var(--ease-out); }
-.motion .ladder.is-armed .rung:not(.is-lum) :is(.rung-games, .rung-score, .rung-elo) { transition: opacity 0.6s 0.15s; }
-.motion .ladder.is-armed .rung:not(.is-lum):not(.is-met) .wdl { transform: scaleX(0); }
-.motion .ladder.is-armed .rung:not(.is-lum):not(.is-met) :is(.rung-games, .rung-score, .rung-elo) { opacity: 0; transition-delay: 0s; }
-.motion .ladder[data-s="0"] .is-lum { transform: translate3d(0, calc(var(--h) * 4), 0); }
-.motion .ladder[data-s="1"] .is-lum { transform: translate3d(0, calc(var(--h) * 3), 0); }
-.motion .ladder[data-s="2"] .is-lum { transform: translate3d(0, calc(var(--h) * 2), 0); }
-.motion .ladder[data-s="3"] .is-lum { transform: translate3d(0, var(--h), 0); }
-.motion .ladder[data-s="0"] :is([data-rung="0"], [data-rung="1"], [data-rung="2"], [data-rung="3"]),
-.motion .ladder[data-s="1"] :is([data-rung="1"], [data-rung="2"], [data-rung="3"]),
-.motion .ladder[data-s="2"] :is([data-rung="2"], [data-rung="3"]),
-.motion .ladder[data-s="3"] [data-rung="3"] { transform: translate3d(0, calc(var(--h) * -1), 0); }
-.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(40px, 6vw, 80px); }
-.fact { display: grid; gap: 14px; align-content: start; }
-.fact-label { font: 400 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
-.fact-value { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; font: 500 clamp(2.5rem, 4.4vw, 3.6rem)/1 var(--sans); letter-spacing: -0.04em; }
-.fact-pm { font-size: 1rem; font-weight: 400; letter-spacing: 0; color: var(--muted); }
-.fact > p:not([class]) { font-size: 0.95rem; color: var(--muted); }
-.fact .link { justify-self: start; font-size: 0.92rem; }
 
 /* ---------- strength: the gauntlet, a rating against other engines ----------
    A row an opponent, strongest first, Luminex where its rating puts it. Each row ends in a small
@@ -297,51 +266,25 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
   .gnt-games { font-size: 0.68rem; }
 }
 
-/* the development build: measured, but not yet a ladder measurement, so set apart from the estimate */
+/* the release against the one before it: a heading, a sentence, and the match as one row */
 .preview { display: grid; gap: clamp(22px, 3vw, 34px); margin-top: 16px; }
-/* the ladder that placed v6.5 follows as history, under a heading of its own */
-.sub-head { display: grid; gap: 14px; max-width: 76ch; margin: clamp(56px, 8vw, 104px) 0 clamp(26px, 3.4vw, 44px); }
-.sub-head p { color: var(--muted); }
 .preview-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; }
 .preview-top .legend { margin-bottom: 0; }
 .preview-part { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr); gap: clamp(20px, 3vw, 48px); align-items: center; }
-.preview-part + .preview-part { padding-top: clamp(22px, 3vw, 34px); border-top: 1px solid var(--line-2); }
 .preview-head { display: grid; gap: 14px; justify-items: start; }
 .preview-head h3 { font-size: clamp(1.3rem, 1.8vw, 1.55rem); }
 .preview-head > p:not([class]) { font-size: 0.95rem; color: var(--muted); }
 .preview-head > p a, .gnt-text p a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
 .preview-head > p a:hover, .gnt-text p a:hover { text-decoration-color: currentColor; }
 .preview-head .link { font-size: 0.92rem; }
-.preview-rows { display: grid; gap: 8px; }
-.preview-row { background: var(--paper); }
-.preview-row .wdl rect { stroke: var(--paper); }
-/* an Elo is written as its test page shows it, two decimals and the interval: the last column has room for that */
-@media (min-width: 641px) { .preview-row { grid-template-columns: minmax(112px, 0.7fr) minmax(0, 1.5fr) 3.6rem 9rem; } }
-.preview-row .rung-rating { display: block; margin: 2px 0 0; font-size: 0.86rem; }
+.strength-note { margin-top: 18px; }
 @media (max-width: 1180px) { .preview-part { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 980px) {
-  .climbing { grid-template-columns: 1fr; }
-  .standing { position: static; }
-  .facts { grid-template-columns: 1fr; }
-}
 @media (max-width: 640px) {
-  .ladder-cols { display: none; }
-  .ladder { --h: 104px; }
   .rung { grid-template-columns: 1fr auto auto; grid-template-rows: auto auto; gap: 8px 14px; height: 96px; padding-inline: 16px; align-content: center; }
   .rung-result { grid-column: 1 / -1; grid-row: 2; }
-  .rung-score::after { content: " score"; font-weight: 400; font-size: 0.74rem; color: var(--faint); }
-  .rung-elo::after { content: " Elo"; font-weight: 400; font-size: 0.74rem; color: var(--faint); }
-  .is-lum .rung-score::after, .is-lum .rung-elo::after { content: none; }
-  /* these rows carry an error margin, so their numbers must stay on one line */
-  .preview-row :is(.rung-score, .rung-elo) { white-space: nowrap; }
-  .preview-row .rung-score::after { content: none; }
-  .ladder .rung-pm { display: none; }      /* no room for the interval in the row; the note under the ladder links the tests */
 }
-/* the narrowest phones: the numbers lose the words after them, and an interval goes under its Elo */
-@media (max-width: 360px) {
-  .rung-score::after, .rung-elo::after { content: none; }
-  .preview-row .rung-pm { display: block; margin-top: 2px; font-size: 0.8rem; text-align: right; }
-}
+/* the narrowest phones: the interval goes under its Elo */
+@media (max-width: 360px) { .rung-pm { display: block; margin-top: 2px; font-size: 0.8rem; text-align: right; } }
 
 /* ---------- method: the strip of every test ---------- */
 .strip { margin: 0; }

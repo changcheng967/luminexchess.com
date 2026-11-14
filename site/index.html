@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=14"></script>
+  <script src="/assets/js/theme.js?v=15"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -28,11 +28,11 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=14">
-  <link rel="stylesheet" href="/assets/css/home.css?v=14">
-  <script src="/assets/js/site.js?v=14" defer></script>
-  <script src="/assets/js/board.js?v=14" defer></script>
-  <script src="/assets/js/home.js?v=14" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=15">
+  <link rel="stylesheet" href="/assets/css/home.css?v=15">
+  <script src="/assets/js/site.js?v=15" defer></script>
+  <script src="/assets/js/board.js?v=15" defer></script>
+  <script src="/assets/js/home.js?v=15" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -256,7 +256,7 @@
             <dl class="proof" data-reveal data-d="6">
               <div><dt>The release<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo><!--@g:n-->3471<!--/@g:n--></span><span class="u">± <!--@g:e-->16<!--/@g:e--></span></dd></div>
               <div><dt>Over v6.5.1</dt><dd><span class="proof-n" data-odo>+246.55</span><span class="u">± 13.37</span></dd></div>
-              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>777,868</span></dd></div>
+              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>781,484</span></dd></div>
               <div><dt>Speed</dt><dd><span class="proof-n" data-odo>1.2M</span><span class="u">nodes/s</span></dd></div>
             </dl>
             <p class="scroll-cue" data-cue aria-hidden="true"><span>Scroll to play a real game</span><i></i></p>
@@ -288,7 +288,6 @@
               <div class="gnt-text">
                 <p>Main of 13 November, with the gen768r_05q network, played 800 games against each of twelve engines that CCRL rates, at 10+0.1 on one thread: 9,602 games, none lost on time and no crash. The rating is the one at which the points expected against all twelve equal the points scored.</p>
                 <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between 3439 and 3499, where the games by themselves would leave ± 6. More opponents near Luminex would narrow it; more games would not.</p>
-                <p class="gnt-before"><a href="https://bench.luminexchess.com/gauntlet/2/">The gauntlet before it</a>, on main of 12 November with the gen768r_04q network, gave 3448 ± 24 against the same twelve engines: 23 points less. The opponents' disagreement is in both ratings and largely cancels between them, so the difference is surer than either rating: the games alone leave it about ± 9.</p>
                 <p class="gnt-since">v6.6.0 is this engine with the next network, gen768r_06q, which scored +3.09 ± 2.46 Elo against gen768r_05q in self-play (test 128). That is less than a repeat gauntlet resolves, so the rating stands for the release.</p>
                 <a class="link" href="https://bench.luminexchess.com/gauntlet/3/"><span>Gauntlet 3 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
@@ -428,160 +427,30 @@
           <!-- /@gauntlet -->
         </figure>
 
-        <div class="facts">
-          <article class="card fact" data-glow data-reveal>
-            <p class="fact-label">Over v6.5.1</p>
-            <p class="fact-value num"><span data-odo>+246.55</span><span class="fact-pm">± 13.37</span></p>
-            <p>v6.6.0 against v6.5.1 over 2,010 games at 10+0.1: 1,292 wins, 653 draws and 65 losses. Gains in self-play usually shrink against other engines, so the gauntlet, not this, sets the rating.</p>
-            <a class="link" href="https://bench.luminexchess.com/test/131/"><span>Test 131 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </article>
-          <article class="card fact" data-glow data-reveal data-d="1">
-            <p class="fact-label">The release's network</p>
-            <p class="fact-value num"><span data-odo>+3.09</span><span class="fact-pm">± 2.46</span></p>
-            <p>The gauntlet was played by the development build of 13 November, with gen768r_05q. v6.6.0 carries gen768r_06q, which scored +3.09 ± 2.46 Elo against it over 22,846 games. A repeat gauntlet resolves about ± 10, so the rating stands.</p>
-            <a class="link" href="https://bench.luminexchess.com/test/128/"><span>Test 128 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </article>
-          <article class="card fact" data-glow data-reveal data-d="2">
-            <p class="fact-label">Computer Chess Index</p>
-            <p class="fact-value num"><span data-odo>2963</span><span class="fact-pm">at 60+0.6</span></p>
-            <p>CCI has not rated v6.6.0 yet. Its page of 14 November 2026 rates v6.5.1 at 2561, 2963 and 3093 at 8+0.08, 60+0.6 and 2m24+1.12, on an Intel E-core without AVX-512, and at 2584, 2928 and 3011 on a P-core. On the E-core that is 441 to 567 above v6.5.0, which its setup had run without the network file. CCI has its own scale, anchored at a random mover, so these are not CCRL Blitz values.</p>
-            <a class="link" href="https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md"><span>Luminex on the CCI</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </article>
-        </div>
-
         <aside class="card preview" data-glow data-reveal aria-labelledby="preview-title">
           <div class="preview-top">
-            <p class="fact-label" id="preview-title">Against the release before it</p>
-            <p class="legend"><span><i class="k-w"></i>The newer build wins</span><span><i class="k-d"></i>Draws</span><span><i class="k-l"></i>v6.5.1 wins</span></p>
+            <p class="fact-label" id="preview-title">In self-play</p>
+            <p class="legend"><span><i class="k-w"></i>v6.6.0 wins</span><span><i class="k-d"></i>Draws</span><span><i class="k-l"></i>v6.5.1 wins</span></p>
           </div>
           <div class="preview-part">
             <div class="preview-head">
               <h3 class="h-m">v6.6.0 against v6.5.1</h3>
-              <p>At 10+0.1, the time control of the tests, v6.6.0 scored +246.55 ± 13.37 Elo against v6.5.1 (<a href="https://bench.luminexchess.com/test/131/">test 131</a>): the new network, the time management and the search work together. This is self-play, not a rating: gains in self-play usually shrink against other engines, and the gauntlet above is what places the release.</p>
+              <p>The new network, the time management and the search work, measured together at 10+0.1, the time control of the tests (<a href="https://bench.luminexchess.com/test/131/">test 131</a>). This is self-play, not a rating: gains in self-play usually shrink against other engines, and the gauntlet above is what places the release.</p>
               <a class="link" href="/download/"><span>Download v6.6.0</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               <a class="link" href="/tests/"><span>Every change behind it, with its test</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
-            <ol class="preview-rows" aria-label="v6.6.0 against v6.5.1 at 10+0.1">
-              <li class="rung preview-row is-met">
-                <span class="rung-name">10+0.1 <span class="rung-rating num">v6.6.0</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 2010 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="1292" height="10"/><rect class="wdl-d" x="1292" width="653" height="10"/><rect class="wdl-l" x="1945" width="65" height="10"/></svg>
-                  <span class="rung-games">+1,292 =653 −65 · 2,010 games</span>
-                </span>
-                <span class="rung-score num">81%</span>
-                <span class="rung-elo num">+246.55 <span class="rung-pm">± 13.37</span></span>
-              </li>
-            </ol>
-          </div>
-          <div class="preview-part">
-            <div class="preview-head">
-              <h3 class="h-m">On the way there, at CCI's three time controls</h3>
-              <p>On 11 November main, then with the gen768r_03q network, played v6.5.1 on OpenBench at the three time controls CCI rates at: +202.07 ± 11.65 Elo at 8+0.08 (<a href="https://bench.luminexchess.com/test/77/">test 77</a>), +178.56 ± 15.71 at 60+0.6 (<a href="https://bench.luminexchess.com/test/78/">test 78</a>) and +172.78 ± 17.77 at 2m24+1.12 (<a href="https://bench.luminexchess.com/test/79/">test 79</a>). Three more networks followed before the release. CCI's own figures above are still v6.5.1's.</p>
-              <a class="link" href="/games/"><span>Two wins over Stash 37, move by move</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <div class="rung" role="group" aria-label="v6.6.0 against v6.5.1 at 10+0.1: 1,292 wins, 653 draws and 65 losses">
+              <span class="rung-name">10+0.1 <span class="rung-rating num">2,010 games</span></span>
+              <span class="rung-result">
+                <svg class="wdl" viewBox="0 0 2010 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="1292" height="10"/><rect class="wdl-d" x="1292" width="653" height="10"/><rect class="wdl-l" x="1945" width="65" height="10"/></svg>
+                <span class="rung-games">+1,292 =653 −65</span>
+              </span>
+              <span class="rung-score num">81%</span>
+              <span class="rung-elo num">+246.55 <span class="rung-pm">± 13.37</span></span>
             </div>
-            <ol class="preview-rows" aria-label="Main of 11 November against v6.5.1 at CCI's three time controls">
-              <li class="rung preview-row is-met">
-                <span class="rung-name">8+0.08 <span class="rung-rating num">STC · 11 Nov</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 2014 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="1153" height="10"/><rect class="wdl-d" x="1153" width="763" height="10"/><rect class="wdl-l" x="1916" width="98" height="10"/></svg>
-                  <span class="rung-games">+1,153 =763 −98 · 2,014 games</span>
-                </span>
-                <span class="rung-score num">76%</span>
-                <span class="rung-elo num">+202.07 <span class="rung-pm">± 11.65</span></span>
-              </li>
-              <li class="rung preview-row is-met">
-                <span class="rung-name">60+0.6 <span class="rung-rating num">LTC · 11 Nov</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 1000 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="506" height="10"/><rect class="wdl-d" x="506" width="461" height="10"/><rect class="wdl-l" x="967" width="33" height="10"/></svg>
-                  <span class="rung-games">+506 =461 −33 · 1,000 games</span>
-                </span>
-                <span class="rung-score num">74%</span>
-                <span class="rung-elo num">+178.56 <span class="rung-pm">± 15.71</span></span>
-              </li>
-              <li class="rung preview-row is-met">
-                <span class="rung-name">2m24+1.12 <span class="rung-rating num">VLTC · 11 Nov</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 600 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="287" height="10"/><rect class="wdl-d" x="287" width="302" height="10"/><rect class="wdl-l" x="589" width="11" height="10"/></svg>
-                  <span class="rung-games">+287 =302 −11 · 600 games</span>
-                </span>
-                <span class="rung-score num">73%</span>
-                <span class="rung-elo num">+172.78 <span class="rung-pm">± 17.77</span></span>
-              </li>
-            </ol>
           </div>
         </aside>
-
-        <div class="sub-head" data-reveal>
-          <h3 class="h-m" id="ladder-title">Before the gauntlet: the Stash ladder</h3>
-          <p>Stash, by Morgan Houppin, has a release at almost every step of strength. Until the gauntlets, Luminex was placed by climbing them one version at a time: the v6.5.0 release candidate beat every Stash from 29 to 32 and scored 48% against Stash 33, which put v6.5 near 3255. Stash v37.0, the strongest, is now one of the gauntlet's twelve.</p>
-        </div>
-        <div class="climbing" data-ladder>
-          <aside class="standing" data-reveal>
-            <p class="standing-label">v6.5, on the CCRL Blitz scale</p>
-            <p class="standing-num num"><span data-ladder-odo>≈3255</span></p>
-            <p class="standing-step" data-ladder-step>Estimated from five matches</p>
-            <ol class="standing-rungs" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ol>
-          </aside>
-
-          <div class="ladder-col">
-            <p class="legend" data-reveal><span><i class="k-w"></i>Luminex wins</span><span><i class="k-d"></i>Draws</span><span><i class="k-l"></i>Stash wins</span></p>
-            <div class="ladder-cols" aria-hidden="true"><span>Opponent · CCRL Blitz</span><span>Results for Luminex</span><span>Score</span><span>Elo</span></div>
-            <ol class="ladder" aria-label="The v6.5.0 release candidate against Stash releases, strongest first">
-              <li class="rung" data-rung="4">
-                <span class="rung-name">Stash 33 <span class="rung-rating num">3286</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 1036 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="370" height="10"/><rect class="wdl-d" x="370" width="257" height="10"/><rect class="wdl-l" x="627" width="409" height="10"/></svg>
-                  <span class="rung-games">+370 =257 −409 · 1,036 games</span>
-                </span>
-                <span class="rung-score num">48%</span>
-                <span class="rung-elo num">−13.09 <span class="rung-pm">± 18.34</span></span>
-              </li>
-              <li class="rung is-lum" data-rung-lum>
-                <span class="rung-name">Luminex v6.5 <span class="rung-rating num">≈3255</span></span>
-                <span class="rung-result"><span class="rung-games">Estimated from these matches</span></span>
-                <span class="rung-score"></span>
-                <span class="rung-elo"></span>
-              </li>
-              <li class="rung" data-rung="3">
-                <span class="rung-name">Stash 32 <span class="rung-rating num">3252</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 1026 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="371" height="10"/><rect class="wdl-d" x="371" width="309" height="10"/><rect class="wdl-l" x="680" width="346" height="10"/></svg>
-                  <span class="rung-games">+371 =309 −346 · 1,026 games</span>
-                </span>
-                <span class="rung-score num">51%</span>
-                <span class="rung-elo num">+8.47 <span class="rung-pm">± 17.60</span></span>
-              </li>
-              <li class="rung" data-rung="2">
-                <span class="rung-name">Stash 31 <span class="rung-rating num">3220</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 1004 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="424" height="10"/><rect class="wdl-d" x="424" width="270" height="10"/><rect class="wdl-l" x="694" width="310" height="10"/></svg>
-                  <span class="rung-games">+424 =270 −310 · 1,004 games</span>
-                </span>
-                <span class="rung-score num">56%</span>
-                <span class="rung-elo num">+39.62 <span class="rung-pm">± 18.14</span></span>
-              </li>
-              <li class="rung" data-rung="1">
-                <span class="rung-name">Stash 30 <span class="rung-rating num">3166</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 1006 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="501" height="10"/><rect class="wdl-d" x="501" width="230" height="10"/><rect class="wdl-l" x="731" width="275" height="10"/></svg>
-                  <span class="rung-games">+501 =230 −275 · 1,006 games</span>
-                </span>
-                <span class="rung-score num">61%</span>
-                <span class="rung-elo num">+79.41 <span class="rung-pm">± 18.75</span></span>
-              </li>
-              <li class="rung" data-rung="0">
-                <span class="rung-name">Stash 29 <span class="rung-rating num">3137</span></span>
-                <span class="rung-result">
-                  <svg class="wdl" viewBox="0 0 1040 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="577" height="10"/><rect class="wdl-d" x="577" width="187" height="10"/><rect class="wdl-l" x="764" width="276" height="10"/></svg>
-                  <span class="rung-games">+577 =187 −276 · 1,040 games</span>
-                </span>
-                <span class="rung-score num">64%</span>
-                <span class="rung-elo num">+103.51 <span class="rung-pm">± 19.97</span></span>
-              </li>
-            </ol>
-            <p class="note" data-reveal>Ratings are CCRL Blitz values for each Stash release. The matches ran on OpenBench (tests 35 to 39) with the v6.5.0 release candidate, about 1,000 games each at 10+0.1 adjusted to the workers' speed, one thread, one version at a time from Stash 29 until Luminex scored below 50%. Each match places Luminex between 3241 (from Stash 29) and 3273 (from Stash 33); weighted by their error bars, the five agree on 3256 (<a href="https://bench.luminexchess.com/test/38/">Stash 32, test 38</a>). Against v6.4.0 the same release candidate scored +145.35 ± 12.02 Elo over 2,020 games: 1,063 wins, 693 draws and 264 losses (<a href="https://bench.luminexchess.com/test/40/">test 40</a>).</p>
-          </div>
-        </div>
+        <p class="note strength-note" data-reveal>The Computer Chess Index, an independent rating list with a scale of its own, has rated Luminex up to v6.5.1; v6.6.0 is not on it yet. <a href="https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md">Luminex on the CCI</a></p>
       </div>
     </section>
 
@@ -616,11 +485,10 @@
           </li>
         </ol>
 
-        <dl class="totals">
+        <dl class="totals totals-3">
           <div data-reveal><dt>SPRTs run</dt><dd class="num"><span data-odo>52</span></dd></div>
           <div data-reveal data-d="1"><dt>Passed</dt><dd class="num is-lit"><span data-odo>33</span></dd></div>
-          <div data-reveal data-d="2"><dt>OpenBench games</dt><dd class="num"><span data-odo>777,868</span></dd></div>
-          <div data-reveal data-d="3"><dt>Over v6.5.1</dt><dd class="num"><span data-odo>+246.55</span></dd></div>
+          <div data-reveal data-d="2"><dt>OpenBench games</dt><dd class="num"><span data-odo>781,484</span></dd></div>
         </dl>
 
         <figure class="card strip" data-strip>
@@ -1061,35 +929,11 @@
             </li>
             <li class="tl" data-pt="4">
               <time datetime="2026-11-10">Nov 2026</time>
-              <div class="tl-body"><h3>Eight output buckets <span class="tl-elo num">+54.50</span></h3><p>gen768r_03: eight output buckets, revived tail neurons and 2.5 billion T91 positions, +54.50 ± 15.01 Elo against v6.5.1's network in self-play. A third SPSA run retuned the search constants for it, and network and constants went into main together.</p></div>
-            </li>
-            <li class="tl" data-pt="4">
-              <time datetime="2026-11-11">Nov 2026</time>
-              <div class="tl-body"><h3>Trained through its own rounding <span class="tl-elo num">+13.39</span></h3><p>gen768r_03q: the same network trained on to 460,000 steps, then 30,000 steps of quantization-aware training, which trains through the engine's int8 rounding. +13.39 ± 6.48 Elo against gen768r_03, which it replaced on main.</p></div>
-            </li>
-            <li class="tl" data-pt="4">
-              <time datetime="2026-11-11">Nov 2026</time>
-              <div class="tl-body"><h3>Development builds</h3><p>Every push to main that passes its checks now publishes a development build, which replaces the one before. Against v6.5.1, main with gen768r_03q scored +202.07 ± 11.65, +178.56 ± 15.71 and +172.78 ± 17.77 Elo in self-play at CCI's three time controls.</p></div>
-            </li>
-            <li class="tl" data-pt="4">
-              <time datetime="2026-11-11">Nov 2026</time>
-              <div class="tl-body"><h3>More positions, more steps <span class="tl-elo num">+13.31</span></h3><p>gen768r_04q: the same run continued to 860,000 steps, now on 3.73 billion positions and with a loss power of 3.0 instead of 2.6, then 30,000 quantization-aware steps. +13.31 ± 6.55 Elo against gen768r_03q, which it replaced on main.</p></div>
+              <div class="tl-body"><h3>A new line of networks</h3><p>gen768r: eight output buckets, a revived tail, and training through the engine's own rounding. Five networks between 10 and 14 November, on Leela's test91 games, each tested against the one before: +60.08 ± 15.55 Elo with its retuned search constants, then +13.39 ± 6.48, +13.31 ± 6.55, +22.02 ± 8.52 and +3.09 ± 2.46.</p></div>
             </li>
             <li class="tl" data-pt="4">
               <time datetime="2026-11-12">Nov 2026</time>
-              <div class="tl-body"><h3>Rated against twelve engines <span class="tl-elo num">3448</span></h3><p>Gauntlets on OpenBench now rate a build against other engines. The first full one: main with gen768r_04q, 9,612 games at 10+0.1 against twelve engines rated from 3417 to 3773. 3448 ± 24 on the CCRL Blitz scale, and 57.5% against Stash 37.</p></div>
-            </li>
-            <li class="tl" data-pt="4">
-              <time datetime="2026-11-13">Nov 2026</time>
-              <div class="tl-body"><h3>Two more months of games <span class="tl-elo num">+22.02</span></h3><p>gen768r_05q: the run continued to 1.5 million steps on 6.6 billion positions, 4.2 billion of them from two months of games the network had not seen, then 30,000 quantization-aware steps. +22.02 ± 8.52 Elo against gen768r_04q, which it replaced on main.</p></div>
-            </li>
-            <li class="tl" data-pt="4">
-              <time datetime="2026-11-13">Nov 2026</time>
-              <div class="tl-body"><h3>The same twelve engines again <span class="tl-elo num">3471</span></h3><p>The gauntlet repeated on main with gen768r_05q: 9,602 games against the same twelve engines at the same time control. 3471 ± 16 on the CCRL Blitz scale, 23 points above the first, and 63.3% against Stash 37.</p></div>
-            </li>
-            <li class="tl" data-pt="4">
-              <time datetime="2026-11-14">Nov 2026</time>
-              <div class="tl-body"><h3>The last of its line <span class="tl-elo num">+3.09</span></h3><p>gen768r_06q: the run continued to 1.98 million steps on 6.0 billion positions, January's games among them for the first time, then 30,000 quantization-aware steps. +3.09 ± 2.46 Elo against gen768r_05q over 22,846 games. The line has now used every month of its data, and ends here.</p></div>
+              <div class="tl-body"><h3>Development builds and gauntlets</h3><p>Every push to main now publishes a development build, and gauntlets on OpenBench rate a build against twelve engines that CCRL rates: 3448 ± 24 on 12 November, 3471 ± 16 a day later with the next network.</p></div>
             </li>
             <li class="tl" data-pt="5">
               <time datetime="2026-11-14">Nov 2026</time>

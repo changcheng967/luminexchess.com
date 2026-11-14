@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=14"></script>
+  <script src="/assets/js/theme.js?v=15"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,10 +25,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=14">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=14">
-  <script src="/assets/js/site.js?v=14" defer></script>
-  <script src="/assets/js/engine.js?v=14" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=15">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=15">
+  <script src="/assets/js/site.js?v=15" defer></script>
+  <script src="/assets/js/engine.js?v=15" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -481,33 +481,26 @@
             <h3 class="h-m" id="machine">The training machine</h3>
             <p>One RTX PRO 6000 Blackwell with 96 GB of memory. The trainer keeps 2.5 billion positions on the card and the rest in the host's memory (<a href="https://github.com/changcheng967/Luminex/pull/61">#61</a>), and it runs the feature layer as dense matrix products on the card's tensor cores (<a href="https://github.com/changcheng967/Luminex/pull/59">#59</a>), which took training from 21.2 to 53.7 steps a second. Run 04's 400,000 steps took about 2.2 hours. Quantization-aware training is <a href="https://github.com/changcheng967/Luminex/pull/58">#58</a>, and <a href="https://github.com/changcheng967/Luminex/pull/60">#60</a> converts Leela's T91 data. The engine itself is unchanged by these.</p>
           </div>
-          <div class="prose-stack">
-            <div class="prose" data-reveal>
-            <h3 class="h-m" id="gen768r-03">Eight output buckets: gen768r_03</h3>
-            <p>The same inputs and accumulators, with eight output buckets: a separate 16 → 32 → 1 tail for each band of four pieces on the board, at no extra cost per evaluation. Tail neurons that had died in earlier training were revived before the run.</p>
-            <p>It trained for 230,000 steps of 131,072 positions, about 30 billion samples, on 2.5 billion positions from Leela's test91 self-play, February to May 2026, scored by that run's own networks; January's games were held out to check it. Against v6.5.1's network it scored +54.50 ± 15.01 Elo (<a href="https://bench.luminexchess.com/test/63/">test 63</a>).</p>
-            <p>A third SPSA run of 80,000 games then retuned the search constants for it. Network and constants went into main together on 10 November: +60.08 ± 15.55 Elo over the previous main in 876 games (<a href="https://bench.luminexchess.com/test/68/">test 68</a>). The retuning alone, with gen768r_03 on both sides, measured −1.81 ± 3.45 over 12,484 games (<a href="https://bench.luminexchess.com/test/69/">test 69</a>): that test failed, and the constants went in with the network inside the error margin.</p>
-            </div>
-            <div class="prose" data-reveal data-d="1">
-              <h3 class="h-m" id="gen768r-03q">Trained through its own rounding: gen768r_03q</h3>
-              <p>The same network trained on to 460,000 steps on the same data, then 30,000 steps of quantization-aware training, which trains through the engine's own int8 rounding. Against gen768r_03 it scored +13.39 ± 6.48 Elo over 3,296 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/73/">test 73</a>); at 60+0.6 the same pair stood at +9.76 ± 11.08 after 712 games when the test was stopped (<a href="https://bench.luminexchess.com/test/74/">test 74</a>). With it, main stood +172.78 to +202.07 Elo above v6.5.1 in self-play at CCI's three time controls (<a href="/#strength">the three matches</a>).</p>
-            </div>
-          </div>
-          <div class="prose-stack">
-            <div class="prose" data-reveal data-d="2">
-              <h3 class="h-m" id="gen768r-04q">More positions, more steps: gen768r_04q</h3>
-              <p>It continues the same run from 460,000 to 860,000 steps, now on 3.73 billion positions from test91's February to August and October 2026 games, with a loss power of 3.0 instead of 2.6, then 30,000 quantization-aware steps. Against gen768r_03q it scored +13.31 ± 6.55 Elo over 3,394 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/82/">test 82</a>). It went onto main on 12 November. An SPSA run of 80,000 games then retuned 13 search margins for it (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>), but none moved beyond noise; the SPRT of its values was stopped (<a href="https://bench.luminexchess.com/test/84/">test 84</a>) and main keeps its margins. With this network, the first full gauntlet against twelve rated engines put main at 3448 ± 24 on the CCRL Blitz scale (<a href="https://bench.luminexchess.com/gauntlet/2/">gauntlet 2</a>).</p>
-            </div>
-            <div class="prose" data-reveal data-d="3">
-              <h3 class="h-m" id="gen768r-05q">Two more months of games: gen768r_05q</h3>
-              <p>The run went on from 860,000 steps to 1,502,671, on 6.6 billion positions: test91's games of November and December 2025, 4.24 billion positions that no network of this line had trained on, beside those of February to May 2026. Then 30,000 quantization-aware steps. On January's games, which every run until then had left out, its loss before rounding is 4.3% below gen768r_04's. Against gen768r_04q it scored +22.02 ± 8.52 Elo over 1,912 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/112/">test 112</a>), and it went onto main on 13 November (<a href="https://github.com/changcheng967/Luminex/pull/72">#72</a>). It has gen768r_04q's size and speed. With it, the same twelve engines put main at 3471 ± 16 (<a href="/#gauntlet">the table</a>), 23 points above the gauntlet with gen768r_04q.</p>
-            </div>
-            <div class="prose" data-reveal data-d="3">
-              <h3 class="h-m" id="next-network">Released in v6.6.0: gen768r_06q</h3>
-              <p>The last run: from 1,502,671 steps to 1,954,130 on 6.0 billion positions. January 2026 is among them for the first time, with its last 10,975,798 positions held out, beside June to August and October 2026 and December 2025. Then 30,000 quantization-aware steps. On January's held-out positions the loss fell from 0.002026 for gen768r_05q to 0.002001, a third of each of the two steps before it. Against gen768r_05q it scored +3.09 ± 2.46 Elo over 22,846 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/128/">test 128</a>), which passed, and it shipped (<a href="https://github.com/changcheng967/Luminex/pull/75">#75</a>). It is inside every v6.6.0 binary, which reports it by its file name, <code>luminex_gen768r_06q_i8.nnue</code>. The line has now used every month of its data; the network after it is a new design.</p>
-            </div>
-          </div>
         </div>
+        <figure class="phases steps" id="next-network" data-reveal>
+          <figcaption class="fig-head">
+            <span class="fig-title" id="steps-title">Each network of the line, tested</span>
+            <span class="fig-sub">An SPRT at 10+0.1 for every step, against the network before it; the first against v6.5.1's network and search constants.</span>
+          </figcaption>
+          <table class="phases-table" role="table" aria-labelledby="steps-title">
+            <thead role="rowgroup">
+              <tr role="row"><th role="columnheader" scope="col">Network</th><th role="columnheader" scope="col">What changed</th><th role="columnheader" scope="col">Elo</th><th role="columnheader" scope="col">Test</th></tr>
+            </thead>
+            <tbody role="rowgroup">
+              <tr role="row"><th role="rowheader" scope="row">gen768r_03</th><td role="cell" data-th="What changed">Eight output buckets and a revived tail: 230,000 steps on 2.5 billion positions, with the search constants retuned for it</td><td role="cell" data-th="Elo" class="n">+60.08 ± 15.55</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/68/">test 68</a></td></tr>
+              <tr role="row"><th role="rowheader" scope="row">gen768r_03q</th><td role="cell" data-th="What changed">Trained on to 460,000 steps, then 30,000 steps through the engine's own int8 rounding</td><td role="cell" data-th="Elo" class="n">+13.39 ± 6.48</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/73/">test 73</a></td></tr>
+              <tr role="row"><th role="rowheader" scope="row">gen768r_04q</th><td role="cell" data-th="What changed">To 860,000 steps, on 3.73 billion positions, with a loss power of 3.0 instead of 2.6</td><td role="cell" data-th="Elo" class="n">+13.31 ± 6.55</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/82/">test 82</a></td></tr>
+              <tr role="row"><th role="rowheader" scope="row">gen768r_05q</th><td role="cell" data-th="What changed">To 1.5 million steps, on 6.6 billion positions, 4.24 billion of them new to the line</td><td role="cell" data-th="Elo" class="n">+22.02 ± 8.52</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/112/">test 112</a></td></tr>
+              <tr role="row"><th role="rowheader" scope="row">gen768r_06q</th><td role="cell" data-th="What changed">To 1.98 million steps, on 6.0 billion positions, with January 2026 for the first time</td><td role="cell" data-th="Elo" class="n">+3.09 ± 2.46</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/128/">test 128</a></td></tr>
+            </tbody>
+          </table>
+          <p class="note">On positions held out from January 2026 the loss fell with every step: 0.002183 for gen768r_03q, then 0.002103, 0.002026, and 0.002001 for gen768r_06q. The last step is a third of each of the two before it: the line has used every month of its data, and the network after it is a new design. gen768r_06q is inside every v6.6.0 binary, which reports it by its file name, <code>luminex_gen768r_06q_i8.nnue</code>.</p>
+        </figure>
         <a class="card link-card" data-glow data-reveal href="https://huggingface.co/datasets/xushawn/t91-lgs">
           <span class="link-card-label">Training data on Hugging Face</span>
           <span class="link-card-title">t91-lgs</span>

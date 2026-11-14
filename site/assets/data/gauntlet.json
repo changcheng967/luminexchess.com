@@ -258,34 +258,6 @@
    "expected": 61.3
   }
  ],
- "previous": {
-  "id": 2,
-  "href": "https://bench.luminexchess.com/gauntlet/2/",
-  "date": "12 November 2026",
-  "sha": "fba65a5c73fa314f1e7008f8dd576f4de651d3e1",
-  "network": "gen768r_04q",
-  "tc": "10+0.1",
-  "each": 800,
-  "games": 9612,
-  "list": "CCRL Blitz",
-  "rating": 3448,
-  "error": 24,
-  "fromGames": 7,
-  "opponents": [
-   "Altair v7.0.0",
-   "Berserk 14",
-   "Clover v9.1",
-   "Elixir v3.0",
-   "Obsidian v16.0",
-   "Patricia 5",
-   "PlentyChess b-v8.0.0",
-   "Quanticade Cronus-3.0",
-   "Renegade v1.3.0",
-   "Rice 8.0.0",
-   "Smallbrain 7.0.0",
-   "Stash v37.0"
-  ]
- },
  "title": "Against twelve rated engines",
  "since": "v6.6.0 is this engine with the next network, gen768r_06q, which scored +3.09 ± 2.46 Elo against gen768r_05q in self-play (test 128). That is less than a repeat gauntlet resolves, so the rating stands for the release."
 }

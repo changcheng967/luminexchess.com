@@ -1,6 +1,6 @@
 /* luminexchess.com: the home page's scenes.
    - the opening: scrolling plays a real game on the board;
-   - the ladder: Luminex climbs past one Stash release after another;
+   - the gauntlet: the result bars grow and Luminex takes its place among the engines;
    - the strip of tests, the four steps, and the chronicle with its chart.
    Every scene has a still form, used without scripts or with reduced motion. */
 (function () {
@@ -285,57 +285,6 @@
       });
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(); ask(); });
     }
-  })();
-
-  /* =====================================================================
-     The ladder: one Stash release after another
-     ===================================================================== */
-  (function ladder() {
-    var root = $("[data-ladder]");
-    if (!root || !motion) return;
-    var list = $(".ladder", root), lumRow = $("[data-rung-lum]", root);
-    var rungs = $$("[data-rung]", root).sort(function (a, b) { return a.getAttribute("data-rung") - b.getAttribute("data-rung"); });
-    var odoEl = $("[data-ladder-odo]", root), stepEl = $("[data-ladder-step]", root);
-    var marks = $$(".standing-rungs li", root);
-    if (!list || !lumRow || rungs.length < 5 || !odoEl) return;
-    var lumRating = $(".rung-rating", lumRow);
-
-    var final = { num: odoEl.textContent.trim(), text: stepEl.textContent };
-    var names = rungs.map(function (r) { return $(".rung-name", r).firstChild.textContent.trim(); });
-    var ratings = rungs.map(function (r) { return $(".rung-rating", r).textContent.trim(); });
-    var odo = Lux.odo(odoEl);
-    odoEl.setAttribute("data-odo-manual", "");
-    odoEl.classList.add("is-live");
-
-    function measure() {
-      var a = rungs[1].getBoundingClientRect(), b = rungs[0].getBoundingClientRect();
-      var h = Math.abs(b.top - a.top);
-      if (h > 0) list.style.setProperty("--h", h.toFixed(1) + "px");
-    }
-    var state = -1;
-    function set(s) {
-      if (s === state) return;
-      state = s;
-      list.setAttribute("data-s", Math.min(s, 4));
-      rungs.forEach(function (r, i) { r.classList.toggle("is-met", i < s); });
-      marks.forEach(function (m, i) { m.classList.toggle("is-on", i < s); });
-      // the row carries the same reading as the big number while it climbs
-      var reading = s === 0 ? "" : s < 5 ? ">" + ratings[s - 1] : final.num;
-      if (lumRating) lumRating.textContent = reading || "…";
-      // before the climb the digits stand at zero, ready to roll: a screen reader hears the estimate itself
-      if (s === 0) { odo.set(">" + ratings[0].replace(/\d/g, "0"), final.num); stepEl.textContent = "Five matches, one release at a time"; }
-      else if (s < 5) { odo.set(">" + ratings[s - 1]); stepEl.textContent = "Beats " + names[s - 1] + ": above " + ratings[s - 1]; }
-      else { odo.set(final.num); stepEl.textContent = final.text; }
-    }
-    measure();
-    list.classList.add("is-armed");
-    set(0);
-    void list.offsetWidth;
-    window.addEventListener("resize", measure);
-    Lux.scene(list, {
-      mode: function (r, vh) { return (vh * 0.84 - r.top) / (vh * 0.56); },
-      onUpdate: function (p) { set(p <= 0.02 ? 0 : Math.min(5, 1 + Math.floor(p * 4.999))); }
-    });
   })();
 
   /* =====================================================================
