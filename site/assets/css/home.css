@@ -304,8 +304,8 @@ html:not(.motion) .opening-foot { margin-top: 40px; }
 .preview-head { display: grid; gap: 14px; justify-items: start; }
 .preview-head h3 { font-size: clamp(1.3rem, 1.8vw, 1.55rem); }
 .preview-head > p:not([class]) { font-size: 0.95rem; color: var(--muted); }
-.preview-head > p a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
-.preview-head > p a:hover { text-decoration-color: currentColor; }
+.preview-head > p a, .gnt-text p a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
+.preview-head > p a:hover, .gnt-text p a:hover { text-decoration-color: currentColor; }
 .preview-head .link { font-size: 0.92rem; }
 .preview-rows { display: grid; gap: 8px; }
 .preview-row { background: var(--paper); }
