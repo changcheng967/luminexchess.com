@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Bring the site's numbers up to date from OpenBench.
+"""Bring the site's numbers up to date from OpenBench, and from the Computer Chess Index.
 
     python -I tools/bench_update.py                 read the bench and report; nothing is written
     python -I tools/bench_update.py --write         also write the counters and dates into the pages
     python -I tools/bench_update.py --gauntlet 2    write site/assets/data/gauntlet.json from gauntlet 2's page
+    python -I tools/bench_update.py --cci           write site/assets/data/cci.json from CCI's page for Luminex
     python -I tools/bench_update.py --from DIR      use saved pages (index1.html ..., users.html) instead of fetching
     python -I tools/bench_update.py --via ""        fetch directly instead of through `ssh -n oracle`
 
@@ -11,6 +12,8 @@ What it reads
     https://bench.luminexchess.com/index/N       every workload: kind, games, Elo, LLR
     https://bench.luminexchess.com/users/        the bench's own count of games played
     https://bench.luminexchess.com/gauntlet/N/   with --gauntlet: the rating and the table of opponents
+    CCI's engines/Luminex.md on GitHub           the list's ratings of the release (also read for the
+                                                 report, which says when cci.json is behind the page)
 
 What it reports
     - the totals the pages show: SPRTs run, passed, and games (the bench's own count, which
@@ -41,7 +44,15 @@ What --gauntlet N changes
       about what main has become after the gauntlet (a newer network, say). Remove it when a
       new gauntlet makes it untrue.
 
-After either, run `python -I tools/stamp.py site`.
+What --cci [VERSION] changes
+    - site/assets/data/cci.json: what the Computer Chess Index, an independent rating list, says
+      about one version (default: the release the home page names): the rating, its range and the
+      number of games at each of the list's time controls, on the machine that has played the
+      most of them, with the date the list's page was generated. tools/stamp.py writes the note
+      under "Where it stands" from it, and calls the figures early readings while any range is
+      wider than ± 50. The list adds games every day, so the figures move: run it again.
+
+After any of these, run `python -I tools/stamp.py site`.
 
 By default the bench is fetched through `ssh -n oracle curl ...`, because not every network can
 reach the domain; pass --via "" to fetch from this machine.
@@ -57,6 +68,8 @@ import sys
 import urllib.request
 
 BENCH = "https://bench.luminexchess.com"
+CCI_PAGE = "https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md"
+CCI_RAW = "https://raw.githubusercontent.com/computer-chess-index/cci/main/engines/Luminex.md"
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 N = "{:,}".format
 KINDS = ("sprt", "fixed", "gauntlet", "tune")
@@ -234,6 +247,76 @@ def still_quoting(previous):
     return found
 
 
+# ---------------------------------------------------------------- the Computer Chess Index
+
+def long_date(iso):
+    """'2026-11-15' -> '15 November 2026', as the site writes a date."""
+    return datetime.date.fromisoformat(iso).strftime("%d %B %Y").lstrip("0")
+
+
+def cci_clock(text):
+    """A time control as the site writes one: '8.0+0.08s' -> '8+0.08', '2m24s+1.12s' -> '144+1.12'."""
+    base, inc = text.strip().split("+")
+    m = re.fullmatch(r"(?:(\d+)m)?(?:([\d.]+)s?)?", base)
+    return "%s+%s" % (whole(int(m.group(1) or 0) * 60 + float(m.group(2) or 0)), whole(inc.rstrip("s")))
+
+
+def release_version():
+    """The release the home page names (softwareVersion in its JSON-LD)."""
+    with open(os.path.join(ROOT, "index.html"), encoding="utf-8") as fh:
+        return re.search(r'"softwareVersion":\s*"([\d.]+)"', fh.read()).group(1)
+
+
+def read_cci(page, version):
+    """What CCI's page for Luminex says about one version, as cci.json keeps it.
+
+    The page's last table has a row for every version, time control and machine: the rating, its
+    range and the number of games. A version and a time control are written once and hold for the
+    rows under them. Of the machines that have played the version, the one with the most time
+    controls is taken (the page's first, if several have as many).
+    """
+    generated = re.search(r"Generated:\s*(\d{4}-\d\d-\d\d)", page).group(1)
+    machines = dict(re.findall(r"^## Elo Ratings (\w+) <sub>\((.*)\)</sub>\s*$", page, flags=re.M))
+    published = {}
+    for v, day in re.findall(r"^\| ([\d.]+) \| (\d{4}-\d\d-\d\d) \|", page, flags=re.M):
+        published.setdefault(v, day)
+    rows, order, ver, tc = {}, [], None, None
+    for line in page[page.index("## Detailed Evaluation Results"):].split("\n"):
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) < 6 or not re.fullmatch(r"-?\d+", cells[3]):
+            continue
+        ver, tc = cells[0] or ver, cells[1] or tc
+        name, clock = re.match(r"(\w+)\s*<sub>\((.*?)\)</sub>", tc).groups()
+        if ver not in rows:
+            order.append(ver)
+        rows.setdefault(ver, []).append({"machine": cells[2], "tc": name, "clock": cci_clock(clock),
+                                         "elo": int(cells[3]), "range": int(cells[4]), "games": int(cells[5])})
+    by = {}
+    for r in rows.get(version, []):
+        by.setdefault(r["machine"], []).append(r)
+    listed = list(machines)
+    machine = max(by, key=lambda k: (len(by[k]), -listed.index(k) if k in listed else -len(listed))) if by else None
+    cells = sorted(by.get(machine, []), key=lambda r: float(r["clock"].split("+")[0]))
+    return {
+        "note": "What the Computer Chess Index says about the release: the note under \"Where it stands\" on the home page. "
+                "Written by tools/bench_update.py --cci; run tools/stamp.py site afterwards.",
+        "href": CCI_PAGE, "generated": long_date(generated), "version": version,
+        "published": long_date(published[version]) if version in published else None,
+        "newest": order[0] if order else None,              # the newest version the list has played
+        "machine": machine, "machineName": machines.get(machine),
+        "cells": [{k: r[k] for k in ("tc", "clock", "elo", "range", "games")} for r in cells],
+    }
+
+
+def cci_line(c):
+    if not c["cells"]:
+        return "CCI, page of %s: v%s is not on it (the newest it has played: %s)" % (c["generated"], c["version"], c["newest"] or "none")
+    return "CCI, page of %s: v%s on %s (%s): %s" % (
+        c["generated"], c["version"], c["machine"], c["machineName"],
+        "; ".join("%s %s %d ± %d from %s game%s" % (x["tc"], x["clock"], x["elo"], x["range"], N(x["games"]), "" if x["games"] == 1 else "s")
+                  for x in c["cells"]))
+
+
 # ---------------------------------------------------------------- main
 
 def main():
@@ -242,13 +325,33 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--write", action="store_true", help="write the counters and dates into the pages")
     ap.add_argument("--gauntlet", type=int, default=0, help="write gauntlet.json from this gauntlet's page")
-    ap.add_argument("--from", dest="src", default="", help="a folder of saved pages: index1.html ..., users.html, gauntletN.html")
+    ap.add_argument("--cci", nargs="?", const="", default=None, metavar="VERSION",
+                    help="write cci.json from CCI's page for Luminex (default version: the release the home page names)")
+    ap.add_argument("--from", dest="src", default="", help="a folder of saved pages: index1.html ..., users.html, gauntletN.html, cci.md")
     ap.add_argument("--via", default="ssh -n oracle", help='command that runs curl elsewhere ("" = fetch from here)')
     ap.add_argument("--date", default="", help='the date to write, e.g. "12 November 2026" (default: today, in UTC)')
     ap.add_argument("--no-pages", action="store_true", help="do not read every row's test page (faster; Elo figures are then not checked)")
     a = ap.parse_args()
     # UTC, like the bench's and GitHub's own dates and the names of the development builds
     today = a.date or datetime.datetime.now(datetime.timezone.utc).strftime("%d %B %Y").lstrip("0")
+
+    def cci_now(version):
+        """CCI's page as cci.json would keep it, or None if the page did not come back."""
+        page = (open(os.path.join(a.src, "cci.md"), encoding="utf-8", errors="replace").read() if a.src and os.path.exists(os.path.join(a.src, "cci.md"))
+                else ("" if a.src else fetch(CCI_RAW, a.via)))
+        return read_cci(page, version) if "## Detailed Evaluation Results" in page and "Generated:" in page else None
+
+    cci_path = os.path.join(ROOT, "assets", "data", "cci.json")
+    if a.cci is not None:
+        data = cci_now(a.cci or release_version())
+        if not data:
+            sys.exit("CCI's page for Luminex did not come back, or it changed shape.")
+        with open(cci_path, "w", encoding="utf-8", newline="\n") as fh:
+            json.dump(data, fh, ensure_ascii=False, indent=1)
+            fh.write("\n")
+        print(cci_line(data))
+        print("written to assets/data/cci.json. Now run: python -I tools/stamp.py site")
+        return
 
     if a.gauntlet:
         page = (open(os.path.join(a.src, "gauntlet%d.html" % a.gauntlet), encoding="utf-8", errors="replace").read() if a.src
@@ -398,6 +501,15 @@ def main():
         newest = max(w["id"] for w in kinds["gauntlet"] if w["section"] == "Finished") if any(w["section"] == "Finished" for w in kinds["gauntlet"]) else None
         if newest and newest != on_site:
             print("\nthe newest finished gauntlet is %d; the site shows %s (python -I tools/bench_update.py --gauntlet %d)" % (newest, on_site or "none", newest))
+    # the Computer Chess Index adds games every day: say when its page has moved on from cci.json
+    if os.path.exists(cci_path):
+        with open(cci_path, encoding="utf-8") as fh:
+            kept = json.load(fh)
+        now = cci_now(release_version())
+        if now and any(now.get(k) != kept.get(k) for k in ("version", "generated", "machine", "cells", "newest")):
+            print("\nCCI's page has moved on from cci.json (python -I tools/bench_update.py --cci):")
+            print("  the site:  " + cci_line(kept))
+            print("  the list:  " + cci_line(now))
 
     if not a.write:
         print("\nnothing written (pass --write to update the counters and dates)")

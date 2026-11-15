@@ -17,8 +17,11 @@ Regions:
     tests-rows               the full test record on the tests page
     gauntlet                 the gauntlet figure on the home page: the rating, how
                              it was measured, and a row for every opponent
+    cci                      the note under "Where it stands": what the Computer Chess
+                             Index, an independent rating list, says about the release
 The three tests-* regions are drawn from site/assets/data/tests.json, the gauntlet
-from site/assets/data/gauntlet.json (written by tools/bench_update.py --gauntlet N).
+from site/assets/data/gauntlet.json (written by tools/bench_update.py --gauntlet N),
+the cci note from site/assets/data/cci.json (tools/bench_update.py --cci).
 
 Values: inside a sentence, <!--@g:rating-->3471 ± 16<!--/@g:rating--> is filled from
 gauntlet.json as well, so the pages and the footer quote the newest gauntlet without
@@ -332,6 +335,45 @@ def region_gauntlet(g, indent):
     return "\n".join(indent + "  " + line for chunk in out for line in chunk.split("\n"))
 
 
+def and_list(items):
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
+
+
+EARLY = 60      # a CCI figure with a wider range than this (under about a hundred games) is an early reading, not yet a rating
+
+
+def region_cci(c, indent):
+    """The note under "Where it stands": what the Computer Chess Index says about the release.
+
+    Every figure is the list's own: the rating, its range and the number of games, at each of its
+    time controls, with the date its page was generated. The list's settled ratings stand within
+    about ± 30 to ± 50 (a few hundred games); while any figure's range is wider than EARLY, the
+    note says that these are early readings. Before the list has played the release, the note
+    says so and names the newest version it has.
+    """
+    lead = "The Computer Chess Index, an independent rating list with a scale of its own, "
+    cells = c.get("cells") or []
+    if not cells:
+        text = lead + ("has rated Luminex up to v%s; v%s is not on it yet." % (esc(c["newest"]), esc(c["version"])) if c.get("newest")
+                       else "has not played Luminex yet.")
+    else:
+        figures = and_list(["%d ± %d at %s" % (x["elo"], x["range"], esc(x["clock"])) for x in cells])
+        games = [x["games"] for x in cells]
+        if len(set(games)) == 1:
+            played = "%sfrom %s %s" % ("each " if len(games) > 1 else "", "{:,}".format(games[0]), "game" if games[0] == 1 else "games")
+        else:
+            played = "from %s games" % and_list([str(n) for n in games])          # no thousands commas inside a list
+        core = re.search(r"- (\w)-Core$", c.get("machineName") or "")
+        where = "on its %s-core machine" % core.group(1) if core else "on its %s machine" % esc(c.get("machineName") or c.get("machine"))
+        day = re.sub(r" \d{4}$", "", c["generated"])
+        if max(x["range"] for x in cells) > EARLY:
+            text = lead + ("has started on v%s. Its page of %s reads %s %s, %s: %s that will move as it plays on."
+                           % (esc(c["version"]), day, figures, where, played, "early readings" if len(cells) > 1 else "an early reading"))
+        else:
+            text = lead + "gives v%s %s %s, %s (its page of %s)." % (esc(c["version"]), figures, where, played, day)
+    return '%s<p class="note strength-note" data-reveal>%s <a href="%s">Luminex on the CCI</a></p>' % (indent, text, esc(c["href"]))
+
+
 # ---------------------------------------------------------------- stamping
 
 REGION = re.compile(r"(?P<indent>[ \t]*)<!-- @(?P<name>[\w-]+) -->.*?<!-- /@(?P=name) -->", re.S)
@@ -355,7 +397,7 @@ def gauntlet_values(g):
     }
 
 
-def stamp(text, page_url, data, gauntlet=None):
+def stamp(text, page_url, data, gauntlet=None, cci=None):
     def fill(m):
         name, indent = m.group("name"), m.group("indent")
         if name in ("sprite", "footer"):
@@ -374,6 +416,10 @@ def stamp(text, page_url, data, gauntlet=None):
             if gauntlet is None:
                 raise SystemExit("@gauntlet in %s, but assets/data/gauntlet.json is missing" % page_url)
             body = region_gauntlet(gauntlet, indent)
+        elif name == "cci":
+            if cci is None:
+                raise SystemExit("@cci in %s, but assets/data/cci.json is missing" % page_url)
+            body = region_cci(cci, indent)
         else:
             raise SystemExit("unknown region @%s in %s" % (name, page_url))
         return "%s<!-- @%s -->\n%s\n%s<!-- /@%s -->" % (indent, name, body, indent, name)
@@ -479,6 +525,10 @@ def main():
     if os.path.exists(os.path.join(root, "assets", "data", "gauntlet.json")):
         with open(os.path.join(root, "assets", "data", "gauntlet.json"), encoding="utf-8") as fh:
             gauntlet = json.load(fh)
+    cci = None
+    if os.path.exists(os.path.join(root, "assets", "data", "cci.json")):
+        with open(os.path.join(root, "assets", "data", "cci.json"), encoding="utf-8") as fh:
+            cci = json.load(fh)
     bad = 0
     for folder, _, files in os.walk(root):
         for name in sorted(files):
@@ -489,7 +539,7 @@ def main():
             url = "/" + (rel[:-len("index.html")] if rel.endswith("index.html") else rel)
             with open(path, encoding="utf-8") as fh:
                 before = fh.read()
-            after = stamp(before, url, data, gauntlet)
+            after = stamp(before, url, data, gauntlet, cci)
             if after != before:
                 with open(path, "w", encoding="utf-8", newline="\n") as fh:
                     fh.write(after)

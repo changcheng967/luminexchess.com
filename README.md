@@ -53,8 +53,9 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
 - `tools/stamp.py site` keeps the repeated parts in step and checks the pages. A page marks
   a region with `<!-- @name -->` and `<!-- /@name -->`; the tool rewrites what is between
   them: the icon sprite, header and footer from `tools/parts/`, the starting position's
-  pieces, the test charts and rows from `site/assets/data/tests.json`, and the gauntlet
-  figure from `site/assets/data/gauntlet.json`. Inside a sentence, a value between
+  pieces, the test charts and rows from `site/assets/data/tests.json`, the gauntlet
+  figure from `site/assets/data/gauntlet.json`, and the note about the Computer Chess Index
+  from `site/assets/data/cci.json`. Inside a sentence, a value between
   `<!--@g:key-->` and `<!--/@g:key-->` is filled from `gauntlet.json` too (keys: `rating`,
   `n`, `e`, `games`, `day`, `count`, `tc`, `list`, `network`), so the pages and the
   footer quote the newest gauntlet without an edit. It then reports anything the Content
@@ -70,7 +71,9 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   the sentence under them on the tests page, the "as of" date, and the Elo, interval and
   games of every row that differs from its test page. With `--gauntlet N` it
   writes `gauntlet.json` from that gauntlet's page, keeps the gauntlet shown until then in
-  it as `previous`, and lists the lines that still quote that one. It fetches through `ssh -n oracle` by
+  it as `previous`, and lists the lines that still quote that one. With `--cci` it writes
+  `cci.json` from the Computer Chess Index's page for Luminex, and the plain report says
+  when that page has moved on from the file. It fetches through `ssh -n oracle` by
   default (`--via ""` fetches from this machine). The count of games is the bench's own
   (its Users page), which includes games of workloads deleted later; the sum over the
   listed workloads does not.
@@ -134,9 +137,10 @@ console.
     network is always written by its real file name (`luminex_gen768r_06q_i8.nnue`), never
     by an older network's name or a neutral one.
   - `/`: the opening's pill and numbers, "Where it stands" (the gauntlet's `title` and
-    `since` in `gauntlet.json`, and the release against the one before it as one result
-    row), the chart's point for the release (`data-points`, the headline, the hidden
-    table), a chronicle entry and the "Next" entry, the download section.
+    `since` in `gauntlet.json`, the release against the one before it as one result
+    row, and the CCI note: `tools/bench_update.py --cci` once `softwareVersion` names
+    the release), the chart's point for the release (`data-points`, the headline, the
+    hidden table), a chronicle entry and the "Next" entry, the download section.
   - `/engine/`: the generation cards, the training counters, the table of phases and the
     table of networks under it; `/tests/`: the notes under the record;
     `tools/parts/footer.html`: the footnote.
@@ -178,6 +182,14 @@ console.
   release's own figures wait for the next release: the four training counters and the
   table of phases on `/engine/` (a step is 131,072 positions), the sentence about positions
   shown on the home page, and the `since` sentence in `gauntlet.json`.
+- **CCI.** The Computer Chess Index, an independent list, adds games every day, so its
+  figures for a new release move for weeks. `tools/bench_update.py` says when its page has
+  moved on; `tools/bench_update.py --cci`, then `tools/stamp.py`, bring the note under "Where
+  it stands" along. The note quotes the list's own figures for the release: the rating, its
+  range and the games at each time control, on the machine that has played the most, with
+  the date of the list's page. While any range is wider than ± 60 it calls them early
+  readings (`EARLY` in `tools/stamp.py`); before the list has played the release it says so.
+  It is the one place the site quotes CCI, and it never shows an older version's figures.
 - **Strength.** The release's match against the one before it and the rating chart's
   points (`data-points`) are in `site/index.html`; the gauntlet figure comes from
   `gauntlet.json`; the footnote is in `tools/parts/footer.html`.
