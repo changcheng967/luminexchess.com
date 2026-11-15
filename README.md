@@ -4,8 +4,8 @@ The website of [Luminex](https://github.com/changcheng967/Luminex), an open-sour
 
 `site/` is the whole website: plain HTML, CSS and JavaScript with no build step and no
 third-party requests, apart from one call a page to the GitHub API for the latest release
-and, on the download page, the current development build (the pages carry v6.5.1 links as
-a fallback).
+and, on the download page, the current development build (the pages carry the current
+release's links as a fallback).
 
 ## Pages
 
@@ -171,12 +171,13 @@ console.
   `noteEnd` (a sentence added to the note under the rows). A new gauntlet starts without
   them.
 - **A new network on main.** In `site/assets/data/tests.json`, label its test "Passed; on
-  main" and the one before it "Passed; since replaced by …". On `/engine/`: the four
-  training counters, the table of phases (a step is 131,072 positions) and a row in the
-  table of networks. On the home page: the sentence
-  about positions shown, a chronicle entry, and the `since` sentence in `gauntlet.json`
-  (shown under the gauntlet's text) until a gauntlet has rated the new build. On
-  `/download/`: the network the development build carries.
+  main" and the one before it "Passed; since replaced by …" (a released network keeps
+  "Passed; released in v…"). On `/engine/`: a row in the table of networks and the note
+  under it. On the home page: the chronicle's "Next" entry. On `/download/`: the network
+  the development build carries, with its test. The pages describe the release, so the
+  release's own figures wait for the next release: the four training counters and the
+  table of phases on `/engine/` (a step is 131,072 positions), the sentence about positions
+  shown on the home page, and the `since` sentence in `gauntlet.json`.
 - **Strength.** The release's match against the one before it and the rating chart's
   points (`data-points`) are in `site/index.html`; the gauntlet figure comes from
   `gauntlet.json`; the footnote is in `tools/parts/footer.html`.

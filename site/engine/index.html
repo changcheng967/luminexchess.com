@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=15"></script>
+  <script src="/assets/js/theme.js?v=16"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,10 +25,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=15">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=15">
-  <script src="/assets/js/site.js?v=15" defer></script>
-  <script src="/assets/js/engine.js?v=15" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=16">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=16">
+  <script src="/assets/js/site.js?v=16" defer></script>
+  <script src="/assets/js/engine.js?v=16" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -397,7 +397,7 @@
 
         <div class="gens-head">
           <h3 class="h-m" id="generations" data-reveal>Four generations of one design</h3>
-          <p data-reveal data-d="1">The accumulators have kept their shape since gen768; what changes from one generation to the next is mostly what stands behind them. With v6.6.0 the gen768r line is complete, and the network after it is a new design. Each has its specification in the repository's <a href="https://github.com/changcheng967/Luminex/tree/main/nnue">nnue folder</a>, beside a <a href="https://github.com/changcheng967/Luminex/blob/main/nnue/DEVLOG.md">development log</a> that also covers the 512-wide networks that came before.</p>
+          <p data-reveal data-d="1">The accumulators have kept their shape since gen768; what changes from one generation to the next is mostly what stands behind them. Each has its specification in the repository's <a href="https://github.com/changcheng967/Luminex/tree/main/nnue">nnue folder</a>, beside a <a href="https://github.com/changcheng967/Luminex/blob/main/nnue/DEVLOG.md">development log</a> that also covers the 512-wide networks that came before.</p>
           <p class="legend gens-legend" data-reveal data-d="2"><span><i class="k-add"></i>New in this generation</span><span><i class="k-plan"></i>Specified, not built</span><span><i class="k-keep"></i>Carried over</span></p>
         </div>
         <ol class="gens" data-gens aria-labelledby="generations">
@@ -430,7 +430,7 @@
             <h4 class="gen-name">gen768s</h4>
             <svg class="gen-fig" viewBox="0 0 240 100" aria-hidden="true" focusable="false"><rect class="g-in" x="6" y="10" width="9" height="80" rx="2.5"/><rect class="g-acc" x="26" y="10" width="8" height="80" rx="2.5"/><rect class="g-acc" x="38" y="10" width="8" height="80" rx="2.5"/><path class="g-wire" d="M15 50H26"/><path class="g-wire" d="M46 50C60 50 62 12 78 12"/><rect class="g-box" x="78" y="8" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 23 78 23"/><rect class="g-box" x="78" y="19" width="8" height="8" rx="2"/><path class="g-wire is-sel" d="M46 50C60 50 62 34 78 34"/><rect class="g-box is-sel" x="78" y="30" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 45 78 45"/><rect class="g-box" x="78" y="41" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 56 78 56"/><rect class="g-box" x="78" y="52" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 67 78 67"/><rect class="g-box" x="78" y="63" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 78 78 78"/><rect class="g-box" x="78" y="74" width="8" height="8" rx="2"/><path class="g-wire" d="M46 50C60 50 62 89 78 89"/><rect class="g-box" x="78" y="85" width="8" height="8" rx="2"/><path class="g-wire" d="M86 34C100 34 104 30 120 30"/><rect class="g-tail" x="120" y="18.0" width="9" height="24" rx="2.5"/><path class="g-wire" d="M129 30H152"/><rect class="g-tail" x="152" y="12.5" width="9" height="35" rx="2.5"/><path class="g-wire" d="M161 30H184.5"/><circle class="g-tail" cx="190" cy="30" r="5.5"/><path class="g-wire is-plan g-new" d="M86 34C100 34 102 78 120 78"/><rect class="g-plan g-new" x="120" y="70" width="9" height="16" rx="2.5"/><path class="g-wire is-plan g-new" d="M129 78H147"/><circle class="g-plan g-new" cx="152" cy="78" r="4.5"/><text class="g-label" x="203" y="33">value</text><text class="g-label g-new" x="163" y="81">error</text></svg>
             <p class="gen-shape mono">… + 8 × (1,536 → 8 → 1)</p>
-            <p>gen768r with a second, smaller head in every bucket. It predicts, in centipawns, how far the static evaluation is from what a deep search would say, and is computed only where the search's pruning margins read it. Today the search makes that guess from correction history, for a whole class of positions at once. The design allows the head 3% of the speed, and asks for an offline test and then an SPRT. It is a design; nothing is built yet.</p>
+            <p>gen768r with a second, smaller head in every bucket. It predicts, in centipawns, how far the static evaluation is from what a deep search would say, and is computed only where the search's pruning margins read it. Today the search makes that guess from correction history, for a whole class of positions at once. The design allows the head 3% of the speed, and asks for an offline test and then an SPRT. The head is not built yet: gen768s_01q, the network now on main, has gen768r's shape without it.</p>
             <a class="link" href="https://github.com/changcheng967/Luminex/blob/main/nnue/V4-GEN768S.md"><span>Specification<span class="sr-only"> of gen768s</span></span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </li>
         </ol>
@@ -484,7 +484,7 @@
         </div>
         <figure class="phases steps" id="next-network" data-reveal>
           <figcaption class="fig-head">
-            <span class="fig-title" id="steps-title">Each network of the line, tested</span>
+            <span class="fig-title" id="steps-title">Each network since v6.5.1, tested</span>
             <span class="fig-sub">An SPRT at 10+0.1 for every step, against the network before it; the first against v6.5.1's network and search constants.</span>
           </figcaption>
           <table class="phases-table" role="table" aria-labelledby="steps-title">
@@ -497,9 +497,10 @@
               <tr role="row"><th role="rowheader" scope="row">gen768r_04q</th><td role="cell" data-th="What changed">To 860,000 steps, on 3.73 billion positions, with a loss power of 3.0 instead of 2.6</td><td role="cell" data-th="Elo" class="n">+13.31 ± 6.55</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/82/">test 82</a></td></tr>
               <tr role="row"><th role="rowheader" scope="row">gen768r_05q</th><td role="cell" data-th="What changed">To 1.5 million steps, on 6.6 billion positions, 4.24 billion of them new to the line</td><td role="cell" data-th="Elo" class="n">+22.02 ± 8.52</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/112/">test 112</a></td></tr>
               <tr role="row"><th role="rowheader" scope="row">gen768r_06q</th><td role="cell" data-th="What changed">To 1.98 million steps, on 6.0 billion positions, with January 2026 for the first time</td><td role="cell" data-th="Elo" class="n">+3.09 ± 2.46</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/128/">test 128</a></td></tr>
+              <tr role="row"><th role="rowheader" scope="row">gen768s_01q</th><td role="cell" data-th="What changed">After the release: gen768r_06 trained for 450,000 more steps on 6.1 billion test91 positions relabeled by Leela's BT4 network, then 30,000 steps through the engine's rounding</td><td role="cell" data-th="Elo" class="n">+77.57 ± 15.21</td><td role="cell" data-th="Test" class="n"><a href="https://bench.luminexchess.com/test/140/">test 140</a></td></tr>
             </tbody>
           </table>
-          <p class="note">On positions held out from January 2026 the loss fell with every step: 0.002183 for gen768r_03q, then 0.002103, 0.002026, and 0.002001 for gen768r_06q. The last step is a third of each of the two before it: the line has used every month of its data, and the network after it is a new design. gen768r_06q is inside every v6.6.0 binary, which reports it by its file name, <code>luminex_gen768r_06q_i8.nnue</code>.</p>
+          <p class="note">On positions held out from January 2026 the loss fell with every gen768r network: 0.002183 for gen768r_03q, then 0.002103, 0.002026, and 0.002001 for gen768r_06q. That last fall is a third of each of the two before it: the line had used every month of its data, and the network after it changes the labels instead. gen768r_06q is inside every v6.6.0 binary, which reports it by its file name, <code>luminex_gen768r_06q_i8.nnue</code>; gen768s_01q is on main and in the <a href="/download/#dev">development build</a>.</p>
         </figure>
         <a class="card link-card" data-glow data-reveal href="https://huggingface.co/datasets/xushawn/t91-lgs">
           <span class="link-card-label">Training data on Hugging Face</span>

@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=15"></script>
+  <script src="/assets/js/theme.js?v=16"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -28,11 +28,11 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=15">
-  <link rel="stylesheet" href="/assets/css/home.css?v=15">
-  <script src="/assets/js/site.js?v=15" defer></script>
-  <script src="/assets/js/board.js?v=15" defer></script>
-  <script src="/assets/js/home.js?v=15" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=16">
+  <link rel="stylesheet" href="/assets/css/home.css?v=16">
+  <script src="/assets/js/site.js?v=16" defer></script>
+  <script src="/assets/js/board.js?v=16" defer></script>
+  <script src="/assets/js/home.js?v=16" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -256,7 +256,7 @@
             <dl class="proof" data-reveal data-d="6">
               <div><dt>The release<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo><!--@g:n-->3471<!--/@g:n--></span><span class="u">± <!--@g:e-->16<!--/@g:e--></span></dd></div>
               <div><dt>Over v6.5.1</dt><dd><span class="proof-n" data-odo>+246.55</span><span class="u">± 13.37</span></dd></div>
-              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>781,484</span></dd></div>
+              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>824,508</span></dd></div>
               <div><dt>Speed</dt><dd><span class="proof-n" data-odo>1.2M</span><span class="u">nodes/s</span></dd></div>
             </dl>
             <p class="scroll-cue" data-cue aria-hidden="true"><span>Scroll to play a real game</span><i></i></p>
@@ -486,15 +486,15 @@
         </ol>
 
         <dl class="totals totals-3">
-          <div data-reveal><dt>SPRTs run</dt><dd class="num"><span data-odo>52</span></dd></div>
-          <div data-reveal data-d="1"><dt>Passed</dt><dd class="num is-lit"><span data-odo>33</span></dd></div>
-          <div data-reveal data-d="2"><dt>OpenBench games</dt><dd class="num"><span data-odo>781,484</span></dd></div>
+          <div data-reveal><dt>SPRTs run</dt><dd class="num"><span data-odo>57</span></dd></div>
+          <div data-reveal data-d="1"><dt>Passed</dt><dd class="num is-lit"><span data-odo>35</span></dd></div>
+          <div data-reveal data-d="2"><dt>OpenBench games</dt><dd class="num"><span data-odo>824,508</span></dd></div>
         </dl>
 
         <figure class="card strip" data-strip>
           <figcaption class="fig-head">
             <span class="fig-title">Every test so far</span>
-            <span class="fig-sub">Elo against the engine each change would replace, oldest on the left, as of 14 November 2026. A test that passed is lit.</span>
+            <span class="fig-sub">Elo against the engine each change would replace, oldest on the left, as of 15 November 2026. A test that passed is lit.</span>
           </figcaption>
           <!-- @tests-strip -->
           <div class="strip-scroll">
@@ -511,268 +511,293 @@
                 <line x1="44" x2="992" y1="14" y2="14"/>
                 <text x="34" y="18" text-anchor="end">+120</text>
                 <text class="strip-end is-first" x="44" y="242">Test 1</text>
-                <text class="strip-end is-last" x="992" y="242" text-anchor="end">Test 130</text>
+                <text class="strip-end is-last" x="992" y="242" text-anchor="end">Test 140</text>
               </g>
               <a class="sbar is-pass" href="/tests/#t1" aria-label="Test 1, Static exchange evaluation rewritten with exact x-rays: +127.32 ± 27.23 Elo over 570 games. Passed." data-test="1" data-title="Static exchange evaluation rewritten with exact x-rays" data-text="+127.32 ± 27.23" data-games="570" data-label="Passed">
-                <rect class="sbar-hit" x="44" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="53.12" x2="53.12" y1="14" y2="39.14"/>
-                <path class="sbar-off" d="M49.12 20L53.12 14L57.12 20"/>
-                <path class="sbar-fill" d="M48 165.5V18Q48 14 52 14H54.23Q58.23 14 58.23 18V165.5Z"/>
+                <rect class="sbar-hit" x="44" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="52.32" x2="52.32" y1="14" y2="39.14"/>
+                <path class="sbar-off" d="M48.32 20L52.32 14L56.32 20"/>
+                <path class="sbar-fill" d="M48 165.5V18Q48 14 52 14H52.63Q56.63 14 56.63 18V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t3" aria-label="Test 3, Capture history, razoring and quiescence repairs: +20.71 ± 9.77 Elo over 3,006 games. Passed." data-test="3" data-title="Capture history, razoring and quiescence repairs" data-text="+20.71 ± 9.77" data-games="3,006" data-label="Passed">
-                <rect class="sbar-hit" x="62.23" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="71.35" x2="71.35" y1="127.02" y2="151.69"/>
-                <path class="sbar-fill" d="M66.23 165.5V143.35Q66.23 139.35 70.23 139.35H72.46Q76.46 139.35 76.46 143.35V165.5Z"/>
+                <rect class="sbar-hit" x="60.63" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="68.95" x2="68.95" y1="127.02" y2="151.69"/>
+                <path class="sbar-fill" d="M64.63 165.5V143.35Q64.63 139.35 68.63 139.35H69.26Q73.26 139.35 73.26 143.35V165.5Z"/>
               </a>
               <a class="sbar is-merged is-neg" href="/tests/#t18" aria-label="Test 18, Hash table encoding, replacement and seven more repairs: −6.99 ± 6.66 Elo over 6,314 games. Merged for correctness." data-test="18" data-title="Hash table encoding, replacement and seven more repairs" data-text="−6.99 ± 6.66" data-games="6,314" data-label="Merged for correctness">
-                <rect class="sbar-hit" x="80.46" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="89.58" x2="89.58" y1="165.92" y2="182.73"/>
-                <path class="sbar-fill" d="M84.46 165.5V170.32Q84.46 174.32 88.46 174.32H90.69Q94.69 174.32 94.69 170.32V165.5Z"/>
+                <rect class="sbar-hit" x="77.26" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="85.58" x2="85.58" y1="165.92" y2="182.73"/>
+                <path class="sbar-fill" d="M81.26 165.5V170.32Q81.26 174.32 85.26 174.32H85.89Q89.89 174.32 89.89 170.32V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t19" aria-label="Test 19, History sign, root-best leak and eval cache fixes: +10.32 ± 6.51 Elo over 6,602 games. Passed." data-test="19" data-title="History sign, root-best leak and eval cache fixes" data-text="+10.32 ± 6.51" data-games="6,602" data-label="Passed">
-                <rect class="sbar-hit" x="98.69" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="107.81" x2="107.81" y1="144.25" y2="160.69"/>
-                <path class="sbar-fill" d="M102.69 165.5V156.47Q102.69 152.47 106.69 152.47H108.92Q112.92 152.47 112.92 156.47V165.5Z"/>
+                <rect class="sbar-hit" x="93.89" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="102.21" x2="102.21" y1="144.25" y2="160.69"/>
+                <path class="sbar-fill" d="M97.89 165.5V156.47Q97.89 152.47 101.89 152.47H102.53Q106.53 152.47 106.53 156.47V165.5Z"/>
               </a>
               <a class="sbar is-merged is-neg" href="/tests/#t22" aria-label="Test 22, Quiescence hash table, eval reuse, 50-move damping: −1.27 ± 4.07 Elo over 17,492 games. Merged, within error." data-test="22" data-title="Quiescence hash table, eval reuse, 50-move damping" data-text="−1.27 ± 4.07" data-games="17,492" data-label="Merged, within error">
-                <rect class="sbar-hit" x="116.92" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="126.04" x2="126.04" y1="161.97" y2="172.24"/>
-                <path class="sbar-fill" d="M120.92 165.5V165.5Q120.92 167.1 122.53 167.1H129.55Q131.15 167.1 131.15 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="110.53" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="118.84" x2="118.84" y1="161.97" y2="172.24"/>
+                <path class="sbar-fill" d="M114.53 165.5V165.5Q114.53 167.1 116.13 167.1H121.55Q123.16 167.1 123.16 165.5V165.5Z"/>
               </a>
               <a class="sbar is-merged is-neg" href="/tests/#t23" aria-label="Test 23, Complete check detection, no double null moves: −4.42 ± 5.68 Elo over 8,732 games. Merged, within error." data-test="23" data-title="Complete check detection, no double null moves" data-text="−4.42 ± 5.68" data-games="8,732" data-label="Merged, within error">
-                <rect class="sbar-hit" x="135.15" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="144.27" x2="144.27" y1="163.91" y2="178.25"/>
-                <path class="sbar-fill" d="M139.15 165.5V167.08Q139.15 171.08 143.15 171.08H145.38Q149.38 171.08 149.38 167.08V165.5Z"/>
+                <rect class="sbar-hit" x="127.16" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="135.47" x2="135.47" y1="163.91" y2="178.25"/>
+                <path class="sbar-fill" d="M131.16 165.5V167.08Q131.16 171.08 135.16 171.08H135.79Q139.79 171.08 139.79 167.08V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t24" aria-label="Test 24, Queen promotions searched with the captures: +8.25 ± 5.61 Elo over 8,632 games. Passed." data-test="24" data-title="Queen promotions searched with the captures" data-text="+8.25 ± 5.61" data-games="8,632" data-label="Passed">
-                <rect class="sbar-hit" x="153.38" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="162.5" x2="162.5" y1="148" y2="162.17"/>
-                <path class="sbar-fill" d="M157.38 165.5V159.08Q157.38 155.08 161.38 155.08H163.62Q167.62 155.08 167.62 159.08V165.5Z"/>
+                <rect class="sbar-hit" x="143.79" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="152.11" x2="152.11" y1="148" y2="162.17"/>
+                <path class="sbar-fill" d="M147.79 165.5V159.08Q147.79 155.08 151.79 155.08H152.42Q156.42 155.08 156.42 159.08V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t27" aria-label="Test 27, AVX-512 VNNI builds on capable CPUs: +45.79 ± 14.88 Elo over 1,328 games. Passed." data-test="27" data-title="AVX-512 VNNI builds on capable CPUs" data-text="+45.79 ± 14.88" data-games="1,328" data-label="Passed">
-                <rect class="sbar-hit" x="171.62" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="180.73" x2="180.73" y1="88.9" y2="126.48"/>
-                <path class="sbar-fill" d="M175.62 165.5V111.69Q175.62 107.69 179.62 107.69H181.85Q185.85 107.69 185.85 111.69V165.5Z"/>
+                <rect class="sbar-hit" x="160.42" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="168.74" x2="168.74" y1="88.9" y2="126.48"/>
+                <path class="sbar-fill" d="M164.42 165.5V111.69Q164.42 107.69 168.42 107.69H169.05Q173.05 107.69 173.05 111.69V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t28" aria-label="Test 28, King-move accumulators from a per-square refresh cache: +6.96 ± 4.96 Elo over 10,292 games. Passed." data-test="28" data-title="King-move accumulators from a per-square refresh cache" data-text="+6.96 ± 4.96" data-games="10,292" data-label="Passed">
-                <rect class="sbar-hit" x="189.85" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="198.96" x2="198.96" y1="150.45" y2="162.97"/>
-                <path class="sbar-fill" d="M193.85 165.5V160.71Q193.85 156.71 197.85 156.71H200.08Q204.08 156.71 204.08 160.71V165.5Z"/>
+                <rect class="sbar-hit" x="177.05" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="185.37" x2="185.37" y1="150.45" y2="162.97"/>
+                <path class="sbar-fill" d="M181.05 165.5V160.71Q181.05 156.71 185.05 156.71H185.68Q189.68 156.71 189.68 160.71V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t29" aria-label="Test 29, Only checks that keep material are extended: +15.81 ± 8.27 Elo over 3,848 games. Passed." data-test="29" data-title="Only checks that keep material are extended" data-text="+15.81 ± 8.27" data-games="3,848" data-label="Passed">
-                <rect class="sbar-hit" x="208.08" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="217.19" x2="217.19" y1="135.1" y2="155.98"/>
-                <path class="sbar-fill" d="M212.08 165.5V149.54Q212.08 145.54 216.08 145.54H218.31Q222.31 145.54 222.31 149.54V165.5Z"/>
+                <rect class="sbar-hit" x="193.68" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="202" x2="202" y1="135.1" y2="155.98"/>
+                <path class="sbar-fill" d="M197.68 165.5V149.54Q197.68 145.54 201.68 145.54H202.32Q206.32 145.54 206.32 149.54V165.5Z"/>
               </a>
               <a class="sbar is-stop" href="/tests/#t30" aria-label="Test 30, Null-move, singular, root and qsearch bound repairs: +1.68 ± 4.95 Elo over 10,748 games. Stopped, unresolved; re-run as test 33." data-test="30" data-title="Null-move, singular, root and qsearch bound repairs" data-text="+1.68 ± 4.95" data-games="10,748" data-label="Stopped, unresolved; re-run as test 33">
-                <rect class="sbar-hit" x="226.31" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="235.42" x2="235.42" y1="157.13" y2="169.63"/>
-                <path class="sbar-fill" d="M230.31 165.5V165.5Q230.31 163.38 232.43 163.38H238.42Q240.54 163.38 240.54 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="210.32" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="218.63" x2="218.63" y1="157.13" y2="169.63"/>
+                <path class="sbar-fill" d="M214.32 165.5V165.5Q214.32 163.38 216.44 163.38H220.83Q222.95 163.38 222.95 165.5V165.5Z"/>
               </a>
               <a class="sbar is-stop" href="/tests/#t31" aria-label="Test 31, Failed quiet moves lose as much history as cutoffs earn: +48.64 ± 27.31 Elo over 266 games. Stopped: a bench bug stretched the time control." data-test="31" data-title="Failed quiet moves lose as much history as cutoffs earn" data-text="+48.64 ± 27.31" data-games="266" data-label="Stopped: a bench bug stretched the time control">
-                <rect class="sbar-hit" x="244.54" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="253.65" x2="253.65" y1="69.61" y2="138.57"/>
-                <path class="sbar-fill" d="M248.54 165.5V108.09Q248.54 104.09 252.54 104.09H254.77Q258.77 104.09 258.77 108.09V165.5Z"/>
+                <rect class="sbar-hit" x="226.95" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="235.26" x2="235.26" y1="69.61" y2="138.57"/>
+                <path class="sbar-fill" d="M230.95 165.5V108.09Q230.95 104.09 234.95 104.09H235.58Q239.58 104.09 239.58 108.09V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t32" aria-label="Test 32, Failed quiet moves lose as much history as cutoffs earn: +92.68 ± 20.53 Elo over 660 games. Passed." data-test="32" data-title="Failed quiet moves lose as much history as cutoffs earn" data-text="+92.68 ± 20.53" data-games="660" data-label="Passed">
-                <rect class="sbar-hit" x="262.77" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="271.88" x2="271.88" y1="22.57" y2="74.41"/>
-                <path class="sbar-fill" d="M266.77 165.5V52.49Q266.77 48.49 270.77 48.49H273Q277 48.49 277 52.49V165.5Z"/>
+                <rect class="sbar-hit" x="243.58" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="251.89" x2="251.89" y1="22.57" y2="74.41"/>
+                <path class="sbar-fill" d="M247.58 165.5V52.49Q247.58 48.49 251.58 48.49H252.21Q256.21 48.49 256.21 52.49V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t33" aria-label="Test 33, Null-move, singular, root and qsearch bound repairs: +5.48 ± 5.70 Elo over 7,100 games. Passed, no-regression test." data-test="33" data-title="Null-move, singular, root and qsearch bound repairs" data-text="+5.48 ± 5.70" data-games="7,100" data-label="Passed, no-regression test">
-                <rect class="sbar-hit" x="281" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="290.12" x2="290.12" y1="151.39" y2="165.78"/>
-                <path class="sbar-fill" d="M285 165.5V162.58Q285 158.58 289 158.58H291.23Q295.23 158.58 295.23 162.58V165.5Z"/>
+                <rect class="sbar-hit" x="260.21" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="268.53" x2="268.53" y1="151.39" y2="165.78"/>
+                <path class="sbar-fill" d="M264.21 165.5V162.58Q264.21 158.58 268.21 158.58H268.84Q272.84 158.58 272.84 162.58V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t34" aria-label="Test 34, The hash table keeps its saved move when a store has none: +29.81 ± 11.19 Elo over 1,776 games. Passed." data-test="34" data-title="The hash table keeps its saved move when a store has none" data-text="+29.81 ± 11.19" data-games="1,776" data-label="Passed">
-                <rect class="sbar-hit" x="299.23" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="308.35" x2="308.35" y1="113.74" y2="141.99"/>
-                <path class="sbar-fill" d="M303.23 165.5V131.86Q303.23 127.86 307.23 127.86H309.46Q313.46 127.86 313.46 131.86V165.5Z"/>
+                <rect class="sbar-hit" x="276.84" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="285.16" x2="285.16" y1="113.74" y2="141.99"/>
+                <path class="sbar-fill" d="M280.84 165.5V131.86Q280.84 127.86 284.84 127.86H285.47Q289.47 127.86 289.47 131.86V165.5Z"/>
               </a>
               <a class="sbar is-stop" href="/tests/#t41" aria-label="Test 41, Re-search reduced fail-highs with a zero window first: +1.95 ± 2.11 Elo over 46,332 games. Stopped, unresolved; re-run as test 44." data-test="41" data-title="Re-search reduced fail-highs with a zero window first" data-text="+1.95 ± 2.11" data-games="46,332" data-label="Stopped, unresolved; re-run as test 44">
-                <rect class="sbar-hit" x="317.46" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="326.58" x2="326.58" y1="160.37" y2="165.7"/>
-                <path class="sbar-fill" d="M321.46 165.5V165.5Q321.46 163.04 323.92 163.04H329.23Q331.69 163.04 331.69 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="293.47" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="301.79" x2="301.79" y1="160.37" y2="165.7"/>
+                <path class="sbar-fill" d="M297.47 165.5V165.5Q297.47 163.04 299.94 163.04H303.64Q306.11 163.04 306.11 165.5V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t42" aria-label="Test 42, Key correction history by side to move: +61.41 ± 15.85 Elo over 886 games. Passed." data-test="42" data-title="Key correction history by side to move" data-text="+61.41 ± 15.85" data-games="886" data-label="Passed">
-                <rect class="sbar-hit" x="335.69" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="344.81" x2="344.81" y1="67.96" y2="107.98"/>
-                <path class="sbar-fill" d="M339.69 165.5V91.97Q339.69 87.97 343.69 87.97H345.92Q349.92 87.97 349.92 91.97V165.5Z"/>
+                <rect class="sbar-hit" x="310.11" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="318.42" x2="318.42" y1="67.96" y2="107.98"/>
+                <path class="sbar-fill" d="M314.11 165.5V91.97Q314.11 87.97 318.11 87.97H318.74Q322.74 87.97 322.74 91.97V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t43" aria-label="Test 43, Prune late quiet moves without a history escape: +4.86 ± 3.74 Elo over 16,290 games. Passed." data-test="43" data-title="Prune late quiet moves without a history escape" data-text="+4.86 ± 3.74" data-games="16,290" data-label="Passed">
-                <rect class="sbar-hit" x="353.92" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="363.04" x2="363.04" y1="154.64" y2="164.09"/>
-                <path class="sbar-fill" d="M357.92 165.5V163.36Q357.92 159.36 361.92 159.36H364.15Q368.15 159.36 368.15 163.36V165.5Z"/>
+                <rect class="sbar-hit" x="326.74" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="335.05" x2="335.05" y1="154.64" y2="164.09"/>
+                <path class="sbar-fill" d="M330.74 165.5V163.36Q330.74 159.36 334.74 159.36H335.37Q339.37 159.36 339.37 163.36V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t44" aria-label="Test 44, Re-search reduced fail-highs with a zero window first: +1.23 ± 3.61 Elo over 16,644 games. Passed, no-regression test." data-test="44" data-title="Re-search reduced fail-highs with a zero window first" data-text="+1.23 ± 3.61" data-games="16,644" data-label="Passed, no-regression test">
-                <rect class="sbar-hit" x="372.15" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="381.27" x2="381.27" y1="159.39" y2="168.5"/>
-                <path class="sbar-fill" d="M376.15 165.5V165.5Q376.15 163.95 377.71 163.95H384.83Q386.38 163.95 386.38 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="343.37" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="351.68" x2="351.68" y1="159.39" y2="168.5"/>
+                <path class="sbar-fill" d="M347.37 165.5V165.5Q347.37 163.95 348.92 163.95H354.45Q356 163.95 356 165.5V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t46" aria-label="Test 46, Set the search constants to the tune 45 values: +26.49 ± 10.38 Elo over 1,958 games. Passed." data-test="46" data-title="Set the search constants to the tune 45 values" data-text="+26.49 ± 10.38" data-games="1,958" data-label="Passed">
-                <rect class="sbar-hit" x="390.38" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="399.5" x2="399.5" y1="118.95" y2="145.16"/>
-                <path class="sbar-fill" d="M394.38 165.5V136.06Q394.38 132.06 398.38 132.06H400.62Q404.62 132.06 404.62 136.06V165.5Z"/>
+                <rect class="sbar-hit" x="360" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="368.32" x2="368.32" y1="118.95" y2="145.16"/>
+                <path class="sbar-fill" d="M364 165.5V136.06Q364 132.06 368 132.06H368.63Q372.63 132.06 372.63 136.06V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t47" aria-label="Test 47, Require a margin over beta for shallow null moves: +4.00 ± 3.12 Elo over 20,664 games. Passed." data-test="47" data-title="Require a margin over beta for shallow null moves" data-text="+4.00 ± 3.12" data-games="20,664" data-label="Passed">
-                <rect class="sbar-hit" x="408.62" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="417.73" x2="417.73" y1="156.51" y2="164.39"/>
-                <path class="sbar-fill" d="M412.62 165.5V164.45Q412.62 160.45 416.62 160.45H418.85Q422.85 160.45 422.85 164.45V165.5Z"/>
+                <rect class="sbar-hit" x="376.63" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="384.95" x2="384.95" y1="156.51" y2="164.39"/>
+                <path class="sbar-fill" d="M380.63 165.5V164.45Q380.63 160.45 384.63 160.45H385.26Q389.26 160.45 389.26 164.45V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t48" aria-label="Test 48, Prune more quiet moves by futility from depth 3: −4.37 ± 4.97 Elo over 8,102 games. Failed, closed." data-test="48" data-title="Prune more quiet moves by futility from depth 3" data-text="−4.37 ± 4.97" data-games="8,102" data-label="Failed, closed">
-                <rect class="sbar-hit" x="426.85" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="435.96" x2="435.96" y1="164.74" y2="177.29"/>
-                <path class="sbar-fill" d="M430.85 165.5V167.02Q430.85 171.02 434.85 171.02H437.08Q441.08 171.02 441.08 167.02V165.5Z"/>
+                <rect class="sbar-hit" x="393.26" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="401.58" x2="401.58" y1="164.74" y2="177.29"/>
+                <path class="sbar-fill" d="M397.26 165.5V167.02Q397.26 171.02 401.26 171.02H401.89Q405.89 171.02 405.89 167.02V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t49" aria-label="Test 49, Keep checking moves out of history pruning: −1.87 ± 3.84 Elo over 13,588 games. Failed, closed." data-test="49" data-title="Keep checking moves out of history pruning" data-text="−1.87 ± 3.84" data-games="13,588" data-label="Failed, closed">
-                <rect class="sbar-hit" x="445.08" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="454.19" x2="454.19" y1="163.01" y2="172.71"/>
-                <path class="sbar-fill" d="M449.08 165.5V165.5Q449.08 167.86 451.44 167.86H456.95Q459.31 167.86 459.31 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="409.89" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="418.21" x2="418.21" y1="163.01" y2="172.71"/>
+                <path class="sbar-fill" d="M413.89 165.5V165.5Q413.89 167.86 416.26 167.86H420.17Q422.53 167.86 422.53 165.5V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t50" aria-label="Test 50, The solved schedule, first variant: +32.22 ± 11.19 Elo over 1,514 games. Passed." data-test="50" data-title="The solved schedule, first variant" data-text="+32.22 ± 11.19" data-games="1,514" data-label="Passed">
-                <rect class="sbar-hit" x="463.31" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="472.42" x2="472.42" y1="110.69" y2="138.95"/>
-                <path class="sbar-fill" d="M467.31 165.5V128.82Q467.31 124.82 471.31 124.82H473.54Q477.54 124.82 477.54 128.82V165.5Z"/>
+                <rect class="sbar-hit" x="426.53" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="434.84" x2="434.84" y1="110.69" y2="138.95"/>
+                <path class="sbar-fill" d="M430.53 165.5V128.82Q430.53 124.82 434.53 124.82H435.16Q439.16 124.82 439.16 128.82V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t51" aria-label="Test 51, Spend the clock by a solved time schedule: +72.22 ± 16.84 Elo over 732 games. Passed, the default." data-test="51" data-title="Spend the clock by a solved time schedule" data-text="+72.22 ± 16.84" data-games="732" data-label="Passed, the default">
-                <rect class="sbar-hit" x="481.54" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="490.65" x2="490.65" y1="53.06" y2="95.58"/>
-                <path class="sbar-fill" d="M485.54 165.5V78.32Q485.54 74.32 489.54 74.32H491.77Q495.77 74.32 495.77 78.32V165.5Z"/>
+                <rect class="sbar-hit" x="443.16" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="451.47" x2="451.47" y1="53.06" y2="95.58"/>
+                <path class="sbar-fill" d="M447.16 165.5V78.32Q447.16 74.32 451.16 74.32H451.79Q455.79 74.32 455.79 78.32V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t52" aria-label="Test 52, Stop the search by measured best-move stability: +8.32 ± 5.29 Elo over 6,812 games. Passed." data-test="52" data-title="Stop the search by measured best-move stability" data-text="+8.32 ± 5.29" data-games="6,812" data-label="Passed">
-                <rect class="sbar-hit" x="499.77" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="508.88" x2="508.88" y1="148.32" y2="161.67"/>
-                <path class="sbar-fill" d="M503.77 165.5V159Q503.77 155 507.77 155H510Q514 155 514 159V165.5Z"/>
+                <rect class="sbar-hit" x="459.79" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="468.11" x2="468.11" y1="148.32" y2="161.67"/>
+                <path class="sbar-fill" d="M463.79 165.5V159Q463.79 155 467.79 155H468.42Q472.42 155 472.42 159V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t53" aria-label="Test 53, A time schedule from the untempered phase values: −4.74 ± 5.02 Elo over 7,104 games. Failed, variant dropped." data-test="53" data-title="A time schedule from the untempered phase values" data-text="−4.74 ± 5.02" data-games="7,104" data-label="Failed, variant dropped">
-                <rect class="sbar-hit" x="518" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="527.12" x2="527.12" y1="165.15" y2="177.82"/>
-                <path class="sbar-fill" d="M522 165.5V167.48Q522 171.48 526 171.48H528.23Q532.23 171.48 532.23 167.48V165.5Z"/>
+                <rect class="sbar-hit" x="476.42" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="484.74" x2="484.74" y1="165.15" y2="177.82"/>
+                <path class="sbar-fill" d="M480.42 165.5V167.48Q480.42 171.48 484.42 171.48H485.05Q489.05 171.48 489.05 167.48V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t55" aria-label="Test 55, Time management at 60+0.6, the long CCI control: +37.46 ± 11.00 Elo over 1,052 games. Passed." data-test="55" data-title="Time management at 60+0.6, the long CCI control" data-text="+37.46 ± 11.00" data-games="1,052" data-label="Passed">
-                <rect class="sbar-hit" x="536.23" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="545.35" x2="545.35" y1="104.32" y2="132.09"/>
-                <path class="sbar-fill" d="M540.23 165.5V122.21Q540.23 118.21 544.23 118.21H546.46Q550.46 118.21 550.46 122.21V165.5Z"/>
+                <rect class="sbar-hit" x="493.05" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="501.37" x2="501.37" y1="104.32" y2="132.09"/>
+                <path class="sbar-fill" d="M497.05 165.5V122.21Q497.05 118.21 501.05 118.21H501.68Q505.68 118.21 505.68 122.21V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t56" aria-label="Test 56, Zero-increment clocks spent by value of time (10+0): +5.60 ± 4.17 Elo over 12,666 games. Passed." data-test="56" data-title="Zero-increment clocks spent by value of time (10+0)" data-text="+5.60 ± 4.17" data-games="12,666" data-label="Passed">
-                <rect class="sbar-hit" x="554.46" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="563.58" x2="563.58" y1="153.17" y2="163.69"/>
-                <path class="sbar-fill" d="M558.46 165.5V162.43Q558.46 158.43 562.46 158.43H564.69Q568.69 158.43 568.69 162.43V165.5Z"/>
+                <rect class="sbar-hit" x="509.68" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="518" x2="518" y1="153.17" y2="163.69"/>
+                <path class="sbar-fill" d="M513.68 165.5V162.43Q513.68 158.43 517.68 158.43H518.32Q522.32 158.43 522.32 162.43V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t57" aria-label="Test 57, Moves-to-go clocks spent by value of time (40 moves in 10 s): +11.01 ± 6.21 Elo over 4,796 games. Passed." data-test="57" data-title="Moves-to-go clocks spent by value of time (40 moves in 10 s)" data-text="+11.01 ± 6.21" data-games="4,796" data-label="Passed">
-                <rect class="sbar-hit" x="572.69" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="581.81" x2="581.81" y1="143.76" y2="159.44"/>
-                <path class="sbar-fill" d="M576.69 165.5V155.6Q576.69 151.6 580.69 151.6H582.92Q586.92 151.6 586.92 155.6V165.5Z"/>
+                <rect class="sbar-hit" x="526.32" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="534.63" x2="534.63" y1="143.76" y2="159.44"/>
+                <path class="sbar-fill" d="M530.32 165.5V155.6Q530.32 151.6 534.32 151.6H534.95Q538.95 151.6 538.95 155.6V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t58" aria-label="Test 58, Time management at 144+1.12, the longest CCI control: +28.75 ± 9.28 Elo over 1,296 games. Passed." data-test="58" data-title="Time management at 144+1.12, the longest CCI control" data-text="+28.75 ± 9.28" data-games="1,296" data-label="Passed">
-                <rect class="sbar-hit" x="590.92" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="600.04" x2="600.04" y1="117.49" y2="140.92"/>
-                <path class="sbar-fill" d="M594.92 165.5V133.2Q594.92 129.2 598.92 129.2H601.15Q605.15 129.2 605.15 133.2V165.5Z"/>
+                <rect class="sbar-hit" x="542.95" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="551.26" x2="551.26" y1="117.49" y2="140.92"/>
+                <path class="sbar-fill" d="M546.95 165.5V133.2Q546.95 129.2 550.95 129.2H551.58Q555.58 129.2 555.58 133.2V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t60" aria-label="Test 60, Set the search constants to the tune 54 values: +5.88 ± 4.15 Elo over 10,642 games. Passed." data-test="60" data-title="Set the search constants to the tune 54 values" data-text="+5.88 ± 4.15" data-games="10,642" data-label="Passed">
-                <rect class="sbar-hit" x="609.15" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="618.27" x2="618.27" y1="152.84" y2="163.32"/>
-                <path class="sbar-fill" d="M613.15 165.5V162.08Q613.15 158.08 617.15 158.08H619.38Q623.38 158.08 623.38 162.08V165.5Z"/>
+                <rect class="sbar-hit" x="559.58" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="567.89" x2="567.89" y1="152.84" y2="163.32"/>
+                <path class="sbar-fill" d="M563.58 165.5V162.08Q563.58 158.08 567.58 158.08H568.21Q572.21 158.08 572.21 162.08V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t61" aria-label="Test 61, Correct the int8 tail biases for rounding: −21.65 ± 9.03 Elo over 2,346 games. Failed, closed." data-test="61" data-title="Correct the int8 tail biases for rounding" data-text="−21.65 ± 9.03" data-games="2,346" data-label="Failed, closed">
-                <rect class="sbar-hit" x="627.38" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="636.5" x2="636.5" y1="181.43" y2="204.23"/>
-                <path class="sbar-fill" d="M631.38 165.5V188.83Q631.38 192.83 635.38 192.83H637.62Q641.62 192.83 641.62 188.83V165.5Z"/>
+                <rect class="sbar-hit" x="576.21" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="584.53" x2="584.53" y1="181.43" y2="204.23"/>
+                <path class="sbar-fill" d="M580.21 165.5V188.83Q580.21 192.83 584.21 192.83H584.84Q588.84 192.83 588.84 188.83V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t63" aria-label="Test 63, gen768r_03: eight output buckets, trained on 2.5 billion T91 positions: +54.50 ± 15.01 Elo over 964 games. Passed; since replaced by gen768r_03q." data-test="63" data-title="gen768r_03: eight output buckets, trained on 2.5 billion T91 positions" data-text="+54.50 ± 15.01" data-games="964" data-label="Passed; since replaced by gen768r_03q">
-                <rect class="sbar-hit" x="645.62" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="654.73" x2="654.73" y1="77.74" y2="115.64"/>
-                <path class="sbar-fill" d="M649.62 165.5V100.69Q649.62 96.69 653.62 96.69H655.85Q659.85 96.69 659.85 100.69V165.5Z"/>
+                <rect class="sbar-hit" x="592.84" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="601.16" x2="601.16" y1="77.74" y2="115.64"/>
+                <path class="sbar-fill" d="M596.84 165.5V100.69Q596.84 96.69 600.84 96.69H601.47Q605.47 96.69 605.47 100.69V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t64" aria-label="Test 64, The 13 centipawn margins scaled by 1.2 for gen768r_03: −4.97 ± 6.97 Elo over 3,006 games. Failed; a fixed-length match." data-test="64" data-title="The 13 centipawn margins scaled by 1.2 for gen768r_03" data-text="−4.97 ± 6.97" data-games="3,006" data-label="Failed; a fixed-length match">
-                <rect class="sbar-hit" x="663.85" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="672.96" x2="672.96" y1="162.97" y2="180.57"/>
-                <path class="sbar-fill" d="M667.85 165.5V167.77Q667.85 171.77 671.85 171.77H674.08Q678.08 171.77 678.08 167.77V165.5Z"/>
+                <rect class="sbar-hit" x="609.47" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="617.79" x2="617.79" y1="162.97" y2="180.57"/>
+                <path class="sbar-fill" d="M613.47 165.5V167.77Q613.47 171.77 617.47 171.77H618.11Q622.11 171.77 622.11 167.77V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t66" aria-label="Test 66, A training loss with power 2.0 instead of 2.6: −14.20 ± 7.81 Elo over 2,986 games. Failed." data-test="66" data-title="A training loss with power 2.0 instead of 2.6" data-text="−14.20 ± 7.81" data-games="2,986" data-label="Failed">
-                <rect class="sbar-hit" x="682.08" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="691.19" x2="691.19" y1="173.57" y2="193.29"/>
-                <path class="sbar-fill" d="M686.08 165.5V179.43Q686.08 183.43 690.08 183.43H692.31Q696.31 183.43 696.31 179.43V165.5Z"/>
+                <rect class="sbar-hit" x="626.11" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="634.42" x2="634.42" y1="173.57" y2="193.29"/>
+                <path class="sbar-fill" d="M630.11 165.5V179.43Q630.11 183.43 634.11 183.43H634.74Q638.74 183.43 638.74 179.43V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t67" aria-label="Test 67, A training loss with power 3.0 instead of 2.6: +2.95 ± 2.34 Elo over 30,522 games. Passed." data-test="67" data-title="A training loss with power 3.0 instead of 2.6" data-text="+2.95 ± 2.34" data-games="30,522" data-label="Passed">
-                <rect class="sbar-hit" x="700.31" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="709.42" x2="709.42" y1="158.82" y2="164.73"/>
-                <path class="sbar-fill" d="M704.31 165.5V165.5Q704.31 161.78 708.03 161.78H710.81Q714.54 161.78 714.54 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="642.74" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="651.05" x2="651.05" y1="158.82" y2="164.73"/>
+                <path class="sbar-fill" d="M646.74 165.5V165.5Q646.74 161.78 650.46 161.78H651.64Q655.37 161.78 655.37 165.5V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t68" aria-label="Test 68, gen768r_03 together with the tune 65 search constants: +60.08 ± 15.55 Elo over 876 games. Passed." data-test="68" data-title="gen768r_03 together with the tune 65 search constants" data-text="+60.08 ± 15.55" data-games="876" data-label="Passed">
-                <rect class="sbar-hit" x="718.54" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="727.65" x2="727.65" y1="70.02" y2="109.28"/>
-                <path class="sbar-fill" d="M722.54 165.5V93.65Q722.54 89.65 726.54 89.65H728.77Q732.77 89.65 732.77 93.65V165.5Z"/>
+                <rect class="sbar-hit" x="659.37" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="667.68" x2="667.68" y1="70.02" y2="109.28"/>
+                <path class="sbar-fill" d="M663.37 165.5V93.65Q663.37 89.65 667.37 89.65H668Q672 89.65 672 93.65V165.5Z"/>
               </a>
               <a class="sbar is-merged is-neg" href="/tests/#t69" aria-label="Test 69, The tune 65 search constants against tune 54&#x27;s, both with gen768r_03: −1.81 ± 3.45 Elo over 12,484 games. Merged, within error." data-test="69" data-title="The tune 65 search constants against tune 54&#x27;s, both with gen768r_03" data-text="−1.81 ± 3.45" data-games="12,484" data-label="Merged, within error">
-                <rect class="sbar-hit" x="736.77" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="745.88" x2="745.88" y1="163.43" y2="172.14"/>
-                <path class="sbar-fill" d="M740.77 165.5V165.5Q740.77 167.79 743.05 167.79H748.71Q751 167.79 751 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="676" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="684.32" x2="684.32" y1="163.43" y2="172.14"/>
+                <path class="sbar-fill" d="M680 165.5V165.5Q680 167.79 682.29 167.79H686.35Q688.63 167.79 688.63 165.5V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t70" aria-label="Test 70, A quantization-aware fine-tune of gen768r_03: +10.41 ± 5.64 Elo over 4,474 games. Passed; superseded by gen768r_03q." data-test="70" data-title="A quantization-aware fine-tune of gen768r_03" data-text="+10.41 ± 5.64" data-games="4,474" data-label="Passed; superseded by gen768r_03q">
-                <rect class="sbar-hit" x="755" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="764.12" x2="764.12" y1="145.24" y2="159.48"/>
-                <path class="sbar-fill" d="M759 165.5V156.36Q759 152.36 763 152.36H765.23Q769.23 152.36 769.23 156.36V165.5Z"/>
+                <rect class="sbar-hit" x="692.63" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="700.95" x2="700.95" y1="145.24" y2="159.48"/>
+                <path class="sbar-fill" d="M696.63 165.5V156.36Q696.63 152.36 700.63 152.36H701.26Q705.26 152.36 705.26 156.36V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t71" aria-label="Test 71, Quantization-aware training against the same fine-tune without it: +23.29 ± 8.96 Elo over 1,912 games. Passed." data-test="71" data-title="Quantization-aware training against the same fine-tune without it" data-text="+23.29 ± 8.96" data-games="1,912" data-label="Passed">
-                <rect class="sbar-hit" x="773.23" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="782.35" x2="782.35" y1="124.78" y2="147.41"/>
-                <path class="sbar-fill" d="M777.23 165.5V140.1Q777.23 136.1 781.23 136.1H783.46Q787.46 136.1 787.46 140.1V165.5Z"/>
+                <rect class="sbar-hit" x="709.26" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="717.58" x2="717.58" y1="124.78" y2="147.41"/>
+                <path class="sbar-fill" d="M713.26 165.5V140.1Q713.26 136.1 717.26 136.1H717.89Q721.89 136.1 721.89 140.1V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t72" aria-label="Test 72, gen768r_03 continued: a second 230,000-step training cycle: +8.74 ± 5.09 Elo over 5,684 games. Passed; the base of gen768r_03q." data-test="72" data-title="gen768r_03 continued: a second 230,000-step training cycle" data-text="+8.74 ± 5.09" data-games="5,684" data-label="Passed; the base of gen768r_03q">
-                <rect class="sbar-hit" x="791.46" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="800.58" x2="800.58" y1="148.04" y2="160.89"/>
-                <path class="sbar-fill" d="M795.46 165.5V158.47Q795.46 154.47 799.46 154.47H801.69Q805.69 154.47 805.69 158.47V165.5Z"/>
+                <rect class="sbar-hit" x="725.89" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="734.21" x2="734.21" y1="148.04" y2="160.89"/>
+                <path class="sbar-fill" d="M729.89 165.5V158.47Q729.89 154.47 733.89 154.47H734.53Q738.53 154.47 738.53 158.47V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t73" aria-label="Test 73, gen768r_03q: a quantization-aware fine-tune of the continued network: +13.39 ± 6.48 Elo over 3,296 games. Passed; since replaced by gen768r_04q." data-test="73" data-title="gen768r_03q: a quantization-aware fine-tune of the continued network" data-text="+13.39 ± 6.48" data-games="3,296" data-label="Passed; since replaced by gen768r_04q">
-                <rect class="sbar-hit" x="809.69" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="818.81" x2="818.81" y1="140.41" y2="156.78"/>
-                <path class="sbar-fill" d="M813.69 165.5V152.6Q813.69 148.6 817.69 148.6H819.92Q823.92 148.6 823.92 152.6V165.5Z"/>
+                <rect class="sbar-hit" x="742.53" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="750.84" x2="750.84" y1="140.41" y2="156.78"/>
+                <path class="sbar-fill" d="M746.53 165.5V152.6Q746.53 148.6 750.53 148.6H751.16Q755.16 148.6 755.16 152.6V165.5Z"/>
               </a>
               <a class="sbar is-stop" href="/tests/#t74" aria-label="Test 74, gen768r_03q against gen768r_03 at 60+0.6, the long CCI control: +9.76 ± 11.08 Elo over 712 games. Stopped, unresolved." data-test="74" data-title="gen768r_03q against gen768r_03 at 60+0.6, the long CCI control" data-text="+9.76 ± 11.08" data-games="712" data-label="Stopped, unresolved">
-                <rect class="sbar-hit" x="827.92" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="837.04" x2="837.04" y1="139.19" y2="167.17"/>
-                <path class="sbar-fill" d="M831.92 165.5V157.18Q831.92 153.18 835.92 153.18H838.15Q842.15 153.18 842.15 157.18V165.5Z"/>
+                <rect class="sbar-hit" x="759.16" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="767.47" x2="767.47" y1="139.19" y2="167.17"/>
+                <path class="sbar-fill" d="M763.16 165.5V157.18Q763.16 153.18 767.16 153.18H767.79Q771.79 153.18 771.79 157.18V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t82" aria-label="Test 82, gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions: +13.31 ± 6.55 Elo over 3,394 games. Passed; since replaced by gen768r_05q." data-test="82" data-title="gen768r_04q: the run continued to 860,000 steps, on 3.73 billion positions" data-text="+13.31 ± 6.55" data-games="3,394" data-label="Passed; since replaced by gen768r_05q">
-                <rect class="sbar-hit" x="846.15" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="855.27" x2="855.27" y1="140.43" y2="156.97"/>
-                <path class="sbar-fill" d="M850.15 165.5V152.7Q850.15 148.7 854.15 148.7H856.38Q860.38 148.7 860.38 152.7V165.5Z"/>
+                <rect class="sbar-hit" x="775.79" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="784.11" x2="784.11" y1="140.43" y2="156.97"/>
+                <path class="sbar-fill" d="M779.79 165.5V152.7Q779.79 148.7 783.79 148.7H784.42Q788.42 148.7 788.42 152.7V165.5Z"/>
               </a>
               <a class="sbar is-stop is-neg" href="/tests/#t84" aria-label="Test 84, The 13 search margins set to the tune 83 values: −1.35 ± 11.10 Elo over 1,026 games. Stopped: the tune&#x27;s drift was noise." data-test="84" data-title="The 13 search margins set to the tune 83 values" data-text="−1.35 ± 11.10" data-games="1,026" data-label="Stopped: the tune&#x27;s drift was noise">
-                <rect class="sbar-hit" x="864.38" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="873.5" x2="873.5" y1="153.19" y2="181.22"/>
-                <path class="sbar-fill" d="M868.38 165.5V165.5Q868.38 167.2 870.09 167.2H876.91Q878.62 167.2 878.62 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="792.42" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="800.74" x2="800.74" y1="153.19" y2="181.22"/>
+                <path class="sbar-fill" d="M796.42 165.5V165.5Q796.42 167.2 798.13 167.2H803.35Q805.05 167.2 805.05 165.5V165.5Z"/>
               </a>
               <a class="sbar is-merged" href="/tests/#t85" aria-label="Test 85, Keep quiescence search&#x27;s capture cutoffs in the hash table: +1.29 ± 2.38 Elo over 24,230 games. Stopped undecided; merged as no regression." data-test="85" data-title="Keep quiescence search&#x27;s capture cutoffs in the hash table" data-text="+1.29 ± 2.38" data-games="24,230" data-label="Stopped undecided; merged as no regression">
-                <rect class="sbar-hit" x="882.62" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="891.73" x2="891.73" y1="160.87" y2="166.88"/>
-                <path class="sbar-fill" d="M886.62 165.5V165.5Q886.62 163.87 888.24 163.87H895.22Q896.85 163.87 896.85 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="809.05" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="817.37" x2="817.37" y1="160.87" y2="166.88"/>
+                <path class="sbar-fill" d="M813.05 165.5V165.5Q813.05 163.87 814.68 163.87H820.06Q821.68 163.87 821.68 165.5V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t112" aria-label="Test 112, gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions: +22.02 ± 8.52 Elo over 1,912 games. Passed; since replaced by gen768r_06q." data-test="112" data-title="gen768r_05q: the run continued to 1.5 million steps, on 6.6 billion positions" data-text="+22.02 ± 8.52" data-games="1,912" data-label="Passed; since replaced by gen768r_06q">
-                <rect class="sbar-hit" x="900.85" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="909.96" x2="909.96" y1="126.94" y2="148.46"/>
-                <path class="sbar-fill" d="M904.85 165.5V141.7Q904.85 137.7 908.85 137.7H911.08Q915.08 137.7 915.08 141.7V165.5Z"/>
+                <rect class="sbar-hit" x="825.68" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="834" x2="834" y1="126.94" y2="148.46"/>
+                <path class="sbar-fill" d="M829.68 165.5V141.7Q829.68 137.7 833.68 137.7H834.32Q838.32 137.7 838.32 141.7V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t113" aria-label="Test 113, Widen reverse futility&#x27;s margin as material comes off: −3.48 ± 4.10 Elo over 8,088 games. Failed, closed." data-test="113" data-title="Widen reverse futility&#x27;s margin as material comes off" data-text="−3.48 ± 4.10" data-games="8,088" data-label="Failed, closed">
-                <rect class="sbar-hit" x="919.08" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="928.19" x2="928.19" y1="164.72" y2="175.07"/>
-                <path class="sbar-fill" d="M923.08 165.5V165.89Q923.08 169.89 927.08 169.89H929.31Q933.31 169.89 933.31 165.89V165.5Z"/>
+                <rect class="sbar-hit" x="842.32" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="850.63" x2="850.63" y1="164.72" y2="175.07"/>
+                <path class="sbar-fill" d="M846.32 165.5V165.89Q846.32 169.89 850.32 169.89H850.95Q854.95 169.89 854.95 165.89V165.5Z"/>
               </a>
               <a class="sbar is-pass" href="/tests/#t128" aria-label="Test 128, gen768r_06q: the run continued to 1.98 million steps, the last network of its line: +3.09 ± 2.46 Elo over 22,846 games. Passed; released in v6.6.0." data-test="128" data-title="gen768r_06q: the run continued to 1.98 million steps, the last network of its line" data-text="+3.09 ± 2.46" data-games="22,846" data-label="Passed; released in v6.6.0">
-                <rect class="sbar-hit" x="937.31" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="946.42" x2="946.42" y1="158.49" y2="164.7"/>
-                <path class="sbar-fill" d="M941.31 165.5V165.5Q941.31 161.6 945.21 161.6H947.64Q951.54 161.6 951.54 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="858.95" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="867.26" x2="867.26" y1="158.49" y2="164.7"/>
+                <path class="sbar-fill" d="M862.95 165.5V165.5Q862.95 161.6 866.85 161.6H867.68Q871.58 161.6 871.58 165.5V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t129" aria-label="Test 129, An 8-bit feature layer (gen768r_06q8) on a branch with wider accumulators: −5.28 ± 4.82 Elo over 5,858 games. Failed; re-run without the wider accumulators as test 130." data-test="129" data-title="An 8-bit feature layer (gen768r_06q8) on a branch with wider accumulators" data-text="−5.28 ± 4.82" data-games="5,858" data-label="Failed; re-run without the wider accumulators as test 130">
-                <rect class="sbar-hit" x="955.54" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="964.65" x2="964.65" y1="166.08" y2="178.25"/>
-                <path class="sbar-fill" d="M959.54 165.5V168.17Q959.54 172.17 963.54 172.17H965.77Q969.77 172.17 969.77 168.17V165.5Z"/>
+                <rect class="sbar-hit" x="875.58" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="883.89" x2="883.89" y1="166.08" y2="178.25"/>
+                <path class="sbar-fill" d="M879.58 165.5V168.17Q879.58 172.17 883.58 172.17H884.21Q888.21 172.17 888.21 168.17V165.5Z"/>
               </a>
               <a class="sbar is-fail is-neg" href="/tests/#t130" aria-label="Test 130, The 8-bit feature layer alone: gen768r_06q8 on main&#x27;s own accumulators: −1.82 ± 3.32 Elo over 12,188 games. Failed." data-test="130" data-title="The 8-bit feature layer alone: gen768r_06q8 on main&#x27;s own accumulators" data-text="−1.82 ± 3.32" data-games="12,188" data-label="Failed">
-                <rect class="sbar-hit" x="973.77" y="14" width="18.23" height="202"/>
-                <line class="sbar-ci" x1="982.88" x2="982.88" y1="163.61" y2="171.99"/>
-                <path class="sbar-fill" d="M977.77 165.5V165.5Q977.77 167.8 980.07 167.8H985.7Q988 167.8 988 165.5V165.5Z"/>
+                <rect class="sbar-hit" x="892.21" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="900.53" x2="900.53" y1="163.61" y2="171.99"/>
+                <path class="sbar-fill" d="M896.21 165.5V165.5Q896.21 167.8 898.51 167.8H902.54Q904.84 167.8 904.84 165.5V165.5Z"/>
+              </a>
+              <a class="sbar is-fail is-neg" href="/tests/#t135" aria-label="Test 135, Prune quiets by history only below alpha: −0.73 ± 2.65 Elo over 18,614 games. Failed, closed." data-test="135" data-title="Prune quiets by history only below alpha" data-text="−0.73 ± 2.65" data-games="18,614" data-label="Failed, closed">
+                <rect class="sbar-hit" x="908.84" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="917.16" x2="917.16" y1="163.08" y2="169.77"/>
+                <path class="sbar-fill" d="M912.84 165.5V165.5Q912.84 166.42 913.76 166.42H920.55Q921.47 166.42 921.47 165.5V165.5Z"/>
+              </a>
+              <a class="sbar is-pass" href="/tests/#t136" aria-label="Test 136, gen1024s_01q: 1,024 wide, trained on BT4&#x27;s labels, against gen768r_06q: +58.15 ± 14.26 Elo over 790 games. Passed; gen768s_01q shipped instead." data-test="136" data-title="gen1024s_01q: 1,024 wide, trained on BT4&#x27;s labels, against gen768r_06q" data-text="+58.15 ± 14.26" data-games="790" data-label="Passed; gen768s_01q shipped instead">
+                <rect class="sbar-hit" x="925.47" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="933.79" x2="933.79" y1="74.08" y2="110.09"/>
+                <path class="sbar-fill" d="M929.47 165.5V96.09Q929.47 92.09 933.47 92.09H934.11Q938.11 92.09 938.11 96.09V165.5Z"/>
+              </a>
+              <a class="sbar is-fail is-neg" href="/tests/#t137" aria-label="Test 137, An 8-bit feature table for gen1024s_01q (gen1024s_01q8) against its 16-bit one: −1.97 ± 3.20 Elo over 10,936 games. Failed." data-test="137" data-title="An 8-bit feature table for gen1024s_01q (gen1024s_01q8) against its 16-bit one" data-text="−1.97 ± 3.20" data-games="10,936" data-label="Failed">
+                <rect class="sbar-hit" x="942.11" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="950.42" x2="950.42" y1="163.95" y2="172.03"/>
+                <path class="sbar-fill" d="M946.11 165.5V165.5Q946.11 167.99 948.59 167.99H952.25Q954.74 167.99 954.74 165.5V165.5Z"/>
+              </a>
+              <a class="sbar is-fail is-neg" href="/tests/#t139" aria-label="Test 139, gen1024s_01q against gen768s_01q: the same training at 1,024 wide and at 768: −4.10 ± 4.08 Elo over 6,864 games. Failed; the 768-wide network ships." data-test="139" data-title="gen1024s_01q against gen768s_01q: the same training at 1,024 wide and at 768" data-text="−4.10 ± 4.08" data-games="6,864" data-label="Failed; the 768-wide network ships">
+                <rect class="sbar-hit" x="958.74" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="967.05" x2="967.05" y1="165.53" y2="175.83"/>
+                <path class="sbar-fill" d="M962.74 165.5V166.68Q962.74 170.68 966.74 170.68H967.37Q971.37 170.68 971.37 166.68V165.5Z"/>
+              </a>
+              <a class="sbar is-pass" href="/tests/#t140" aria-label="Test 140, gen768s_01q: gen768r_06 trained further, on the labels of Leela&#x27;s BT4 network: +77.57 ± 15.21 Elo over 642 games. Passed; on main." data-test="140" data-title="gen768s_01q: gen768r_06 trained further, on the labels of Leela&#x27;s BT4 network" data-text="+77.57 ± 15.21" data-games="642" data-label="Passed; on main">
+                <rect class="sbar-hit" x="975.37" y="14" width="16.63" height="202"/>
+                <line class="sbar-ci" x1="983.68" x2="983.68" y1="48.37" y2="86.77"/>
+                <path class="sbar-fill" d="M979.37 165.5V71.57Q979.37 67.57 983.37 67.57H984Q988 67.57 988 71.57V165.5Z"/>
               </a>
             </svg>
           </div>
@@ -875,7 +900,7 @@
         <header class="sec-head">
           <p class="kicker" data-reveal><span class="kicker-n">4.</span> Chronicle</p>
           <h2 id="history-title" class="h-l" data-split>From first commit to <em>3471</em></h2>
-          <p class="lede" data-reveal data-d="2">Nine and a half months and 1,724 commits, from a handcrafted engine to a neural one, and every step since November measured on OpenBench.</p>
+          <p class="lede" data-reveal data-d="2">Nine and a half months and 1,725 commits, from a handcrafted engine to a neural one, and every step since November measured on OpenBench.</p>
         </header>
 
         <div class="chron" data-chron>
@@ -941,7 +966,7 @@
             </li>
             <li class="tl is-next" data-pt="6">
               <time>Next</time>
-              <div class="tl-body"><h3>A new network design</h3><p>v6.6.0 closes the gen768r line. The network after it is a new design, not a longer run, and it is in design now. gen768s, a design that also estimates its own error for the search, is specified and not built.</p></div>
+              <div class="tl-body"><h3>A network with new labels</h3><p>On main a day after the release: gen768s_01q, the release's network trained further with new labels, those of Leela's BT4 network. +77.57 ± 15.21 Elo over it in self-play. It is in the development build, and no gauntlet has rated it yet.</p></div>
             </li>
           </ol>
         </div>
@@ -974,7 +999,7 @@
           <a class="dl" data-glow data-reveal data-d="2" data-os="mac" data-asset="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-macos-arm64">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-command"/></svg></span>
             <span class="dl-os">macOS</span>
-            <span class="dl-variant">Apple silicon, macOS 26 or newer</span>
+            <span class="dl-variant">Apple silicon, macOS 13.3 or newer</span>
             <span class="dl-file mono"><span data-file>luminex-macos-arm64</span> <span class="dl-size" data-size>73 MB</span></span>
             <span class="dl-go" aria-hidden="true"><svg class="icon"><use href="#i-download"/></svg></span>
           </a>

@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/tests/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=15"></script>
+  <script src="/assets/js/theme.js?v=16"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -25,10 +25,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=15">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=15">
-  <script src="/assets/js/site.js?v=15" defer></script>
-  <script src="/assets/js/tests.js?v=15" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=16">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=16">
+  <script src="/assets/js/site.js?v=16" defer></script>
+  <script src="/assets/js/tests.js?v=16" defer></script>
 </head>
 <body class="page-tests">
   <!-- @sprite -->
@@ -111,11 +111,11 @@
         <h1 id="tests-title" class="h-xl" data-split><em>Measured,</em> not guessed</h1>
         <p class="lede" data-reveal data-d="3">Luminex runs its own OpenBench instance. A candidate change plays the current engine until a sequential probability ratio test can tell a gain from noise.</p>
         <dl class="totals totals-hero totals-3">
-          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>52</span></dd></div>
-          <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>33</span></dd></div>
-          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>781,484</span></dd></div>
+          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>57</span></dd></div>
+          <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>35</span></dd></div>
+          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>824,508</span></dd></div>
         </dl>
-        <p class="statline" data-reveal data-d="8">OpenBench's list holds 78 runs, one of them not finished: 53 SPRTs, 18 fixed-length matches, 3 gauntlets and 4 SPSA tuning runs. The SPRTs played 409,700 of the games, the tuning runs 320,000, the matches 28,838 and the gauntlets 19,470; another 3,476 were played in runs since deleted from the list.</p>
+        <p class="statline" data-reveal data-d="8">OpenBench's list holds 85 runs, 3 of them not finished: 60 SPRTs, 18 fixed-length matches, 3 gauntlets and 4 SPSA tuning runs. The SPRTs played 451,608 of the games, the tuning runs 320,000, the matches 28,838 and the gauntlets 19,470; another 4,592 were played in runs since deleted from the list.</p>
       </div>
       <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
@@ -126,16 +126,16 @@
         <header class="sec-head">
           <p class="kicker" data-reveal><span class="kicker-n">1.</span> The record</p>
           <h2 id="record-title" class="h-l" data-split>Every test <em>so far</em></h2>
-          <p class="lede" data-reveal data-d="2">Elo against the engine each change would replace, with 95% confidence intervals, newest first, as of 14 November 2026.</p>
+          <p class="lede" data-reveal data-d="2">Elo against the engine each change would replace, with 95% confidence intervals, newest first, as of 15 November 2026.</p>
         </header>
 
         <div class="record" data-record>
           <div class="record-bar">
             <div class="filters" role="group" aria-label="Show tests by outcome">
               <!-- @tests-filters -->
-              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">52</span></button>
-              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">33</span></button>
-              <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">9</span></button>
+              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">57</span></button>
+              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">35</span></button>
+              <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">12</span></button>
               <button type="button" class="chip" data-filter="merged" aria-pressed="false">Merged anyway <span class="num">5</span></button>
               <button type="button" class="chip" data-filter="stop" aria-pressed="false">Stopped <span class="num">5</span></button>
               <!-- /@tests-filters -->
@@ -149,6 +149,101 @@
           </div>
           <ol class="trows" data-rows>
             <!-- @tests-rows -->
+            <li class="trow is-pass" id="t140" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/84">gen768s_01q: gen768r_06 trained further, on the labels of Leela&#x27;s BT4 network</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/140/">Test 140</a> · #84 · 642 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="217.51" x2="282.16" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M249.84 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+77.57 ± 15.21</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; on main</span></p>
+            </li>
+            <li class="trow is-fail" id="t139" data-status="fail">
+              <div class="trow-label">
+                <a class="trow-title" href="https://bench.luminexchess.com/test/139/">gen1024s_01q against gen768s_01q: the same training at 1,024 wide and at 768</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/139/">Test 139</a> · network · 6,864 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="67.62" x2="84.96" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M76.29 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">−4.10 ± 4.08</p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed; the 768-wide network ships</span></p>
+            </li>
+            <li class="trow is-fail" id="t137" data-status="fail">
+              <div class="trow-label">
+                <a class="trow-title" href="https://bench.luminexchess.com/test/137/">An 8-bit feature table for gen1024s_01q (gen1024s_01q8) against its 16-bit one</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/137/">Test 137</a> · network · 10,936 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="74.01" x2="87.61" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M80.81 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">−1.97 ± 3.20</p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed</span></p>
+            </li>
+            <li class="trow is-pass" id="t136" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://bench.luminexchess.com/test/136/">gen1024s_01q: 1,024 wide, trained on BT4&#x27;s labels, against gen768r_06q</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/136/">Test 136</a> · network · 790 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="178.27" x2="238.87" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M208.57 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+58.15 ± 14.26</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; gen768s_01q shipped instead</span></p>
+            </li>
+            <li class="trow is-fail" id="t135" data-status="fail">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/80">Prune quiets by history only below alpha</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/135/">Test 135</a> · #80 · 18,614 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="77.82" x2="89.08" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M83.45 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">−0.73 ± 2.65</p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed, closed</span></p>
+            </li>
             <li class="trow is-fail" id="t130" data-status="fail">
               <div class="trow-label">
                 <a class="trow-title" href="https://bench.luminexchess.com/test/130/">The 8-bit feature layer alone: gen768r_06q8 on main&#x27;s own accumulators</a>
