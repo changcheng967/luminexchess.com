@@ -11,6 +11,30 @@
  },
  "tests": [
   {
+   "test": 155,
+   "title": "Stop pruning evasions, forced defences, checks and the TT move",
+   "href": "https://github.com/changcheng967/Luminex/pull/96",
+   "ref": "#96",
+   "games": 10976,
+   "elo": -2.03,
+   "ci": 3.27,
+   "text": "−2.03 ± 3.27",
+   "status": "fail",
+   "label": "Failed, closed"
+  },
+  {
+   "test": 154,
+   "title": "Keep the singular test out of its own verification",
+   "href": "https://github.com/changcheng967/Luminex/pull/95",
+   "ref": "#95",
+   "games": 10832,
+   "elo": -2.12,
+   "ci": 3.36,
+   "text": "−2.12 ± 3.36",
+   "status": "fail",
+   "label": "Failed, closed"
+  },
+  {
    "test": 153,
    "title": "Put the feature layer on a grid its int16 lanes can hold",
    "href": "https://github.com/changcheng967/Luminex/pull/93",

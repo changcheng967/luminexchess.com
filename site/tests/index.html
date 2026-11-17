@@ -111,11 +111,11 @@
         <h1 id="tests-title" class="h-xl" data-split><em>Measured,</em> not guessed</h1>
         <p class="lede" data-reveal data-d="3">Luminex runs its own OpenBench instance. A candidate change plays the current engine until a sequential probability ratio test can tell a gain from noise.</p>
         <dl class="totals totals-hero totals-3">
-          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>68</span></dd></div>
+          <div data-reveal data-d="4"><dt>SPRTs run</dt><dd class="num"><span data-odo>70</span></dd></div>
           <div data-reveal data-d="5"><dt>Passed</dt><dd class="num is-lit"><span data-odo>42</span></dd></div>
-          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>947,388</span></dd></div>
+          <div data-reveal data-d="6"><dt>OpenBench games</dt><dd class="num"><span data-odo>966,666</span></dd></div>
         </dl>
-        <p class="statline" data-reveal data-d="8">OpenBench's list holds 95 runs, 2 of them not finished: 70 SPRTs, 18 fixed-length matches, 3 gauntlets and 4 SPSA tuning runs. The SPRTs played 574,470 of the games, the tuning runs 320,000, the matches 28,838 and the gauntlets 19,470; another 4,610 were played in runs since deleted from the list.</p>
+        <p class="statline" data-reveal data-d="8">OpenBench's list holds 97 runs, 2 of them not finished: 72 SPRTs, 18 fixed-length matches, 3 gauntlets and 4 SPSA tuning runs. The SPRTs played 593,748 of the games, the tuning runs 320,000, the matches 28,838 and the gauntlets 19,470; another 4,610 were played in runs since deleted from the list.</p>
       </div>
       <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
@@ -133,9 +133,9 @@
           <div class="record-bar">
             <div class="filters" role="group" aria-label="Show tests by outcome">
               <!-- @tests-filters -->
-              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">68</span></button>
+              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">70</span></button>
               <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">42</span></button>
-              <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">16</span></button>
+              <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">18</span></button>
               <button type="button" class="chip" data-filter="merged" aria-pressed="false">Merged anyway <span class="num">5</span></button>
               <button type="button" class="chip" data-filter="stop" aria-pressed="false">Stopped <span class="num">5</span></button>
               <!-- /@tests-filters -->
@@ -149,6 +149,44 @@
           </div>
           <ol class="trows" data-rows>
             <!-- @tests-rows -->
+            <li class="trow is-fail" id="t155" data-status="fail">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/96">Stop pruning evasions, forced defences, checks and the TT move</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/155/">Test 155</a> · #96 · 10,976 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="73.74" x2="87.64" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M80.69 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">−2.03 ± 3.27</p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed, closed</span></p>
+            </li>
+            <li class="trow is-fail" id="t154" data-status="fail">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/95">Keep the singular test out of its own verification</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/154/">Test 154</a> · #95 · 10,832 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="73.35" x2="87.64" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M80.5 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">−2.12 ± 3.36</p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed, closed</span></p>
+            </li>
             <li class="trow is-pass" id="t153" data-status="pass">
               <div class="trow-label">
                 <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/93">Put the feature layer on a grid its int16 lanes can hold</a>
