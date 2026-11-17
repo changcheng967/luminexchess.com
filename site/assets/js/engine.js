@@ -66,23 +66,4 @@
     list.classList.add("is-live");
     select(layers[1], true);
   })();
-
-  // every figure of bars (speed, and the three of the clock) grows when it comes on screen
-  (function bars() {
-    if (!motion) return;
-    $$("[data-speed]").forEach(function (fig) {
-      $$(".bar", fig).forEach(function (b, i) { b.style.setProperty("--i", i); });
-      fig.classList.add("is-armed");
-      Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.35);
-    });
-  })();
-
-  // the generations: what each one adds to the last arrives card by card
-  (function generations() {
-    var list = $("[data-gens]");
-    if (!list || !motion) return;
-    $$(".gen", list).forEach(function (g, i) { g.style.setProperty("--i", i); });
-    list.classList.add("is-armed");
-    Lux.onVisible(list, function () { list.classList.add("is-in"); }, 0.2);
-  })();
 })();

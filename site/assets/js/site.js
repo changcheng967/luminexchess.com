@@ -1,6 +1,6 @@
 /* luminexchess.com: shared behaviour for every page. The pages are complete
-   without this file; it adds motion, the release lookup and small comforts.
-   Page scripts build on window.Lux. */
+   without this file; it adds the scroll scenes' machinery, the header, the release
+   lookup and small comforts. Page scripts build on window.Lux. */
 (function () {
   "use strict";
 
@@ -215,37 +215,8 @@
     });
   }
 
-  /* ---------- headings: split into words that rise one after another ---------- */
-  function split(heading) {
-    var text = heading.textContent.replace(/\s+/g, " ").trim();
-    var live = el("span");
-    live.setAttribute("aria-hidden", "true");
-    while (heading.firstChild) live.appendChild(heading.firstChild);
-    var i = 0;
-    (function walk(node) {
-      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
-        if (child.nodeType === 3) {
-          var frag = document.createDocumentFragment();
-          child.textContent.split(/(\s+)/).forEach(function (part) {
-            if (!part) return;
-            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); return; }
-            var w = el("span", "w"), inner = el("span", null, part);
-            w.style.setProperty("--i", i++);
-            w.appendChild(inner);
-            frag.appendChild(w);
-          });
-          node.replaceChild(frag, child);
-        } else if (child.nodeType === 1 && child.tagName !== "BR") {
-          walk(child);
-        }
-      });
-    })(live);
-    heading.appendChild(el("span", "sr-only", text));   // what assistive technology reads
-    heading.appendChild(live);
-    heading.classList.add("is-split");
-  }
-
-  /* ---------- odometers: numbers whose digits roll into place ---------- */
+  /* ---------- odometers: a number whose digits roll when its value changes ----------
+     Built only where a page script asks for one (the chart's rating as the chronicle moves). */
   function Odo(node) {
     this.el = node;
     this.text = node.textContent.trim();
@@ -315,136 +286,7 @@
     return node._odo;
   };
 
-  /* ---------- reveal on scroll ---------- */
-  if (motion) {
-    $$("[data-split]").forEach(split);
-    var odos = $$("[data-odo]").map(function (n) { return Lux.odo(n); });
-    if ("IntersectionObserver" in window) {
-      var arrive = function (node) {
-        node.classList.add("is-in");
-        if (node._odo && !node.hasAttribute("data-odo-manual")) node._odo.roll();
-        if (node.hasAttribute("data-reveal")) {
-          var wait = 1300 + 80 * (parseInt(node.getAttribute("data-d"), 10) || 0);
-          setTimeout(function () { node.classList.add("is-done"); }, wait);
-        }
-      };
-      var revealIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          revealIO.unobserve(e.target);
-          arrive(e.target);
-        });
-      }, { threshold: 0.14, rootMargin: "0px 0px -7% 0px" });
-      // what is already on the first screen arrives at once, even at its very
-      // bottom edge, where the observer's margin would never reach it
-      var firstScreen = window.innerHeight + 30;
-      $$("[data-reveal], [data-split], [data-odo]").forEach(function (n) {
-        var r = n.getBoundingClientRect();
-        if (r.bottom > 0 && r.top < firstScreen) requestAnimationFrame(function () { arrive(n); });
-        else revealIO.observe(n);
-      });
-    } else {
-      $$("[data-reveal], [data-split]").forEach(function (n) { n.classList.add("is-in", "is-done"); });
-      odos.forEach(function (o) { o.roll(); });
-    }
-  }
-
-  /* ---------- the checkered dissolve ---------- */
-  $$(".dissolve").forEach(function (band) {
-    // each square waits for its own moment: row by row from the bottom,
-    // alternating colours first, with a little scatter so it never looks ruled
-    var squares = $$("i", band);
-    var base = [0.15, 0.4, 0.62];                    // bottom row first
-    function assign() {
-      var cols = getComputedStyle(band).gridTemplateColumns.split(" ").length || 16;
-      var shown = squares.filter(function (sq) { return sq.offsetParent !== null; });
-      var rows = Math.ceil(shown.length / cols);
-      shown.forEach(function (sq, n) {
-        var row = Math.floor(n / cols), col = n % cols;
-        var fromBottom = Math.min(2, rows - 1 - row);
-        var parity = (row + col) % 2;
-        var scatter = ((col * 7 + row * 13) % 10) / 10;
-        sq.style.setProperty("--t", (base[fromBottom] + parity * 0.1 + scatter * 0.2).toFixed(3));
-      });
-    }
-    assign();
-    window.addEventListener("resize", assign);
-    // 0 as the band comes up from the bottom edge, 1 once it stands a quarter of the screen above it
-    if (motion) Lux.scene(band, { mode: function (r, vh) { return (vh - r.top) / (vh * 0.25 + r.height); } });
-  });
-
-  /* ---------- the four steps: the line fills and each step lights as it is reached ---------- */
-  $$("[data-pipe]").forEach(function (list) {
-    var items = $$("li", list);
-    if (!motion) { items.forEach(function (li) { li.classList.add("is-on"); }); return; }
-    Lux.scene(list, {
-      mode: function (r, vh) { return (vh * 0.86 - r.top) / (vh * 0.5); },
-      smooth: 0.14,
-      onUpdate: function (p) {
-        items.forEach(function (li, i) { li.classList.toggle("is-on", p >= (i / (items.length - 1)) * 0.96 + 0.02); });
-      }
-    });
-  });
-
-  /* ---------- the footer's large name rises as the page ends ---------- */
-  if (motion) {
-    $$("[data-ftr-mark]").forEach(function (mark) {
-      Lux.scene(mark, { mode: function (r, vh) { return (vh - r.top) / (r.height * 0.9); }, smooth: 0.14 });
-    });
-  }
-
-  /* ---------- light that follows the pointer ---------- */
-  if (finePointer) {
-    $$("[data-glow]").forEach(function (card) {
-      if (!$(":scope > .glow", card)) card.insertBefore(el("span", "glow"), card.firstChild);
-      var pending = false, x = 0, y = 0;
-      card.addEventListener("pointermove", function (e) {
-        var r = card.getBoundingClientRect();
-        x = e.clientX - r.left; y = e.clientY - r.top;
-        if (pending) return;
-        pending = true;
-        requestAnimationFrame(function () {
-          pending = false;
-          card.style.setProperty("--mx", x.toFixed(1) + "px");
-          card.style.setProperty("--my", y.toFixed(1) + "px");
-        });
-      });
-    });
-    if (motion) {
-      // the main buttons lean toward the pointer
-      $$(".btn-primary").forEach(function (btn) {
-        btn.addEventListener("pointermove", function (e) {
-          var r = btn.getBoundingClientRect();
-          btn.style.setProperty("--bx", (((e.clientX - r.left) / r.width - 0.5) * 10).toFixed(1) + "px");
-          btn.style.setProperty("--by", (((e.clientY - r.top) / r.height - 0.5) * 8).toFixed(1) + "px");
-        });
-        btn.addEventListener("pointerleave", function () {
-          btn.style.setProperty("--bx", "0px");
-          btn.style.setProperty("--by", "0px");
-        });
-      });
-      $$("[data-spot]").forEach(function (stage) {
-        var spot = $(".fx-spot", stage);
-        if (!spot) return;
-        var tx = 0, ty = 0, cx = 0, cy = 0, running = false, seen = false;
-        function step() {
-          cx += (tx - cx) * 0.09; cy += (ty - cy) * 0.09;
-          spot.style.setProperty("--sx", cx.toFixed(1) + "px");
-          spot.style.setProperty("--sy", cy.toFixed(1) + "px");
-          if (Math.abs(tx - cx) + Math.abs(ty - cy) > 0.6) requestAnimationFrame(step); else running = false;
-        }
-        stage.addEventListener("pointermove", function (e) {
-          var r = stage.getBoundingClientRect();
-          tx = e.clientX - r.left; ty = e.clientY - r.top;
-          if (!seen) { seen = true; cx = tx; cy = ty; spot.classList.add("is-on"); }
-          if (!running) { running = true; requestAnimationFrame(step); }
-        });
-        stage.addEventListener("pointerleave", function () { seen = false; spot.classList.remove("is-on"); });
-      });
-    }
-  }
-
-  /* ---------- the rail and the progress line ---------- */
+  /* ---------- the rail: where you are on a long page ---------- */
   (function rail() {
     var marks = $$("[data-rail]");
     if (marks.length < 3) return;
@@ -461,17 +303,13 @@
     });
     navEl.appendChild(bar); navEl.appendChild(list);
     document.body.appendChild(navEl);
-    var line = el("div", "progress"); line.appendChild(el("i"));
-    line.setAttribute("aria-hidden", "true");
-    document.body.appendChild(line);
 
-    var fill = bar.firstChild, tick = line.firstChild, pending = false, current = -1;
+    var fill = bar.firstChild, pending = false, current = -1;
     function update() {
       pending = false;
       var doc = document.documentElement, max = doc.scrollHeight - window.innerHeight;
       var p = max > 0 ? clamp(window.scrollY / max) : 0;
       fill.style.setProperty("--p", p.toFixed(4));
-      tick.style.setProperty("--p", p.toFixed(4));
       var probe = window.innerHeight * 0.4, at = 0;
       for (var i = 0; i < marks.length; i++) if (marks[i].getBoundingClientRect().top <= probe) at = i;
       if (at !== current) {
@@ -733,15 +571,6 @@
       location.reload();
     });
   })();
-
-  /* ---------- loops run only while they are on screen ---------- */
-  $$("[data-live]").forEach(function (node) {
-    Lux.whileVisible(node, function (on) { node.classList.toggle("is-live", on && !document.hidden); }, 0.2);
-  });
-  document.addEventListener("visibilitychange", function () {
-    if (document.hidden) $$("[data-live].is-live").forEach(function (n) { n.classList.remove("is-live"); n.setAttribute("data-was-live", ""); });
-    else $$("[data-was-live]").forEach(function (n) { n.removeAttribute("data-was-live"); n.classList.add("is-live"); });
-  });
 
   root.classList.add("is-ready");
 })();

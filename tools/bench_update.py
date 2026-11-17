@@ -534,7 +534,7 @@ def main():
     tests = sub(tests, odo % "SPRTs run", r"\g<1>%d\g<2>" % len(done), 1, "tests")
     tests = sub(tests, odo % "Passed", r"\g<1>%d\g<2>" % len(passed), 1, "tests")
     tests = sub(tests, odo % "OpenBench games", r"\g<1>%s\g<2>" % N(played), 1, "tests")
-    tests = sub(tests, r"(newest first, as of )\d{1,2} \w+ \d{4}(\.)", r"\g<1>%s\g<2>" % today, 1, "tests")
+    tests = sub(tests, r"(newest first, as of )\d{1,2} \w+ \d{4}(\.?)", r"\g<1>%s\g<2>" % today, 1, "tests")
 
     def count(n, one, many):
         return "%d %s" % (n, one if n == 1 else many)

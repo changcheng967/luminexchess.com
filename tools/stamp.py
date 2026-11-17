@@ -301,7 +301,10 @@ def region_gauntlet(g, indent):
         '    <p class="gnt-num num"><span data-odo>%d</span><span class="gnt-pm">± %d</span></p>' % (g["rating"], g["error"]),
         '    <p class="gnt-on">on the %s scale</p>' % esc(g["list"]),
     ] + ([
-        '    <p class="gnt-also"><span class="num">%d ± %d</span> on the %s scale, from the same games</p>' % (other["rating"], other["error"], esc(other["list"])),
+        '    <p class="gnt-also"><span class="num">%d ± %d</span> on the %s scale, %s</p>' % (
+            other["rating"], other["error"], esc(other["list"]),
+            "from the same games" if other.get("games") == g["games"] else
+            "from the %s games against the %s opponents that list rates" % ("{:,}".format(other["games"]), WORDS[other["opponents"]] if other["opponents"] < len(WORDS) else other["opponents"])),
     ] if other else []) + [
         '  </div>',
         '  <div class="gnt-text">',
@@ -371,7 +374,7 @@ def region_cci(c, indent):
                            % (esc(c["version"]), day, figures, where, played, "early readings" if len(cells) > 1 else "an early reading"))
         else:
             text = lead + "gives v%s %s %s, %s (its page of %s)." % (esc(c["version"]), figures, where, played, day)
-    return '%s<p class="note strength-note" data-reveal>%s <a href="%s">Luminex on the CCI</a></p>' % (indent, text, esc(c["href"]))
+    return '%s<p class="note strength-note">%s <a href="%s">Luminex on the CCI</a></p>' % (indent, text, esc(c["href"]))
 
 
 # ---------------------------------------------------------------- stamping

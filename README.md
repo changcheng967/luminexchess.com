@@ -25,16 +25,16 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
 ## How it is put together
 
 - `site/assets/css/site.css` is shared by every page; `home.css` and `pages.css` add the
-  home page and the other pages. Two surfaces carry the design: the **stage** (the lit
-  scenes, dark in both themes) and **paper** (ivory by day, near-black by night). Amber is
-  Luminex's light, blue is the opponent, grey is a draw.
+  home page and the other pages. Two surfaces carry the design: the **stage** (dark in
+  both themes) and **paper** (ivory by day, near-black by night). Amber is Luminex's
+  light, blue is the opponent, grey is a draw.
 - `site/assets/js/theme.js` runs in `<head>`: it marks the document `js` and, unless the
   visitor prefers reduced motion or has used the footer's "Reduce motion" switch, `motion`.
-  Every hidden starting state and every scroll scene is keyed on `html.motion`, so without
-  scripts or with reduced motion each page is complete and still.
-- `site.js` holds what every page shares: scroll scenes (`Lux.scene`), reveals, the heading
-  word split, the rolling numbers, the pointer, the header, the release lookup. `board.js`
-  draws a board from a FEN. `home.js`, `viewer.js`, `tests.js`, `engine.js` and
+  Every scroll scene is keyed on `html.motion`, so without scripts or with reduced motion
+  each page is complete and still.
+- `site.js` holds what every page shares: scroll scenes (`Lux.scene`), the header, the
+  rail, the pointer, the release lookup, and the rolling number a page script may ask for.
+  `board.js` draws a board from a FEN. `home.js`, `viewer.js`, `tests.js`, `engine.js` and
   `notfound.js` belong to one page each.
 - Animations move `transform` and `opacity` only. The Content Security Policy allows no
   inline styles, so scripts place things by setting CSS custom properties
@@ -45,8 +45,38 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   has settled or the visitor does something, and only then marks the document `is-settled`,
   which switches on smooth scrolling between anchors. A scene that changes the page's height
   after its data arrives asks for that wait with `Lux.wait()` and calls what it gets back
-  when it is done. An anchor's target stops 120 px from the top (`scroll-padding-top` on the
+  when it is done. An anchor's target stops 96 px from the top (`scroll-padding-top` on the
   page plus `scroll-margin-top` on `[id]`).
+
+## Design rules
+
+The site was audited with [unslop](https://github.com/heydamir/unslop) by Damir Sokolovsky
+on 17 November 2026 and these are the rules that came out of it. They are what keeps the
+pages from reading as generated; a change that breaks one needs a reason.
+
+- **Direction.** Exact, evidential, unhurried. The world is a tournament hall after hours
+  and its paperwork: one lamp over a board, score sheets, crosstables. Two moments carry
+  the richness: the board that replays a real game, and the evidence drawn as data (the
+  gauntlet's plot, the record of tests with their intervals). Everything around them is
+  quiet. The signature is the measured rule: the tick-marked line under "measured" and the
+  ± beside every measured figure, and nowhere else.
+- **Type.** The display serif is for first and second level headings only (`.h-xl`, `.h-l`);
+  everything else is the text face at 400, 500 or 600. No italics. Labels are sentence case
+  in the mono face at 12 px with no letter-spacing; negative tracking only on display sizes.
+  A heading, a label, a button and a one-sentence caption end without a full stop.
+- **Colour.** One accent, used for the primary action, a selection and the figure that
+  matters. No glows, no coloured shadows, no washes behind content: depth is a surface step
+  and a hairline. The one light is the lamp over the opening's board.
+- **Shape and space.** Radii by size (`--r-s` 6 tags, `--r-c` 10 controls, `--r-m` 12 rows,
+  `--r-l` 16 cards); nothing is a full pill except a switch. Spacing sits on a 4 px grid;
+  an odd value stays only where it centres something. Icons are 18 px with a 1.5 stroke.
+- **Motion.** Kept where it explains: the game that plays with the scroll, the steps of the
+  search, the chart that follows the chronicle, a piece moving. One easing curve
+  (`--ease-out`), 150 ms for feedback and at most 500 ms for a change. Nothing loops, nothing
+  moves on hover, nothing rises into place as the page scrolls. The pieces being set on the
+  opening's board is the one entrance. The custom pointer stays on the owner's wish.
+- **Numbers.** One format a figure wherever it appears; tabular figures where a number
+  changes in place or sits in a column.
 
 ## Tools
 

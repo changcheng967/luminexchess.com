@@ -45,7 +45,7 @@
         it.el.style.setProperty("--i", Math.round(Math.abs(it.f - 3.5) * 2) + (pawn ? 9 : 0) + (black ? 4 : 0));
       });
       boardEl.classList.add("is-set");
-      setTimeout(function () { boardEl.classList.add("is-live"); boardEl.classList.remove("is-set"); }, 2600);
+      setTimeout(function () { boardEl.classList.add("is-live"); boardEl.classList.remove("is-set"); }, 1200);
     } else {
       boardEl.classList.add("is-live");
     }
@@ -288,18 +288,6 @@
   })();
 
   /* =====================================================================
-     Strength: the gauntlet. When it comes on screen the result bars grow,
-     the implied ratings appear, and Luminex takes its place among the engines.
-     ===================================================================== */
-  (function gauntlet() {
-    var fig = $("[data-gauntlet]");
-    if (!fig || !motion) return;
-    $$(".gnt-row", fig).forEach(function (row, i) { row.style.setProperty("--i", i); });
-    fig.classList.add("is-armed");
-    Lux.onVisible($(".gnt-rows", fig) || fig, function () { fig.classList.add("is-in"); }, 0.12);
-  })();
-
-  /* =====================================================================
      Method: the four steps, and the strip of every test
      ===================================================================== */
   (function strip() {
@@ -310,10 +298,6 @@
       b.style.setProperty("--i", i);
       if (parseFloat(b.getAttribute("data-text").replace("−", "-")) < 0) b.classList.add("is-neg");
     });
-    if (motion) {
-      fig.classList.add("is-armed");
-      Lux.onVisible(fig, function () { fig.classList.add("is-in"); }, 0.3);
-    }
     // The stylesheet sizes the strip from the number of bars where a finger needs room. The newest
     // tests are at the right end, so a strip wider than its frame starts scrolled there.
     fig.style.setProperty("--bars", bars.length);
@@ -417,7 +401,7 @@
         var gg = svgEl("g", {}, "c-goal");
         gg.appendChild(svgEl("line", { x1: Lm, x2: W - Rm, y1: y(goal), y2: y(goal) }));
         // at the left end, clear of the newest point's label, which climbs toward the line
-        var gt = svgEl("text", { x: Lm + 6, y: y(goal) - 9, "text-anchor": "start" }); gt.textContent = "GOAL " + goal;
+        var gt = svgEl("text", { x: Lm + 6, y: y(goal) - 9, "text-anchor": "start" }); gt.textContent = "Goal " + goal;
         gg.appendChild(gt); base.appendChild(gg);
       }
       plot.appendChild(base);
@@ -434,7 +418,6 @@
       var slot = (W - Lm - Rm - 2 * PAD) / (pts.length - 1);      // dates lose their year where the points stand close
       groups = pts.map(function (p, i) {
         var gEl = svgEl("g", {}, "c-pt");
-        gEl.appendChild(svgEl("circle", { cx: x(i), cy: y(p.elo), r: 7 }, "c-halo"));
         gEl.appendChild(svgEl("circle", { cx: x(i), cy: y(p.elo), r: 6.5 }));
         var ly = y(p.elo) - 15;
         if (goal && y(goal) > ly - 14 && y(goal) < ly + 4) ly = y(p.elo) + 25;      // it would sit on the goal line: below its point instead
