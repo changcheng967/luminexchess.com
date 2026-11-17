@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "15 November 2026",
+ "asOf": "17 November 2026",
  "leftOff": [
   59
  ],
@@ -11,6 +11,138 @@
  },
  "tests": [
   {
+   "test": 153,
+   "title": "Put the feature layer on a grid its int16 lanes can hold",
+   "href": "https://github.com/changcheng967/Luminex/pull/93",
+   "ref": "#93",
+   "games": 2312,
+   "elo": 16.69,
+   "ci": 6.86,
+   "text": "+16.69 ± 6.86",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 152,
+   "title": "Score bare-king endgames before the network",
+   "href": "https://github.com/changcheng967/Luminex/pull/92",
+   "ref": "#92",
+   "games": 43048,
+   "elo": -0.41,
+   "ci": 1.62,
+   "text": "−0.41 ± 1.62",
+   "status": "pass",
+   "label": "Passed as no regression (bounds −5 to 0)"
+  },
+  {
+   "test": 151,
+   "title": "gen768s_04q: gen768s_03 trained 250,000 steps further, against gen768s_03q",
+   "href": "https://bench.luminexchess.com/test/151/",
+   "ref": "network",
+   "games": 17904,
+   "elo": -0.74,
+   "ci": 2.46,
+   "text": "−0.74 ± 2.46",
+   "status": "fail",
+   "label": "Failed"
+  },
+  {
+   "test": 150,
+   "title": "Align the hash table and network weights, with huge pages on Linux",
+   "href": "https://github.com/changcheng967/Luminex/pull/91",
+   "ref": "#91",
+   "games": 4628,
+   "elo": 8.71,
+   "ci": 4.79,
+   "text": "+8.71 ± 4.79",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 149,
+   "title": "Reduce late moves sooner and every losing capture",
+   "href": "https://github.com/changcheng967/Luminex/pull/82",
+   "ref": "#82",
+   "games": 6966,
+   "elo": 6.24,
+   "ci": 3.94,
+   "text": "+6.24 ± 3.94",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 148,
+   "title": "gen768s_03q: two more runs on BT4's labels, with one int8 scale per tail row, against gen768s_01q",
+   "href": "https://github.com/changcheng967/Luminex/pull/89",
+   "ref": "#89",
+   "games": 2130,
+   "elo": 17.8,
+   "ci": 7.38,
+   "text": "+17.80 ± 7.38",
+   "status": "pass",
+   "label": "Passed; on main"
+  },
+  {
+   "test": 147,
+   "title": "One int8 scale per tail row (gen768s_02qr) against one per layer (gen768s_02q)",
+   "href": "https://github.com/changcheng967/Luminex/pull/89",
+   "ref": "#89",
+   "games": 4026,
+   "elo": 9.84,
+   "ci": 5.12,
+   "text": "+9.84 ± 5.12",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 146,
+   "title": "The network's error head read in the pruning margins",
+   "href": "https://github.com/changcheng967/Luminex/pull/87",
+   "ref": "#87",
+   "games": 8510,
+   "elo": -2.9,
+   "ci": 3.59,
+   "text": "−2.90 ± 3.59",
+   "status": "fail",
+   "label": "Failed, closed"
+  },
+  {
+   "test": 145,
+   "title": "gen768s_02q: 450,000 more steps with December 2025's positions and a draw head in the loss",
+   "href": "https://bench.luminexchess.com/test/145/",
+   "ref": "network",
+   "games": 9878,
+   "elo": 4.99,
+   "ci": 3.52,
+   "text": "+4.99 ± 3.52",
+   "status": "pass",
+   "label": "Passed; since replaced by gen768s_03q"
+  },
+  {
+   "test": 143,
+   "title": "Require the null-move margin up to depth 12",
+   "href": "https://github.com/changcheng967/Luminex/pull/83",
+   "ref": "#83",
+   "games": 15788,
+   "elo": -0.99,
+   "ci": 2.66,
+   "text": "−0.99 ± 2.66",
+   "status": "fail",
+   "label": "Failed, closed"
+  },
+  {
+   "test": 141,
+   "title": "gen1024s_01q against gen768s_01q at 60+0.6, the long CCI control",
+   "href": "https://bench.luminexchess.com/test/141/",
+   "ref": "network",
+   "games": 14234,
+   "elo": -1.03,
+   "ci": 2.34,
+   "text": "−1.03 ± 2.34",
+   "status": "fail",
+   "label": "Failed"
+  },
+  {
    "test": 140,
    "title": "gen768s_01q: gen768r_06 trained further, on the labels of Leela's BT4 network",
    "href": "https://github.com/changcheng967/Luminex/pull/84",
@@ -20,7 +152,7 @@
    "ci": 15.21,
    "text": "+77.57 ± 15.21",
    "status": "pass",
-   "label": "Passed; on main"
+   "label": "Passed; since replaced by gen768s_03q"
   },
   {
    "test": 139,
