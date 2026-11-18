@@ -56,12 +56,13 @@
 .viewer-result:empty { display: none; }
 .viewer-story { color: var(--muted); max-width: 56ch; }
 .viewer-opening { font-size: 0.86rem; color: var(--faint); }
+.viewer-match { font-size: 0.86rem; }
 .evals { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.evalcard { display: grid; gap: 8px; padding: 16px; border-radius: var(--r-m); background: rgba(243, 240, 233, 0.04); box-shadow: inset 0 0 0 1px var(--line-2); }
-.evalcard-who { display: flex; align-items: center; gap: 8px; font: 400 0.75rem/1 var(--mono); color: var(--muted); }
+.evalcard { display: grid; gap: 8px; min-width: 0; padding: 16px; border-radius: var(--r-m); background: rgba(243, 240, 233, 0.04); box-shadow: inset 0 0 0 1px var(--line-2); }
+.evalcard-who { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font: 400 0.75rem/1 var(--mono); color: var(--muted); }
 .evalcard-who i { width: 8px; height: 8px; border-radius: 2px; background: var(--lumen); }
 .is-stash .evalcard-who i { background: var(--mark-2); }
-.evalcard-who span { color: var(--faint); }
+.evalcard-side { color: var(--faint); }
 .evalcard-score { font: 500 clamp(1.7rem, 2.7vw, 2.3rem)/1 var(--sans); font-variant-numeric: lining-nums tabular-nums; }
 .evalcard-meta { font-size: 0.75rem; color: var(--faint); }
 .evals-gap { min-height: 1.5em; font-size: 0.9rem; color: var(--lumen); }

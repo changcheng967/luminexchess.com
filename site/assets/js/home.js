@@ -225,7 +225,9 @@
         intro = big ? Math.round(vh * 0.55) : 0;
         // on narrow screens the words scroll away first, then the board is held
         copyH = big ? 0 : Math.max(0, Math.round(consoleEl.getBoundingClientRect().top - pinEl.getBoundingClientRect().top));
-        var per = big ? 15 : 12, bookPer = big ? 56 : 40, dwell = big ? 250 : 200;
+        // a long game gets the scroll track of an 80-ply one: the board catches up faster instead
+        var pace = Math.min(1, 80 / game.plies.length);
+        var per = Math.max(5, Math.round((big ? 15 : 12) * pace)), bookPer = big ? 56 : 40, dwell = big ? 250 : 200;
         var pos = big ? 24 : 70;
         stops = [0];
         for (var st = 1; st <= N; st++) {

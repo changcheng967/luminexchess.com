@@ -12,7 +12,7 @@ release's links as a fallback).
 | Address | File | What it holds |
 |---|---|---|
 | `/` | `site/index.html` | The opening (a real game, played by scrolling), the release's strength (the gauntlet, and the match against the release before it), the method, three scenes from inside the engine, the chronicle with the rating chart, downloads |
-| `/games/` | `site/games/index.html` | The game viewer: two wins over Stash 37 with both engines' scores |
+| `/games/` | `site/games/index.html` | The game viewer: the two wins in gauntlet 3 against Obsidian v16.0 and Berserk 14, with both engines' scores |
 | `/tests/` | `site/tests/index.html` | The record of every SPRT, and what is not in it |
 | `/engine/` | `site/engine/index.html` | The six parts, the search explained step by step, speed, the clock, the network and its four generations, training |
 | `/download/` | `site/download/index.html` | Every build of the release, the development build, how to run and build it, questions |

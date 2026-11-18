@@ -246,6 +246,14 @@
     $("opening").textContent = "Opening: " + game.opening + ".";
     $("lum-side").textContent = lumWhite ? "White" : "Black";
     $("stash-side").textContent = lumWhite ? "Black" : "White";
+    $("opp-name").textContent = lumWhite ? game.black : game.white;
+    // the game is one of a whole match: the link goes to all of it
+    var m = game.match, matchLink = $("match");
+    matchLink.parentNode.hidden = !m;
+    if (m) {
+      matchLink.href = m.href;
+      matchLink.firstElementChild.textContent = "All " + m.games.toLocaleString("en-US") + " games of test " + m.test + " on OpenBench";
+    }
     buildMoves();
     buildChips();
     drawGraph();

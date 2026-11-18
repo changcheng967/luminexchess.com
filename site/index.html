@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=17"></script>
+  <script src="/assets/js/theme.js?v=18"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -27,11 +27,11 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=17">
-  <link rel="stylesheet" href="/assets/css/home.css?v=17">
-  <script src="/assets/js/site.js?v=17" defer></script>
-  <script src="/assets/js/board.js?v=17" defer></script>
-  <script src="/assets/js/home.js?v=17" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=18">
+  <link rel="stylesheet" href="/assets/css/home.css?v=18">
+  <script src="/assets/js/site.js?v=18" defer></script>
+  <script src="/assets/js/board.js?v=18" defer></script>
+  <script src="/assets/js/home.js?v=18" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -129,7 +129,7 @@
     <!-- the opening: the page's first scene. The board stays in place while the
          page scrolls, and the scroll position plays a real game on it. -->
     <section class="stage opening" id="top" data-opening data-rail="Opening"
-             data-src="/assets/data/games.json" data-book="d2d3 g8f6 c1f4 b7b6" data-book-san="d3 Nf6 Bf4 b6"
+             data-src="/assets/data/games.json" data-book="c2c4 e7e5 b2b4 b7b5" data-book-san="c4 e5 b4 b5"
              aria-labelledby="hero-title">
       <div class="opening-pin">
         <div class="fx" aria-hidden="true"><span class="fx-lamp"></span></div>
@@ -160,10 +160,10 @@
             </div>
 
             <div class="replay" data-replay>
-              <p class="kicker"><span class="kicker-n">Replay</span> Against Stash 37, 10 November 2026</p>
-              <h2 class="h-m replay-title" data-g="title">One move from level to lost</h2>
-              <p class="replay-players"><span class="who-lum">Luminex</span> <i>vs</i> <span class="who-opp">Stash 37</span> <b class="replay-result num" data-g="result">1–0</b></p>
-              <p class="replay-story" data-g="story">After 19.Ng5 Luminex rated its position +3.2 while Stash 37 scored itself only −1.0. Five moves later Stash took a rook and scored itself −0.7; after 25.Qh6 its score was −16.5, and it was mated on move 38.</p>
+              <p class="kicker"><span class="kicker-n">Replay</span> Against Obsidian v16.0, 14 November 2026</p>
+              <h2 class="h-m replay-title" data-g="title">A rook for a rook by move ten</h2>
+              <p class="replay-players"><span class="who-lum">Luminex</span> <i>vs</i> <span class="who-opp">Obsidian v16.0</span> <b class="replay-result num" data-g="result">1–0</b> <span class="replay-of">the only win in 800 games</span></p>
+              <p class="replay-story" data-g="story">Luminex's only win in 800 games against Obsidian v16.0 (3746 on CCRL Blitz): 1 win, 133 draws, 666 losses. Obsidian's queen took the rook on a1, Luminex's bishop the rook on h8. From move 6 both engines scored White ahead; mate came on move 83.</p>
               <div class="duo">
                 <div class="duo-card is-lum">
                   <span class="duo-who"><i aria-hidden="true"></i>Luminex <span>White</span></span>
@@ -171,7 +171,7 @@
                   <span class="duo-meta" data-g="lum-meta">its own score</span>
                 </div>
                 <div class="duo-card is-opp">
-                  <span class="duo-who"><i aria-hidden="true"></i>Stash 37 <span>Black</span></span>
+                  <span class="duo-who"><i aria-hidden="true"></i>Obsidian v16.0 <span>Black</span></span>
                   <span class="duo-score num" data-g="opp">+0.00</span>
                   <span class="duo-meta" data-g="opp-meta">its own score</span>
                 </div>
@@ -190,7 +190,7 @@
               <p class="replay-gap" data-g="gap"></p>
               <div class="moment" data-g="moment-box">
                 <ol class="pips" data-g="pips" aria-label="Key moments of the game"></ol>
-                <p class="moment-text"><b class="mono" data-g="moment-move"></b> <span data-g="moment">A win over Stash 37 by the development build of 10 November, replayed with each engine's own score after every move.</span></p>
+                <p class="moment-text"><b class="mono" data-g="moment-move"></b> <span data-g="moment">Played by main of 13 November with the gen768r_05q network, at 10+0.1 on one thread. Each engine's own score follows every move.</span></p>
               </div>
               <p class="replay-more">
                 <a class="link" href="/games/"><span>Both games, move by move</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -201,7 +201,7 @@
           <figure class="console" data-console>
             <div class="console-frame">
               <div class="evalbar" aria-hidden="true"><i></i></div>
-              <div class="board" data-setup role="img" aria-label="A chess board that replays one of Luminex's wins over Stash 37 as the page scrolls">
+              <div class="board" data-setup role="img" aria-label="A chess board that replays Luminex's win over Obsidian v16.0 as the page scrolls">
                 <!-- @pieces -->
                 <svg class="pc b x0 y0" data-p="bR" data-sq="a8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-R"/></svg>
                 <svg class="pc b x1 y0" data-p="bN" data-sq="b8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
@@ -249,7 +249,7 @@
             <dl class="proof">
               <div><dt>The release<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo><!--@g:n-->3471<!--/@g:n--></span><span class="u">± <!--@g:e-->16<!--/@g:e--></span></dd></div>
               <div><dt>Over v6.5.1</dt><dd><span class="proof-n" data-odo>+246.55</span><span class="u">± 13.37</span></dd></div>
-              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>968,790</span></dd></div>
+              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>979,080</span></dd></div>
             </dl>
             <p class="scroll-cue" data-cue aria-hidden="true"><span>Scroll to play a real game</span><i></i></p>
           </div>
@@ -482,13 +482,13 @@
         <dl class="totals totals-3">
           <div><dt>SPRTs run</dt><dd class="num"><span data-odo>70</span></dd></div>
           <div><dt>Passed</dt><dd class="num is-lit"><span data-odo>42</span></dd></div>
-          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>968,790</span></dd></div>
+          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>979,080</span></dd></div>
         </dl>
 
         <figure class="card strip" data-strip>
           <figcaption class="fig-head">
             <span class="fig-title">Every test so far</span>
-            <span class="fig-sub">Elo against the engine each change would replace, oldest on the left, as of 17 November 2026. A test that passed is lit.</span>
+            <span class="fig-sub">Elo against the engine each change would replace, oldest on the left, as of 18 November 2026. A test that passed is lit.</span>
           </figcaption>
           <!-- @tests-strip -->
           <div class="strip-scroll">
@@ -942,12 +942,12 @@
 
           <article class="trio-card">
             <div class="trio-fig">
-              <p class="speed-num num">1.26<span class="totals-u">million</span></p>
+              <p class="speed-num num">1.65<span class="totals-u">million</span></p>
               <p class="trio-sizes mono"><span>nodes a second in test games, one thread</span></p>
             </div>
             <div class="trio-text">
-              <h3 class="h-m">More than a million positions a second</h3>
-              <p>On one thread of the test workers, in games at 10+0.1 with the release's network. Speed is strength at fast time controls.</p>
+              <h3 class="h-m">More than a million and a half positions a second</h3>
+              <p>On one thread of the test workers, in games at 10+0.1: main with gen768s_03q, built with clang 23. Speed is strength at fast time controls.</p>
             </div>
           </article>
         </div>

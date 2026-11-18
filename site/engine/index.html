@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#08080a">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=17"></script>
+  <script src="/assets/js/theme.js?v=18"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,10 +24,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=17">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=17">
-  <script src="/assets/js/site.js?v=17" defer></script>
-  <script src="/assets/js/engine.js?v=17" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=18">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=18">
+  <script src="/assets/js/site.js?v=18" defer></script>
+  <script src="/assets/js/engine.js?v=18" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -246,16 +246,16 @@
       <div class="wrap speed-grid">
         <header class="sec-head">
           <p class="kicker"><span class="kicker-n">3.</span> Speed</p>
-          <h2 id="speed-title" class="h-l">Over a million nodes a second</h2>
-          <p class="lede">Speed is strength at fast time controls: the AVX-512 VNNI build alone was worth +45.79 ± 14.88 Elo on the test workers (<a href="https://bench.luminexchess.com/test/27/">test 27</a>). Since v6.5.1, three changes search the same trees about 9.5% faster: the child's hash entry is prefetched when a move is made, the child accumulator is written in one pass, and accumulator updates wait until an evaluation needs them (<a href="https://github.com/changcheng967/Luminex/pull/36">#36</a>, <a href="https://github.com/changcheng967/Luminex/pull/37">#37</a>, <a href="https://github.com/changcheng967/Luminex/pull/38">#38</a>).</p>
+          <h2 id="speed-title" class="h-l">Over a million and a half nodes a second</h2>
+          <p class="lede">Speed is strength at fast time controls: the AVX-512 VNNI build alone was worth +45.79 ± 14.88 Elo on the test workers (<a href="https://bench.luminexchess.com/test/27/">test 27</a>). Since v6.5.1, three changes search the same trees about 9.5% faster: the child's hash entry is prefetched when a move is made, the child accumulator is written in one pass, and accumulator updates wait until an evaluation needs them (<a href="https://github.com/changcheng967/Luminex/pull/36">#36</a>, <a href="https://github.com/changcheng967/Luminex/pull/37">#37</a>, <a href="https://github.com/changcheng967/Luminex/pull/38">#38</a>). Since 17 November the test workers build the engine with clang 23, where gcc 14 built it before.</p>
         </header>
         <figure class="card speed">
           <figcaption class="fig-head">
             <span class="fig-title">Speed in test games</span>
-            <span class="fig-sub">Nodes per second on one thread of the test workers, in the games of test 128 at 10+0.1</span>
+            <span class="fig-sub">Nodes per second on one thread of the test workers, in the games of test 156 at 10+0.1, as of 18 November</span>
           </figcaption>
-          <p class="speed-fig num">1.26<span class="totals-u">million</span></p>
-          <p class="note">With gen768r_06q, the release's network: 1.261 million, against 1.259 million with the network before it (<a href="https://github.com/changcheng967/Luminex/pull/75">#75</a>).</p>
+          <p class="speed-fig num">1.65<span class="totals-u">million</span></p>
+          <p class="note">Main of 17 November with gen768s_03q, on the workers that build it with clang 23: 1.63, 1.65 and 1.72 million by worker (<a href="https://bench.luminexchess.com/test/156/">test 156</a>). Two workers that still built with gcc 14 ran the same code at 1.02 and 1.36 million.</p>
         </figure>
       </div>
     </section>

@@ -9,9 +9,11 @@ earliest, compared with the opponent's, and writes the top twelve to
 candidates.json: per ply the SAN, the FEN after the move, and the mover's score
 and depth, converted to White's point of view. Needs python-chess.
 
-The current showcase games come from the 100-game match against Stash 37
-played with fastchess on 10 November 2026 (luminex_vs_stash37_20261110.pgn,
-kept in the engine repository's out/ folder): games 57 and 33 of that file.
+The ranking was written for the 100-game match against Stash 37 of 10 November 2026
+(luminex_vs_stash37_20261110.pgn, in the engine repository's out/ folder), whose games
+57 and 33 the page showed until 18 November. The games shown now were not ranked: they
+are Luminex's only wins against Obsidian v16.0 and Berserk 14 in gauntlet 3, and
+export_games.py reads their PGN files directly through load() and export() below.
 """
 import json
 import re

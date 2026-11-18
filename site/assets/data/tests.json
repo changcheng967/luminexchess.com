@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "17 November 2026",
+ "asOf": "18 November 2026",
  "leftOff": [
   59
  ],
