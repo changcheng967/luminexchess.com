@@ -6,9 +6,9 @@
   <title>Luminex — open-source NNUE chess engine</title>
   <meta name="description" content="Luminex is a free, open-source UCI chess engine written in C++23, with a 768-wide NNUE evaluation and a search whose changes are measured with SPRT before they ship.">
   <link rel="canonical" href="https://luminexchess.com/">
-  <meta name="theme-color" content="#08080a">
+  <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=18"></script>
+  <script src="/assets/js/theme.js?v=19"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -22,16 +22,18 @@
   <meta property="og:image" content="https://luminexchess.com/assets/img/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Luminex. Every idea, measured before it plays. A chess board from one of its games.">
+  <meta property="og:image:alt" content="Luminex. Every idea, measured before it plays. The Luminex knight, drawn in light.">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=18">
-  <link rel="stylesheet" href="/assets/css/home.css?v=18">
-  <script src="/assets/js/site.js?v=18" defer></script>
-  <script src="/assets/js/board.js?v=18" defer></script>
-  <script src="/assets/js/home.js?v=18" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=19">
+  <link rel="stylesheet" href="/assets/css/home.css?v=19">
+  <script src="/assets/js/site.js?v=19" defer></script>
+  <script src="/assets/js/cells.js?v=19" defer></script>
+  <script src="/assets/js/ride.js?v=19" defer></script>
+  <script src="/assets/js/knight.js?v=19" defer></script>
+  <script src="/assets/js/home.js?v=19" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -98,7 +100,7 @@
   <header class="hdr">
     <div class="hdr-pill">
       <a class="brand" href="/" aria-label="Luminex, home">
-        <svg class="brand-mark" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
+        <img class="brand-mark" src="/assets/img/mark-128.png" alt="" width="36" height="36" decoding="async">
         <span class="brand-name">Luminex</span>
       </a>
       <nav class="nav" id="nav" aria-label="Main">
@@ -115,6 +117,7 @@
           <svg class="icon to-night" aria-hidden="true"><use href="#i-moon"/></svg>
           <svg class="icon to-day" aria-hidden="true"><use href="#i-sun"/></svg>
         </button>
+        <a class="btn btn-s btn-primary hdr-get" href="/download/">Download</a>
         <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="nav">
           <svg class="icon i-open" aria-hidden="true"><use href="#i-menu"/></svg>
           <svg class="icon i-close" aria-hidden="true"><use href="#i-close"/></svg>
@@ -126,138 +129,94 @@
   <!-- /@header -->
 
   <main id="main">
-    <!-- the opening: the page's first scene. The board stays in place while the
-         page scrolls, and the scroll position plays a real game on it. -->
-    <section class="stage opening" id="top" data-opening data-rail="Opening"
-             data-src="/assets/data/games.json" data-book="c2c4 e7e5 b2b4 b7b5" data-book-san="c4 e5 b4 b5"
-             aria-labelledby="hero-title">
-      <div class="opening-pin">
-        <div class="fx" aria-hidden="true"><span class="fx-lamp"></span></div>
-
-        <div class="wrap opening-grid">
-          <div class="opening-copy">
-            <div class="hero" data-hero>
-              <a class="pill hero-pill" href="#strength">
-                <b>v6.6.0</b>
-                <span>is out: +246.55 ± 13.37 Elo over v6.5.1</span>
-                <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+    <!-- the ride: one canvas that pulls back, as the page scrolls, from one position to every game
+         the bench has played. The words beside it are the page; the drawing needs scripts. -->
+    <section class="ride" id="top" data-ride
+             data-src="/assets/data/games.json" data-gauntlet="/assets/data/gauntlet.json" data-wall="/assets/data/wall.json"
+             data-ply="14" data-test="116" aria-labelledby="hero-title">
+      <div class="hero" data-hero>
+        <div class="wrap">
+          <div class="hero-copy">
+            <div class="hero-knight" data-knight-fx="/assets/img/knight-glow.png" aria-hidden="true"></div>
+            <a class="pill hero-pill" href="/download/">
+              <b>v6.6.0</b>
+              <span>is out, its network inside every binary</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+            <h1 id="hero-title" class="hero-h1">
+              <span class="sr-only">Luminex. </span>
+              <span class="h-xl hero-title">Every idea,<br> <em>measured</em><br> before it plays</span>
+            </h1>
+            <p class="lede hero-lede">A free, open-source chess engine. A neural network judges each position, an alpha-beta search looks ahead, and a change to either plays the current engine until the games can tell a gain from noise.</p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="/download/">
+                <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+                <span>Download <span data-release-tag>v6.6.0</span></span>
               </a>
-              <h1 id="hero-title" class="hero-h1">
-                <span class="sr-only">Luminex. </span>
-                <span class="h-xl hero-title">Every idea,<br> <span class="ruled">measured</span><br> before it plays</span>
-              </h1>
-              <p class="lede hero-lede">A free, open-source chess engine. A neural network judges each position, an alpha-beta search looks ahead, and a change to either plays the current engine until the games can tell a gain from noise.</p>
-              <div class="hero-cta">
-                <a class="btn btn-primary" href="/download/">
-                  <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
-                  <span>Download <span data-release-tag>v6.6.0</span></span>
-                </a>
-                <a class="btn btn-ghost" href="https://github.com/changcheng967/Luminex">
-                  <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
-                  <span>Source on GitHub</span>
-                </a>
-              </div>
+              <a class="btn btn-ghost" href="https://github.com/changcheng967/Luminex">
+                <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
+                <span>Source on GitHub</span>
+              </a>
             </div>
-
-            <div class="replay" data-replay>
-              <p class="kicker"><span class="kicker-n">Replay</span> Against Obsidian v16.0, 14 November 2026</p>
-              <h2 class="h-m replay-title" data-g="title">A rook for a rook by move ten</h2>
-              <p class="replay-players"><span class="who-lum">Luminex</span> <i>vs</i> <span class="who-opp">Obsidian v16.0</span> <b class="replay-result num" data-g="result">1–0</b> <span class="replay-of">the only win in 800 games</span></p>
-              <p class="replay-story" data-g="story">Luminex's only win in 800 games against Obsidian v16.0 (3746 on CCRL Blitz): 1 win, 133 draws, 666 losses. Obsidian's queen took the rook on a1, Luminex's bishop the rook on h8. From move 6 both engines scored White ahead; mate came on move 83.</p>
-              <div class="duo">
-                <div class="duo-card is-lum">
-                  <span class="duo-who"><i aria-hidden="true"></i>Luminex <span>White</span></span>
-                  <span class="duo-score num" data-g="lum">+0.00</span>
-                  <span class="duo-meta" data-g="lum-meta">its own score</span>
-                </div>
-                <div class="duo-card is-opp">
-                  <span class="duo-who"><i aria-hidden="true"></i>Obsidian v16.0 <span>Black</span></span>
-                  <span class="duo-score num" data-g="opp">+0.00</span>
-                  <span class="duo-meta" data-g="opp-meta">its own score</span>
-                </div>
-              </div>
-              <div class="spark" aria-hidden="true">
-                <div class="draw" data-g="draw">
-                  <svg viewBox="0 0 1000 200" preserveAspectRatio="none" focusable="false">
-                    <line class="spark-zero" x1="0" x2="1000" y1="100" y2="100"/>
-                    <path class="spark-area" data-g="lum-area" d=""/>
-                    <path class="spark-opp" data-g="opp-line" d=""/>
-                    <path class="spark-lum" data-g="lum-line" d=""/>
-                  </svg>
-                </div>
-                <span class="spark-note">Both scores, from Luminex's side. Above the line, Luminex is better.</span>
-              </div>
-              <p class="replay-gap" data-g="gap"></p>
-              <div class="moment" data-g="moment-box">
-                <ol class="pips" data-g="pips" aria-label="Key moments of the game"></ol>
-                <p class="moment-text"><b class="mono" data-g="moment-move"></b> <span data-g="moment">Played by main of 13 November with the gen768r_05q network, at 10+0.1 on one thread. Each engine's own score follows every move.</span></p>
-              </div>
-              <p class="replay-more">
-                <a class="link" href="/games/"><span>Both games, move by move</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-              </p>
-            </div>
-          </div>
-
-          <figure class="console" data-console>
-            <div class="console-frame">
-              <div class="evalbar" aria-hidden="true"><i></i></div>
-              <div class="board" data-setup role="img" aria-label="A chess board that replays Luminex's win over Obsidian v16.0 as the page scrolls">
-                <!-- @pieces -->
-                <svg class="pc b x0 y0" data-p="bR" data-sq="a8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-R"/></svg>
-                <svg class="pc b x1 y0" data-p="bN" data-sq="b8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
-                <svg class="pc b x2 y0" data-p="bB" data-sq="c8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-B"/></svg>
-                <svg class="pc b x3 y0" data-p="bQ" data-sq="d8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-Q"/></svg>
-                <svg class="pc b x4 y0" data-p="bK" data-sq="e8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-K"/></svg>
-                <svg class="pc b x5 y0" data-p="bB" data-sq="f8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-B"/></svg>
-                <svg class="pc b x6 y0" data-p="bN" data-sq="g8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
-                <svg class="pc b x7 y0" data-p="bR" data-sq="h8" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-R"/></svg>
-                <svg class="pc b x0 y1" data-p="bP" data-sq="a7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc b x1 y1" data-p="bP" data-sq="b7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc b x2 y1" data-p="bP" data-sq="c7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc b x3 y1" data-p="bP" data-sq="d7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc b x4 y1" data-p="bP" data-sq="e7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc b x5 y1" data-p="bP" data-sq="f7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc b x6 y1" data-p="bP" data-sq="g7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc b x7 y1" data-p="bP" data-sq="h7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x0 y6" data-p="wP" data-sq="a2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x1 y6" data-p="wP" data-sq="b2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x2 y6" data-p="wP" data-sq="c2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x3 y6" data-p="wP" data-sq="d2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x4 y6" data-p="wP" data-sq="e2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x5 y6" data-p="wP" data-sq="f2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x6 y6" data-p="wP" data-sq="g2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x7 y6" data-p="wP" data-sq="h2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                <svg class="pc w x0 y7" data-p="wR" data-sq="a1" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-R"/></svg>
-                <svg class="pc w x1 y7" data-p="wN" data-sq="b1" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
-                <svg class="pc w x2 y7" data-p="wB" data-sq="c1" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-B"/></svg>
-                <svg class="pc w x3 y7" data-p="wQ" data-sq="d1" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-Q"/></svg>
-                <svg class="pc w x4 y7" data-p="wK" data-sq="e1" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-K"/></svg>
-                <svg class="pc w x5 y7" data-p="wB" data-sq="f1" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-B"/></svg>
-                <svg class="pc w x6 y7" data-p="wN" data-sq="g1" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
-                <svg class="pc w x7 y7" data-p="wR" data-sq="h1" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-R"/></svg>
-                <!-- /@pieces -->
-              </div>
-            </div>
-            <figcaption class="readout mono">
-              <span class="readout-move" data-g="move">Starting position</span>
-              <span class="readout-eval" data-g="eval">Luminex +0.00</span>
-              <span class="readout-depth" data-g="depth">depth –</span>
-            </figcaption>
-          </figure>
-
-          <div class="opening-foot" data-foot>
             <dl class="proof">
-              <div><dt>The release<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo><!--@g:n-->3471<!--/@g:n--></span><span class="u">± <!--@g:e-->16<!--/@g:e--></span></dd></div>
-              <div><dt>Over v6.5.1</dt><dd><span class="proof-n" data-odo>+246.55</span><span class="u">± 13.37</span></dd></div>
-              <div><dt>Test games</dt><dd><span class="proof-n" data-odo>979,080</span></dd></div>
+            <div><dt>The release<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo><!--@g:n-->3471<!--/@g:n--></span><span class="u">± <!--@g:e-->16<!--/@g:e--></span></dd></div>
+            <div><dt>Over v6.5.1</dt><dd><span class="proof-n" data-odo>+246.55</span><span class="u">± 13.37</span></dd></div>
             </dl>
-            <p class="scroll-cue" data-cue aria-hidden="true"><span>Scroll to play a real game</span><i></i></p>
           </div>
         </div>
-
-        <a class="skip-scene" href="#strength" data-skip><span>Skip the game</span><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg></a>
       </div>
-      <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      <div class="ride-track">
+        <a class="skip-ride" href="#strength">Skip to where it stands</a>
+        <div class="ride-pin">
+          <canvas class="ride-canvas" aria-hidden="true"></canvas>
+          <div class="wrap ride-ui">
+            <div class="ride-copy">
+              <article class="scale scale-0" data-scale="0">
+                <p class="kicker">One position</p>
+                <h2 class="scale-n"><span class="scale-num">1</span> <span class="scale-unit">position</span></h2>
+                <p class="scale-text">Move 10 of a real game: Luminex against Obsidian v16.0, on 14 November 2026. Touch a piece and the squares it attacks light up, the way the engine holds them: as sixty-four bits.</p>
+                <div class="ride-still" data-still></div>
+              </article>
+              <article class="scale" data-scale="1">
+                <p class="kicker">One game</p>
+                <h2 class="scale-n"><span class="scale-num" data-count="plies">161</span> <span class="scale-unit">positions</span></h2>
+                <p class="scale-text">Pull back, and that position is one frame of a game. Under every frame is Luminex's own score for it. From move 6 both engines scored White ahead; mate came on move 83.</p>
+                <a class="link" href="/games/"><span>Replay it move by move</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <div class="ride-still" data-still></div>
+              </article>
+              <article class="scale" data-scale="2">
+                <p class="kicker">One match</p>
+                <h2 class="scale-n"><span class="scale-num" data-count="match">800</span> <span class="scale-unit">games</span></h2>
+                <p class="scale-text">That game is the one lit cell. Against Obsidian v16.0, rated 3746 on CCRL Blitz, Luminex won once, drew 133 times and lost 666. A lit cell is a win, a dim one a draw, a dark one a loss.</p>
+                <div class="ride-still" data-still></div>
+              </article>
+              <article class="scale" data-scale="3">
+                <p class="kicker">One gauntlet</p>
+                <h2 class="scale-n"><span class="scale-num"><!--@g:games-->9,602<!--/@g:games--></span> <span class="scale-unit">games</span></h2>
+                <p class="scale-text">Twelve engines that CCRL rates, about 800 games against each. The stronger the opponent, the darker its field. Together they put the release at <!--@g:rating-->3471 ± 16<!--/@g:rating--> on the CCRL Blitz scale.</p>
+                <a class="link" href="#strength"><span>Where it stands</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <div class="ride-still" data-still></div>
+              </article>
+              <article class="scale" data-scale="4">
+                <p class="kicker">Every game</p>
+                <h2 class="scale-n"><span class="scale-num" data-wall-games>992,548</span> <span class="scale-unit">games</span></h2>
+                <p class="scale-text">Every cell is one game the bench has played: each test of a change, each tuning run, each gauntlet. No change to the engine's play ships until its games can tell a gain from noise.</p>
+                <a class="link" href="/tests/"><span>Every test, with its result</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <div class="ride-still" data-still></div>
+              </article>
+            </div>
+          </div>
+          <p class="ride-readout" data-readout aria-hidden="true"></p>
+          <ol class="ride-steps" aria-label="The five scales of the drawing">
+            <li><button type="button" data-go="0"><b>1</b><span>position</span></button></li>
+            <li><button type="button" data-go="1"><b data-count="plies">161</b><span>positions</span></button></li>
+            <li><button type="button" data-go="2"><b data-count="match">800</b><span>games</span></button></li>
+            <li><button type="button" data-go="3"><b><!--@g:games-->9,602<!--/@g:games--></b><span>games</span></button></li>
+            <li><button type="button" data-go="4"><b data-wall-games>992,548</b><span>games</span></button></li>
+          </ol>
+        </div>
+      </div>
     </section>
 
     <section class="sec" id="strength" data-rail="Strength" aria-labelledby="strength-title">
@@ -482,7 +441,7 @@
         <dl class="totals totals-3">
           <div><dt>SPRTs run</dt><dd class="num"><span data-odo>70</span></dd></div>
           <div><dt>Passed</dt><dd class="num is-lit"><span data-odo>42</span></dd></div>
-          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>979,080</span></dd></div>
+          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>992,548</span></dd></div>
         </dl>
 
         <figure class="card strip" data-strip>
@@ -875,7 +834,7 @@
         <header class="sec-head">
           <p class="kicker"><span class="kicker-n">3.</span> Inside the engine</p>
           <h2 id="engine-title" class="h-l">Two evaluations, one search</h2>
-          <p class="lede">Luminex pairs a quantized neural network with a hand-crafted fallback, behind an alpha-beta search that orders, reduces and prunes its moves</p>
+          <p class="lede">Luminex pairs a quantized neural network with a hand-crafted fallback, behind an alpha-beta search that orders, reduces and prunes its moves.</p>
         </header>
 
         <div class="trio">
@@ -1040,11 +999,16 @@
 
     <section class="stage cta" id="download" data-rail="Get it" aria-labelledby="download-title">
       <div class="wrap cta-inner">
-        <p class="kicker"><span class="kicker-n">5.</span> Get it</p>
-        <h2 id="download-title" class="h-l">Your move</h2>
-        <p class="lede">
-          <span data-release-name>Luminex v6.6.0</span>, released <time data-release-date datetime="2026-11-14">14 November 2026</time>. Free under the GPL v3. The network is inside the program, so there is nothing else to download or place.
-        </p>
+        <div class="cta-top">
+          <div class="cta-head">
+            <p class="kicker"><span class="kicker-n">5.</span> Get it</p>
+            <h2 id="download-title" class="h-l">Your move</h2>
+            <p class="lede">
+              <span data-release-name>Luminex v6.6.0</span>, released <time data-release-date datetime="2026-11-14">14 November 2026</time>. Free under the GPL v3. The network is inside the program, so there is nothing else to download or place.
+            </p>
+          </div>
+          <div class="cta-knight" data-knight-fx="/assets/img/knight-glow.png" aria-hidden="true"></div>
+        </div>
         <div class="cta-dl">
           <a class="dl" data-os="windows" data-asset="luminex-windows-x86-64-modern.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-windows-x86-64-modern.exe">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-window"/></svg></span>
@@ -1077,11 +1041,11 @@
   </main>
 
   <!-- @footer -->
-  <footer class="stage ftr">
+  <footer class="ftr">
     <div class="wrap">
       <div class="ftr-grid">
         <div class="ftr-brand">
-          <p class="ftr-name"><svg class="brand-mark" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>Luminex</p>
+          <p class="ftr-name"><img class="brand-mark" src="/assets/img/mark-256.png" alt="" width="56" height="56" loading="lazy" decoding="async">Luminex</p>
           <p>Free software under the GNU General Public License v3. Parts of its foundation derive from Stockfish. Training positions come from Leela Chess Zero self-play.</p>
           <button class="motion-switch" type="button" data-motion-switch aria-pressed="false" hidden>
             <span class="motion-switch-track" aria-hidden="true"><i></i></span>
@@ -1104,6 +1068,10 @@
           <a href="https://bench.luminexchess.com">OpenBench</a>
           <a href="https://huggingface.co/datasets/xushawn/t91-lgs">Training data</a>
         </nav>
+        <div class="ftr-bits" aria-hidden="true">
+          <div class="bits"><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+          <p class="bits-cap">The name, in bits:<br>seven letters, eight squares each</p>
+        </div>
       </div>
       <div class="ftr-base">
         <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release's rating is that of a gauntlet of <!--@g:games-->9,602<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->twelve<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings. The development build of <!--@g:day-->13 November<!--/@g:day--> played it, one network before the release's; that network, gen768r_06q, adds +3.09 ± 2.46 Elo in self-play. It is not a rating-list figure.</p>

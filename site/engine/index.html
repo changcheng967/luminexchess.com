@@ -6,9 +6,9 @@
   <title>Inside the engine — Luminex</title>
   <meta name="description" content="How Luminex works: a 768-wide NNUE evaluation with incremental accumulators, a selective alpha-beta search explained step by step, its speed, a clock spent by a solved schedule, and how the networks are trained.">
   <link rel="canonical" href="https://luminexchess.com/engine/">
-  <meta name="theme-color" content="#08080a">
+  <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=18"></script>
+  <script src="/assets/js/theme.js?v=19"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,10 +24,13 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=18">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=18">
-  <script src="/assets/js/site.js?v=18" defer></script>
-  <script src="/assets/js/engine.js?v=18" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=19">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=19">
+  <script src="/assets/js/site.js?v=19" defer></script>
+  <script src="/assets/js/board.js?v=19" defer></script>
+  <script src="/assets/js/cells.js?v=19" defer></script>
+  <script src="/assets/js/inputs.js?v=19" defer></script>
+  <script src="/assets/js/engine.js?v=19" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -75,7 +78,7 @@
   <header class="hdr">
     <div class="hdr-pill">
       <a class="brand" href="/" aria-label="Luminex, home">
-        <svg class="brand-mark" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
+        <img class="brand-mark" src="/assets/img/mark-128.png" alt="" width="36" height="36" decoding="async">
         <span class="brand-name">Luminex</span>
       </a>
       <nav class="nav" id="nav" aria-label="Main">
@@ -92,6 +95,7 @@
           <svg class="icon to-night" aria-hidden="true"><use href="#i-moon"/></svg>
           <svg class="icon to-day" aria-hidden="true"><use href="#i-sun"/></svg>
         </button>
+        <a class="btn btn-s btn-primary hdr-get" href="/download/">Download</a>
         <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="nav">
           <svg class="icon i-open" aria-hidden="true"><use href="#i-menu"/></svg>
           <svg class="icon i-close" aria-hidden="true"><use href="#i-close"/></svg>
@@ -107,7 +111,7 @@
       <div class="wrap">
         <p class="kicker"><span class="kicker-n">Engine</span> Inside</p>
         <h1 id="engine-title" class="h-xl">Two evaluations, one search</h1>
-        <p class="lede">Luminex pairs a quantized neural network with a hand-crafted fallback, behind an alpha-beta search that orders, reduces and prunes its moves</p>
+        <p class="lede">Luminex pairs a quantized neural network with a hand-crafted fallback, behind an alpha-beta search that orders, reduces and prunes its moves.</p>
       </div>
       <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
@@ -334,6 +338,30 @@
           <p class="lede">A move changes only the pieces that moved, so the first layer is updated with a few vector additions instead of being recomputed. Select a layer to see what it does.</p>
         </header>
 
+        <figure class="card inputs" data-inputs data-src="/assets/data/games.json" aria-labelledby="inputs-title">
+          <figcaption class="fig-head">
+            <span class="fig-title" id="inputs-title">Its inputs, lit by the pieces</span>
+            <span class="fig-sub">White's half of the first layer, indexed as the engine indexes it: 24,576 inputs in 32 blocks, one for each square White's king can stand on once the board is mirrored to put it on the e to h files, and in each block twelve planes of 64 squares, one for each kind of piece, its own above, the opponent's below. Black's half is the same, seen from Black's side.</span>
+          </figcaption>
+          <div class="inputs-grid">
+            <div class="inputs-left">
+              <div class="board" role="img" aria-label="The position in the game, from move 3 of Luminex against Obsidian v16.0"></div>
+              <div class="inputs-controls" role="group" aria-label="Move through the game">
+                <button type="button" class="vc" data-in="first" aria-label="Book position"><svg class="icon" aria-hidden="true"><use href="#i-first"/></svg></button>
+                <button type="button" class="vc" data-in="prev" aria-label="Previous move"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
+                <button type="button" class="vc vc-play" data-in="play" aria-label="Play"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
+                <button type="button" class="vc" data-in="next" aria-label="Next move"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+                <span class="inputs-pos mono" data-in-pos>Book position</span>
+              </div>
+            </div>
+            <div class="inputs-field">
+              <canvas class="inputs-canvas" aria-hidden="true"></canvas>
+              <p class="inputs-axes mono" aria-hidden="true"><span>The king on the e to h files, rank 8 at the top</span><span>In a block: P N B R Q K, own then opponent's</span></p>
+            </div>
+          </div>
+          <p class="inputs-read" data-in-read aria-live="polite">The network sees a position as the pieces on their squares. The board needs scripts to step through the game.</p>
+        </figure>
+
         <ol class="net" data-net aria-label="Network layers, from input to output">
           <li class="net-layer" data-layer="0">
             <button type="button" class="net-btn" aria-controls="net-detail" aria-pressed="false">
@@ -505,11 +533,11 @@
   </main>
 
   <!-- @footer -->
-  <footer class="stage ftr">
+  <footer class="ftr">
     <div class="wrap">
       <div class="ftr-grid">
         <div class="ftr-brand">
-          <p class="ftr-name"><svg class="brand-mark" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>Luminex</p>
+          <p class="ftr-name"><img class="brand-mark" src="/assets/img/mark-256.png" alt="" width="56" height="56" loading="lazy" decoding="async">Luminex</p>
           <p>Free software under the GNU General Public License v3. Parts of its foundation derive from Stockfish. Training positions come from Leela Chess Zero self-play.</p>
           <button class="motion-switch" type="button" data-motion-switch aria-pressed="false" hidden>
             <span class="motion-switch-track" aria-hidden="true"><i></i></span>
@@ -532,6 +560,10 @@
           <a href="https://bench.luminexchess.com">OpenBench</a>
           <a href="https://huggingface.co/datasets/xushawn/t91-lgs">Training data</a>
         </nav>
+        <div class="ftr-bits" aria-hidden="true">
+          <div class="bits"><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+          <p class="bits-cap">The name, in bits:<br>seven letters, eight squares each</p>
+        </div>
       </div>
       <div class="ftr-base">
         <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release's rating is that of a gauntlet of <!--@g:games-->9,602<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->twelve<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings. The development build of <!--@g:day-->13 November<!--/@g:day--> played it, one network before the release's; that network, gen768r_06q, adds +3.09 ± 2.46 Elo in self-play. It is not a rating-list figure.</p>

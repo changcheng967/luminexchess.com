@@ -196,6 +196,7 @@
     window.addEventListener("scroll", function () {
       var y = window.scrollY, dy = y - lastY;
       lastY = y;
+      hdr.classList.toggle("is-solid", y > 12);
       if (navOpen()) return;
       if (y < 120) { hdr.classList.remove("is-away"); run = 0; return; }
       run = (dy > 0) === (run > 0) ? run + dy : dy;
@@ -203,7 +204,30 @@
       else if (run < -50) hdr.classList.remove("is-away");
     }, { passive: true });
     hdr.addEventListener("focusin", function () { hdr.classList.remove("is-away"); });
+    hdr.classList.toggle("is-solid", window.scrollY > 12);
   }
+
+  /* ---------- coming into the light: marked elements come up once, when first seen ---------- */
+  (function rise() {
+    var nodes = $$("[data-rise], [data-focus]");
+    if (!nodes.length) return;
+    $$("[data-rise-group]").forEach(function (g) {
+      Array.prototype.forEach.call(g.children, function (c, i) {
+        if (!c.hasAttribute("data-rise")) c.setAttribute("data-rise", "");
+        c.style.setProperty("--d", i);
+      });
+    });
+    nodes = $$("[data-rise], [data-focus]");
+    if (!motion || !("IntersectionObserver" in window)) { nodes.forEach(function (n) { n.classList.add("is-in"); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    nodes.forEach(function (n) { io.observe(n); });
+  })();
   if (toggle && nav) {
     toggle.addEventListener("click", function () { setNav(!navOpen()); });
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) setNav(false); });
@@ -256,6 +280,13 @@
   };
   Odo.prototype.roll = function () {
     this.digits.forEach(function (d) { d.r.style.setProperty("--v", d.v); });
+  };
+  // back to zero at once, then roll up again to the number shown
+  Odo.prototype.replay = function () {
+    var self = this;
+    this.vis.classList.add("is-reset");
+    this.digits.forEach(function (d) { d.r.style.setProperty("--v", 0); });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { self.vis.classList.remove("is-reset"); self.roll(); }); });
   };
   // show another value; digits roll when the new text has the same shape, and
   // roll up from zero when it has a new one. The copy a screen reader hears follows it.
@@ -317,7 +348,9 @@
         links.forEach(function (a, i) { if (i === at) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
       }
       var foot = $(".ftr");
-      navEl.classList.toggle("is-off", !!foot && foot.getBoundingClientRect().top < window.innerHeight * 0.7);
+      // off above the first marked section (the home page's ride has its own steps) and over the footer
+      navEl.classList.toggle("is-off", marks[0].getBoundingClientRect().top > probe ||
+                                       (!!foot && foot.getBoundingClientRect().top < window.innerHeight * 0.7));
     }
     function ask() { if (!pending) { pending = true; requestAnimationFrame(update); } }
     window.addEventListener("scroll", ask, { passive: true });
@@ -538,6 +571,7 @@
       var under = document.elementFromPoint(x, y);
       if (under) { lastTarget = under; read(under); ask(); }
     }, { passive: true });
+    Lux.pointerAway = function (away) { wrap.classList.toggle("is-loupe", !!away); };
     document.addEventListener("pointerdown", function () { wrap.classList.add("is-down"); });
     document.addEventListener("pointerup", function () { wrap.classList.remove("is-down"); });
     document.documentElement.addEventListener("pointerleave", hide);

@@ -25,17 +25,22 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
 ## How it is put together
 
 - `site/assets/css/site.css` is shared by every page; `home.css` and `pages.css` add the
-  home page and the other pages. Two surfaces carry the design: the **stage** (dark in
-  both themes) and **paper** (ivory by day, near-black by night). Amber is Luminex's
-  light, blue is the opponent, grey is a draw.
+  home page and the other pages. The colours are the logo's: deep navy, cool ink, and one
+  light, cyan running into violet, that means Luminex or a win. Amber is the opponent. By
+  day the same site is printed on cool paper and the light becomes a deep teal ink.
 - `site/assets/js/theme.js` runs in `<head>`: it marks the document `js` and, unless the
   visitor prefers reduced motion or has used the footer's "Reduce motion" switch, `motion`.
   Every scroll scene is keyed on `html.motion`, so without scripts or with reduced motion
   each page is complete and still.
 - `site.js` holds what every page shares: scroll scenes (`Lux.scene`), the header, the
-  rail, the pointer, the release lookup, and the rolling number a page script may ask for.
-  `board.js` draws a board from a FEN. `home.js`, `viewer.js`, `tests.js`, `engine.js` and
-  `notfound.js` belong to one page each.
+  rail, the pointer, the release lookup, things coming into the light once (`data-rise`),
+  and the rolling number a page script may ask for. `board.js` draws a board from a FEN.
+  `cells.js` holds the cells (one game a cell: the seeded scatter of a run's results, the
+  colours, the wall of every run in boards of 64) and the chess the figures need
+  (`Lux.chess`: a FEN's squares, what a piece attacks). `ride.js` is the home page's ride,
+  `knight.js` the living logo, `wallview.js` the tests page's wall, `inputs.js` the engine
+  page's inputs; `home.js`, `viewer.js`, `tests.js`, `engine.js` and `notfound.js` belong to
+  one page each.
 - Animations move `transform` and `opacity` only. The Content Security Policy allows no
   inline styles, so scripts place things by setting CSS custom properties
   (`element.style.setProperty`).
@@ -48,35 +53,32 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   when it is done. An anchor's target stops 96 px from the top (`scroll-padding-top` on the
   page plus `scroll-margin-top` on `[id]`).
 
-## Design rules
+## Design
 
-The site was audited with [unslop](https://github.com/heydamir/unslop) by Damir Sokolovsky
-on 17 November 2026 and these are the rules that came out of it. They are what keeps the
-pages from reading as generated; a change that breaks one needs a reason.
+Redesigned on 18 November 2026 from one idea, at the owner's wish to think again from
+scratch (the rules of the unslop audit of 17 November no longer bind the site; its facts
+discipline does).
 
-- **Direction.** Exact, evidential, unhurried. The world is a tournament hall after hours
-  and its paperwork: one lamp over a board, score sheets, crosstables. Two moments carry
-  the richness: the board that replays a real game, and the evidence drawn as data (the
-  gauntlet's plot, the record of tests with their intervals). Everything around them is
-  quiet. The signature is the measured rule: the tick-marked line under "measured" and the
-  ± beside every measured figure, and nowhere else.
-- **Type.** The display serif is for first and second level headings only (`.h-xl`, `.h-l`);
-  everything else is the text face at 400, 500 or 600. No italics. Labels are sentence case
-  in the mono face at 12 px with no letter-spacing; negative tracking only on display sizes.
-  A heading, a label, a button and a one-sentence caption end without a full stop.
-- **Colour.** One accent, used for the primary action, a selection and the figure that
-  matters. No glows, no coloured shadows, no washes behind content: depth is a surface step
-  and a hairline. The one light is the lamp over the opening's board.
-- **Shape and space.** Radii by size (`--r-s` 6 tags, `--r-c` 10 controls, `--r-m` 12 rows,
-  `--r-l` 16 cards); nothing is a full pill except a switch. Spacing sits on a 4 px grid;
-  an odd value stays only where it centres something. Icons are 18 px with a 1.5 stroke.
-- **Motion.** Kept where it explains: the game that plays with the scroll, the steps of the
-  search, the chart that follows the chronicle, a piece moving. One easing curve
-  (`--ease-out`), 150 ms for feedback and at most 500 ms for a change. Nothing loops, nothing
-  moves on hover, nothing rises into place as the page scrolls. The pieces being set on the
-  opening's board is the one entrance. The custom pointer stays on the owner's wish.
-- **Numbers.** One format a figure wherever it appears; tabular figures where a number
-  changes in place or sits in a column.
+- **The idea: one square of light is one game.** The logo is a knight whose mane breaks
+  into squares of light; the site takes those squares as its unit. A lit cell is a win, a
+  dim one a draw, a dark one a loss, and cells are laid out in boards of 64. The home page
+  opens on a real position and pulls back, as the page scrolls, to the game it is a frame
+  of, the match that game is one cell of, the gauntlet of twelve matches, and the wall of
+  every game the bench has played (`ride.js`). The same cells draw the match beside each
+  game, the wall on the tests page and the network's inputs on the engine page.
+- **The logo** is the owner's (`luminex.jpg` in the engine repository), used as drawn: a
+  rounded tile in the header, footer and icons, and alive at the end of the home page and
+  above the phone hero, rebuilt from its own light one square per few pixels (`knight.js`).
+- **Light means something.** Glow is kept for what is lit: a win, Luminex's figures, the
+  word "measured", the thing under the pointer. Pieces light the squares they attack, as
+  64-bit masks the engine would hold.
+- **Type.** Bodoni Moda for words read once (headings, big figures, its italic for the lit
+  word), Schibsted Grotesk for words read through, Fragment Mono for anything measured.
+- **Motion** comes from scrolling and from the pointer: the camera pulls back, figures roll
+  into place, the knight's squares scatter and settle. Nothing loops. Every scene has a
+  still form without motion, and the custom pointer stays on the owner's wish.
+- **Facts.** Every Elo exactly as its test page shows it; one number for a thing on a page;
+  never an older state's number beside the current one.
 
 ## Tools
 
@@ -108,8 +110,14 @@ pages from reading as generated; a change that breaks one needs a reason.
   (its Users page), which includes games of workloads deleted later; the sum over the
   listed workloads does not.
 - `tools/serve.py site 8137` serves the site locally with the headers from `site/_headers`.
-- `tools/make_assets.py http://127.0.0.1:8137 site` redraws the icons and the link-preview
-  card from the site's own knight, fonts and styles (needs Playwright and a local Chrome).
+- `tools/logo_assets.py ../Luminex/luminex.jpg site` draws the marks, icons, favicon, the
+  light-only knight that `knight.js` builds the living logo from, and the link-preview card,
+  all from the logo at the top of the engine repository (needs Pillow, and Playwright with a
+  local Chrome for the card).
+- `tools/wall.py` writes `site/assets/data/wall.json`: every run on the bench with its wins,
+  draws and losses, read-only from the bench server's database through `ssh oracle`, for the
+  wall of games (the home page's ride and the tests page). Run it with `bench_update.py --write`
+  so the wall's cells and the count of games beside it come from the same moment.
 - `tools/select_games.py` and `tools/export_games.py` choose and write the two games in
   `site/assets/data/` (`games.json` and the PGN); their docstrings name the archive the
   current games come from.

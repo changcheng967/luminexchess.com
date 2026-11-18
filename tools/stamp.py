@@ -73,7 +73,8 @@ def region_part(name):
 def region_header(page_url):
     text = region_part("header")
     # the link to the page being stamped is the current one
-    return text.replace('<a href="%s">' % page_url, '<a href="%s" aria-current="page">' % page_url)
+    text = text.replace('<a href="%s">' % page_url, '<a href="%s" aria-current="page">' % page_url)
+    return text.replace('hdr-get" href="%s">' % page_url, 'hdr-get" href="%s" aria-current="page">' % page_url)
 
 
 def region_pieces(indent):

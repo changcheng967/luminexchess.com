@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Page not found — Luminex</title>
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#08080a">
+  <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=18"></script>
+  <script src="/assets/js/theme.js?v=19"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=18">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=18">
-  <script src="/assets/js/site.js?v=18" defer></script>
-  <script src="/assets/js/board.js?v=18" defer></script>
-  <script src="/assets/js/notfound.js?v=18" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=19">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=19">
+  <script src="/assets/js/site.js?v=19" defer></script>
+  <script src="/assets/js/board.js?v=19" defer></script>
+  <script src="/assets/js/notfound.js?v=19" defer></script>
 </head>
 <body class="page-404">
   <!-- @sprite -->
@@ -65,7 +65,7 @@
   <header class="hdr">
     <div class="hdr-pill">
       <a class="brand" href="/" aria-label="Luminex, home">
-        <svg class="brand-mark" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
+        <img class="brand-mark" src="/assets/img/mark-128.png" alt="" width="36" height="36" decoding="async">
         <span class="brand-name">Luminex</span>
       </a>
       <nav class="nav" id="nav" aria-label="Main">
@@ -82,6 +82,7 @@
           <svg class="icon to-night" aria-hidden="true"><use href="#i-moon"/></svg>
           <svg class="icon to-day" aria-hidden="true"><use href="#i-sun"/></svg>
         </button>
+        <a class="btn btn-s btn-primary hdr-get" href="/download/">Download</a>
         <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="nav">
           <svg class="icon i-open" aria-hidden="true"><use href="#i-menu"/></svg>
           <svg class="icon i-close" aria-hidden="true"><use href="#i-close"/></svg>
@@ -113,11 +114,11 @@
   </main>
 
   <!-- @footer -->
-  <footer class="stage ftr">
+  <footer class="ftr">
     <div class="wrap">
       <div class="ftr-grid">
         <div class="ftr-brand">
-          <p class="ftr-name"><svg class="brand-mark" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>Luminex</p>
+          <p class="ftr-name"><img class="brand-mark" src="/assets/img/mark-256.png" alt="" width="56" height="56" loading="lazy" decoding="async">Luminex</p>
           <p>Free software under the GNU General Public License v3. Parts of its foundation derive from Stockfish. Training positions come from Leela Chess Zero self-play.</p>
           <button class="motion-switch" type="button" data-motion-switch aria-pressed="false" hidden>
             <span class="motion-switch-track" aria-hidden="true"><i></i></span>
@@ -140,6 +141,10 @@
           <a href="https://bench.luminexchess.com">OpenBench</a>
           <a href="https://huggingface.co/datasets/xushawn/t91-lgs">Training data</a>
         </nav>
+        <div class="ftr-bits" aria-hidden="true">
+          <div class="bits"><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+          <p class="bits-cap">The name, in bits:<br>seven letters, eight squares each</p>
+        </div>
       </div>
       <div class="ftr-base">
         <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release's rating is that of a gauntlet of <!--@g:games-->9,602<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->twelve<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings. The development build of <!--@g:day-->13 November<!--/@g:day--> played it, one network before the release's; that network, gen768r_06q, adds +3.09 ± 2.46 Elo in self-play. It is not a rating-list figure.</p>

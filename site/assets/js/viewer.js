@@ -17,6 +17,72 @@
   var playBtn = root.querySelector('[data-act="play"]');
 
   var board = new Lux.Board(boardEl, { coords: true });
+
+  /* ---------- the light a piece throws: the squares it attacks, under the pointer ---------- */
+  var hintEl = root.querySelector(".viewer-hint"), hintText = hintEl ? hintEl.textContent : "";
+  var atkLayer = el("div", "atk-layer"), atkFrom = el("span", "atk atk-from"), atkCells = [];
+  atkLayer.setAttribute("aria-hidden", "true");
+  atkLayer.appendChild(atkFrom);
+  for (var ai = 0; ai < 28; ai++) { var cell = el("span", "atk"); atkCells.push(cell); atkLayer.appendChild(cell); }
+  boardEl.appendChild(atkLayer);
+  var atkSq = -1;
+  function placeAt(node, sq) {
+    var f = sq & 7, r = sq >> 3;
+    node.style.setProperty("--x", board.flipped ? 7 - f : f);
+    node.style.setProperty("--y", board.flipped ? 7 - r : r);
+  }
+  function light(sq) {
+    if (sq === atkSq) return;
+    atkSq = sq;
+    var pos = game && sq >= 0 ? Lux.chess.parseFen(ply < 0 ? game.startFen : game.plies[ply].fen) : null;
+    var code = pos ? pos[sq] : null, list = code ? Lux.chess.attacks(pos, sq) : [];
+    atkLayer.classList.toggle("is-on", !!code);
+    if (code) placeAt(atkFrom, sq);
+    atkCells.forEach(function (c, i) {
+      c.hidden = i >= list.length;
+      if (i < list.length) placeAt(c, list[i]);
+    });
+    if (!hintEl) return;
+    hintEl.textContent = code
+      ? (code.charAt(0) === "w" ? "White " : "Black ") + Lux.chess.NAMES[code.charAt(1)] + " on " + Lux.chess.squareName(sq) + " attacks " +
+        list.length + (list.length === 1 ? " square · " : " squares · ") + Lux.chess.mask(list)
+      : hintText;
+  }
+  function squareUnder(e) {
+    var r = boardEl.getBoundingClientRect(), f = Math.floor((e.clientX - r.left) / r.width * 8), k = Math.floor((e.clientY - r.top) / r.height * 8);
+    if (f < 0 || f > 7 || k < 0 || k > 7) return -1;
+    return board.flipped ? (7 - k) * 8 + (7 - f) : k * 8 + f;
+  }
+  if (Lux.chess) {
+    boardEl.addEventListener("pointermove", function (e) { light(squareUnder(e)); });
+    boardEl.addEventListener("pointerdown", function (e) { light(squareUnder(e)); });
+    boardEl.addEventListener("pointerleave", function () { light(-1); });
+  }
+
+  /* ---------- the whole match, as cells: this game is the lit one ---------- */
+  var fieldEl = root.querySelector("[data-v='field']");
+  function drawField(m) {
+    if (!fieldEl || !Lux.cells || !m) { if (fieldEl) fieldEl.hidden = true; return; }
+    fieldEl.hidden = false;
+    var C = Lux.cells, cells = C.scatter({ id: m.test, k: "g", w: m.wins, d: m.draws, l: m.losses });
+    var cols = 40, rows = Math.ceil(cells.length / cols), w = fieldEl.clientWidth || 360, cs = w / cols, h = Math.ceil(rows * cs);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), pal = C.palette(root);
+    fieldEl.width = Math.round(w * dpr); fieldEl.height = Math.round(h * dpr);
+    fieldEl.style.setProperty("--h", h + "px");
+    var c = fieldEl.getContext("2d");
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, w, h);
+    var gap = Math.max(1, cs * 0.16), size = cs - gap;
+    for (var i = 0; i < cells.length; i++) {
+      var x = i % cols, y = (i / cols) | 0, v = cells[i];
+      if (v === C.WIN) {
+        c.fillStyle = "rgba(" + pal.rgb[C.WIN].slice(0, 3).join(",") + ",0.22)";
+        c.fillRect(x * cs - cs * 0.5, y * cs - cs * 0.5, cs * 2, cs * 2);
+      }
+      c.fillStyle = ((x + y) & 1 ? pal.alt : pal.css)[v];
+      c.fillRect(x * cs + gap / 2, y * cs + gap / 2, size, size);
+    }
+  }
   var games = [], game = null, gi = 0;
   var ply = -1;        // -1 = starting position, k = after ply k
   var playing = false, timer = 0;
@@ -160,6 +226,7 @@
     var fen = k < 0 ? game.startFen : game.plies[k].fen;
     var step = Math.abs(k - ply) === 1;
     ply = k;
+    if (atkSq >= 0) { var held = atkSq; atkSq = -2; light(held); }     // the position changed under the pointer
     if (animate && step) board.set(fen, true);
     else board.instant(function () { board.set(fen, false); });
     if (k < 0) board.mark(null);
@@ -249,6 +316,8 @@
     $("opp-name").textContent = lumWhite ? game.black : game.white;
     // the game is one of a whole match: the link goes to all of it
     var m = game.match, matchLink = $("match");
+    drawField(m);
+    atkSq = -2; light(-1);
     matchLink.parentNode.hidden = !m;
     if (m) {
       matchLink.href = m.href;

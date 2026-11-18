@@ -26,7 +26,7 @@ What it reports
       decimals, and the bench's intervals have changed with its code before. --no-pages skips it.
 
 What --write changes
-    - "Test games" in the home page's opening and the three totals on the home and tests pages;
+    - the count of games in the home page's ride (its last scale) and the three totals on the home and tests pages;
     - the sentence under the tests page's totals (how many of each kind, and the games by kind);
     - the "as of" date in tests.json, on the home page's chart and on the tests page (the UTC
       date, like every other date on the site: GitHub's, the bench's, the development builds');
@@ -524,7 +524,7 @@ def main():
 
     odo = r'(<dt>%s</dt><dd class="num[^"]*"><span data-odo>)[^<]+(</span>)'
     home = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
-    home = sub(home, r'(<dt>Test games</dt><dd><span class="proof-n" data-odo>)[\d,]+(</span>)', r"\g<1>%s\g<2>" % N(played), 1, "home")
+    home = sub(home, r'(data-wall-games>)[\d,]+(<)', r"\g<1>%s\g<2>" % N(played), 2, "home")     # the ride's last scale and its step (tools/wall.py writes it too)
     home = sub(home, odo % "SPRTs run", r"\g<1>%d\g<2>" % len(done), 1, "home")
     home = sub(home, odo % "Passed", r"\g<1>%d\g<2>" % len(passed), 1, "home")
     home = sub(home, odo % "OpenBench games", r"\g<1>%s\g<2>" % N(played), 1, "home")
