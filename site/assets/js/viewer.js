@@ -61,6 +61,7 @@
 
   /* ---------- the whole match, as cells: this game is the lit one ---------- */
   var fieldEl = root.querySelector("[data-v='field']");
+  var themeWatch = null;
   function drawField(m) {
     if (!fieldEl || !Lux.cells || !m) { if (fieldEl) fieldEl.hidden = true; return; }
     fieldEl.hidden = false;
@@ -317,6 +318,10 @@
     // the game is one of a whole match: the link goes to all of it
     var m = game.match, matchLink = $("match");
     drawField(m);
+    if (!themeWatch && window.MutationObserver) {           // the cells take the theme's colours: draw them again when it changes
+      themeWatch = new MutationObserver(function () { if (game) drawField(game.match); });
+      themeWatch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    }
     atkSq = -2; light(-1);
     matchLink.parentNode.hidden = !m;
     if (m) {

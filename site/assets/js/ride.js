@@ -180,6 +180,7 @@
       win: pal.css[C.WIN], draw: pal.css[C.DRAW], loss: pal.css[C.LOSS]
     };
     var bg = C.rgba(col.bg), wn = C.rgba(col.win);
+    col.litGlow = parseFloat(v("--lit-glow", "0.34")) || 0;
     col.bgA = function (a) { return "rgba(" + bg[0] + "," + bg[1] + "," + bg[2] + "," + a.toFixed(3) + ")"; };
     col.glow = "rgba(" + wn[0] + "," + wn[1] + "," + wn[2] + ",0.13)";
   }
@@ -319,7 +320,7 @@
     fields.forEach(function (f) {
       var X = (f.x - cam.ax) * cs + cam.px, Y = (f.y + HEAD - cam.ay) * cs + cam.py;
       var W = FCOLS * cs, H = f.rows * cs;
-      var alpha = alphaAll * (f === hero ? 1 : others);
+      var alpha = alphaAll * (f === hero ? 1 : others) * (1 - smooth((cs - 110) / 170));
       if (alpha < 0.01 || X > w || Y > h || X + W < 0 || Y + H < 0) return;
       c.globalAlpha = alpha;
       if (cs < 2.4) {
@@ -385,7 +386,7 @@
     c.imageSmoothingEnabled = s < 1;
     c.imageSmoothingQuality = "medium";
     c.drawImage(wall.bitmap, X, Y, wall.W * s, wall.H * s);
-    if (wall.glow && s < 3) {
+    if (wall.glow && s < 3 && col.litGlow > 0) {
       c.globalCompositeOperation = "lighter";
       c.globalAlpha = alpha * 0.55 * (1 - smooth((s - 1.5) / 1.5));
       c.imageSmoothingEnabled = true;
@@ -476,7 +477,7 @@
     if (st === 1) return "Each frame is a position · the bar under it is Luminex's own score";
     if (st === 2) return "Lit: a win · dim: a draw · dark: a loss";
     if (st === 3) return "Strongest opponent first · " + touch + " a field for its score";
-    if (st === 4) return Lux.finePointer ? "Point at the wall to read a run" : "Gold: wins · blue: tuning runs";
+    if (st === 4) return Lux.finePointer ? "Point at the wall to read a run" : "Lit: wins · violet: tuning runs · touch for a run";
     return "";
   }
   function lastBy(who, k) { for (var i = k; i >= 0; i--) if (game.plies[i].by === who) return game.plies[i]; return game.plies[0]; }

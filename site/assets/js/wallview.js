@@ -19,7 +19,8 @@
 
   function colours() {
     pal = C.palette(fig);
-    ink = { bg: pal.v("--bg-2", "#0e1014"), line: pal.v("--ink", "#f4f0e7"), lumen: pal.v("--lumen", "#ffc24b") };
+    ink = { bg: pal.v("--bg-2", "#09111f"), line: pal.v("--ink", "#edf3ff"), lumen: pal.v("--lumen", "#6fe6f5"),
+            glow: parseFloat(pal.v("--lit-glow", "0.34")) || 0 };
   }
   function size() {
     var w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -41,7 +42,7 @@
     ctx.globalAlpha = hover ? 0.55 : 1;
     ctx.drawImage(wall.bitmap, view.x, view.y, wall.W * s, wall.H * s);
     ctx.globalAlpha = 1;
-    if (wall.glow) {
+    if (wall.glow && ink.glow > 0) {
       ctx.globalCompositeOperation = "lighter";
       ctx.globalAlpha = hover ? 0.25 : 0.5;
       ctx.imageSmoothingEnabled = true;
