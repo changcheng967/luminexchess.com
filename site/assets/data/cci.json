@@ -1,7 +1,7 @@
 {
  "note": "What the Computer Chess Index says about the release: the note under \"Where it stands\" on the home page. Written by tools/bench_update.py --cci; run tools/stamp.py site afterwards.",
  "href": "https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md",
- "generated": "17 November 2026",
+ "generated": "19 November 2026",
  "version": "6.6.0",
  "published": "14 November 2026",
  "newest": "6.6.0",
@@ -11,23 +11,23 @@
   {
    "tc": "STC",
    "clock": "8+0.08",
-   "elo": 2877,
-   "range": 93,
-   "games": 36
+   "elo": 2844,
+   "range": 41,
+   "games": 184
   },
   {
    "tc": "LTC",
    "clock": "60+0.6",
-   "elo": 3195,
-   "range": 89,
-   "games": 36
+   "elo": 3216,
+   "range": 32,
+   "games": 260
   },
   {
    "tc": "VLTC",
    "clock": "144+1.12",
-   "elo": 3332,
-   "range": 90,
-   "games": 32
+   "elo": 3329,
+   "range": 39,
+   "games": 168
   }
  ]
 }

@@ -61,8 +61,11 @@ def main():
 
     tests = json.load(open(os.path.join(ROOT, "assets", "data", "tests.json"), encoding="utf-8"))
     listed = {t["test"]: t for t in tests.get("tests", [])}
-    gaunt = json.load(open(os.path.join(ROOT, "assets", "data", "gauntlet.json"), encoding="utf-8"))
-    opp = {o["test"]: o["name"] for o in gaunt.get("opponents", [])}
+    opp = {}                                   # every gauntlet the site keeps: the newest and the one the ride draws
+    for name in sorted(os.listdir(os.path.join(ROOT, "assets", "data"))):
+        if name.startswith("gauntlet") and name.endswith(".json"):
+            gaunt = json.load(open(os.path.join(ROOT, "assets", "data", name), encoding="utf-8"))
+            opp.update({o["test"]: o["name"] for o in gaunt.get("opponents", [])})
 
     runs, total = [], 0
     for r in rows:

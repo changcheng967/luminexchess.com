@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/download/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=20"></script>
+  <script src="/assets/js/theme.js?v=21"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,9 +24,9 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=20">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=20">
-  <script src="/assets/js/site.js?v=20" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=21">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=21">
+  <script src="/assets/js/site.js?v=21" defer></script>
 </head>
 <body class="page-download">
   <!-- @sprite -->
@@ -168,7 +168,7 @@
           </div>
           <div class="devbuild-text">
             <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main: at present gen768s_03q, two steps on from the release's gen768r_06q in self-play: +77.57 ± 15.21 Elo (<a href="https://bench.luminexchess.com/test/140/">test 140</a>), then +17.80 ± 7.38 (<a href="https://bench.luminexchess.com/test/148/">test 148</a>). It is not a numbered release: for anything that needs a fixed version, take v6.6.0 above.</p>
-            <p class="devbuild-fine">One binary a platform now: the Linux and Windows ones carry the network's kernels for every instruction set and run the best one the processor supports. The network is attached as a file of its own. The program names itself <code>Luminex dev-YYYYMMDD-</code> and the first eight characters of its commit.</p>
+            <p class="devbuild-fine">One binary a platform now: the Linux and Windows ones carry the network's kernels for every instruction set and run the best one the processor supports. The network is attached as a file of its own. The program names itself <code>Luminex dev-YYYYMMDD-</code> and the first eight characters of its commit. Since 19 November every build is clang 23's: on Linux with lld and its C++ library linked in, so it needs only glibc 2.35 (Ubuntu 22.04 or newer); clang-cl on Windows; LLVM 23 against the system's own C++ library on macOS 13.3 or newer.</p>
           </div>
           <a class="btn btn-ghost devbuild-go" href="https://github.com/changcheng967/Luminex/releases">
             <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
@@ -203,7 +203,7 @@ go movetime 2000</code></pre>
           </div>
           <div class="howto-step">
             <h3 class="h-m">Or build it</h3>
-            <p>With a C++23 compiler (GCC 13, Clang 15 or MSVC 2022 and newer) and CMake 3.20 or newer. This builds the development branch with its network inside, as the releases are built; for the release itself, run <code>git checkout v6.6.0</code> after cloning.</p>
+            <p>With CMake 3.20 or newer and a C++23 compiler: clang 23 builds every release, about a quarter faster in games than gcc 14 (add <code>-DCMAKE_CXX_COMPILER=clang++-23</code> to the first <code>cmake</code> line), and GCC 13, Clang 15 or MSVC 2022 and newer also compile it. This builds the development branch with its network inside, as the releases are built; for the release itself, run <code>git checkout v6.6.0</code> after cloning.</p>
             <div class="code">
               <button class="copy" type="button" data-copy="build-demo" aria-label="Copy the build commands">
                 <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-say" aria-hidden="true">Copy</span>
@@ -251,7 +251,7 @@ cmake --build build --config Release</code></pre>
             </details>
             <details>
               <summary><span>How strong is it, really?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>About 3470 on the CCRL Blitz scale: a gauntlet of <!--@g:games-->9,602<!--/@g:games--> games against <!--@g:count-->twelve<!--/@g:count--> rated engines gave <!--@g:rating-->3471 ± 16<!--/@g:rating-->, played by the development build one network before the release's. Against v6.5.1, v6.6.0 scored +246.55 ± 13.37 Elo over 2,010 games. Both were measured on OpenBench and are not entries on a rating list; see <a href="/#strength">Strength</a> for the numbers.</p>
+              <p>The development build, main of <!--@g:day-->18 November<!--/@g:day-->: <!--@g:rating-->3559 ± 12<!--/@g:rating--> on the CCRL Blitz scale, from a gauntlet of <!--@g:games-->8,814<!--/@g:games--> games against <!--@g:count-->eleven<!--/@g:count--> rated engines. The release, v6.6.0, was rated 3471 ± 16 by the gauntlet before it, and scored +246.55 ± 13.37 Elo against v6.5.1 over 2,010 games. All of it was measured on OpenBench and none of it is an entry on a rating list; see <a href="/#strength">Strength</a> for the numbers.</p>
             </details>
             <details>
               <summary><span>How are changes tested?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -301,7 +301,7 @@ cmake --build build --config Release</code></pre>
         </div>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the release's rating is that of a gauntlet of <!--@g:games-->9,602<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->twelve<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings. The development build of <!--@g:day-->13 November<!--/@g:day--> played it, one network before the release's; that network, gen768r_06q, adds +3.09 ± 2.46 Elo in self-play. It is not a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the development build's rating, from a gauntlet of <!--@g:games-->8,814<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->eleven<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings, played by main of <!--@g:day-->18 November<!--/@g:day--> with the <!--@g:network-->gen768s_03q<!--/@g:network--> network. The release, v6.6.0, was rated 3471 ± 16 by the gauntlet before it. Neither is a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>

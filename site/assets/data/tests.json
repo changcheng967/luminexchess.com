@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "18 November 2026",
+ "asOf": "19 November 2026",
  "leftOff": [
   59
  ],
@@ -10,6 +10,54 @@
   "max": 120
  },
  "tests": [
+  {
+   "test": 174,
+   "title": "gen768t_01q, the first V5 network, against gen768s_03q, main's",
+   "href": "https://github.com/changcheng967/Luminex/pull/112",
+   "ref": "#112",
+   "games": 668,
+   "elo": 73.37,
+   "ci": 14.2,
+   "text": "+73.37 ± 14.20",
+   "status": "pass",
+   "label": "Passed; pull request open"
+  },
+  {
+   "test": 173,
+   "title": "gen768t_01q against its control: the same training without the relation inputs (gen768s_05q)",
+   "href": "https://bench.luminexchess.com/test/173/",
+   "ref": "network",
+   "games": 1058,
+   "elo": 37.91,
+   "ci": 10.32,
+   "text": "+37.91 ± 10.32",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 157,
+   "title": "Let a side null-move only with a piece of its own",
+   "href": "https://github.com/changcheng967/Luminex/pull/99",
+   "ref": "#99",
+   "games": 26424,
+   "elo": 0.11,
+   "ci": 2.02,
+   "text": "+0.11 ± 2.02",
+   "status": "pass",
+   "label": "Passed as no regression (bounds −5 to 0)"
+  },
+  {
+   "test": 156,
+   "title": "Play the move a stopped iteration has already proven",
+   "href": "https://github.com/changcheng967/Luminex/pull/97",
+   "ref": "#97",
+   "games": 63820,
+   "elo": 1.74,
+   "ci": 1.3,
+   "text": "+1.74 ± 1.30",
+   "status": "pass",
+   "label": "Passed"
+  },
   {
    "test": 155,
    "title": "Stop pruning evasions, forced defences, checks and the TT move",
@@ -445,7 +493,7 @@
   {
    "test": 63,
    "title": "gen768r_03: eight output buckets, trained on 2.5 billion T91 positions",
-   "href": "https://github.com/changcheng967/Luminex/blob/main/nnue/V3-GEN768R.md",
+   "href": "https://github.com/changcheng967/Luminex/blob/main/docs/nnue/V3-GEN768R.md",
    "ref": "network",
    "games": 964,
    "elo": 54.5,

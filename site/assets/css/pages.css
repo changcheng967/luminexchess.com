@@ -288,7 +288,7 @@ body:has(.hdr:not(.is-away)) .thead { top: 56px; }      /* step below the header
 .k-add { background: var(--lumen); }
 .k-plan { box-shadow: inset 0 0 0 1.5px var(--lumen); background: repeating-linear-gradient(135deg, transparent 0 2px, rgba(var(--lumen-rgb), 0.5) 2px 4px); }
 .k-keep { background: var(--dim); }
-.gens { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.gens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .gen { display: grid; grid-template-rows: auto auto auto auto 1fr auto; gap: 12px; align-content: start; padding: 24px; }
 .gen.is-now { box-shadow: inset 0 0 0 1.5px var(--accent), none; }
 .gen-status { display: flex; align-items: center; gap: 8px; font: 400 0.75rem/1.33 var(--mono); color: var(--faint); }
@@ -298,6 +298,9 @@ body:has(.hdr:not(.is-away)) .thead { top: 56px; }      /* step below the header
 .gen.is-now .gen-status i { background: var(--lumen); }
 .gen.is-plan .gen-status i { background: none; box-shadow: inset 0 0 0 1.5px var(--lumen); }
 .gen.is-shelved .gen-status i { background: none; box-shadow: inset 0 0 0 1.5px var(--dim); }
+.gen.is-next { box-shadow: inset 0 0 0 1px rgba(var(--lumen-rgb), 0.45); }
+.gen.is-next .gen-status { color: var(--accent); }
+.gen.is-next .gen-status i { background: none; box-shadow: inset 0 0 0 1.5px var(--lumen), 0 0 8px rgba(var(--lumen-rgb), 0.6); }
 .gen-name { font: 400 1.375rem/1.2 var(--mono); }
 .gen-fig { display: block; width: min(100%, 300px); height: auto; margin-block: 2px 0; overflow: visible; }
 .gen-fig .g-in { fill: var(--dim); opacity: 0.28; }
