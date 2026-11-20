@@ -347,35 +347,55 @@ EARLY = 60      # a CCI figure with a wider range than this (under about a hundr
 
 
 def region_cci(c, indent):
-    """The note under "Where it stands": what the Computer Chess Index says about the release.
+    """The Computer Chess Index's figure in "Where it stands": what an independent list says about the release.
 
-    Every figure is the list's own: the rating, its range and the number of games, at each of its
-    time controls, with the date its page was generated. The list's settled ratings stand within
-    about ± 30 to ± 50 (a few hundred games); while any figure's range is wider than EARLY, the
-    note says that these are early readings. Before the list has played the release, the note
-    says so and names the newest version it has.
+    Every figure is the list's own: at each of its time controls the rating, its range and the number of
+    games, the change over the version it rated before (from the page's own table), and the place on its
+    complete list among the engines rated there, with the date its page was generated. While any range is
+    wider than EARLY the figure says that these are early readings. Before the list has played the
+    release, a sentence says so and names the newest version it has.
     """
-    lead = "The Computer Chess Index, an independent rating list with a scale of its own, "
     cells = c.get("cells") or []
+    link = '<a class="link" href="%s"><span>Luminex on the CCI</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>' % esc(c["href"])
     if not cells:
-        text = lead + ("has rated Luminex up to v%s; v%s is not on it yet." % (esc(c["newest"]), esc(c["version"])) if c.get("newest")
-                       else "has not played Luminex yet.")
-    else:
-        figures = and_list(["%d ± %d at %s" % (x["elo"], x["range"], esc(x["clock"])) for x in cells])
-        games = [x["games"] for x in cells]
-        if len(set(games)) == 1:
-            played = "%sfrom %s %s" % ("each " if len(games) > 1 else "", "{:,}".format(games[0]), "game" if games[0] == 1 else "games")
-        else:
-            played = "from %s games" % and_list([str(n) for n in games])          # no thousands commas inside a list
-        core = re.search(r"- (\w)-Core$", c.get("machineName") or "")
-        where = "on its %s-core machine" % core.group(1) if core else "on its %s machine" % esc(c.get("machineName") or c.get("machine"))
-        day = re.sub(r" \d{4}$", "", c["generated"])
-        if max(x["range"] for x in cells) > EARLY:
-            text = lead + ("has started on v%s. Its page of %s reads %s %s, %s: %s that will move as it plays on."
-                           % (esc(c["version"]), day, figures, where, played, "early readings" if len(cells) > 1 else "an early reading"))
-        else:
-            text = lead + "gives v%s %s %s, %s (its page of %s)." % (esc(c["version"]), figures, where, played, day)
-    return '%s<p class="note strength-note">%s <a href="%s">Luminex on the CCI</a></p>' % (indent, text, esc(c["href"]))
+        text = ("has rated Luminex up to v%s; v%s is not on it yet." % (esc(c["newest"]), esc(c["version"])) if c.get("newest")
+                else "has not played Luminex yet.")
+        return '%s<p class="note strength-note">The Computer Chess Index, an independent rating list with a scale of its own, %s %s</p>' % (indent, text, link)
+    core = re.search(r"^(.*?) \(.*\) - (\w)-Core$", c.get("machineName") or "")
+    where = ("the %s-cores of an Intel Core %s" % (core.group(2), esc(core.group(1))) if core
+             else "its %s machine" % esc(c.get("machineName") or c.get("machine")))
+    day = re.sub(r" \d{4}$", "", c["generated"])
+    names = {"STC": "Short", "LTC": "Long", "VLTC": "Very long"}
+    rows = []
+    for x in cells:
+        place = ('\n      <p class="cci-rank mono">#%d of %d engines on the list</p>' % (x["rank"], x["of"])) if x.get("rank") else ""
+        more = "%s games" % "{:,}".format(x["games"])
+        if x.get("delta") is not None and c.get("previous"):
+            more += " · %s%d over v%s" % ("+" if x["delta"] >= 0 else "\u2212", abs(x["delta"]), esc(c["previous"]))
+        rows.append(
+            '    <li class="cci-cell">\n'
+            '      <p class="cci-tc mono">%s · %s</p>\n'
+            '      <p class="cci-num num"><span class="cci-elo">%d</span><span class="cci-pm">± %d</span></p>%s\n'
+            '      <p class="cci-more mono">%s</p>\n'
+            '    </li>' % (names.get(x["tc"], esc(x["tc"])), esc(x["clock"]), x["elo"], x["range"], place, more))
+    sub = ("Its own games against other engines, on %s, at three time controls, on a scale of its own: these figures "
+           "compare with the other engines on its list, not with CCRL's. Its page of %s." % (where, day))
+    if max(x["range"] for x in cells) > EARLY:
+        sub += " The ranges are still wide: early readings that will move as it plays on."
+    foot = [link]
+    if c.get("listHref"):
+        foot.append('<a class="link" href="%s"><span>The whole list</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>' % esc(c["listHref"]))
+    out = ['<figure class="card cci" aria-labelledby="cci-title">',
+           '  <figcaption class="cci-head">',
+           '    <p class="fact-label" id="cci-title">On an independent list</p>',
+           '    <h3 class="h-m">The Computer Chess Index rates v%s</h3>' % esc(c["version"]),
+           '    <p class="cci-sub">%s</p>' % sub,
+           '  </figcaption>',
+           '  <ol class="cci-cells">'] + rows + [
+           '  </ol>',
+           '  <p class="cci-foot">%s</p>' % " ".join(foot),
+           '</figure>']
+    return "\n".join(indent + line for chunk in out for line in chunk.split("\n"))
 
 
 # ---------------------------------------------------------------- stamping

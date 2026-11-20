@@ -86,7 +86,7 @@ discipline does).
   a region with `<!-- @name -->` and `<!-- /@name -->`; the tool rewrites what is between
   them: the icon sprite, header and footer from `tools/parts/`, the starting position's
   pieces, the test charts and rows from `site/assets/data/tests.json`, the gauntlet
-  figure from `site/assets/data/gauntlet.json`, and the note about the Computer Chess Index
+  figure from `site/assets/data/gauntlet.json`, and the figure for the Computer Chess Index
   from `site/assets/data/cci.json`. Inside a sentence, a value between
   `<!--@g:key-->` and `<!--/@g:key-->` is filled from `gauntlet.json` too (keys: `rating`,
   `n`, `e`, `games`, `day`, `count`, `tc`, `list`, `network`), so the pages and the
@@ -227,12 +227,14 @@ console.
   shown on the home page, and the `since` sentence in `gauntlet.json`.
 - **CCI.** The Computer Chess Index, an independent list, adds games every day, so its
   figures for a new release move for weeks. `tools/bench_update.py` says when its page has
-  moved on; `tools/bench_update.py --cci`, then `tools/stamp.py`, bring the note under "Where
-  it stands" along. The note quotes the list's own figures for the release: the rating, its
-  range and the games at each time control, on the machine that has played the most, with
-  the date of the list's page. While any range is wider than ± 60 it calls them early
-  readings (`EARLY` in `tools/stamp.py`); before the list has played the release it says so.
-  It is the one place the site quotes CCI, and it never shows an older version's figures.
+  moved on; `tools/bench_update.py --cci`, then `tools/stamp.py`, bring its figure in "Where
+  it stands" along. The figure quotes the list's own numbers for the release, on the machine
+  that has played the most: at each time control the rating, its range, the games, the change
+  over the version the list rated before (from the page's own table), and the place on its
+  complete list (`lists/CCIRatings.csv`, one row an engine) among the engines rated there,
+  given only when that list's row carries the same ratings. While any range is wider than
+  ± 60 it calls them early readings (`EARLY` in `tools/stamp.py`); before the list has played
+  the release it is a sentence that says so. It is the one place the site quotes CCI.
 - **Strength.** The release's match against the one before it and the rating chart's
   points (`data-points`) are in `site/index.html`; the gauntlet figure comes from
   `gauntlet.json`; the footnote is in `tools/parts/footer.html`.

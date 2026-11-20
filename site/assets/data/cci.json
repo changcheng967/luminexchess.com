@@ -1,5 +1,5 @@
 {
- "note": "What the Computer Chess Index says about the release: the note under \"Where it stands\" on the home page. Written by tools/bench_update.py --cci; run tools/stamp.py site afterwards.",
+ "note": "What the Computer Chess Index says about the release: its figure in \"Where it stands\" on the home page. Written by tools/bench_update.py --cci; run tools/stamp.py site afterwards.",
  "href": "https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md",
  "generated": "20 November 2026",
  "version": "6.6.0",
@@ -7,27 +7,38 @@
  "newest": "6.6.0",
  "machine": "E1",
  "machineName": "Ultra 7 265T (1.50 GHz) - E-Core",
+ "previous": "6.5.1",
+ "listHref": "https://github.com/computer-chess-index/cci/blob/main/lists/CCIRatings.csv",
  "cells": [
   {
    "tc": "STC",
    "clock": "8+0.08",
    "elo": 2863,
    "range": 37,
-   "games": 224
+   "games": 224,
+   "delta": 307,
+   "rank": 119,
+   "of": 292
   },
   {
    "tc": "LTC",
    "clock": "60+0.6",
    "elo": 3220,
    "range": 32,
-   "games": 260
+   "games": 260,
+   "delta": 247,
+   "rank": 115,
+   "of": 287
   },
   {
    "tc": "VLTC",
    "clock": "144+1.12",
    "elo": 3336,
    "range": 39,
-   "games": 176
+   "games": 176,
+   "delta": 239,
+   "rank": 112,
+   "of": 278
   }
  ]
 }

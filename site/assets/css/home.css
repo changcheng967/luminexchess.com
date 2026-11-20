@@ -209,6 +209,24 @@
 .rung-elo { color: var(--accent); }
 .rung-pm { color: var(--muted); }
 .strength-note { margin-top: 24px; }
+/* the Computer Chess Index: the release on an independent list, a column a time control */
+.cci { display: grid; gap: clamp(20px, 2.6vw, 28px); margin-top: 16px; padding: clamp(24px, 3.4vw, 44px); }
+.cci-head { display: grid; gap: 10px; max-width: 76ch; }
+.cci-sub { font-size: 0.95rem; color: var(--muted); }
+.cci-cells { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.cci-cell { display: grid; gap: 8px; align-content: start; padding: 22px 20px 4px 0; }
+.cci-cell + .cci-cell { padding-left: clamp(16px, 2.4vw, 28px); border-left: 1px solid var(--line); }
+.cci-tc { font-size: 0.8rem; color: var(--muted); }
+.cci-num { display: flex; align-items: baseline; gap: 10px; }
+.cci-elo { font: 400 clamp(2.8rem, 5vw, 4rem)/1 var(--serif); font-variation-settings: "opsz" 72; letter-spacing: -0.02em; font-variant-numeric: lining-nums; color: var(--lit-text); text-shadow: 0 0 0.4em rgba(var(--lumen-rgb), var(--lit-glow)); }
+.cci-pm { font: 400 0.82rem/1 var(--mono); color: var(--muted); }
+.cci-rank { font-size: 0.84rem; color: var(--ink-2); }
+.cci-more { font-size: 0.76rem; color: var(--faint); }
+.cci-foot { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+@media (max-width: 720px) {
+  .cci-cells { grid-template-columns: minmax(0, 1fr); }
+  .cci-cell + .cci-cell { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+}
 @media (max-width: 1180px) { .preview-part { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 640px) {
   .rung { grid-template-columns: 1fr auto auto; grid-template-rows: auto auto; gap: 8px 12px; height: 96px; align-content: center; }

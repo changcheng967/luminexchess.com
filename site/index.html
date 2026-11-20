@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=23"></script>
+  <script src="/assets/js/theme.js?v=24"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -27,13 +27,13 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=23">
-  <link rel="stylesheet" href="/assets/css/home.css?v=23">
-  <script src="/assets/js/site.js?v=23" defer></script>
-  <script src="/assets/js/cells.js?v=23" defer></script>
-  <script src="/assets/js/ride.js?v=23" defer></script>
-  <script src="/assets/js/knight.js?v=23" defer></script>
-  <script src="/assets/js/home.js?v=23" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=24">
+  <link rel="stylesheet" href="/assets/css/home.css?v=24">
+  <script src="/assets/js/site.js?v=24" defer></script>
+  <script src="/assets/js/cells.js?v=24" defer></script>
+  <script src="/assets/js/ride.js?v=24" defer></script>
+  <script src="/assets/js/knight.js?v=24" defer></script>
+  <script src="/assets/js/home.js?v=24" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -392,7 +392,34 @@
           </div>
         </aside>
         <!-- @cci -->
-        <p class="note strength-note">The Computer Chess Index, an independent rating list with a scale of its own, gives v6.6.0 2863 ± 37 at 8+0.08, 3220 ± 32 at 60+0.6 and 3336 ± 39 at 144+1.12 on its E-core machine, from 224, 260 and 176 games (its page of 20 November). <a href="https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md">Luminex on the CCI</a></p>
+        <figure class="card cci" aria-labelledby="cci-title">
+          <figcaption class="cci-head">
+            <p class="fact-label" id="cci-title">On an independent list</p>
+            <h3 class="h-m">The Computer Chess Index rates v6.6.0</h3>
+            <p class="cci-sub">Its own games against other engines, on the E-cores of an Intel Core Ultra 7 265T, at three time controls, on a scale of its own: these figures compare with the other engines on its list, not with CCRL's. Its page of 20 November.</p>
+          </figcaption>
+          <ol class="cci-cells">
+            <li class="cci-cell">
+              <p class="cci-tc mono">Short · 8+0.08</p>
+              <p class="cci-num num"><span class="cci-elo">2863</span><span class="cci-pm">± 37</span></p>
+              <p class="cci-rank mono">#119 of 292 engines on the list</p>
+              <p class="cci-more mono">224 games · +307 over v6.5.1</p>
+            </li>
+            <li class="cci-cell">
+              <p class="cci-tc mono">Long · 60+0.6</p>
+              <p class="cci-num num"><span class="cci-elo">3220</span><span class="cci-pm">± 32</span></p>
+              <p class="cci-rank mono">#115 of 287 engines on the list</p>
+              <p class="cci-more mono">260 games · +247 over v6.5.1</p>
+            </li>
+            <li class="cci-cell">
+              <p class="cci-tc mono">Very long · 144+1.12</p>
+              <p class="cci-num num"><span class="cci-elo">3336</span><span class="cci-pm">± 39</span></p>
+              <p class="cci-rank mono">#112 of 278 engines on the list</p>
+              <p class="cci-more mono">176 games · +239 over v6.5.1</p>
+            </li>
+          </ol>
+          <p class="cci-foot"><a class="link" href="https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md"><span>Luminex on the CCI</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a> <a class="link" href="https://github.com/computer-chess-index/cci/blob/main/lists/CCIRatings.csv"><span>The whole list</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+        </figure>
         <!-- /@cci -->
       </div>
     </section>

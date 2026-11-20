@@ -70,6 +70,8 @@ import urllib.request
 BENCH = "https://bench.luminexchess.com"
 CCI_PAGE = "https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md"
 CCI_RAW = "https://raw.githubusercontent.com/computer-chess-index/cci/main/engines/Luminex.md"
+CCI_LIST = "https://github.com/computer-chess-index/cci/blob/main/lists/CCIRatings.csv"
+CCI_LIST_RAW = "https://raw.githubusercontent.com/computer-chess-index/cci/main/lists/CCIRatings.csv"
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 N = "{:,}".format
 KINDS = ("sprt", "fixed", "gauntlet", "tune")
@@ -267,7 +269,30 @@ def release_version():
         return re.search(r'"softwareVersion":\s*"([\d.]+)"', fh.read()).group(1)
 
 
-def read_cci(page, version):
+def cci_list_places(listing, version, cells):
+    """Where the version stands on CCI's complete list (one row an engine, its newest version, rated on the
+    machine the list is kept on): its place at each time control among the engines rated there. Only when
+    the list's row is this version and carries the same ratings as the cells, so place and figure agree."""
+    import csv
+    import io as _io
+    try:
+        rows = list(csv.DictReader(_io.StringIO(listing)))
+    except csv.Error:
+        return {}
+    mine = next((r for r in rows if r.get("Engine") == "Luminex" and r.get("Version") == version), None)
+    if not mine:
+        return {}
+    out = {}
+    for x in cells:
+        v = (mine.get(x["tc"]) or "").strip()
+        if not v.lstrip("-").isdigit() or int(v) != x["elo"]:
+            return {}
+        rated = [int(r[x["tc"]]) for r in rows if (r.get(x["tc"]) or "").strip().lstrip("-").isdigit()]
+        out[x["tc"]] = (1 + sum(1 for e in rated if e > x["elo"]), len(rated))
+    return out
+
+
+def read_cci(page, version, listing=""):
     """What CCI's page for Luminex says about one version, as cci.json keeps it.
 
     The page's last table has a row for every version, time control and machine: the rating, its
@@ -297,14 +322,38 @@ def read_cci(page, version):
     listed = list(machines)
     machine = max(by, key=lambda k: (len(by[k]), -listed.index(k) if k in listed else -len(listed))) if by else None
     cells = sorted(by.get(machine, []), key=lambda r: float(r["clock"].split("+")[0]))
+    # the machine's own table of versions: each figure's change over the version before, as the page gives it
+    deltas, previous = {}, None
+    if machine:
+        sec = re.search(r"^## Elo Ratings %s <sub>.*?$(.*?)(?=^## |\Z)" % re.escape(machine), page, flags=re.M | re.S)
+        if sec:
+            lines = [l for l in sec.group(1).split("\n") if l.startswith("|")]
+            head = [h.strip() for h in lines[0].strip().strip("|").split("|")] if lines else []
+            tcs = [re.match(r"(\w+)", h).group(1) for h in head[2:5]] if len(head) >= 5 else []
+            versions = [l.strip().strip("|").split("|") for l in lines[2:]]
+            for i, row in enumerate(versions):
+                if row[0].strip() == version:
+                    for tc, cell in zip(tcs, row[2:5]):
+                        d = re.search(r"\(([+-]?\d+)\)", cell)
+                        if d:
+                            deltas[tc] = int(d.group(1))
+                    if i + 1 < len(versions) and re.fullmatch(r"[\d.]+", versions[i + 1][0].strip()):
+                        previous = versions[i + 1][0].strip()
+    places = cci_list_places(listing, version, cells) if listing else {}
+    for r in cells:
+        if r["tc"] in deltas and previous:
+            r["delta"] = deltas[r["tc"]]
+        if r["tc"] in places:
+            r["rank"], r["of"] = places[r["tc"]]
     return {
-        "note": "What the Computer Chess Index says about the release: the note under \"Where it stands\" on the home page. "
+        "note": "What the Computer Chess Index says about the release: its figure in \"Where it stands\" on the home page. "
                 "Written by tools/bench_update.py --cci; run tools/stamp.py site afterwards.",
         "href": CCI_PAGE, "generated": long_date(generated), "version": version,
         "published": long_date(published[version]) if version in published else None,
         "newest": order[0] if order else None,              # the newest version the list has played
         "machine": machine, "machineName": machines.get(machine),
-        "cells": [{k: r[k] for k in ("tc", "clock", "elo", "range", "games")} for r in cells],
+        "previous": previous if deltas else None, "listHref": CCI_LIST if places else None,
+        "cells": [{k: r[k] for k in ("tc", "clock", "elo", "range", "games", "delta", "rank", "of") if k in r} for r in cells],
     }
 
 
@@ -339,7 +388,11 @@ def main():
         """CCI's page as cci.json would keep it, or None if the page did not come back."""
         page = (open(os.path.join(a.src, "cci.md"), encoding="utf-8", errors="replace").read() if a.src and os.path.exists(os.path.join(a.src, "cci.md"))
                 else ("" if a.src else fetch(CCI_RAW, a.via)))
-        return read_cci(page, version) if "## Detailed Evaluation Results" in page and "Generated:" in page else None
+        if "## Detailed Evaluation Results" not in page or "Generated:" not in page:
+            return None
+        listing = (open(os.path.join(a.src, "cci.csv"), encoding="utf-8", errors="replace").read() if a.src and os.path.exists(os.path.join(a.src, "cci.csv"))
+                   else ("" if a.src else fetch(CCI_LIST_RAW, a.via)))
+        return read_cci(page, version, listing)
 
     cci_path = os.path.join(ROOT, "assets", "data", "cci.json")
     if a.cci is not None:
