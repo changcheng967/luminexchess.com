@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/download/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=21"></script>
+  <script src="/assets/js/theme.js?v=22"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,9 +24,9 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=21">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=21">
-  <script src="/assets/js/site.js?v=21" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=22">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=22">
+  <script src="/assets/js/site.js?v=22" defer></script>
 </head>
 <body class="page-download">
   <!-- @sprite -->
@@ -167,7 +167,7 @@
             <p class="devbuild-now mono" data-dev hidden>Now <span data-dev-name></span> · <time data-dev-date></time></p>
           </div>
           <div class="devbuild-text">
-            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main: at present gen768s_03q, two steps on from the release's gen768r_06q in self-play: +77.57 ± 15.21 Elo (<a href="https://bench.luminexchess.com/test/140/">test 140</a>), then +17.80 ± 7.38 (<a href="https://bench.luminexchess.com/test/148/">test 148</a>). It is not a numbered release: for anything that needs a fixed version, take v6.6.0 above.</p>
+            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main: at present gen768t_01q, the first V5 network, three steps on from the release's gen768r_06q in self-play: +77.57 ± 15.21 Elo (<a href="https://bench.luminexchess.com/test/140/">test 140</a>), +17.80 ± 7.38 (<a href="https://bench.luminexchess.com/test/148/">test 148</a>), then +73.37 ± 14.20 (<a href="https://bench.luminexchess.com/test/174/">test 174</a>). It is not a numbered release: for anything that needs a fixed version, take v6.6.0 above.</p>
             <p class="devbuild-fine">One binary a platform now: the Linux and Windows ones carry the network's kernels for every instruction set and run the best one the processor supports. The network is attached as a file of its own. The program names itself <code>Luminex dev-YYYYMMDD-</code> and the first eight characters of its commit. Since 19 November every build is clang 23's: on Linux with lld and its C++ library linked in, so it needs only glibc 2.35 (Ubuntu 22.04 or newer); clang-cl on Windows; LLVM 23 against the system's own C++ library on macOS 13.3 or newer.</p>
           </div>
           <a class="btn btn-ghost devbuild-go" href="https://github.com/changcheng967/Luminex/releases">

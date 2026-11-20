@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=21"></script>
+  <script src="/assets/js/theme.js?v=22"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -27,13 +27,13 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=21">
-  <link rel="stylesheet" href="/assets/css/home.css?v=21">
-  <script src="/assets/js/site.js?v=21" defer></script>
-  <script src="/assets/js/cells.js?v=21" defer></script>
-  <script src="/assets/js/ride.js?v=21" defer></script>
-  <script src="/assets/js/knight.js?v=21" defer></script>
-  <script src="/assets/js/home.js?v=21" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=22">
+  <link rel="stylesheet" href="/assets/css/home.css?v=22">
+  <script src="/assets/js/site.js?v=22" defer></script>
+  <script src="/assets/js/cells.js?v=22" defer></script>
+  <script src="/assets/js/ride.js?v=22" defer></script>
+  <script src="/assets/js/knight.js?v=22" defer></script>
+  <script src="/assets/js/home.js?v=22" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -200,7 +200,7 @@
               </article>
               <article class="scale" data-scale="4">
                 <p class="kicker">Every game</p>
-                <h2 class="scale-n"><span class="scale-num" data-wall-games>1,087,124</span> <span class="scale-unit">games</span></h2>
+                <h2 class="scale-n"><span class="scale-num" data-wall-games>1,088,326</span> <span class="scale-unit">games</span></h2>
                 <p class="scale-text">Every cell is one game the bench has played: each test of a change, each tuning run, each gauntlet. No change to the engine's play ships until its games can tell a gain from noise.</p>
                 <a class="link" href="/tests/"><span>Every test, with its result</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                 <div class="ride-still" data-still></div>
@@ -213,7 +213,7 @@
             <li><button type="button" data-go="1"><b data-count="plies">161</b><span>positions</span></button></li>
             <li><button type="button" data-go="2"><b data-count="match">800</b><span>games</span></button></li>
             <li><button type="button" data-go="3"><b>9,602</b><span>games</span></button></li>
-            <li><button type="button" data-go="4"><b data-wall-games>1,087,124</b><span>games</span></button></li>
+            <li><button type="button" data-go="4"><b data-wall-games>1,088,326</b><span>games</span></button></li>
           </ol>
         </div>
       </div>
@@ -239,7 +239,7 @@
               <div class="gnt-text">
                 <p>Main of 18 November, with the gen768s_03q network, played 800 games against each of eleven engines that CCRL rates, at 10+0.1 on one thread: 8,814 games, none lost on time and no crash. The rating is the one at which the points expected against all eleven equal the points scored.</p>
                 <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between 3534 and 3588, where the games by themselves would leave ± 4. More opponents near Luminex would narrow it; more games would not.</p>
-                <p class="gnt-since">The first V5 network, gen768t_01q, has since passed its SPRT against gen768s_03q, the network this gauntlet played with: +73.37 ± 14.20 Elo (test 174). It waits in pull request #112.</p>
+                <p class="gnt-since">Since then the first V5 network, gen768t_01q, has replaced gen768s_03q on main: +73.37 ± 14.20 Elo against it in self-play (test 174). No gauntlet has rated it yet.</p>
                 <a class="link" href="https://bench.luminexchess.com/gauntlet/4/"><span>Gauntlet 4 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </figcaption>
@@ -431,7 +431,7 @@
         <dl class="totals totals-3">
           <div><dt>SPRTs run</dt><dd class="num"><span data-odo>74</span></dd></div>
           <div><dt>Passed</dt><dd class="num is-lit"><span data-odo>46</span></dd></div>
-          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>1,087,124</span></dd></div>
+          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>1,088,326</span></dd></div>
         </dl>
 
         <figure class="card strip" data-strip>
@@ -767,7 +767,7 @@
                 <line class="sbar-ci" x1="831.86" x2="831.86" y1="146.61" y2="159.54"/>
                 <path class="sbar-fill" d="M829.46 165.5V155.48Q829.46 153.08 831.86 153.08H831.86Q834.27 153.08 834.27 155.48V165.5Z"/>
               </a>
-              <a class="sbar is-pass" href="/tests/#t148" aria-label="Test 148, gen768s_03q: two more runs on BT4&#x27;s labels, with one int8 scale per tail row, against gen768s_01q: +17.80 ± 7.38 Elo over 2,130 games. Passed; on main." data-test="148" data-title="gen768s_03q: two more runs on BT4&#x27;s labels, with one int8 scale per tail row, against gen768s_01q" data-text="+17.80 ± 7.38" data-games="2,130" data-label="Passed; on main">
+              <a class="sbar is-pass" href="/tests/#t148" aria-label="Test 148, gen768s_03q: two more runs on BT4&#x27;s labels, with one int8 scale per tail row, against gen768s_01q: +17.80 ± 7.38 Elo over 2,130 games. Passed; since replaced by gen768t_01q." data-test="148" data-title="gen768s_03q: two more runs on BT4&#x27;s labels, with one int8 scale per tail row, against gen768s_01q" data-text="+17.80 ± 7.38" data-games="2,130" data-label="Passed; since replaced by gen768t_01q">
                 <rect class="sbar-hit" x="838.27" y="14" width="12.81" height="202"/>
                 <line class="sbar-ci" x1="844.68" x2="844.68" y1="133.71" y2="152.34"/>
                 <path class="sbar-fill" d="M842.27 165.5V145.43Q842.27 143.03 844.68 143.03H844.68Q847.08 143.03 847.08 145.43V165.5Z"/>
@@ -822,7 +822,7 @@
                 <line class="sbar-ci" x1="972.78" x2="972.78" y1="104.61" y2="130.67"/>
                 <path class="sbar-fill" d="M970.38 165.5V120.04Q970.38 117.64 972.78 117.64H972.78Q975.19 117.64 975.19 120.04V165.5Z"/>
               </a>
-              <a class="sbar is-pass" href="/tests/#t174" aria-label="Test 174, gen768t_01q, the first V5 network, against gen768s_03q, main&#x27;s: +73.37 ± 14.20 Elo over 668 games. Passed; pull request open." data-test="174" data-title="gen768t_01q, the first V5 network, against gen768s_03q, main&#x27;s" data-text="+73.37 ± 14.20" data-games="668" data-label="Passed; pull request open">
+              <a class="sbar is-pass" href="/tests/#t174" aria-label="Test 174, gen768t_01q, the first V5 network, against gen768s_03q: +73.37 ± 14.20 Elo over 668 games. Passed; on main." data-test="174" data-title="gen768t_01q, the first V5 network, against gen768s_03q" data-text="+73.37 ± 14.20" data-games="668" data-label="Passed; on main">
                 <rect class="sbar-hit" x="979.19" y="14" width="12.81" height="202"/>
                 <line class="sbar-ci" x1="985.59" x2="985.59" y1="54.94" y2="90.8"/>
                 <path class="sbar-fill" d="M983.19 165.5V75.28Q983.19 72.87 985.59 72.87H985.59Q988 72.87 988 75.28V165.5Z"/>
@@ -911,12 +911,12 @@
 
           <article class="trio-card">
             <div class="trio-fig">
-              <p class="speed-num num">1.65<span class="totals-u">million</span></p>
+              <p class="speed-num num">1.30<span class="totals-u">million</span></p>
               <p class="trio-sizes mono"><span>nodes a second in test games, one thread</span></p>
             </div>
             <div class="trio-text">
-              <h3 class="h-m">More than a million and a half positions a second</h3>
-              <p>On one thread of the test workers, in games at 10+0.1: main with gen768s_03q, built with clang 23. Speed is strength at fast time controls.</p>
+              <h3 class="h-m">More than a million positions a second</h3>
+              <p>On one thread of the test workers, in games at 10+0.1: main with gen768t_01q, the first V5 network, built with clang 23. Speed is strength at fast time controls.</p>
             </div>
           </article>
         </div>
@@ -1002,9 +1002,9 @@
               <time datetime="2026-11-18">Nov 2026</time>
               <div class="tl-body"><h3>Main, 18 November <span class="tl-elo num">3559</span></h3><p>Two networks on from the release: gen768s_01q, its network trained further on the labels of Leela's BT4 network (+77.57 ± 15.21 Elo), then gen768s_03q (+17.80 ± 7.38). Around them: late moves reduced sooner (+6.24 ± 3.94), aligned tables with huge pages (+8.71 ± 4.79), a feature layer whose arithmetic no longer saturates (+16.69 ± 6.86), the move a stopped iteration has already proven (+1.74 ± 1.30), bare-king endings scored before the network, and one binary a platform, built with clang 23. A gauntlet of 8,814 games against eleven engines that CCRL rates puts this build at 3559 ± 12.</p></div>
             </li>
-            <li class="tl is-next" data-pt="7">
-              <time>Next</time>
-              <div class="tl-body"><h3>The first V5 network</h3><p>gen768t_01q reads 55,960 relation inputs a side beside the piece-squares: one piece attacking another, or a pawn attacking a pawn. It passed its SPRT against gen768s_03q at +73.37 ± 14.20 Elo (<a href="https://bench.luminexchess.com/test/174/">test 174</a>), and +37.91 ± 10.32 against the same training without them (<a href="https://bench.luminexchess.com/test/173/">test 173</a>). It waits in <a href="https://github.com/changcheng967/Luminex/pull/112">pull request #112</a>.</p></div>
+            <li class="tl is-next" data-pt="6">
+              <time datetime="2026-11-19">Nov 2026</time>
+              <div class="tl-body"><h3>The first V5 network</h3><p>gen768t_01q reads 55,960 relation inputs a side beside the piece-squares: one piece attacking another, or a pawn attacking a pawn. It passed its SPRT against gen768s_03q at +73.37 ± 14.20 Elo (<a href="https://bench.luminexchess.com/test/174/">test 174</a>), and +37.91 ± 10.32 against the same training without them (<a href="https://bench.luminexchess.com/test/173/">test 173</a>). On main since 19 November (<a href="https://github.com/changcheng967/Luminex/pull/112">#112</a>); no gauntlet has rated it yet.</p></div>
             </li>
           </ol>
         </div>

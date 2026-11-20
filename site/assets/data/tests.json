@@ -12,7 +12,7 @@
  "tests": [
   {
    "test": 174,
-   "title": "gen768t_01q, the first V5 network, against gen768s_03q, main's",
+   "title": "gen768t_01q, the first V5 network, against gen768s_03q",
    "href": "https://github.com/changcheng967/Luminex/pull/112",
    "ref": "#112",
    "games": 668,
@@ -20,7 +20,7 @@
    "ci": 14.2,
    "text": "+73.37 ± 14.20",
    "status": "pass",
-   "label": "Passed; pull request open"
+   "label": "Passed; on main"
   },
   {
    "test": 173,
@@ -152,7 +152,7 @@
    "ci": 7.38,
    "text": "+17.80 ± 7.38",
    "status": "pass",
-   "label": "Passed; on main"
+   "label": "Passed; since replaced by gen768t_01q"
   },
   {
    "test": 147,

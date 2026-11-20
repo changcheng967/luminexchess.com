@@ -243,5 +243,5 @@
    "expected": 71.3
   }
  ],
- "since": "The first V5 network, gen768t_01q, has since passed its SPRT against gen768s_03q, the network this gauntlet played with: +73.37 ± 14.20 Elo (test 174). It waits in pull request #112."
+ "since": "Since then the first V5 network, gen768t_01q, has replaced gen768s_03q on main: +73.37 ± 14.20 Elo against it in self-play (test 174). No gauntlet has rated it yet."
 }
