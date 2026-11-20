@@ -505,7 +505,7 @@
   {
    "test": 63,
    "title": "gen768r_03: eight output buckets, trained on 2.5 billion T91 positions",
-   "href": "https://github.com/changcheng967/Luminex/blob/main/docs/nnue/V3-GEN768R.md",
+   "href": "https://github.com/changcheng967/Luminex/blob/main/docs/NNUE.md#v3-gen768r",
    "ref": "network",
    "games": 964,
    "elo": 54.5,

@@ -203,14 +203,14 @@ go movetime 2000</code></pre>
           </div>
           <div class="howto-step">
             <h3 class="h-m">Or build it</h3>
-            <p>With CMake 3.20 or newer and a C++23 compiler: clang 23 builds every release, about a quarter faster in games than gcc 14 (add <code>-DCMAKE_CXX_COMPILER=clang++-23</code> to the first <code>cmake</code> line), and GCC 13, Clang 15 or MSVC 2022 and newer also compile it. This builds the development branch with its network inside, as the releases are built; for the release itself, run <code>git checkout v6.6.0</code> after cloning.</p>
+            <p>With CMake 3.20 or newer and a C++23 compiler: clang 23 builds every release, about a quarter faster in games than gcc 14 (add <code>-DCMAKE_CXX_COMPILER=clang++-23</code> to the first <code>cmake</code> line), and GCC 13, Clang 15 or MSVC 2022 and newer also compile it. This builds the development branch with its network inside, as the releases are built. For the release itself, run <code>git checkout v6.6.0</code> after cloning; the release predates <code>ci.sh</code>, so fetch its network with <code>bash .github/scripts/fetch-net.sh</code> instead.</p>
             <div class="code">
               <button class="copy" type="button" data-copy="build-demo" aria-label="Copy the build commands">
                 <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-say" aria-hidden="true">Copy</span>
               </button>
 <pre id="build-demo"><code>git clone https://github.com/changcheng967/Luminex.git
 cd Luminex
-bash .github/scripts/fetch-net.sh
+bash .github/scripts/ci.sh fetch-net
 cmake -B build -DCMAKE_BUILD_TYPE=Release -DLUMINEX_EMBED_PINNED=ON
 cmake --build build --config Release</code></pre>
             </div>

@@ -178,10 +178,13 @@ console.
   - `/download/`: the four cards, the table of every build (file, processor, what it
     needs: the notes' Downloads table), the network card's file name, the questions. A
     network is always written by its real file name (`luminex_gen768r_06q_i8.nnue`), never
-    by an older network's name or a neutral one.
+    by an older network's name or a neutral one. The build commands are main's (its
+    network comes from `bash .github/scripts/ci.sh fetch-net`); the sentence above them
+    gives the release's own fetch line while the release predates that (`fetch-net.sh` in
+    v6.6.0): drop it once a release has `ci.sh fetch-net`.
   - `/`: the opening's pill and numbers, "Where it stands" (the gauntlet's `title` and
     `since` in `gauntlet.json`, the release against the one before it as one result
-    row, and the CCI note: `tools/bench_update.py --cci` once `softwareVersion` names
+    row, and the CCI figure: `tools/bench_update.py --cci` once `softwareVersion` names
     the release), the chart's point for the release (`data-points`, the headline, the
     hidden table), a chronicle entry and the "Next" entry, the download section.
   - `/engine/`: the generation cards, the training counters, the table of phases and the

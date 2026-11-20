@@ -1,6 +1,6 @@
 /* luminexchess.com: the network's inputs, lit by the pieces (the engine page).
 
-   White's half of the first layer, indexed as the engine indexes it (featurize.cpp,
+   White's half of the first layer, indexed as the engine indexes it (nnue.cpp,
    halfka_idx): the board is mirrored so White's king stands on the e to h files,
    the king's square picks one of 32 blocks of 768 inputs, and in the block each
    piece lights one input: its plane (own or the opponent's pawn, knight, bishop,
