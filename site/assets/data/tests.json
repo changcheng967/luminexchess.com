@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "19 November 2026",
+ "asOf": "20 November 2026",
  "leftOff": [
   59
  ],
@@ -11,6 +11,18 @@
  },
  "tests": [
   {
+   "test": 176,
+   "title": "gen768t_02q, V5's full run: gen768t_01 trained 1,142,724 steps further, against gen768t_01q",
+   "href": "https://github.com/changcheng967/Luminex/pull/115",
+   "ref": "#115",
+   "games": 1300,
+   "elo": 28.93,
+   "ci": 9.3,
+   "text": "+28.93 ± 9.30",
+   "status": "pass",
+   "label": "Passed; on main"
+  },
+  {
    "test": 174,
    "title": "gen768t_01q, the first V5 network, against gen768s_03q",
    "href": "https://github.com/changcheng967/Luminex/pull/112",
@@ -20,7 +32,7 @@
    "ci": 14.2,
    "text": "+73.37 ± 14.20",
    "status": "pass",
-   "label": "Passed; on main"
+   "label": "Passed; since replaced by gen768t_02q"
   },
   {
    "test": 173,

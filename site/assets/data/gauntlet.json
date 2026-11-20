@@ -243,5 +243,5 @@
    "expected": 71.3
   }
  ],
- "since": "Since then the first V5 network, gen768t_01q, has replaced gen768s_03q on main: +73.37 ± 14.20 Elo against it in self-play (test 174). No gauntlet has rated it yet."
+ "since": "Since then main has moved to V5: gen768t_01q replaced gen768s_03q (+73.37 ± 14.20 Elo, test 174), then its full run, gen768t_02q, replaced it (+28.93 ± 9.30, test 176). No gauntlet has rated them yet."
 }
