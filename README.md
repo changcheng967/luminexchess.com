@@ -224,10 +224,11 @@ console.
   main" and the one before it "Passed; since replaced by …" (a released network keeps
   "Passed; released in v…"). On `/engine/`: a row in the table of networks and the note
   under it. On the home page: the chronicle's "Next" entry. On `/download/`: the network
-  the development build carries, with its test. The pages describe the release, so the
-  release's own figures wait for the next release: the four training counters and the
-  table of phases on `/engine/` (a step is 131,072 positions), the sentence about positions
-  shown on the home page, and the `since` sentence in `gauntlet.json`.
+  the development build carries, with its test. Since 22 November 2026, at the owner's
+  wish, the training section on `/engine/` follows main's network, not the release: its
+  four counters, the table of its runs (a step is 131,072 positions) and the text under it,
+  with v6.6.0's network kept as one line of history. So do the sentence about positions
+  shown on the home page and the `since` sentence in `gauntlet.json`.
 - **CCI.** The Computer Chess Index, an independent list, adds games every day, so its
   figures for a new release move for weeks. `tools/bench_update.py` says when its page has
   moved on; `tools/bench_update.py --cci`, then `tools/stamp.py`, bring its figure in "Where
