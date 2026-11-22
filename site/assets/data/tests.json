@@ -11,6 +11,42 @@
  },
  "tests": [
   {
+   "test": 204,
+   "title": "Halve the second layer's vector multiplies at the AVX2 level, against #126",
+   "href": "https://github.com/changcheng967/Luminex/pull/127",
+   "ref": "#127",
+   "games": 2616,
+   "elo": 14.09,
+   "ci": 6.17,
+   "text": "+14.09 ± 6.17",
+   "status": "pass",
+   "label": "Passed; not merged yet"
+  },
+  {
+   "test": 203,
+   "title": "Run the network's small layers in vector steps",
+   "href": "https://github.com/changcheng967/Luminex/pull/126",
+   "ref": "#126",
+   "games": 6814,
+   "elo": 6.02,
+   "ci": 3.82,
+   "text": "+6.02 ± 3.82",
+   "status": "pass",
+   "label": "Passed; not merged yet"
+  },
+  {
+   "test": 202,
+   "title": "Alternate the node label on the first move too",
+   "href": "https://github.com/changcheng967/Luminex/pull/125",
+   "ref": "#125",
+   "games": 27852,
+   "elo": -0.02,
+   "ci": 1.95,
+   "text": "−0.02 ± 1.95",
+   "status": "fail",
+   "label": "Failed, closed"
+  },
+  {
    "test": 200,
    "title": "gen768t_04q, V5's fourth run: gen768t_03 trained 2,497,248 steps further on Leela data no run had used, against gen768t_03q",
    "href": "https://github.com/changcheng967/Luminex/pull/128",
