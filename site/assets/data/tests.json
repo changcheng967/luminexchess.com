@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "20 November 2026",
+ "asOf": "22 November 2026",
  "leftOff": [
   59
  ],
@@ -11,6 +11,42 @@
  },
  "tests": [
   {
+   "test": 200,
+   "title": "gen768t_04q, V5's fourth run: gen768t_03 trained 2,497,248 steps further on Leela data no run had used, against gen768t_03q",
+   "href": "https://github.com/changcheng967/Luminex/pull/128",
+   "ref": "#128",
+   "games": 5916,
+   "elo": 7.22,
+   "ci": 4.37,
+   "text": "+7.22 ± 4.37",
+   "status": "pass",
+   "label": "Passed; on main"
+  },
+  {
+   "test": 195,
+   "title": "gen768t_03q, V5's third run: gen768t_02 trained 2,614,140 steps further, with twelve Leela files new to the line, against gen768t_02q",
+   "href": "https://github.com/changcheng967/Luminex/pull/123",
+   "ref": "#123",
+   "games": 2158,
+   "elo": 18.53,
+   "ci": 7.54,
+   "text": "+18.53 ± 7.54",
+   "status": "pass",
+   "label": "Passed; since replaced by gen768t_04q"
+  },
+  {
+   "test": 177,
+   "title": "Make helper threads search the main thread's tree, four threads a side",
+   "href": "https://github.com/changcheng967/Luminex/pull/114",
+   "ref": "#114",
+   "games": 710,
+   "elo": 60.8,
+   "ci": 11.74,
+   "text": "+60.80 ± 11.74",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
    "test": 176,
    "title": "gen768t_02q, V5's full run: gen768t_01 trained 1,142,724 steps further, against gen768t_01q",
    "href": "https://github.com/changcheng967/Luminex/pull/115",
@@ -20,7 +56,7 @@
    "ci": 9.3,
    "text": "+28.93 ± 9.30",
    "status": "pass",
-   "label": "Passed; on main"
+   "label": "Passed; since replaced by gen768t_03q"
   },
   {
    "test": 174,
