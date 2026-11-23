@@ -309,9 +309,10 @@ def region_gauntlet(g, indent):
     ] if other else []) + [
         '  </div>',
         '  <div class="gnt-text">',
-        '    <p>Main of %s, with the %s network, played %d games against each of %s engines that CCRL rates, at %s on one thread: '
+        # the commit too: main moves on the same day, and the rating belongs to this one build
+        '    <p>Main of %s at %s, with the %s network, played %d games against each of %s engines that CCRL rates, at %s on one thread: '
         '%s games%s. The rating is the one at which the points expected against all %s equal the points scored.</p>'
-        % (day, esc(g["network"]), g["each"], count, esc(g["tc"]), "{:,}".format(g["games"]), clean, count),
+        % (day, esc(g["sha"][:7]), esc(g["network"]), g["each"], count, esc(g["tc"]), "{:,}".format(g["games"]), clean, count),
         '    <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between %d and %d, '
         'where the games by themselves would leave ± %d. More opponents near Luminex would narrow it; more games would not.</p>'
         % (min(implied), max(implied), g["fromGames"]),

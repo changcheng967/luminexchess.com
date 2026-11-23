@@ -11,6 +11,18 @@
  },
  "tests": [
   {
+   "test": 286,
+   "title": "Fix six more search defects",
+   "href": "https://github.com/changcheng967/Luminex/pull/132",
+   "ref": "#132",
+   "games": 23648,
+   "elo": 2.09,
+   "ci": 2.14,
+   "text": "+2.09 ± 2.14",
+   "status": "stop",
+   "label": "Stopped undecided; merged on the owner's decision"
+  },
+  {
    "test": 273,
    "title": "Fix ten more search defects",
    "href": "https://github.com/changcheng967/Luminex/pull/131",
