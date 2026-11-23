@@ -242,5 +242,6 @@
    "impliedError": 13,
    "expected": 79.7
   }
- ]
+ ],
+ "since": "Since then main has moved on: two speedups for the test workers' processors, seventeen search fixes (+10.57 ± 5.33 and +15.91 ± 6.80 Elo, tests 265 and 273) and a new network, gen768t_05q (+9.86 ± 5.07, test 264). No gauntlet has rated them yet."
 }

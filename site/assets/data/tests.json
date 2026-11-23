@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "22 November 2026",
+ "asOf": "23 November 2026",
  "leftOff": [
   59
  ],
@@ -11,6 +11,42 @@
  },
  "tests": [
   {
+   "test": 273,
+   "title": "Fix ten more search defects",
+   "href": "https://github.com/changcheng967/Luminex/pull/131",
+   "ref": "#131",
+   "games": 2382,
+   "elo": 15.91,
+   "ci": 6.8,
+   "text": "+15.91 ± 6.80",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 265,
+   "title": "Fix seven search defects",
+   "href": "https://github.com/changcheng967/Luminex/pull/129",
+   "ref": "#129",
+   "games": 3550,
+   "elo": 10.57,
+   "ci": 5.33,
+   "text": "+10.57 ± 5.33",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 264,
+   "title": "gen768t_05q, V5's fifth run: gen768t_04 trained 2,693,718 steps further, with t91 back beside six Leela files no run had used, against gen768t_04q",
+   "href": "https://github.com/changcheng967/Luminex/pull/130",
+   "ref": "#130",
+   "games": 3876,
+   "elo": 9.86,
+   "ci": 5.07,
+   "text": "+9.86 ± 5.07",
+   "status": "pass",
+   "label": "Passed; on main"
+  },
+  {
    "test": 204,
    "title": "Halve the second layer's vector multiplies at the AVX2 level, against #126",
    "href": "https://github.com/changcheng967/Luminex/pull/127",
@@ -20,7 +56,7 @@
    "ci": 6.17,
    "text": "+14.09 ± 6.17",
    "status": "pass",
-   "label": "Passed; not merged yet"
+   "label": "Passed"
   },
   {
    "test": 203,
@@ -32,7 +68,7 @@
    "ci": 3.82,
    "text": "+6.02 ± 3.82",
    "status": "pass",
-   "label": "Passed; not merged yet"
+   "label": "Passed"
   },
   {
    "test": 202,
@@ -56,7 +92,7 @@
    "ci": 4.37,
    "text": "+7.22 ± 4.37",
    "status": "pass",
-   "label": "Passed; on main"
+   "label": "Passed; since replaced by gen768t_05q"
   },
   {
    "test": 195,
