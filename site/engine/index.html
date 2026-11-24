@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=24"></script>
+  <script src="/assets/js/theme.js?v=25"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,13 +24,16 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=24">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=24">
-  <script src="/assets/js/site.js?v=24" defer></script>
-  <script src="/assets/js/board.js?v=24" defer></script>
-  <script src="/assets/js/cells.js?v=24" defer></script>
-  <script src="/assets/js/inputs.js?v=24" defer></script>
-  <script src="/assets/js/engine.js?v=24" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=25">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=25">
+  <script src="/assets/js/site.js?v=25" defer></script>
+  <script src="/assets/js/board.js?v=25" defer></script>
+  <script src="/assets/js/cells.js?v=25" defer></script>
+  <script src="/assets/js/inputs.js?v=25" defer></script>
+  <script src="/assets/js/engine.js?v=25" defer></script>
+  <script src="/assets/js/clock.js?v=25" defer></script>
+  <script src="/assets/js/think.js?v=25" defer></script>
+  <script src="/assets/js/tree.js?v=25" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -107,43 +110,94 @@
   <!-- /@header -->
 
   <main id="main">
-    <section class="stage phero has-dissolve" aria-labelledby="engine-title">
+    <section class="stage phero has-dissolve has-tree" aria-labelledby="engine-title">
+      <canvas class="hero-tree" data-hero-tree aria-hidden="true"></canvas>
       <div class="wrap">
         <p class="kicker"><span class="kicker-n">Engine</span> Inside</p>
         <h1 id="engine-title" class="h-xl">Two evaluations, one search</h1>
         <p class="lede">Luminex pairs a quantized neural network with a hand-crafted fallback, behind an alpha-beta search that orders, reduces and prunes its moves.</p>
+        <p class="hero-read mono" aria-hidden="true"><span class="hero-read-k">A real search, growing</span><span data-hero-read></span></p>
       </div>
       <div class="dissolve" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </section>
 
+    <!-- a real search, replayed: think.js reads assets/data/think.json -->
+    <section class="sec think-sec" id="think" data-rail="Thinking" aria-labelledby="think-title">
+      <div class="wrap">
+        <header class="sec-head" data-rise>
+          <p class="kicker"><span class="kicker-n">1.</span> Thinking</p>
+          <h2 id="think-title" class="h-l">Watch it think</h2>
+          <p class="lede">Real searches by main's engine, replayed at their own pace. Each iteration searches one ply deeper; the line it expects lights the board, and the counters run as fast as the engine ran.</p>
+        </header>
+        <figure data-rise class="card think" data-think data-src="/assets/data/think.json" aria-labelledby="think-pos">
+          <div class="think-top">
+            <div class="think-tabs" role="tablist" aria-label="Positions" data-think-tabs></div>
+            <p class="think-pos mono" id="think-pos" data-think-out="pos"></p>
+          </div>
+          <div class="think-grid">
+            <div class="think-left">
+              <div class="board" data-think-board role="img" aria-label="The position, with the line the engine expects drawn as arrows"></div>
+              <div class="think-controls">
+                <button type="button" class="vc vc-play" data-think-do="play" aria-label="Play"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
+                <button type="button" class="vc" data-think-do="again" aria-label="From the start"><svg class="icon" aria-hidden="true"><use href="#i-first"/></svg></button>
+                <span class="think-clock" aria-hidden="true"><i data-think-progress></i></span>
+                <span class="think-time mono" data-think-out="time"></span>
+              </div>
+            </div>
+            <div class="think-right">
+              <dl class="think-nums">
+                <div class="tn-depth"><dt>Depth</dt><dd class="num"><span data-think-out="depth"></span><span class="tn-sel">/<span data-think-out="seldepth"></span></span></dd></div>
+                <div class="tn-score"><dt>Score</dt><dd class="num is-lit" data-think-out="score"></dd></div>
+                <div class="tn-best"><dt>Best move</dt><dd class="num" data-think-out="best"></dd></div>
+                <div class="tn-nodes"><dt>Nodes</dt><dd class="num" data-think-out="nodes"></dd></div>
+              </dl>
+              <div class="think-gauge" data-think-gauge aria-hidden="true"><i></i></div>
+              <p class="think-line"><span class="think-lab">The line it expects</span><span class="mono" data-think-out="line"></span></p>
+              <p class="think-held"><span class="think-lab">The best move</span><span data-think-out="held"></span><span class="think-rule mono">stop rule <span data-think-out="rule"></span></span><span class="think-nps mono"><span data-think-out="nps"></span> nodes a second</span></p>
+              <ol class="think-iters" data-think-iters aria-hidden="true"></ol>
+              <input class="think-scrub" type="range" min="0" max="0" step="1" value="0" data-think-scrub aria-label="Iteration: one bar each, its height the nodes it searched">
+              <pre class="think-uci mono" data-think-uci aria-hidden="true"></pre>
+            </div>
+          </div>
+          <p class="think-cap" data-think-cap></p>
+        </figure>
+      </div>
+    </section>
+
     <section class="sec" id="parts" data-rail="The parts" aria-labelledby="parts-title">
       <div class="wrap">
-        <header class="sec-head">
-          <p class="kicker"><span class="kicker-n">1.</span> The parts</p>
+        <header class="sec-head" data-rise>
+          <p class="kicker"><span class="kicker-n">2.</span> The parts</p>
           <h2 id="parts-title" class="h-l">Six things it is made of</h2>
         </header>
-        <dl class="spec">
-          <div class="spec-row">
+        <dl class="spec" data-rise-group>
+          <div class="spec-row" data-rise>
+            <svg class="spec-g g-net" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><g class="gn-wires"><path d="M14 8 70 14M14 18 70 14M14 28 70 24M14 38 70 34M14 48 70 44M70 14 126 20M70 24 126 20M70 34 126 32M70 44 126 32M126 20 170 22M126 32 170 30M170 22 206 28M170 30 206 28"/></g><g class="gn-c gn-c0"><rect x="11" y="5" width="6" height="6"/><rect x="11" y="15" width="6" height="6"/><rect x="11" y="25" width="6" height="6"/><rect x="11" y="35" width="6" height="6"/><rect x="11" y="45" width="6" height="6"/></g><g class="gn-c gn-c1"><rect x="67" y="11" width="6" height="6"/><rect x="67" y="21" width="6" height="6"/><rect x="67" y="31" width="6" height="6"/><rect x="67" y="41" width="6" height="6"/></g><g class="gn-c gn-c2"><rect x="123" y="17" width="6" height="6"/><rect x="123" y="29" width="6" height="6"/></g><g class="gn-c gn-c3"><rect x="167" y="19" width="6" height="6"/><rect x="167" y="27" width="6" height="6"/></g><g class="gn-c gn-c4"><rect x="202" y="24" width="8" height="8"/></g></svg>
             <dt><span class="spec-n num">01</span>Neural evaluation</dt>
             <dd>A 768-wide HalfKAv2_hm network with 32 king buckets and eight output buckets, chosen by the number of pieces. Its int16 accumulators follow every move incrementally, and the int8 layers behind them run on AVX-512 VNNI, AVX2 or NEON.</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" data-rise>
+            <svg class="spec-g g-search" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><path class="gs-e" d="M110 6 40 28M110 6 85 28M110 6 135 28M110 6 180 28M40 28 25 50M40 28 55 50M85 28 75 50M85 28 95 50M135 28 125 50M135 28 145 50M180 28 170 50M180 28 195 50"/><path class="gs-pv" d="M110 6 40 28 55 50"/><path class="gs-cut" d="M180 28 170 50M180 28 195 50M110 6 180 28M135 28 145 50"/><g class="gs-x"><path d="m176 36 8 8m0-8-8 8M139 38l6 6m0-6-6 6"/></g><rect class="gs-root" x="106" y="2" width="8" height="8"/><rect class="gs-leaf" x="51" y="46" width="8" height="8"/></svg>
             <dt><span class="spec-n num">02</span>Selective search</dt>
             <dd>Principal variation search with aspiration windows, null-move pruning, singular extensions, ProbCut, razoring, futility and late-move pruning, and late-move reductions.</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" data-rise>
+            <svg class="spec-g g-order" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><rect class="go-b go-b0" x="4" y="3" width="120" height="7" rx="2"/><rect class="go-b go-b1" x="4" y="14" width="60" height="7" rx="2"/><rect class="go-b go-b2" x="4" y="25" width="160" height="7" rx="2"/><rect class="go-b go-b3" x="4" y="36" width="90" height="7" rx="2"/><rect class="go-b go-b4" x="4" y="47" width="30" height="7" rx="2"/></svg>
             <dt><span class="spec-n num">03</span>Move ordering that learns</dt>
             <dd>Killer and counter moves, continuation and capture history, static exchange evaluation, and correction history that tunes static scores from what the search finds.</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" data-rise>
+            <svg class="spec-g g-threads" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><path class="gt-l" d="M6 10H150L178 28M6 28H178M6 46H150L178 28"/><rect class="gt-d gt-d0" x="2" y="7" width="7" height="7"/><rect class="gt-d gt-d1" x="2" y="25" width="7" height="7"/><rect class="gt-d gt-d2" x="2" y="43" width="7" height="7"/><g class="gt-tt"><rect x="182" y="12" width="9" height="9"/><rect x="193" y="12" width="9" height="9"/><rect x="204" y="12" width="9" height="9"/><rect x="182" y="23" width="9" height="9"/><rect x="193" y="23" width="9" height="9"/><rect x="204" y="23" width="9" height="9"/><rect x="182" y="34" width="9" height="9"/><rect x="193" y="34" width="9" height="9"/><rect x="204" y="34" width="9" height="9"/></g></svg>
             <dt><span class="spec-n num">04</span>Many threads</dt>
             <dd>Lazy SMP: each search thread keeps its own network accumulators and shares one transposition table with the others.</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" data-rise>
+            <svg class="spec-g g-fall" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><g class="gf-net"><rect x="20" y="10" width="36" height="36" rx="18"/><path d="M30 22h16M30 28h16M30 34h16"/></g><path class="gf-wire" d="M60 28H96M124 28H160"/><rect class="gf-sw" x="98" y="20" width="24" height="16" rx="8"/><rect class="gf-knob" x="101" y="23" width="10" height="10" rx="5"/><g class="gf-hce"><rect x="164" y="10" width="36" height="36" rx="4"/><path d="M172 22h20M172 28h12M172 34h16"/></g></svg>
             <dt><span class="spec-n num">05</span>Always a fallback</dt>
             <dd>Every release since v6.5.1 has its network inside. If no network loads, a hand-crafted evaluation plays instead: material, piece-square tables, mobility, passed pawns and king safety. The engine says so in an info line rather than switching quietly.</dd>
           </div>
-          <div class="spec-row">
+          <div class="spec-row" data-rise>
+            <svg class="spec-g g-uci" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><text class="gu-t gu-t0" x="2" y="12">go movetime 10000</text><text class="gu-t gu-t1" x="2" y="30">info depth 34 score cp 523</text><text class="gu-t gu-t2" x="2" y="48">bestmove d4e6</text></svg>
             <dt><span class="spec-n num">06</span>Speaks UCI</dt>
             <dd>Load it in Cute Chess, Arena, Banksia, En Croissant or any other UCI interface. MultiPV, pondering, win/draw/loss output and Polyglot opening books are built in.</dd>
           </div>
@@ -154,8 +208,8 @@
     <!-- the search, one idea at a time: the figure stays while the steps scroll past it -->
     <section class="stage sec search-scene has-dissolve" id="search" data-rail="The search" aria-labelledby="search-title">
       <div class="wrap">
-        <header class="sec-head">
-          <p class="kicker"><span class="kicker-n">2.</span> The search</p>
+        <header class="sec-head" data-rise>
+          <p class="kicker"><span class="kicker-n">3.</span> The search</p>
           <h2 id="search-title" class="h-l">How the search spends its time</h2>
           <p class="lede">An illustration of the ideas, not a real search tree</p>
         </header>
@@ -248,17 +302,18 @@
 
     <section class="sec" id="speed" data-rail="Speed" aria-labelledby="speed-title">
       <div class="wrap speed-grid">
-        <header class="sec-head">
-          <p class="kicker"><span class="kicker-n">3.</span> Speed</p>
+        <header class="sec-head" data-rise>
+          <p class="kicker"><span class="kicker-n">4.</span> Speed</p>
           <h2 id="speed-title" class="h-l">Over a million nodes a second</h2>
           <p class="lede">Speed is strength at fast time controls: the AVX-512 VNNI build alone was worth +45.79 ± 14.88 Elo on the test workers (<a href="https://bench.luminexchess.com/test/27/">test 27</a>). Since v6.5.1, three changes search the same trees about 9.5% faster: the child's hash entry is prefetched when a move is made, the child accumulator is written in one pass, and accumulator updates wait until an evaluation needs them (<a href="https://github.com/changcheng967/Luminex/pull/36">#36</a>, <a href="https://github.com/changcheng967/Luminex/pull/37">#37</a>, <a href="https://github.com/changcheng967/Luminex/pull/38">#38</a>). Since 17 November the test workers build the engine with clang 23, where gcc 14 built it before. Since 21 November the network's activations are computed in 16-bit integer steps instead of floats, every byte the same: 8.7% more speed at the AVX2 level and 1% at AVX-512 (<a href="https://github.com/changcheng967/Luminex/pull/122">#122</a>). With more than one thread, the helper threads now search the main thread's own tree, so a depth comes 1.36 times sooner at four threads (<a href="https://github.com/changcheng967/Luminex/pull/114">#114</a>), worth +60.80 ± 11.74 Elo at four threads a side (<a href="https://bench.luminexchess.com/test/177/">test 177</a>). Since 22 November two more changes, every byte the same, fit the network to the test workers' EPYC 7702 processors: its small layers in vector steps, 6.1% faster there (<a href="https://github.com/changcheng967/Luminex/pull/126">#126</a>, +6.02 ± 3.82 Elo in <a href="https://bench.luminexchess.com/test/203/">test 203</a>), and half the vector multiplies of its second layer at the AVX2 level, 7.1% more on top (<a href="https://github.com/changcheng967/Luminex/pull/127">#127</a>, +14.09 ± 6.17 in <a href="https://bench.luminexchess.com/test/204/">test 204</a>). Spacing the accumulators' stack so that no store lands on the address of a load just ahead adds 1.8% there, the same trees searched (<a href="https://github.com/changcheng967/Luminex/pull/133">#133</a>).</p>
         </header>
-        <figure class="card speed">
+        <figure data-rise class="card speed">
           <figcaption class="fig-head">
             <span class="fig-title">Speed in test games</span>
             <span class="fig-sub">Nodes per second on one thread of the test workers, in the games of test 174 at 10+0.1, with V5's first network</span>
           </figcaption>
           <p class="speed-fig num">1.30<span class="totals-u">million</span></p>
+          <p class="speed-live" data-live hidden><span class="speed-live-n num" data-live-nodes>0</span><span class="speed-live-t">nodes at that pace since you opened this page</span></p>
           <p class="note">gen768t_01q, the first V5 network, on four workers that build it with clang 23: 1.20, 1.32, 1.33 and 1.35 million by worker (<a href="https://bench.luminexchess.com/test/174/">test 174</a>). The same games' gen768s_03q side ran at 1.65 million: the relation inputs cost about a fifth of the speed, and the network more than makes up for it, +73.37 ± 14.20 Elo. gen768t_02q kept pace with it in the games of <a href="https://bench.luminexchess.com/test/176/">test 176</a>, and gen768t_03q, 04q and 05q, main's network since 23 November, have the same shape and size.</p>
         </figure>
       </div>
@@ -267,12 +322,12 @@
     <!-- the clock: measured, solved, then tested in games -->
     <section class="stage sec clock-scene has-dissolve" id="clock" data-rail="The clock" aria-labelledby="clock-title">
       <div class="wrap">
-        <header class="sec-head">
-          <p class="kicker"><span class="kicker-n">4.</span> The clock</p>
+        <header class="sec-head" data-rise>
+          <p class="kicker"><span class="kicker-n">5.</span> The clock</p>
           <h2 id="clock-title" class="h-l">Thinking time, spent where it pays</h2>
           <p class="lede">How much of the clock a move gets was not tuned by hand. What more thinking time is worth was measured on positions from real games, the schedule that spends the clock best was solved for, and games confirmed it.</p>
         </header>
-        <ol class="clock-steps">
+        <ol class="clock-steps" data-rise-group>
           <li class="card clock-step">
             <p class="clock-n mono" aria-hidden="true">01</p>
             <h3 class="h-m">Measure what time is worth</h3>
@@ -319,6 +374,34 @@
             </figure>
           </li>
         </ol>
+        <figure data-rise class="card clocksim" data-clocksim aria-labelledby="clocksim-title">
+          <figcaption class="fig-head">
+            <span class="fig-title" id="clocksim-title">Try the clock</span>
+            <span class="fig-sub">The engine's own time manager at its defaults, as search.cpp on main has it, on a game you set. In the model game each move spends its average share, the plan divided by 1.16, and the increment comes back; Move Overhead 30 ms, no clock lag measured.</span>
+          </figcaption>
+          <div class="cs-cols">
+            <div class="cs-controls">
+              <div class="cs-presets" role="group" aria-label="Time controls"><button type="button" data-tc="10+0.1" aria-pressed="false">10 s + 0.1 s, the tests</button><button type="button" data-tc="60+0.6" aria-pressed="false">1 min + 0.6 s</button><button type="button" data-tc="180+2" aria-pressed="false">3 min + 2 s</button><button type="button" data-tc="900+10" aria-pressed="false">15 min + 10 s</button><button type="button" data-tc="60+0" aria-pressed="false">1 min</button><button type="button" data-tc="300+0" aria-pressed="false">5 min</button></div>
+              <label class="cs-field"><span class="cs-label">Clock at the start</span><output class="cs-val mono" data-cs-out="base">10 s</output><input type="range" min="0" max="16" step="1" value="0" data-cs="base" aria-label="Clock at the start"></label>
+              <label class="cs-field"><span class="cs-label">Increment</span><output class="cs-val mono" data-cs-out="inc">0.1 s</output><input type="range" min="0" max="14" step="1" value="3" data-cs="inc" aria-label="Increment"></label>
+              <label class="cs-field"><span class="cs-label">The engine's move</span><output class="cs-val mono" data-cs-out="move">move 30</output><input type="range" min="1" max="120" step="1" value="30" data-cs="move" aria-label="The engine's move number"></label>
+              <div class="cs-field cs-held" role="group" aria-label="How many iterations the best move has held"><span class="cs-label">The best move has held for</span><span class="cs-seg"><button type="button" data-held="0" aria-pressed="true">just changed</button><button type="button" data-held="1" aria-pressed="false">1</button><button type="button" data-held="2" aria-pressed="false">2</button><button type="button" data-held="3" aria-pressed="false">3</button><button type="button" data-held="4" aria-pressed="false">4</button><button type="button" data-held="5" aria-pressed="false">5</button><button type="button" data-held="6" aria-pressed="false">6+</button></span></div>
+              <label class="cs-check"><input type="checkbox" data-cs="decided" aria-label="The score is past ±4 pawns"><span>The score is past ±4 pawns</span></label>
+            </div>
+            <div class="cs-read">
+              <dl class="cs-nums">
+                <div><dt>On the clock</dt><dd class="num" data-cs-out="clock"></dd></div>
+                <div><dt>The plan</dt><dd class="num is-lit" data-cs-out="plan"></dd></div>
+                <div><dt>No iteration after</dt><dd class="num" data-cs-out="stop"></dd></div>
+                <div><dt>Never past</dt><dd class="num" data-cs-out="hard"></dd></div>
+              </dl>
+              <svg class="cs-bar" data-cs-bar viewBox="0 0 600 96" aria-hidden="true" focusable="false"></svg>
+              <p class="cs-rule" data-cs-out="rule"></p>
+            </div>
+          </div>
+          <svg class="cs-curve" data-cs-curve viewBox="0 0 600 170" aria-hidden="true" focusable="false"></svg>
+          <p class="cs-note" data-cs-note aria-live="polite"></p>
+        </figure>
         <dl class="totals clock-results">
           <div><dt>The schedule, at 10+0.1</dt><dd class="num is-lit"><span data-odo>+72.22</span></dd></div>
           <div><dt>The stop rule, at 10+0.1</dt><dd class="num"><span data-odo>+8.32</span></dd></div>
@@ -332,16 +415,16 @@
 
     <section class="sec" id="network" data-rail="The network" aria-labelledby="network-title">
       <div class="wrap">
-        <header class="sec-head">
-          <p class="kicker"><span class="kicker-n">5.</span> The network</p>
+        <header class="sec-head" data-rise>
+          <p class="kicker"><span class="kicker-n">6.</span> The network</p>
           <h2 id="network-title" class="h-l">An efficiently updatable neural network</h2>
           <p class="lede">A move changes only the pieces that moved, so the first layer is updated with a few vector additions instead of being recomputed. Select a layer to see what it does.</p>
         </header>
 
-        <figure class="card inputs" data-inputs data-src="/assets/data/games.json" aria-labelledby="inputs-title">
+        <figure data-rise class="card inputs" data-inputs data-src="/assets/data/games.json" aria-labelledby="inputs-title">
           <figcaption class="fig-head">
             <span class="fig-title" id="inputs-title">Its inputs, lit by the pieces</span>
-            <span class="fig-sub">White's half of the first layer, indexed as the engine indexes it: 24,576 inputs in 32 blocks, one for each square White's king can stand on once the board is mirrored to put it on the e to h files, and in each block twelve planes of 64 squares, one for each kind of piece, its own above, the opponent's below. Black's half is the same, seen from Black's side.</span>
+            <span class="fig-sub">White's half of the first layer, indexed as the engine indexes it: 24,576 inputs in 32 blocks, one for each square White's king can stand on once the board is mirrored to put it on the e to h files, and in each block twelve planes of 64 squares, one for each kind of piece, its own above, the opponent's below. Black's half is the same, seen from Black's side. On the board, V5's relations: every piece attacking another, one thread of light each (Luminex's pieces cyan, Obsidian's amber, pawns in contact violet), 55,960 inputs more, of which a position lights a few dozen.</span>
           </figcaption>
           <div class="inputs-grid">
             <div class="inputs-left">
@@ -351,7 +434,14 @@
                 <button type="button" class="vc" data-in="prev" aria-label="Previous move"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button>
                 <button type="button" class="vc vc-play" data-in="play" aria-label="Play"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg></button>
                 <button type="button" class="vc" data-in="next" aria-label="Next move"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button>
+                <button type="button" class="vc vc-toggle" data-in="rel" aria-pressed="true">Relations</button>
                 <span class="inputs-pos mono" data-in-pos>Book position</span>
+              </div>
+              <div class="tails-wrap">
+                <p class="tails-cap mono">The tail it reads, by the men on the board</p>
+                <ol class="tails" data-tails aria-label="The eight tails of the network, one for each band of four men on the board">
+                  <li><span>2–4</span></li><li><span>5–8</span></li><li><span>9–12</span></li><li><span>13–16</span></li><li><span>17–20</span></li><li><span>21–24</span></li><li><span>25–28</span></li><li><span>29–32</span></li>
+                </ol>
               </div>
             </div>
             <div class="inputs-field">
@@ -359,6 +449,7 @@
               <p class="inputs-axes mono" aria-hidden="true"><span>The king on the e to h files, rank 8 at the top</span><span>In a block: P N B R Q K, own then opponent's</span></p>
             </div>
           </div>
+          <p class="inputs-stats mono" data-in-stats></p>
           <p class="inputs-read" data-in-read aria-live="polite">The network sees a position as the pieces on their squares. The board needs scripts to step through the game.</p>
         </figure>
 
@@ -466,8 +557,8 @@
 
     <section class="sec sec-tint" id="training" data-rail="Training" aria-labelledby="training-title">
       <div class="wrap">
-        <header class="sec-head">
-          <p class="kicker"><span class="kicker-n">6.</span> Training</p>
+        <header class="sec-head" data-rise>
+          <p class="kicker"><span class="kicker-n">7.</span> Training</p>
           <h2 id="training-title" class="h-l">Where the network learns</h2>
         </header>
         <dl class="totals totals-train">
@@ -476,6 +567,11 @@
           <div><dt>Positions shown</dt><dd class="num is-lit"><span data-odo>1.24</span><span class="totals-u">trillion</span></dd></div>
           <div><dt>Steps a second</dt><dd class="num"><span data-odo>102.6</span></dd></div>
         </dl>
+        <figure class="lineage" data-lineage aria-hidden="true">
+          <svg class="lineage-svg" viewBox="0 0 1000 236" focusable="false"></svg>
+          <p class="lineage-read mono" data-lineage-read></p>
+          <p class="lineage-cap">Each band is a run, along the steps from the start of V5; each seam in it ends one pass over its data. The line above climbs by each network's SPRT against the one before: a sum of head-to-head results, not one measurement.</p>
+        </figure>
         <figure class="phases">
           <figcaption class="fig-head">
             <span class="fig-title" id="phases-title">The runs behind gen768t_05q, one after another</span>

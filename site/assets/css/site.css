@@ -443,6 +443,10 @@ main { display: block; }
 .hl-check { background: radial-gradient(circle, rgba(222, 60, 40, 0.92) 0, rgba(222, 60, 40, 0.42) 42%, rgba(222, 60, 40, 0) 70%); }
 .board.is-instant .pc, .board.is-instant .hl { transition: none; }
 .board.is-fast .pc, .board.is-fast .hl { transition-duration: 0.12s; }
+/* light on the board (board.js light()): over the squares, under the pieces */
+.board-ov { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.board-ov > * { transition: opacity 0.45s var(--ease); }
+.board-ov > .is-new { opacity: 0; }
 .coord {
   z-index: 1; display: flex; padding: 4px; pointer-events: none;
   font: 400 clamp(9px, 1.1vw, 11px)/1 var(--mono); color: var(--coord-on-light);

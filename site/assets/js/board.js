@@ -205,5 +205,61 @@
   };
   Board.prototype.setFlipped = function (on) { if (on !== this.flipped) this.flip(); };
 
+  /* ---------- light on the board: lines between squares and arrows along a line of play ----------
+     One SVG layer over the squares and under the pieces, in squares (viewBox 0 0 8 8). Squares are
+     counted from a8 = 0, as Lux.chess.parseFen gives them. light() replaces what the layer shows; a
+     line or arrow whose key was not shown before comes in from nothing. */
+  Board.prototype.layer = function () {
+    if (this.ov) return this.ov;
+    var svg = document.createElementNS(SVGNS, "svg");
+    svg.setAttribute("class", "board-ov");
+    svg.setAttribute("viewBox", "0 0 8 8");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    this.root.insertBefore(svg, this.hlCheck.nextSibling);
+    this.ov = svg;
+    this.lit = {};
+    return svg;
+  };
+  Board.prototype.centre = function (sq) {
+    var f = sq & 7, r = sq >> 3;
+    if (this.flipped) { f = 7 - f; r = 7 - r; }
+    return { x: f + 0.5, y: r + 0.5 };
+  };
+  // a tapered arrow from the centre of one square to just short of another's
+  function arrowD(a, b, w) {
+    var dx = b.x - a.x, dy = b.y - a.y, len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var ux = dx / len, uy = dy / len, nx = -uy, ny = ux;
+    var s = 0.2, e = len - 0.1, hl = Math.min(0.42, len * 0.42), hw = w * 2.6;
+    function p(t, o) { return (a.x + ux * t + nx * o).toFixed(3) + " " + (a.y + uy * t + ny * o).toFixed(3); }
+    return "M" + p(s, w * 0.35) + "L" + p(e - hl, w / 2) + "L" + p(e - hl, hw / 2) + "L" + p(e, 0) +
+           "L" + p(e - hl, -hw / 2) + "L" + p(e - hl, -w / 2) + "L" + p(s, -w * 0.35) + "Z";
+  }
+  Board.prototype.light = function (items) {
+    var svg = this.layer(), self = this, before = this.lit, now = {}, fresh = [];
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    items.forEach(function (it) {
+      var a = self.centre(it.a), b = self.centre(it.b), node;
+      if (it.kind === "arrow") {
+        node = document.createElementNS(SVGNS, "path");
+        node.setAttribute("d", arrowD(a, b, it.w || 0.15));
+      } else {
+        node = document.createElementNS(SVGNS, "line");
+        node.setAttribute("x1", a.x); node.setAttribute("y1", a.y);
+        node.setAttribute("x2", b.x); node.setAttribute("y2", b.y);
+      }
+      node.setAttribute("class", it.cls || "");
+      if (it.order !== undefined) node.style.setProperty("--k", it.order);
+      if (it.key && !before[it.key] && Lux.motion) { node.classList.add("is-new"); fresh.push(node); }
+      if (it.key) now[it.key] = true;
+      svg.appendChild(node);
+    });
+    this.lit = now;
+    if (fresh.length) {
+      void svg.getBoundingClientRect();
+      requestAnimationFrame(function () { fresh.forEach(function (n) { n.classList.remove("is-new"); }); });
+    }
+  };
+
   Lux.Board = Board;
 })();

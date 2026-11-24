@@ -1,4 +1,4 @@
-/* luminexchess.com: the network's inputs, lit by the pieces (the engine page).
+/* luminexchess.com: the network's inputs, lit by the pieces, and V5's relations between them (the engine page).
 
    White's half of the first layer, indexed as the engine indexes it (nnue.cpp,
    halfka_idx): the board is mirrored so White's king stands on the e to h files,
@@ -30,7 +30,9 @@
   // the drawing: blocks laid out like the e to h half of the board, planes six by two in a block
   var PW = 8, GAP = 1, BW = 6 * PW + 5 * GAP, BH = 2 * PW + GAP, BG = 3, FW = 4 * BW + 3 * BG, FH = 8 * BH + 7 * BG;
 
-  var game = null, ply = -1, fens = [], feats = [], timer = 0, playing = false;
+  var game = null, ply = -1, fens = [], feats = [], rels = [], tails = [], timer = 0, playing = false;
+  var relOn = true, relBtn = fig.querySelector('[data-in="rel"]'), statsEl = fig.querySelector("[data-in-stats]");
+  var tailEls = Lux.$$("[data-tails] li", fig);
   var view = { w: 0, h: 0, cs: 1, x: 0, y: 0 }, pal = null, ink = {}, base = null;
   var flash = null, hoverIdx = -1;
 
@@ -48,6 +50,31 @@
       list.push({ idx: (a1(i) ^ flip) + p * 64 + bucket * 768, sq: i, code: code });
     }
     return { bucket: bucket, flip: flip, ksq: ksq, list: list, set: list.reduce(function (o, f) { o[f.idx] = f; return o; }, {}) };
+  }
+  // V5's relations in White's half (docs/NNUE.md, V5-GEN768T, groups 2 and 3): a piece attacking a
+  // piece of either colour, rays stopping at the first piece; never a king as the one attacked, never
+  // White's own king as the attacker; a pawn on a pawn is a pawn pair; a mutual attack is one input
+  function relations(fen) {
+    var pos = CH.parseFen(fen), seen = {}, list = [];
+    for (var s = 0; s < 64; s++) {
+      var p = pos[s];
+      if (!p || p === "wK") continue;
+      CH.attacks(pos, s).forEach(function (t) {
+        var q = pos[t];
+        if (!q || q.charAt(1) === "K") return;
+        var pair = p.charAt(1) === "P" && q.charAt(1) === "P";
+        var key = (pair ? "p" : "a") + Math.min(s, t) + "-" + Math.max(s, t);
+        if (seen[key]) { seen[key].mutual = true; return; }
+        seen[key] = { a: s, b: t, key: key, pair: pair, by: p.charAt(0), mutual: false };
+        list.push(seen[key]);
+      });
+    }
+    return list;
+  }
+  // the tail the position uses: (men - 1) * 8 / 32, men counted with the kings
+  function tailOf(fen) {
+    var men = CH.parseFen(fen).filter(Boolean).length;
+    return { men: men, b: ((men - 1) * 8 / 32) | 0 };
   }
   // where an input sits in the drawing, in cells
   function cellOf(idx) {
@@ -152,6 +179,34 @@
     return moveLabel(k) + ": " + (on + off) + " inputs change (" + on + " on, " + off + " off). The first layer adds " + on + (on === 1 ? " row" : " rows") + " of weights and subtracts " + off + "; nothing else is recomputed.";
   }
   function kingName(f) { return CH.FILES.charAt(f.ksq & 7) + ((f.ksq >> 3) + 1); }
+  // what a move did to the relations
+  function relNote(k) {
+    var cur = rels[k + 1] || [];
+    if (k < 0) return " " + cur.length + " relations are lit on the board.";
+    var prev = rels[k] || [], was = {}, is = {};
+    prev.forEach(function (r) { was[r.key] = true; });
+    cur.forEach(function (r) { is[r.key] = true; });
+    var plus = cur.filter(function (r) { return !was[r.key]; }).length, minus = prev.filter(function (r) { return !is[r.key]; }).length;
+    return " Relations: " + cur.length + " lit, " + plus + " new and " + minus + " gone.";
+  }
+  function plural(n, word) { return n + " " + word + (n === 1 ? "" : "s"); }
+  function readout(k) { return describe(feats[k] || feats[k + 1], feats[k + 1], k) + relNote(k); }
+
+  /* ---------- V5: the relations as light on the board, and the tail in use ---------- */
+  function showRelations() {
+    var list = rels[ply + 1] || [];
+    board.light(relOn ? list.map(function (r) {
+      return { a: r.a, b: r.b, key: r.key, cls: "rel " + (r.pair ? "rel-pp" : r.by === "w" ? "rel-w" : "rel-b") + (r.mutual ? " rel-mut" : "") };
+    }) : []);
+  }
+  function showStats() {
+    var f = feats[ply + 1], list = rels[ply + 1] || [], t = tails[ply + 1];
+    if (!f || !t) return;
+    var pairs = list.filter(function (r) { return r.pair; }).length;
+    tailEls.forEach(function (li, i) { li.classList.toggle("is-on", i === t.b); });
+    if (statsEl) statsEl.textContent = N(f.list.length) + " of 24,576 piece-square inputs · " + N(list.length) + " of 55,960 relations (" +
+      plural(list.length - pairs, "attack") + ", " + plural(pairs, "pawn pair") + ") · tail " + (t.b + 1) + " of 8, for " + t.men + " men";
+  }
 
   /* ---------- stepping ---------- */
   var board = new Lux.Board(boardEl, { coords: true });
@@ -168,9 +223,11 @@
       prev.list.forEach(function (it) { if (!cur.set[it.idx]) off.push(it.idx); });
     }
     flash = motion && step ? { t0: performance.now(), on: on, off: off } : null;
-    readEl.textContent = describe(feats[k] || cur, cur, k);           // what this move changed
+    readEl.textContent = readout(k);                                  // what this move changed
     if (posEl) posEl.textContent = k < 0 ? "Book position" : moveLabel(k);
     hoverIdx = -1;
+    showRelations();
+    showStats();
     requestAnimationFrame(draw);
   }
   function stop() {
@@ -206,12 +263,12 @@
     var idx = it ? it.idx : -1;
     if (idx === hoverIdx) return;
     hoverIdx = idx;
-    readEl.textContent = it ? explain(it) : describe(feats[ply], f, ply);
+    readEl.textContent = it ? explain(it) : readout(ply);
     requestAnimationFrame(draw);
   });
   boardEl.addEventListener("pointerleave", function () {
     if (hoverIdx < 0) return;
-    hoverIdx = -1; readEl.textContent = describe(feats[ply] || feats[ply + 1], feats[ply + 1], ply);
+    hoverIdx = -1; readEl.textContent = readout(ply);
     requestAnimationFrame(draw);
   });
   canvas.addEventListener("pointermove", function (e) {
@@ -221,7 +278,7 @@
     var idx = it ? it.idx : -1;
     if (idx === hoverIdx) return;
     hoverIdx = idx;
-    readEl.textContent = it ? explain(it) : describe(feats[ply] || f, f, ply);
+    readEl.textContent = it ? explain(it) : readout(ply);
     requestAnimationFrame(draw);
   });
 
@@ -231,6 +288,8 @@
       game = games[0];
       fens = [game.startFen].concat(game.plies.map(function (p) { return p.fen; }));
       feats = fens.map(features);
+      rels = fens.map(relations);
+      tails = fens.map(tailOf);
       colours();
       fig.classList.add("is-live");
       size();
@@ -239,6 +298,12 @@
         b.addEventListener("click", function () {
           var act = b.getAttribute("data-in");
           if (act === "play") { if (playing) stop(); else play(); return; }
+          if (act === "rel") {
+            relOn = !relOn;
+            b.setAttribute("aria-pressed", relOn ? "true" : "false");
+            showRelations();
+            return;
+          }
           stop();
           if (act === "prev") go(ply - 1, true);
           else if (act === "next") go(ply + 1, true);

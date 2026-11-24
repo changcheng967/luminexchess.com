@@ -14,7 +14,7 @@ release's links as a fallback).
 | `/` | `site/index.html` | The ride (a real position pulled back to every game the bench has played), the strength (the newest gauntlet, and the release against the one before it), the method, three scenes from inside the engine, the chronicle with the rating chart, downloads |
 | `/games/` | `site/games/index.html` | The game viewer: the two wins in gauntlet 3 against Obsidian v16.0 and Berserk 14, with both engines' scores |
 | `/tests/` | `site/tests/index.html` | The record of every SPRT, and what is not in it |
-| `/engine/` | `site/engine/index.html` | The six parts, the search explained step by step, speed, the clock, the network and its four generations, training |
+| `/engine/` | `site/engine/index.html` | A search growing in light behind the title; real searches replayed live; the six parts, each a moving glyph; the search explained step by step; speed, felt; the clock, with a simulator of the engine's own time manager; the network, its inputs and V5's relations lit on a board, its generations; training, its runs drawn as a lineage |
 | `/download/` | `site/download/index.html` | Every build of the release, the development build, how to run and build it, questions |
 | any missing page | `site/404.html` | A lone knight |
 
@@ -39,7 +39,8 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   colours, the wall of every run in boards of 64) and the chess the figures need
   (`Lux.chess`: a FEN's squares, what a piece attacks). `ride.js` is the home page's ride,
   `knight.js` the living logo, `wallview.js` the tests page's wall, `inputs.js` the engine
-  page's inputs; `home.js`, `viewer.js`, `tests.js`, `engine.js` and `notfound.js` belong to
+  page's inputs and V5's relations, `think.js` its replayed searches, `tree.js` the search
+  growing behind its title, `clock.js` its clock simulator; `home.js`, `viewer.js`, `tests.js`, `engine.js` and `notfound.js` belong to
   one page each.
 - Animations move `transform` and `opacity` only. The Content Security Policy allows no
   inline styles, so scripts place things by setting CSS custom properties
@@ -82,6 +83,14 @@ discipline does).
 
 ## Tools
 
+- `tools/think_record.py ENGINE tools/think_positions.json raw.json` records main's engine
+  thinking on the showcase positions (`go movetime 10000`, one thread, Hash 64; every line kept),
+  and `tools/think_json.py tools/think_positions.json raw.json site/assets/data/games.json
+  site/assets/data/think.json` turns that into the engine page's replays: the engine's own lines,
+  each line's time as nodes / nps (the lines carry none), the moves in notation by python-chess,
+  and the search's real end. The stories under each replay are in `think_json.py` and are checked
+  against the recording by hand. Record with main's development build (its network inside) and
+  name the machine in `about`. The opening's tree (`tree.js`) reads the first search.
 - `tools/stamp.py site` keeps the repeated parts in step and checks the pages. A page marks
   a region with `<!-- @name -->` and `<!-- /@name -->`; the tool rewrites what is between
   them: the icon sprite, header and footer from `tools/parts/`, the starting position's
