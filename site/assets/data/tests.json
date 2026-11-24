@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "23 November 2026",
+ "asOf": "24 November 2026",
  "leftOff": [
   59
  ],
@@ -10,6 +10,18 @@
   "max": 120
  },
  "tests": [
+  {
+   "test": 291,
+   "title": "Label every later move's child a cut node, with the pruning margins retuned for it",
+   "href": "https://github.com/changcheng967/Luminex/pull/136",
+   "ref": "#136",
+   "games": 45226,
+   "elo": 0.84,
+   "ci": 1.61,
+   "text": "+0.84 ± 1.61",
+   "status": "stop",
+   "label": "Stopped undecided; closed"
+  },
   {
    "test": 286,
    "title": "Fix six more search defects",
