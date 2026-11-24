@@ -78,11 +78,13 @@
 
   function size() {
     var r = canvas.getBoundingClientRect();
+    if (r.width < 40 || r.height < 40) return false;
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    W = r.width; H = r.height;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (iters.length) grow();
+    return true;
   }
 
   // where the search is at `ms`: the iteration reached, the engine's counters
@@ -96,6 +98,7 @@
   function realTime(p) { var end = iters[iters.length - 1].time; return Math.pow(p, 2.2) * end; }
 
   function draw(now) {
+    if (!nodes.length || W < 40) return;
     var p = built ? 1 : Math.min(1, (now - t0) / BUILD), ms = realTime(p), k = at(ms);
     var l = k >= 0 ? iters[k] : null, depth = l ? l.depth : 0;
     ctx.clearRect(0, 0, W, H);
@@ -163,11 +166,18 @@
       S.lines.forEach(function (l) { byDepth[l.depth] = l; });
       iters = Object.keys(byDepth).map(Number).sort(function (a, b) { return a - b; }).map(function (d) { return byDepth[d]; });
       colours();
-      size();
-      canvas.classList.add("is-live");
-      if (!motion) { built = true; draw(performance.now()); return; }
-      t0 = performance.now();
-      kick();
+      if (!motion) built = true;
+      var started = false;
+      function fit() {
+        if (!size()) return;
+        canvas.classList.add("is-live");
+        if (!started) { started = true; t0 = performance.now(); }
+        if (!motion) draw(performance.now()); else kick();
+      }
+      if ("ResizeObserver" in window) new ResizeObserver(fit).observe(canvas);
+      else window.addEventListener("resize", fit);
+      fit();
+      if (!motion) return;
       if ("IntersectionObserver" in window) {
         new IntersectionObserver(function (es) {
           visible = es[0].isIntersecting;
@@ -181,8 +191,6 @@
         kick();
       });
       hero.addEventListener("pointerleave", function () { pointer = null; kick(); });
-      var tm = 0;
-      window.addEventListener("resize", function () { clearTimeout(tm); tm = setTimeout(function () { size(); kick(); if (!motion) draw(performance.now()); }, 150); });
       new MutationObserver(function () { colours(); kick(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     })
     .catch(function () {});
