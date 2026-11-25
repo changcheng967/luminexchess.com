@@ -694,3 +694,4 @@ body:has(.hdr:not(.is-away)) .thead { top: 56px; }      /* step below the header
 .speed-live-n { font: 500 clamp(1.1rem, 2vw, 1.5rem)/1.1 var(--mono); color: var(--accent); letter-spacing: -0.01em; text-shadow: 0 0 22px rgba(var(--lumen-rgb), 0.45); }
 .speed-live-t { font-size: 0.8rem; color: var(--muted); }
 .cs-more { max-width: 92ch; font-size: 0.8rem; line-height: 1.55; color: var(--muted); }
+.dl, .cci-cell { position: relative; }

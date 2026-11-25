@@ -197,6 +197,13 @@
       });
       if (playBtn) playBtn.addEventListener("click", function () { if (playing) pause(); else play(); });
       if (scrub) scrub.addEventListener("input", function () { pause(); show(+scrub.value, true); });
+      document.addEventListener("keydown", function (e) {
+        if (e.code !== "Space" || e.target.closest("input, button, textarea, select, a, summary, [contenteditable]")) return;
+        var r = root.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        e.preventDefault();
+        if (playing) pause(); else { if (elapsed >= S.end) { elapsed = 0; shown = -1; show(0, true); } play(); }
+      });
       // the bars answer the pointer too: press or drag across them
       var dragging = false;
       function pick(e) {

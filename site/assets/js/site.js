@@ -672,6 +672,24 @@
       b.addEventListener("pointerleave", function () { b.style.setProperty("--tx", "0px"); b.style.setProperty("--ty", "0px"); });
     });
 
+    // objects you can handle: turn toward the pointer, a glare where the light falls
+    $$("[data-tilt]").forEach(function (o) {
+      var max = +(o.getAttribute("data-tilt") || 7), tr = 0, ev = null;
+      function apply() {
+        tr = 0;
+        var r = o.getBoundingClientRect(), nx = (ev.clientX - r.left) / r.width - 0.5, ny = (ev.clientY - r.top) / r.height - 0.5;
+        o.style.setProperty("--ry", (nx * max * 2).toFixed(2) + "deg");
+        o.style.setProperty("--rx", (-ny * max * 1.6).toFixed(2) + "deg");
+        o.style.setProperty("--gx", ((nx + 0.5) * 100).toFixed(1) + "%");
+        o.style.setProperty("--gy", ((ny + 0.5) * 100).toFixed(1) + "%");
+      }
+      o.addEventListener("pointermove", function (e) { ev = e; o.classList.add("is-handled"); if (!tr) tr = requestAnimationFrame(apply); });
+      o.addEventListener("pointerleave", function () {
+        o.classList.remove("is-handled");
+        o.style.setProperty("--rx", "0deg"); o.style.setProperty("--ry", "0deg");
+      });
+    });
+
     var line = document.createElement("i"), sraf = 0;
     line.className = "read-line";
     line.setAttribute("aria-hidden", "true");

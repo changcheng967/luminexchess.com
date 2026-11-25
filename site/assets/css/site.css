@@ -567,3 +567,24 @@ main { display: block; }
 .fold-btn:hover { background: rgba(var(--lumen-rgb), 0.12); box-shadow: inset 0 0 0 1px rgba(var(--lumen-rgb), 0.7); }
 .motion .fold-rest:not([hidden]) { animation: fold-in 0.5s var(--ease) both; }
 @keyframes fold-in { from { opacity: 0; filter: blur(4px); } }
+
+/* ---------- objects you can handle (site.js: data-tilt) ---------- */
+.motion [data-tilt] { transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.7s var(--ease), box-shadow 0.4s var(--ease); will-change: transform; }
+.motion [data-tilt].is-handled { transition: transform 0.14s linear, box-shadow 0.4s var(--ease); }
+.motion [data-tilt]::after { content: ""; position: absolute; inset: 0; z-index: 6; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.45s var(--ease);
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03) 32%, transparent 58%); }
+.motion [data-tilt].is-handled::after { opacity: 1; }
+/* a board of glass: a glossy floor under it, viewfinder corners around it */
+[data-glass] { -webkit-box-reflect: below 8px linear-gradient(rgba(255, 255, 255, 0.2), transparent 26%); box-shadow: 0 0 0 1px rgba(var(--lumen-rgb), 0.25), 0 40px 120px -40px rgba(var(--lumen-rgb), 0.55); }
+.viewfinder { position: relative; }
+.viewfinder::before { content: ""; position: absolute; inset: -14px; pointer-events: none;
+  background:
+    linear-gradient(var(--line-2), var(--line-2)) 0 0 / 16px 1px no-repeat, linear-gradient(var(--line-2), var(--line-2)) 0 0 / 1px 16px no-repeat,
+    linear-gradient(var(--line-2), var(--line-2)) 100% 0 / 16px 1px no-repeat, linear-gradient(var(--line-2), var(--line-2)) 100% 0 / 1px 16px no-repeat,
+    linear-gradient(var(--line-2), var(--line-2)) 0 100% / 16px 1px no-repeat, linear-gradient(var(--line-2), var(--line-2)) 0 100% / 1px 16px no-repeat,
+    linear-gradient(var(--line-2), var(--line-2)) 100% 100% / 16px 1px no-repeat, linear-gradient(var(--line-2), var(--line-2)) 100% 100% / 1px 16px no-repeat; }
+/* "To try": what a scene does when you handle it */
+.try { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font: 500 0.74rem/1.4 var(--mono); color: var(--muted); }
+.try-n { color: var(--accent); }
+.try kbd { display: inline-grid; place-items: center; min-width: 26px; height: 22px; padding: 0 7px; border-radius: 5px; font: 500 0.7rem/1 var(--mono); color: var(--ink); background: var(--bg-3); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.4), 0 0 0 1px var(--line-2); }
+.viewfinder:has(> [data-glass]) { margin-bottom: clamp(36px, 11%, 84px); }
