@@ -209,6 +209,16 @@
 
   /* ---------- coming into the light: marked elements come up once, when first seen ---------- */
   (function rise() {
+    if (motion) {
+      var auto = ".sec-head, .card, .tl, .gen, .howto-step, .faq details, .trow, .spec-row, .net-layer, .gnt-row, .cci-cell, .dl-row, .rung";
+      $$(auto).forEach(function (n) {
+        if (n.hasAttribute("data-rise") || n.parentNode.closest("[data-rise], .stage, [data-no-rise]")) return;
+        n.setAttribute("data-rise", "");
+        var k = 0, s = n;
+        while ((s = s.previousElementSibling)) if (s.matches(auto)) k++;
+        n.style.setProperty("--d", k % 8);
+      });
+    }
     var nodes = $$("[data-rise], [data-focus]");
     if (!nodes.length) return;
     $$("[data-rise-group]").forEach(function (g) {
@@ -603,6 +613,117 @@
     btn.addEventListener("click", function () {
       try { localStorage.setItem("lux-motion", motion ? "off" : "on"); } catch (e) { return; }
       location.reload();
+    });
+  })();
+
+  /* ---------- the whole site in motion ----------
+     Headings rise word by word as their section comes into the light; a card holds a light that
+     follows the pointer; a button leans toward it; a line of light at the top tracks the reading.
+     Nothing here hides content without motion: every starting state is keyed on html.motion. */
+  (function alive() {
+    if (!motion) return;
+    $$(".h-xl, .h-l").forEach(function (h) {
+      if (h.closest("[data-no-words]")) return;
+      var i = 0;
+      Array.prototype.slice.call(h.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(function (t) {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
+            var w = document.createElement("span");
+            w.className = "w"; w.textContent = t; w.style.setProperty("--i", i++);
+            frag.appendChild(w);
+          });
+          h.replaceChild(frag, c);
+        } else if (c.nodeType === 1) {
+          var box = document.createElement("span");
+          box.className = "w"; box.style.setProperty("--i", i++);
+          h.insertBefore(box, c); box.appendChild(c);
+        }
+      });
+      h.classList.add("is-words");
+      if (!h.closest("[data-rise]")) h.classList.add("is-auto");
+    });
+
+    var lit = null, raf = 0, px = 0, py = 0;
+    document.addEventListener("pointermove", function (e) {
+      px = e.clientX; py = e.clientY;
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0;
+        var under = document.elementFromPoint(px, py), card = under && under.closest(".card");
+        if (lit && lit !== card) lit.classList.remove("is-near");
+        lit = card;
+        if (!card) return;
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", Math.round(px - r.left) + "px");
+        card.style.setProperty("--my", Math.round(py - r.top) + "px");
+        card.classList.add("is-near");
+      });
+    }, { passive: true });
+
+    $$(".btn").forEach(function (b) {
+      b.addEventListener("pointermove", function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.setProperty("--tx", (((e.clientX - r.left) / r.width - 0.5) * 10).toFixed(1) + "px");
+        b.style.setProperty("--ty", (((e.clientY - r.top) / r.height - 0.5) * 8).toFixed(1) + "px");
+      });
+      b.addEventListener("pointerleave", function () { b.style.setProperty("--tx", "0px"); b.style.setProperty("--ty", "0px"); });
+    });
+
+    var line = document.createElement("i"), sraf = 0;
+    line.className = "read-line";
+    line.setAttribute("aria-hidden", "true");
+    document.body.appendChild(line);
+    function progress() {
+      sraf = 0;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      line.style.setProperty("--p", max > 0 ? Math.min(1, window.scrollY / max).toFixed(4) : 0);
+    }
+    window.addEventListener("scroll", function () { if (!sraf) sraf = requestAnimationFrame(progress); }, { passive: true });
+    progress();
+  })();
+
+  /* ---------- fewer words at first sight ----------
+     A long note, caption or card text opens with its first sentence; the rest unfolds when asked.
+     Nothing is cut: the whole text is in the page, and without scripts it is all shown. */
+  (function fold() {
+    var sel = ".note, .fig-sub, .prose > p, .tl-body > p, .gnt-text > p, .lineage-cap, .cs-more, .clock-step > p, " +
+              ".step > p, .gen > p:not([class]), .devbuild-text > p, .think-cap, .spec dd, .preview-head > p";
+    var n = 0;
+    $$(sel).forEach(function (p) {
+      var text = p.textContent;
+      if (text.length < 240 || p.closest("[data-no-fold]")) return;
+      var m = /[.:;!?]\s+(?=[A-Z0-9“(+−])/g, cut = -1, r;
+      while ((r = m.exec(text))) { if (r.index > 50) { cut = r.index + 1; break; } }
+      if (cut < 0 || text.length - cut < 80) return;
+      // the cut must fall in a text node of the paragraph itself, not inside a link or a span
+      var seen = 0, at = null, off = 0;
+      for (var i = 0; i < p.childNodes.length; i++) {
+        var c = p.childNodes[i], len = c.textContent.length;
+        if (seen + len >= cut) { if (c.nodeType === 3) { at = c; off = cut - seen; } break; }
+        seen += len;
+      }
+      if (!at) return;
+      var rest = document.createElement("span");
+      rest.className = "fold-rest"; rest.id = "fold-" + (++n); rest.hidden = true;
+      var tail = at.splitText(off);
+      while (tail) { var next = tail.nextSibling; rest.appendChild(tail); tail = next; }
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.className = "fold-btn";
+      btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", rest.id);
+      btn.textContent = "more";
+      btn.addEventListener("click", function () {
+        var open = rest.hidden;
+        rest.hidden = !open;
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        btn.textContent = open ? "less" : "more";
+        p.classList.toggle("is-open", open);
+      });
+      p.appendChild(rest);
+      p.appendChild(btn);
+      p.classList.add("is-folded");
     });
   })();
 

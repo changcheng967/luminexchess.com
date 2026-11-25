@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=26"></script>
+  <script src="/assets/js/theme.js?v=29"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,16 +24,16 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=26">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=26">
-  <script src="/assets/js/site.js?v=26" defer></script>
-  <script src="/assets/js/board.js?v=26" defer></script>
-  <script src="/assets/js/cells.js?v=26" defer></script>
-  <script src="/assets/js/inputs.js?v=26" defer></script>
-  <script src="/assets/js/engine.js?v=26" defer></script>
-  <script src="/assets/js/clock.js?v=26" defer></script>
-  <script src="/assets/js/think.js?v=26" defer></script>
-  <script src="/assets/js/tree.js?v=26" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=29">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=29">
+  <script src="/assets/js/site.js?v=29" defer></script>
+  <script src="/assets/js/board.js?v=29" defer></script>
+  <script src="/assets/js/cells.js?v=29" defer></script>
+  <script src="/assets/js/inputs.js?v=29" defer></script>
+  <script src="/assets/js/engine.js?v=29" defer></script>
+  <script src="/assets/js/clock.js?v=29" defer></script>
+  <script src="/assets/js/think.js?v=29" defer></script>
+  <script src="/assets/js/tree.js?v=29" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -401,6 +401,7 @@
           </div>
           <svg class="cs-curve" data-cs-curve viewBox="0 0 600 170" aria-hidden="true" focusable="false"></svg>
           <p class="cs-note" data-cs-note aria-live="polite"></p>
+          <p class="cs-more">Three more rules move the stop during a real search: three quarters of it when the best move took more than 80% of the last iteration's nodes, and half as much again, up to the hard limit, when the score dropped by more than 30 centipawns or the last depth had to widen its window three times. An iteration that could not finish before the hard limit is not started, and a single legal reply is played at once. With moves to go, a third formula spreads the clock to the end of the block; this simulator shows the two controls without one.</p>
         </figure>
         <dl class="totals clock-results">
           <div><dt>The schedule, at 10+0.1</dt><dd class="num is-lit"><span data-odo>+72.22</span></dd></div>

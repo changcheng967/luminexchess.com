@@ -3,7 +3,7 @@
      reduced motion, as animated ("motion"); the stylesheet keys every hidden
      starting state on those classes, so the page is complete without them;
    - applies a stored light or dark choice so it never flashes the other one.
-   Without a stored choice the page follows the system setting through CSS. */
+   Without a stored choice the site opens dark: light is the visitor's choice. */
 (function () {
   "use strict";
 
@@ -28,7 +28,7 @@
     } catch (e) { return null; }
   }
   function current() {
-    return root.getAttribute("data-theme") || (dark && dark.matches ? "night" : "day");
+    return root.getAttribute("data-theme") || "night";
   }
   function label() {
     var btn = document.querySelector("[data-edition]");
@@ -36,7 +36,7 @@
   }
 
   var choice = stored();
-  if (choice) root.setAttribute("data-theme", choice);
+  root.setAttribute("data-theme", choice || "night");
 
   function apply(edition) {
     root.setAttribute("data-theme", edition);

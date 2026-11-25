@@ -64,7 +64,7 @@
         if (!q || q.charAt(1) === "K") return;
         var pair = p.charAt(1) === "P" && q.charAt(1) === "P";
         var key = (pair ? "p" : "a") + Math.min(s, t) + "-" + Math.max(s, t);
-        if (seen[key]) { seen[key].mutual = true; return; }
+        if (seen[key]) { seen[key].mutual = true; if (p.charAt(0) === "w") seen[key].by = "w"; return; }
         seen[key] = { a: s, b: t, key: key, pair: pair, by: p.charAt(0), mutual: false };
         list.push(seen[key]);
       });
