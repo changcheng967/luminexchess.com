@@ -210,7 +210,7 @@
   /* ---------- coming into the light: marked elements come up once, when first seen ---------- */
   (function rise() {
     if (motion) {
-      var auto = ".sec-head, .card, .tl, .gen, .howto-step, .faq details, .trow, .spec-row, .net-layer, .gnt-row, .cci-cell, .dl-row, .rung";
+      var auto = ".sec-head, .card, .tl, .gen, .howto-step, .faq details, .trow, .spec-row, .net-layer, .gnt-row, .cci-cell, .dl-row, .rung, .builds-table tbody tr, .devbuild";
       $$(auto).forEach(function (n) {
         if (n.hasAttribute("data-rise") || n.parentNode.closest("[data-rise], .stage, [data-no-rise]")) return;
         n.setAttribute("data-rise", "");
@@ -690,6 +690,32 @@
       });
     });
 
+    // numbers roll up to their value the first time they are seen (a page script that drives one itself
+    // marks it data-odo-manual); only plain numbers, never a node with parts of its own
+    $$("[data-odo], .cci-elo").forEach(function (n) {
+      if (n.children.length || n.hasAttribute("data-odo-manual") || n._odo || !/\d/.test(n.textContent)) return;
+      var o = Lux.odo(n);
+      Lux.onVisible(n, function () { o.roll(); }, 0.5);
+    });
+
+    // a block of commands types itself, a line at a time, when first seen
+    $$(".code pre > code").forEach(function (code) {
+      if (code.children.length) return;
+      var parts = code.textContent.split("\n"), frag = document.createDocumentFragment();
+      parts.forEach(function (t, i) {
+        var s = el("span", "code-line", t);
+        s.style.setProperty("--i", i);
+        s.style.setProperty("--n", Math.max(1, t.length));
+        frag.appendChild(s);
+        if (i < parts.length - 1) frag.appendChild(document.createTextNode("\n"));
+      });
+      code.textContent = "";
+      code.appendChild(frag);
+      var pre = code.parentNode;
+      pre.classList.add("is-typed");
+      Lux.onVisible(pre, function () { pre.classList.add("is-in"); }, 0.4);
+    });
+
     var line = document.createElement("i"), sraf = 0;
     line.className = "read-line";
     line.setAttribute("aria-hidden", "true");
@@ -708,7 +734,7 @@
      Nothing is cut: the whole text is in the page, and without scripts it is all shown. */
   (function fold() {
     var sel = ".note, .fig-sub, .prose > p, .tl-body > p, .gnt-text > p, .lineage-cap, .cs-more, .clock-step > p, " +
-              ".step > p, .gen > p:not([class]), .devbuild-text > p, .think-cap, .spec dd, .preview-head > p";
+              ".step > p, .gen > p:not([class]), .devbuild-text > p, .think-cap, .spec dd, .preview-head > p, .gphero .lede";
     var n = 0;
     $$(sel).forEach(function (p) {
       var text = p.textContent;

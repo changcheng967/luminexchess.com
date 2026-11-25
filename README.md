@@ -40,8 +40,11 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   (`Lux.chess`: a FEN's squares, what a piece attacks). `ride.js` is the home page's ride,
   `knight.js` the living logo, `wallview.js` the tests page's wall, `inputs.js` the engine
   page's inputs and V5's relations, `think.js` its replayed searches, `tree.js` the search
-  growing behind its title, `clock.js` its clock simulator; `home.js`, `viewer.js`, `tests.js`, `engine.js` and `notfound.js` belong to
-  one page each.
+  growing behind its title, `clock.js` its clock simulator, `term.js` the download page's terminal
+  (a recorded session replayed at the engine's pace); `home.js` (the ride's sections: the ladder
+  drawn from the gauntlet's rows, the four steps running the strip's newest tests, the chronicle),
+  `viewer.js` (with the games page's field of every game), `tests.js` (with the river of every
+  test), `engine.js` and `notfound.js` belong to one page each.
 - Animations move `transform` and `opacity` only. The Content Security Policy allows no
   inline styles, so scripts place things by setting CSS custom properties
   (`element.style.setProperty`).
@@ -90,7 +93,9 @@ discipline does).
   each line's time as nodes / nps (the lines carry none), the moves in notation by python-chess,
   and the search's real end. The stories under each replay are in `think_json.py` and are checked
   against the recording by hand. Record with main's development build (its network inside) and
-  name the machine in `about`. The opening's tree (`tree.js`) reads the first search.
+  name the machine in `about`. The opening's tree (`tree.js`) reads the first search; the download
+  page's terminal (`term.js`) replays each search as a session, from the `position` command the
+  recording sent to the `bestmove` (with its `ponder`) the engine answered.
 - `tools/stamp.py site` keeps the repeated parts in step and checks the pages. A page marks
   a region with `<!-- @name -->` and `<!-- /@name -->`; the tool rewrites what is between
   them: the icon sprite, header and footer from `tools/parts/`, the starting position's

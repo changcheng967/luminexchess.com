@@ -401,9 +401,103 @@
     }
     document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); });
     root.classList.add("is-loaded");
+    heroField();
     // a link can open a game: /games/#2
     var want = parseInt((location.hash || "").replace("#", ""), 10);
     load(want >= 1 && want <= games.length ? want - 1 : 0);
+  }
+
+  /* ---------- the hero: every game of both matches, two of them lit ----------
+     One square a game, in boards of eight by eight, dark and light like a real board: dark for a loss,
+     half lit for a draw, lit for a win. The order inside a match is the seeded scatter every field of
+     cells uses (the bench keeps counts, not an order), the same picture as the field beside each game.
+     The one win of each match is a button that opens its game. */
+  function heroField() {
+    var box = document.querySelector("[data-gfield]");
+    if (!box || !Lux.cells) return;
+    var C = Lux.cells, ms = games.map(function (g) { return g.match; });
+    if (ms.some(function (m) { return !m; })) return;
+    box.hidden = false;
+    box.setAttribute("role", "group");
+    box.setAttribute("aria-label", "Every game of both matches, one square a game; the two wins are buttons");
+    var parts = games.map(function (g, i) {
+      var m = g.match, opp = g.white === "Luminex" ? g.black : g.white;
+      var wrap = el("div", "gf-match"), frame = el("div", "gf-frame"), cv = el("canvas", "gf-canvas");
+      cv.setAttribute("aria-hidden", "true");
+      frame.appendChild(cv);
+      var cells = C.scatter({ id: m.test, k: "g", w: m.wins, d: m.draws, l: m.losses });
+      var win = -1;
+      for (var k = 0; k < cells.length; k++) if (cells[k] === C.WIN) { win = k; break; }
+      var btn = el("button", "gf-win");
+      btn.type = "button";
+      btn.setAttribute("aria-label", "Open the win against " + opp + ": " + g.title);
+      btn.appendChild(el("span", "gf-dot"));
+      btn.appendChild(el("span", "gf-win-tip", g.title));
+      btn.addEventListener("click", function () {
+        if (i !== gi || !game) load(i);
+        root.scrollIntoView({ behavior: motion ? "smooth" : "auto", block: "start" });
+      });
+      frame.appendChild(btn);
+      var cap = el("p", "gf-cap");
+      cap.appendChild(el("b", "", opp));
+      cap.appendChild(el("span", "", m.games.toLocaleString("en-US") + " games · " + m.wins + " win · " + m.draws + " draws · " + m.losses + " losses"));
+      wrap.appendChild(frame); wrap.appendChild(cap);
+      box.appendChild(wrap);
+      return { cv: cv, btn: btn, cells: cells, win: win, frame: frame };
+    });
+    var hint = el("p", "try gf-try");
+    hint.setAttribute("aria-hidden", "true");
+    [["try-n", "01 · To try"], ["", "Find the two lights"], ["", "·"], ["", "each one opens its game"]]
+      .forEach(function (h) { hint.appendChild(el("span", h[0], h[1])); });
+    box.appendChild(hint);
+
+    var B = 8, PER = 7, t0 = 0, raf = 0;
+    function layout(n, w) {
+      var boards = Math.ceil(n / 64), per = Math.min(PER, boards), rows = Math.ceil(boards / per);
+      var cs = Math.max(3, Math.floor((w / (per * B + per - 1)) * 4) / 4);
+      return { boards: boards, per: per, rows: rows, cs: cs, w: (per * B + per - 1) * cs, h: (rows * B + rows - 1) * cs };
+    }
+    function xy(k, L) {
+      var b = (k / 64) | 0, r = k % 64, bx = b % L.per, by = (b / L.per) | 0;
+      return [(bx * (B + 1) + (r % 8)) * L.cs, (by * (B + 1) + ((r / 8) | 0)) * L.cs, (r % 8 + ((r / 8) | 0)) & 1];
+    }
+    function paint(p, upTo) {
+      var w = Math.floor(p.frame.clientWidth) || 480, L = layout(p.cells.length, w), dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (p.L === undefined || p.L.cs !== L.cs) {
+        p.L = L;
+        p.cv.width = Math.round(L.w * dpr); p.cv.height = Math.round(L.h * dpr);
+        p.cv.style.setProperty("--w", L.w + "px"); p.cv.style.setProperty("--h", L.h + "px");
+        var at = xy(p.win, L);
+        p.btn.style.setProperty("--x", at[0] + "px"); p.btn.style.setProperty("--y", at[1] + "px"); p.btn.style.setProperty("--s", L.cs + "px");
+      }
+      var c = p.cv.getContext("2d"), pal = C.palette(box), gap = Math.max(0.5, L.cs * 0.12);
+      c.setTransform(dpr, 0, 0, dpr, 0, 0);
+      c.clearRect(0, 0, L.w, L.h);
+      var n = Math.min(p.cells.length, upTo);
+      for (var k = 0; k < n; k++) {
+        var v = p.cells[k], q = xy(k, L);
+        c.fillStyle = (q[2] ? pal.alt : pal.css)[v === C.WIN ? C.DRAW : v];   // the win is the button's to light
+        c.fillRect(q[0] + gap / 2, q[1] + gap / 2, L.cs - gap, L.cs - gap);
+      }
+    }
+    function all() { parts.forEach(function (p) { paint(p, Infinity); }); }
+    // the boards fill in one after another, then the two wins light
+    function grow(now) {
+      if (!t0) t0 = now;
+      var f = Math.min(1, (now - t0) / 1400), done = true;
+      parts.forEach(function (p) { var upTo = Math.ceil(p.cells.length * f / 64) * 64; paint(p, upTo); if (upTo < p.cells.length) done = false; });
+      if (!done) { raf = requestAnimationFrame(grow); return; }
+      box.classList.add("is-lit");
+    }
+    if (motion) {
+      parts.forEach(function (p) { paint(p, 0); });
+      Lux.onVisible(box, function () { raf = requestAnimationFrame(grow); }, 0.2);
+    } else { all(); box.classList.add("is-lit"); }
+    var rt = 0;
+    window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { parts.forEach(function (p) { p.L = undefined; }); if (box.classList.contains("is-lit")) all(); }, 120); });
+    if (window.MutationObserver) {
+      new MutationObserver(function () { if (box.classList.contains("is-lit")) all(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    }
   }
 
   function fail() {

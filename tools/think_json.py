@@ -89,7 +89,8 @@ for pos, res in zip(P, R["results"]):
             line["seldepth"] = f["seldepth"]
         line["san"] = san_line(board, f["pv"])
         lines.append(line)
-    best = [l for l in res["raw"] if l.startswith("bestmove")][0].split()[1]
+    bm = [l for l in res["raw"] if l.startswith("bestmove")][0].split()
+    best, ponder = bm[1], (bm[3] if len(bm) > 3 and bm[2] == "ponder" else None)
     g = G[pos["game"]]
     tab, story = STORY[pos["label"]]
     searches.append({
@@ -104,6 +105,9 @@ for pos, res in zip(P, R["results"]):
         "lines": lines,
         "bestmove": best,
         "bestSan": board.san(chess.Move.from_uci(best)),
+        # what was sent and what came back, as the engine's own lines: the download page replays the session
+        "position": "position fen " + pos["start"] + (" moves " + " ".join(pos["moves"]) if pos["moves"] else ""),
+        "ponder": ponder,
     })
     print(tab, "|", len(lines), "lines | best", searches[-1]["bestSan"], "| end", lines[-1]["time"], "ms |", searches[-1]["title"])
 
