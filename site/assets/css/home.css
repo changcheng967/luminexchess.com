@@ -465,7 +465,11 @@ a.ldr-name[href]:hover { color: var(--accent); }
 @keyframes ldr-breathe { to { fill: rgba(var(--lumen-rgb), 0.24); } }
 .motion .ldr.is-in .ldr-lum-orb { animation: ldr-glow 3.2s var(--ease-io) 3s infinite alternate; }
 @keyframes ldr-glow { to { fill: var(--lumen-2); } }
-@media (max-width: 940px) { .is-ladder .ldr { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1180px) {
+  .is-ladder .ldr { grid-template-columns: minmax(0, 1fr); }
+  .ldr-side { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: start; gap: 20px 28px; }
+}
+@media (max-width: 600px) { .ldr-side { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- method: the four steps, running (home.js: machine) ---------- */
 .pipe.is-live { margin-bottom: 18px; }
