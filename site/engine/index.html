@@ -195,7 +195,7 @@
           <div class="spec-row" data-rise>
             <svg class="spec-g g-fall" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><g class="gf-net"><rect x="20" y="10" width="36" height="36" rx="18"/><path d="M30 22h16M30 28h16M30 34h16"/></g><path class="gf-wire" d="M60 28H96M124 28H160"/><rect class="gf-sw" x="98" y="20" width="24" height="16" rx="8"/><rect class="gf-knob" x="101" y="23" width="10" height="10" rx="5"/><g class="gf-hce"><rect x="164" y="10" width="36" height="36" rx="4"/><path d="M172 22h20M172 28h12M172 34h16"/></g></svg>
             <dt><span class="spec-n num">05</span>Always a fallback</dt>
-            <dd>Every release since v6.5.1 has its network inside. If no network loads, a hand-crafted evaluation plays instead: material, piece-square tables, mobility, passed pawns and king safety. The engine says so in an info line rather than switching quietly.</dd>
+            <dd>Every release since v6.5.1 has its network inside. If no network loads, a hand-crafted evaluation plays instead: material, piece-square tables, mobility, passed pawns and king safety, a feature set that follows Stash's, with values fitted for Luminex. The engine says so in an info line rather than switching quietly.</dd>
           </div>
           <div class="spec-row" data-rise>
             <svg class="spec-g g-uci" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><text class="gu-t gu-t0" x="2" y="12">go movetime 10000</text><text class="gu-t gu-t1" x="2" y="30">info depth 34 score cp 523</text><text class="gu-t gu-t2" x="2" y="48">bestmove d4e6</text></svg>
@@ -203,6 +203,7 @@
             <dd>Load it in Cute Chess, Arena, Banksia, En Croissant or any other UCI interface. MultiPV, pondering, win/draw/loss output and Polyglot opening books are built in.</dd>
           </div>
         </dl>
+        <p class="note spec-origins">Where the parts come from: some of the foundations derive from <a href="https://github.com/official-stockfish/Stockfish">Stockfish</a>, and the correction history, the history pruning rule, several search constants and the hand-crafted evaluation's feature set from <a href="https://github.com/mhouppin/stash-bot">Stash</a>, by Morgan Houppin. Both are free under the GPL v3, as Luminex is, and the <a href="https://github.com/changcheng967/Luminex/blob/main/LICENSE">LICENSE</a> credits them. The engine is being rewritten as its own design, a piece at a time, each piece held to the same bench and perft or to an SPRT: the first step made the pins, the slider attack tables, the move list and the legal-move filter Luminex's own (<a href="https://github.com/changcheng967/Luminex/pull/144">#144</a>).</p>
       </div>
     </section>
 
@@ -649,7 +650,7 @@
       <div class="ftr-grid">
         <div class="ftr-brand">
           <p class="ftr-name"><img class="brand-mark" src="/assets/img/mark-256.png" alt="" width="56" height="56" loading="lazy" decoding="async">Luminex</p>
-          <p>Free software under the GNU General Public License v3. Parts of its foundation derive from Stockfish. Its networks learn from positions scored by Leela Chess Zero's networks.</p>
+          <p>Free software under the GNU General Public License v3. Parts of its foundation derive from Stockfish, and some search and evaluation code from Stash, by Morgan Houppin. Its networks learn from positions scored by Leela Chess Zero's networks.</p>
           <button class="motion-switch" type="button" data-motion-switch aria-pressed="false" hidden>
             <span class="motion-switch-track" aria-hidden="true"><i></i></span>
             <span>Reduce motion</span>

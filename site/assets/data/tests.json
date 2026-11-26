@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "24 November 2026",
+ "asOf": "26 November 2026",
  "leftOff": [
   59
  ],
@@ -10,6 +10,114 @@
   "max": 120
  },
  "tests": [
+  {
+   "test": 308,
+   "title": "Check ProbCut's captures in quiescence search before its reduced search",
+   "href": "https://github.com/changcheng967/Luminex/pull/141",
+   "ref": "#141",
+   "games": 2458,
+   "elo": 15.13,
+   "ci": 6.56,
+   "text": "+15.13 ± 6.56",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 307,
+   "title": "Switch ProbCut off",
+   "href": "https://github.com/changcheng967/Luminex/pull/141",
+   "ref": "#141",
+   "games": 4992,
+   "elo": 8.21,
+   "ci": 4.69,
+   "text": "+8.21 ± 4.69",
+   "status": "pass",
+   "label": "Passed; ProbCut was fixed instead (test 308)"
+  },
+  {
+   "test": 305,
+   "title": "Sort the root's tied moves in one order on every build, for a bench that fingerprints the search",
+   "href": "https://github.com/changcheng967/Luminex/pull/139",
+   "ref": "#139",
+   "games": 10806,
+   "elo": 3.57,
+   "ci": 3.23,
+   "text": "+3.57 ± 3.23",
+   "status": "pass",
+   "label": "Passed as no regression (bounds −3 to 1)"
+  },
+  {
+   "test": 303,
+   "title": "Fix three search defects from the fourth audit",
+   "href": "https://github.com/changcheng967/Luminex/pull/140",
+   "ref": "#140",
+   "games": 96868,
+   "elo": 1.57,
+   "ci": 1.06,
+   "text": "+1.57 ± 1.06",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 296,
+   "title": "Reduce quiet checks and deepen the internal iterative reduction at cut nodes, together",
+   "href": "https://github.com/changcheng967/Luminex/pull/138",
+   "ref": "#138",
+   "games": 4680,
+   "elo": 9.06,
+   "ci": 5.01,
+   "text": "+9.06 ± 5.01",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 295,
+   "title": "Deepen the internal iterative reduction at cut nodes without a hash move",
+   "href": "https://github.com/changcheng967/Luminex/pull/138",
+   "ref": "#138",
+   "games": 19314,
+   "elo": 3.11,
+   "ci": 2.45,
+   "text": "+3.11 ± 2.45",
+   "status": "pass",
+   "label": "Passed; merged with test 294's change, tested together as 296"
+  },
+  {
+   "test": 294,
+   "title": "Reduce quiet checks after the first move",
+   "href": "https://github.com/changcheng967/Luminex/pull/138",
+   "ref": "#138",
+   "games": 22082,
+   "elo": 2.8,
+   "ci": 2.24,
+   "text": "+2.80 ± 2.24",
+   "status": "pass",
+   "label": "Passed; merged with test 295's change, tested together as 296"
+  },
+  {
+   "test": 293,
+   "title": "Reduce good captures after the first move",
+   "href": "https://github.com/changcheng967/Luminex/pull/137",
+   "ref": "#137",
+   "games": 20774,
+   "elo": 2.93,
+   "ci": 2.33,
+   "text": "+2.93 ± 2.33",
+   "status": "pass",
+   "label": "Passed"
+  },
+  {
+   "test": 292,
+   "title": "gen768t_06q, V5's sixth run: gen768t_05 trained 2,631,204 steps further, against gen768t_05q",
+   "href": "https://bench.luminexchess.com/test/292/",
+   "ref": "network",
+   "games": 9422,
+   "elo": -2.66,
+   "ci": 3.59,
+   "text": "−2.66 ± 3.59",
+   "status": "fail",
+   "label": "Failed; gen768t_05q stays on main"
+  },
   {
    "test": 291,
    "title": "Label every later move's child a cut node, with the pruning margins retuned for it",

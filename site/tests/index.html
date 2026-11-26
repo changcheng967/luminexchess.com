@@ -112,11 +112,11 @@
         <h1 id="tests-title" class="h-xl">Measured, not guessed</h1>
         <p class="lede">Luminex runs its own OpenBench instance. A candidate change plays the current engine until a sequential probability ratio test can tell a gain from noise.</p>
         <dl class="totals totals-hero totals-3">
-          <div><dt>SPRTs run</dt><dd class="num"><span data-odo>86</span></dd></div>
-          <div><dt>Passed</dt><dd class="num is-lit"><span data-odo>55</span></dd></div>
-          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>1,563,200</span></dd></div>
+          <div><dt>SPRTs run</dt><dd class="num"><span data-odo>95</span></dd></div>
+          <div><dt>Passed</dt><dd class="num is-lit"><span data-odo>63</span></dd></div>
+          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>1,828,240</span></dd></div>
         </dl>
-        <p class="statline">OpenBench's list holds 192 runs, one of them not finished: 87 SPRTs, 90 fixed-length matches, 7 gauntlets and 8 SPSA tuning runs. The SPRTs played 811,784 of the games, the tuning runs 514,752, the matches 177,012 and the gauntlets 55,042; another 4,610 were played in runs since deleted from the list.</p>
+        <p class="statline">OpenBench's list holds 210 runs, 9 of them not finished: 99 SPRTs, 93 fixed-length matches, 7 gauntlets and 11 SPSA tuning runs. The SPRTs played 1,030,360 of the games, the tuning runs 558,016, the matches 180,212 and the gauntlets 55,042; another 4,610 were played in runs since deleted from the list.</p>
         <figure class="wall-fig" data-wall data-src="/assets/data/wall.json">
           <canvas class="wall-canvas" aria-hidden="true"></canvas>
           <figcaption class="wall-cap">
@@ -134,16 +134,16 @@
         <header class="sec-head">
           <p class="kicker"><span class="kicker-n">1.</span> The record</p>
           <h2 id="record-title" class="h-l">Every test so far</h2>
-          <p class="lede">Elo against the engine each change would replace, with 95% confidence intervals, newest first, as of 24 November 2026</p>
+          <p class="lede">Elo against the engine each change would replace, with 95% confidence intervals, newest first, as of 26 November 2026</p>
         </header>
 
         <div class="record" data-record>
           <div class="record-bar">
             <div class="filters" role="group" aria-label="Show tests by outcome">
               <!-- @tests-filters -->
-              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">86</span></button>
-              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">55</span></button>
-              <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">19</span></button>
+              <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="num">95</span></button>
+              <button type="button" class="chip" data-filter="pass" aria-pressed="false">Passed <span class="num">63</span></button>
+              <button type="button" class="chip" data-filter="fail" aria-pressed="false">Failed <span class="num">20</span></button>
               <button type="button" class="chip" data-filter="merged" aria-pressed="false">Merged anyway <span class="num">5</span></button>
               <button type="button" class="chip" data-filter="stop" aria-pressed="false">Stopped <span class="num">7</span></button>
               <!-- /@tests-filters -->
@@ -157,6 +157,177 @@
           </div>
           <ol class="trows" data-rows>
             <!-- @tests-rows -->
+            <li class="trow is-pass" id="t308" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/141">Check ProbCut&#x27;s captures in quiescence search before its reduced search</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/308/">Test 308</a> · #141 · 2,458 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="103.21" x2="131.09" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M117.15 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+15.13 ± 6.56</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
+            </li>
+            <li class="trow is-pass" id="t307" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/141">Switch ProbCut off</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/307/">Test 307</a> · #141 · 4,992 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="92.48" x2="112.41" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M102.45 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+8.21 ± 4.69</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; ProbCut was fixed instead (test 308)</span></p>
+            </li>
+            <li class="trow is-pass" id="t305" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/139">Sort the root&#x27;s tied moves in one order on every build, for a bench that fingerprints the search</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/305/">Test 305</a> · #139 · 10,806 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="85.72" x2="99.45" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M92.59 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+3.57 ± 3.23</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed as no regression (bounds −3 to 1)</span></p>
+            </li>
+            <li class="trow is-pass" id="t303" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/140">Fix three search defects from the fourth audit</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/303/">Test 303</a> · #140 · 96,868 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="86.08" x2="90.59" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M88.34 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+1.57 ± 1.06</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
+            </li>
+            <li class="trow is-pass" id="t296" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/138">Reduce quiet checks and deepen the internal iterative reduction at cut nodes, together</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/296/">Test 296</a> · #138 · 4,680 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="93.61" x2="114.9" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M104.25 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+9.06 ± 5.01</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
+            </li>
+            <li class="trow is-pass" id="t295" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/138">Deepen the internal iterative reduction at cut nodes without a hash move</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/295/">Test 295</a> · #138 · 19,314 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="86.4" x2="96.82" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M91.61 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+3.11 ± 2.45</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; merged with test 294&#x27;s change, tested together as 296</span></p>
+            </li>
+            <li class="trow is-pass" id="t294" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/138">Reduce quiet checks after the first move</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/294/">Test 294</a> · #138 · 22,082 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="86.19" x2="95.71" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M90.95 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+2.80 ± 2.24</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; merged with test 295&#x27;s change, tested together as 296</span></p>
+            </li>
+            <li class="trow is-pass" id="t293" data-status="pass">
+              <div class="trow-label">
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/137">Reduce good captures after the first move</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/293/">Test 293</a> · #137 · 20,774 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="86.28" x2="96.18" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M91.23 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">+2.93 ± 2.33</p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed</span></p>
+            </li>
+            <li class="trow is-fail" id="t292" data-status="fail">
+              <div class="trow-label">
+                <a class="trow-title" href="https://bench.luminexchess.com/test/292/">gen768t_06q, V5&#x27;s sixth run: gen768t_05 trained 2,631,204 steps further, against gen768t_05q</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/292/">Test 292</a> · network · 9,422 games</p>
+              </div>
+              <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
+                <line class="tp-grid is-zero" x1="85" x2="85" y1="0" y2="28"/>
+                <line class="tp-grid" x1="170" x2="170" y1="0" y2="28"/>
+                <line class="tp-grid" x1="255" x2="255" y1="0" y2="28"/>
+                <line class="tp-grid" x1="340" x2="340" y1="0" y2="28"/>
+                <g class="tp-mark">
+                  <line class="tp-ci" x1="71.72" x2="86.98" y1="14" y2="14"/>
+                  <path class="tp-dot" d="M79.35 14h.01"/>
+                </g>
+              </svg>
+              <p class="trow-value num">−2.66 ± 3.59</p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed; gen768t_05q stays on main</span></p>
+            </li>
             <li class="trow is-stop" id="t291" data-status="stop">
               <div class="trow-label">
                 <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/136">Label every later move&#x27;s child a cut node, with the pruning margins retuned for it</a>
@@ -1798,7 +1969,7 @@
         <div class="record-notes prose">
           <p class="note"><b>Merged without a passing test.</b> Five changes: #5 repaired correctness bugs at a measured cost; #10, #11 and the retuned constants in #57 landed inside the error margin; #69 was stopped undecided at +1.29 ± 2.38 after 24,230 games and went in as a no-regression change. Every other change that failed was closed or dropped.</p>
           <p class="note"><b>Not in the record.</b> Test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped). The fixed-length matches, which are not SPRTs: v6.6.0 against v6.5.1 (<a href="https://bench.luminexchess.com/test/131/">test 131</a>) and main of 20 November against v6.6.0 (<a href="https://bench.luminexchess.com/test/178/">test 178</a>) are on <a href="/#strength">the home page</a>, gen768t_04q against gen768t_03q at 60+0.6 (<a href="https://bench.luminexchess.com/test/201/">test 201</a>) is on <a href="/engine/#next-network">the engine page</a>, and the rest were release checks and measurements: from test 216 on, they measure changes to the search, each against the same commit at its defaults. Test 64, a match of a fixed 3,006 games, is listed all the same. The SEE rewrite, at +127.32, runs off the chart.</p>
-          <p class="note"><b>Tuning and gauntlets.</b> Four SPSA runs of 80,000 games each retuned search constants; the last of them, for gen768r_04q (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>), moved no margin beyond noise and was not adopted (<a href="https://bench.luminexchess.com/test/84/">test 84</a>). Three since have tuned how wide the search is on V5's networks, each replacing the one before; the last, <a href="https://bench.luminexchess.com/tune/196/">tune 196</a> on gen768t_03q, finished its 80,000 games. <a href="https://bench.luminexchess.com/tune/290/">Tune 290</a> then retuned the pruning margins, their depth caps and the cut-node reduction together, 80,000 games on gen768t_05q; the change built on its values stopped undecided at +0.84 ± 1.61 after 45,226 games (<a href="https://bench.luminexchess.com/test/291/">test 291</a>) and was closed. Gauntlets rate a build against other engines instead of testing a change: the newest gave <!--@g:rating-->3640 ± 8<!--/@g:rating--> on the CCRL Blitz scale for main of <!--@g:day-->23 November<!--/@g:day--> (<a href="/#gauntlet">the gauntlet</a>).</p>
+          <p class="note"><b>Tuning and gauntlets.</b> Four SPSA runs of 80,000 games each retuned search constants; the last of them, for gen768r_04q (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>), moved no margin beyond noise and was not adopted (<a href="https://bench.luminexchess.com/test/84/">test 84</a>). Three since have tuned how wide the search is on V5's networks, each replacing the one before; the last, <a href="https://bench.luminexchess.com/tune/196/">tune 196</a> on gen768t_03q, finished its 80,000 games. <a href="https://bench.luminexchess.com/tune/290/">Tune 290</a> then retuned the pruning margins, their depth caps and the cut-node reduction together, 80,000 games on gen768t_05q; the change built on its values stopped undecided at +0.84 ± 1.61 after 45,226 games (<a href="https://bench.luminexchess.com/test/291/">test 291</a>) and was closed. Tunes 300 and 302 ran as knockout factorials instead: the first switched the search's heuristics off in combinations to price each one, and found ProbCut costing Elo as it stood; the second tried other shapes for it, and the best, a quiescence check of each capture first, passed as <a href="https://bench.luminexchess.com/test/308/">test 308</a>. Gauntlets rate a build against other engines instead of testing a change: the newest gave <!--@g:rating-->3640 ± 8<!--/@g:rating--> on the CCRL Blitz scale for main of <!--@g:day-->23 November<!--/@g:day--> (<a href="/#gauntlet">the gauntlet</a>).</p>
           <p class="note"><b>The count of games</b> is OpenBench's own count of every game played, the tuning runs and gauntlets included.</p>
           <p>
             <a class="link" href="https://bench.luminexchess.com"><span>Every test, live on bench.luminexchess.com</span><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
@@ -1814,7 +1985,7 @@
       <div class="ftr-grid">
         <div class="ftr-brand">
           <p class="ftr-name"><img class="brand-mark" src="/assets/img/mark-256.png" alt="" width="56" height="56" loading="lazy" decoding="async">Luminex</p>
-          <p>Free software under the GNU General Public License v3. Parts of its foundation derive from Stockfish. Its networks learn from positions scored by Leela Chess Zero's networks.</p>
+          <p>Free software under the GNU General Public License v3. Parts of its foundation derive from Stockfish, and some search and evaluation code from Stash, by Morgan Houppin. Its networks learn from positions scored by Leela Chess Zero's networks.</p>
           <button class="motion-switch" type="button" data-motion-switch aria-pressed="false" hidden>
             <span class="motion-switch-track" aria-hidden="true"><i></i></span>
             <span>Reduce motion</span>

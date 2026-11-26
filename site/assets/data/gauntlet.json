@@ -243,5 +243,5 @@
    "expected": 84.7
   }
  ],
- "since": "Since then main has gained six more search fixes, merged on the owner's decision after their SPRT was stopped undecided at +2.09 ± 2.14 Elo (test 286), and a change to the accumulators' memory layout that searches the same trees 1.8% faster on the test workers (#133). No gauntlet has rated them yet."
+ "since": "Since then main has gained six more search fixes, merged on the owner's decision after their SPRT was stopped undecided at +2.09 ± 2.14 Elo (test 286), a change to the accumulators' memory layout that searches the same trees 1.8% faster on the test workers (#133), and four search changes that each passed an SPRT, at +2.93 ± 2.33 (test 293), +9.06 ± 5.01 (test 296), +1.57 ± 1.06 (test 303) and +15.13 ± 6.56 (test 308). No gauntlet has rated them yet."
 }
