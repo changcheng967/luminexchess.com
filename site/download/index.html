@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/download/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=32"></script>
+  <script src="/assets/js/theme.js?v=33"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,10 +24,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=32">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=32">
-  <script src="/assets/js/site.js?v=32" defer></script>
-  <script src="/assets/js/term.js?v=32" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=33">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=33">
+  <script src="/assets/js/site.js?v=33" defer></script>
+  <script src="/assets/js/term.js?v=33" defer></script>
 </head>
 <body class="page-download">
   <!-- @sprite -->
@@ -111,8 +111,8 @@
             <p class="kicker"><span class="kicker-n">Download</span> Free under the GPL v3</p>
             <h1 id="download-title" class="h-xl">Get Luminex</h1>
             <p class="lede release-meta">
-              <span data-release-name>Luminex v6.6.0</span>, released <time data-release-date datetime="2026-11-14">14 November 2026</time>.
-              <a data-release-url href="https://github.com/changcheng967/Luminex/releases/tag/v6.6.0">Release notes</a>
+              <span data-release-name>Luminex v6.7.0</span>, released <time data-release-date datetime="2026-11-27">27 November 2026</time>.
+              <a data-release-url href="https://github.com/changcheng967/Luminex/releases/tag/v6.7.0">Release notes</a>
             </p>
           </div>
           <figure class="term" data-term aria-labelledby="term-cap" hidden>
@@ -126,50 +126,46 @@
         </div>
 
         <div class="downloads">
-          <a data-tilt="5" class="dl" data-os="windows" data-asset="luminex-windows-x86-64-modern.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-windows-x86-64-modern.exe">
+          <a data-tilt="5" class="dl" data-os="windows" data-asset="luminex-windows-x86-64.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-windows-x86-64.exe">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-window"/></svg></span>
             <span class="dl-os">Windows</span>
-            <span class="dl-variant">AVX2, for most PCs from 2013 on</span>
-            <span class="dl-file mono"><span data-file>luminex-windows-x86-64-modern.exe</span> <span class="dl-size" data-size>73 MB</span></span>
+            <span class="dl-variant">x86-64 with POPCNT; it picks the best kernels the processor has</span>
+            <span class="dl-file mono"><span data-file>luminex-windows-x86-64.exe</span> <span class="dl-size" data-size>123 MB</span></span>
             <span class="dl-go" aria-hidden="true"><svg class="icon"><use href="#i-download"/></svg></span>
           </a>
-          <a data-tilt="5" class="dl" data-os="linux" data-asset="luminex-linux-x86-64-modern" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-linux-x86-64-modern">
+          <a data-tilt="5" class="dl" data-os="linux" data-asset="luminex-linux-x86-64" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-linux-x86-64">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg></span>
             <span class="dl-os">Linux</span>
-            <span class="dl-variant">AVX2, for Ubuntu 24.04 and newer</span>
-            <span class="dl-file mono"><span data-file>luminex-linux-x86-64-modern</span> <span class="dl-size" data-size>73 MB</span></span>
+            <span class="dl-variant">x86-64-v2, for Ubuntu 22.04 and newer</span>
+            <span class="dl-file mono"><span data-file>luminex-linux-x86-64</span> <span class="dl-size" data-size>123 MB</span></span>
             <span class="dl-go" aria-hidden="true"><svg class="icon"><use href="#i-download"/></svg></span>
           </a>
-          <a data-tilt="5" class="dl" data-os="mac" data-asset="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-macos-arm64">
+          <a data-tilt="5" class="dl" data-os="mac" data-asset="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-macos-arm64">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-command"/></svg></span>
             <span class="dl-os">macOS</span>
             <span class="dl-variant">Apple silicon, macOS 13.3 or newer</span>
-            <span class="dl-file mono"><span data-file>luminex-macos-arm64</span> <span class="dl-size" data-size>73 MB</span></span>
+            <span class="dl-file mono"><span data-file>luminex-macos-arm64</span> <span class="dl-size" data-size>123 MB</span></span>
             <span class="dl-go" aria-hidden="true"><svg class="icon"><use href="#i-download"/></svg></span>
           </a>
-          <a class="dl dl-net" data-asset="luminex_gen768r_06q_i8.nnue" data-asset-ext=".nnue" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex_gen768r_06q_i8.nnue">
+          <a class="dl dl-net" data-asset="luminex_gen768u_01q_i8.nnue" data-asset-ext=".nnue" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex_gen768u_01q_i8.nnue">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-chip"/></svg></span>
             <span class="dl-os">Network</span>
-            <span class="dl-variant">gen768r_06q, already inside every download; the file is for builds without it</span>
-            <span class="dl-file mono"><span data-file>luminex_gen768r_06q_i8.nnue</span> <span class="dl-size" data-size>72 MB</span></span>
+            <span class="dl-variant">gen768u_01q, already inside every download; the file is for builds without it</span>
+            <span class="dl-file mono"><span data-file>luminex_gen768u_01q_i8.nnue</span> <span class="dl-size" data-size>122 MB</span></span>
             <span class="dl-go" aria-hidden="true"><svg class="icon"><use href="#i-download"/></svg></span>
           </a>
         </div>
         <div class="builds">
-          <h2 class="builds-title" id="builds-title">Every build of <span data-release-tag>v6.6.0</span></h2>
-          <p class="builds-lede">Take a <code>-modern</code> build unless the processor lacks AVX2 (Intel Core since 2013, AMD since 2015). Every binary has the network, gen768r_06q, built in and plays at full strength by itself.</p>
+          <h2 class="builds-title" id="builds-title">Every build of <span data-release-tag>v6.7.0</span></h2>
+          <p class="builds-lede">One binary a platform, built by clang 23. The Linux and Windows ones carry the network's kernels for every instruction set, from AVX-512 VNNI down to a baseline, and use the best the processor supports. Every binary has the network, gen768u_01q, built in and plays at full strength by itself.</p>
           <table class="builds-table" aria-labelledby="builds-title">
             <thead>
               <tr><th scope="col">Platform</th><th scope="col">File</th><th scope="col">Processor</th><th scope="col">Needs</th></tr>
             </thead>
             <tbody>
-              <tr><th scope="row">Linux</th><td data-th="File"><a data-asset-link="luminex-linux-x86-64-modern" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-linux-x86-64-modern">luminex-linux-x86-64-modern</a></td><td data-th="Processor">AVX2 (x86-64-v3)</td><td data-th="Needs">Ubuntu 24.04 or newer (glibc 2.38, GCC 13's libstdc++)</td></tr>
-              <tr><th scope="row">Linux</th><td data-th="File"><a data-asset-link="luminex-linux-x86-64" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-linux-x86-64">luminex-linux-x86-64</a></td><td data-th="Processor">SSE4.2, POPCNT (x86-64-v2)</td><td data-th="Needs">Ubuntu 24.04 or newer (glibc 2.38, GCC 13's libstdc++)</td></tr>
-              <tr><th scope="row">Linux</th><td data-th="File"><a data-asset-link="luminex-linux-x86-64-glibc235-modern" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-linux-x86-64-glibc235-modern">luminex-linux-x86-64-glibc235-modern</a></td><td data-th="Processor">AVX2 (x86-64-v3)</td><td data-th="Needs">Ubuntu 22.04 or newer (glibc 2.35)</td></tr>
-              <tr><th scope="row">Linux</th><td data-th="File"><a data-asset-link="luminex-linux-x86-64-glibc235" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-linux-x86-64-glibc235">luminex-linux-x86-64-glibc235</a></td><td data-th="Processor">SSE4.2, POPCNT (x86-64-v2)</td><td data-th="Needs">Ubuntu 22.04 or newer (glibc 2.35)</td></tr>
-              <tr><th scope="row">Windows</th><td data-th="File"><a data-asset-link="luminex-windows-x86-64-modern.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-windows-x86-64-modern.exe">luminex-windows-x86-64-modern.exe</a></td><td data-th="Processor">AVX2</td><td data-th="Needs">nothing to install</td></tr>
-              <tr><th scope="row">Windows</th><td data-th="File"><a data-asset-link="luminex-windows-x86-64.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-windows-x86-64.exe">luminex-windows-x86-64.exe</a></td><td data-th="Processor">POPCNT</td><td data-th="Needs">nothing to install</td></tr>
-              <tr><th scope="row">macOS</th><td data-th="File"><a data-asset-link="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-macos-arm64">luminex-macos-arm64</a></td><td data-th="Processor">Apple silicon</td><td data-th="Needs">macOS 13.3 or newer</td></tr>
+              <tr><th scope="row">Linux</th><td data-th="File"><a data-asset-link="luminex-linux-x86-64" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-linux-x86-64">luminex-linux-x86-64</a></td><td data-th="Processor">x86-64-v2 (SSE4.2, POPCNT)</td><td data-th="Needs">glibc 2.35 or newer (Ubuntu 22.04)</td></tr>
+              <tr><th scope="row">Windows</th><td data-th="File"><a data-asset-link="luminex-windows-x86-64.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-windows-x86-64.exe">luminex-windows-x86-64.exe</a></td><td data-th="Processor">x86-64 with POPCNT</td><td data-th="Needs">nothing to install</td></tr>
+              <tr><th scope="row">macOS</th><td data-th="File"><a data-asset-link="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-macos-arm64">luminex-macos-arm64</a></td><td data-th="Processor">Apple silicon</td><td data-th="Needs">macOS 13.3 or newer</td></tr>
             </tbody>
           </table>
         </div>
@@ -180,8 +176,8 @@
             <p class="devbuild-now mono" data-dev hidden>Now <span data-dev-name></span> · <time data-dev-date></time></p>
           </div>
           <div class="devbuild-text">
-            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main: at present gen768t_05q, V5's fifth run, seven steps on from the release's gen768r_06q in self-play: +77.57 ± 15.21 Elo (<a href="https://bench.luminexchess.com/test/140/">test 140</a>), +17.80 ± 7.38 (<a href="https://bench.luminexchess.com/test/148/">test 148</a>), +73.37 ± 14.20 (<a href="https://bench.luminexchess.com/test/174/">test 174</a>), +28.93 ± 9.30 (<a href="https://bench.luminexchess.com/test/176/">test 176</a>), +18.53 ± 7.54 (<a href="https://bench.luminexchess.com/test/195/">test 195</a>), +7.22 ± 4.37 (<a href="https://bench.luminexchess.com/test/200/">test 200</a>), then +9.86 ± 5.07 (<a href="https://bench.luminexchess.com/test/264/">test 264</a>). It is not a numbered release: for anything that needs a fixed version, take v6.6.0 above.</p>
-            <p class="devbuild-fine">One binary a platform now: the Linux and Windows ones carry the network's kernels for every instruction set and run the best one the processor supports. The network is attached as a file of its own. The program names itself <code>Luminex dev-YYYYMMDD-</code> and the first eight characters of its commit. Since 19 November every build is clang 23's: on Linux with lld and its C++ library linked in, so it needs only glibc 2.35 (Ubuntu 22.04 or newer); clang-cl on Windows; LLVM 23 against the system's own C++ library on macOS 13.3 or newer.</p>
+            <p>Every push to main that passes its checks publishes a build, which replaces the one before, so there is only ever one. It carries whatever network is on main: at present gen768u_01q, the network inside v6.7.0, +7.49 ± 4.44 Elo over the one before it (<a href="https://bench.luminexchess.com/test/319/">test 319</a>). It is not a numbered release: for anything that needs a fixed version, take v6.7.0 above.</p>
+            <p class="devbuild-fine">Built as the release is: one binary a platform by clang 23, the network attached as a file of its own. The program names itself <code>Luminex dev-YYYYMMDD-</code> and the first eight characters of its commit.</p>
           </div>
           <a class="btn btn-ghost devbuild-go" href="https://github.com/changcheng967/Luminex/releases">
             <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
@@ -216,7 +212,7 @@ go movetime 2000</code></pre>
           </div>
           <div class="howto-step">
             <h3 class="h-m">Or build it</h3>
-            <p>With CMake 3.20 or newer and clang 23, which the development branch needs: it builds the development builds and the test workers' engines, about a quarter faster in games than gcc 14. This builds the development branch with its network inside, as the releases are built. For the release itself, run <code>git checkout v6.6.0</code> after cloning; its source also builds with GCC 13 or MSVC 2022, as its own binaries were, and it predates <code>ci.sh</code>, so fetch its network with <code>bash .github/scripts/fetch-net.sh</code> instead.</p>
+            <p>With CMake 3.20 or newer and clang 23, which builds every binary since v6.7.0 and the test workers' engines, about a quarter faster in games than gcc 14. This builds the development branch with its network inside, as the releases are built. For the release itself, run <code>git checkout v6.7.0</code> after cloning.</p>
             <div class="code">
               <button class="copy" type="button" data-copy="build-demo" aria-label="Copy the build commands">
                 <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-say" aria-hidden="true">Copy</span>
@@ -246,25 +242,25 @@ cmake --build build --config Release</code></pre>
             </details>
             <details>
               <summary><span>Do I need the network file?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>No. Every download carries the network, gen768r_06q, inside it and plays at full strength by itself; the program reports it by its file name, <code>luminex_gen768r_06q_i8.nnue</code>. To play with a different network, point the <code>NNUEFile</code> option at its file; to play with the handcrafted evaluation, roughly 500 Elo weaker, set <code>UseNNUE</code> to false. The release also attaches the network as a file of its own, for builds without one inside. Before 6.5.1 the network was a separate file that had to sit next to the program, and version 6.3.0 loads it only through <code>NNUEFile</code>.</p>
+              <p>No. Every download carries the network, gen768u_01q, inside it and plays at full strength by itself; the program reports it by its file name, <code>luminex_gen768u_01q_i8.nnue</code>. To play with a different network, point the <code>NNUEFile</code> option at its file; to play with the handcrafted evaluation, roughly 500 Elo weaker, set <code>UseNNUE</code> to false. The release also attaches the network as a file of its own, for builds without one inside. Before 6.5.1 the network was a separate file that had to sit next to the program, and version 6.3.0 loads it only through <code>NNUEFile</code>.</p>
             </details>
             <details>
               <summary><span>Which download should I pick?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>A <code>-modern</code> build, unless the processor lacks AVX2 (Intel Core since 2013, AMD since 2015): then the build without <code>-modern</code> in its name, which needs SSE4.2 and POPCNT on Linux and POPCNT on Windows. On Linux, the plain builds need Ubuntu 24.04 or newer (glibc 2.38); from Ubuntu 22.04 (glibc 2.35) take the <code>glibc235</code> builds. The Windows builds need nothing installed. Macs need Apple silicon and macOS 13.3 or newer. <a href="#builds-title">The table</a> lists every build, and this page marks the one for your system.</p>
+              <p>There is one for each system. The Linux and Windows builds carry the network's kernels for every instruction set and use the best the processor supports: the Linux one needs SSE4.2 and POPCNT (x86-64-v2) and glibc 2.35 or newer (Ubuntu 22.04 or newer), the Windows one a processor with POPCNT and nothing installed. Macs need Apple silicon and macOS 13.3 or newer. <a href="#builds-title">The table</a> lists every build, and this page marks the one for your system.</p>
             </details>
             <details>
               <summary><span>Does it support Chess960 or endgame tablebases?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>Not yet. Luminex plays standard chess only, and it does not probe Syzygy tablebases: it plays endgames with search and evaluation alone. v6.6.0 accepts a <code>SyzygyPath</code> option so interfaces don't complain; since 26 November the development build declares only the options it uses, and answers any other with an <code>info string</code> line (<a href="https://github.com/changcheng967/Luminex/pull/145">#145</a>).</p>
+              <p>Not yet. Luminex plays standard chess only, and it does not probe Syzygy tablebases: it plays endgames with search and evaluation alone. Since v6.7.0 it declares only the options it uses, and answers any other, <code>SyzygyPath</code> included, with an <code>info string</code> line (<a href="https://github.com/changcheng967/Luminex/pull/145">#145</a>).</p>
             </details>
           </div>
           <div class="faq-col">
             <details>
               <summary><span>Can it play weaker, for practice?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>Not yet: Luminex always plays at full strength. v6.6.0 accepts <code>Skill Level</code>, <code>UCI_LimitStrength</code> and <code>UCI_Elo</code> for compatibility, with no effect; the development build no longer declares them.</p>
+              <p>Not yet: Luminex always plays at full strength. v6.6.0 accepted <code>Skill Level</code>, <code>UCI_LimitStrength</code> and <code>UCI_Elo</code> for compatibility, with no effect; since v6.7.0 it no longer declares them.</p>
             </details>
             <details>
               <summary><span>How strong is it, really?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>The development build, main of <!--@g:day-->23 November<!--/@g:day-->: <!--@g:rating-->3640 ± 8<!--/@g:rating--> on the CCRL Blitz scale, from a gauntlet of <!--@g:games-->9,024<!--/@g:games--> games against <!--@g:count-->eleven<!--/@g:count--> rated engines. Main of 20 November scored +212.07 ± 5.22 Elo against v6.6.0 in 10,024 games of self-play. The release, v6.6.0, was rated 3471 ± 16 by an earlier gauntlet, and scored +246.55 ± 13.37 Elo against v6.5.1 over 2,010 games. All of it was measured on OpenBench and none of it is an entry on a rating list; see <a href="/#strength">Strength</a> for the numbers.</p>
+              <p>v6.7.0: <!--@g:rating-->3662 ± 8<!--/@g:rating--> on the CCRL Blitz scale, from a gauntlet of <!--@g:games-->8,876<!--/@g:games--> games of its search and network against <!--@g:count-->eleven<!--/@g:count--> rated engines, and +314.92 ± 14.52 Elo against v6.6.0 over 2,010 games of self-play. All of it was measured on OpenBench and none of it is an entry on a rating list; see <a href="/#strength">Strength</a> for the numbers.</p>
             </details>
             <details>
               <summary><span>How are changes tested?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -315,7 +311,7 @@ cmake --build build --config Release</code></pre>
         </div>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the development build's rating, from a gauntlet of <!--@g:games-->9,024<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->eleven<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings, played by main of <!--@g:day-->23 November<!--/@g:day--> with the <!--@g:network-->gen768t_05q<!--/@g:network--> network. The release, v6.6.0, was rated 3471 ± 16 by an earlier gauntlet. Neither is a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> v6.7.0's rating, from a gauntlet of <!--@g:games-->8,876<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->eleven<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings, played by main of <!--@g:day-->27 November<!--/@g:day--> with the <!--@g:network-->gen768u_01q<!--/@g:network--> network: the search and network v6.7.0 was released with. It is not a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>

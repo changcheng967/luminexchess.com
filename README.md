@@ -203,11 +203,11 @@ console.
   notes on GitHub. Then, page by page:
   - `/download/`: the four cards, the table of every build (file, processor, what it
     needs: the notes' Downloads table), the network card's file name, the questions. A
-    network is always written by its real file name (`luminex_gen768r_06q_i8.nnue`), never
+    network is always written by its real file name (`luminex_gen768u_01q_i8.nnue`), never
     by an older network's name or a neutral one. The build commands are main's (its
-    network comes from `bash .github/scripts/ci.sh fetch-net`); the sentence above them
-    gives the release's own fetch line while the release predates that (`fetch-net.sh` in
-    v6.6.0): drop it once a release has `ci.sh fetch-net`.
+    network comes from `bash .github/scripts/ci.sh fetch-net`, which every release from
+    v6.7.0 has too). Since v6.7.0 there is one binary a platform; the site-tools fixtures
+    (the recorded GitHub answers) are refreshed at every release.
   - `/`: the opening's pill and numbers, "Where it stands" (the gauntlet's `title` and
     `since` in `gauntlet.json`, the release against the one before it as one result
     row, and the CCI figure: `tools/bench_update.py --cci` once `softwareVersion` names
@@ -240,12 +240,14 @@ console.
   `site/index.html`: the chronicle chart's last point (`data-points`, the headline under
   the chart's title and the hidden table) and a chronicle entry. The script then lists
   every line that still quotes the gauntlet before; history may stay (the chronicle, the
-  block of the network that was rated), anything else is stale. Three fields of
+  block of the network that was rated), anything else is stale. Four fields of
   `gauntlet.json` are written by hand and kept when the same gauntlet is read again:
   `title` (the figure's heading; without it, "The development build of <day>, against … engines"),
-  `since` (a sentence after the figure's text: what the engine has become since) and
-  `noteEnd` (a sentence added to the note under the rows). A new gauntlet starts without
-  them.
+  `release` (the release whose search and network the gauntlet played, e.g. "v6.7.0": the
+  figure's text says so), `since` (a sentence after the figure's text: what the engine has
+  become since) and `noteEnd` (a sentence added to the note under the rows). A new gauntlet
+  starts without them. A gauntlet of a release also takes the chronicle's waiting entries
+  in: they lose `is-next` and point at the release's point on the chart.
 - **A new network on main.** In `site/assets/data/tests.json`, label its test "Passed; on
   main" and the one before it "Passed; since replaced by …" (a released network keeps
   "Passed; released in v…"). On `/engine/`: a row in the table of networks and the note

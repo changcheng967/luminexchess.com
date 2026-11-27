@@ -102,6 +102,7 @@
       var id = name.split(",")[0];
       runs.push({ name: id, a: num(steps[0]), b: num(steps[1]), shown: $("td[data-th='Positions shown']", tr).textContent.trim(),
                   from: $("td[data-th='Drawn from']", tr).textContent.trim(), passes: num($("td[data-th=Passes]", tr).textContent),
+                  passesText: $("td[data-th=Passes]", tr).textContent.trim(),   // "9.0", or "about 14" where the data is counted from samples
                   elo: elo[id + "q"] || "", row: tr });
     });
     if (!runs.length) return;
@@ -129,19 +130,18 @@
         var sx = x0 + (x1 - x0) * p / r.passes;
         make("line", { x1: sx, x2: sx, y1: base + 6, y2: base + band - 6 }, "lg-seam", g);
       }
-      make("text", { x: (x0 + x1) / 2, y: base + band + 22, "text-anchor": "middle" }, "lg-name", g).textContent = r.name.replace("gen768t_", "run ");
+      make("text", { x: (x0 + x1) / 2, y: base + band + 22, "text-anchor": "middle" }, "lg-name", g).textContent = r.name.replace("gen768t_", "run ").replace("gen768u_", "V6 run ");
       make("text", { x: x1 - 4, y: y(r.sum) - 9, "text-anchor": "end" }, "lg-gain", g).textContent = r.elo.split(" ")[0];
       make("rect", { x: x0, y: 0, width: x1 - x0, height: H }, "lg-hit", g);
     });
-    [0, 2e6, 4e6, 6e6, 8e6].forEach(function (s) {
-      if (s > end) return;
+    for (var s = 0; s <= end; s += 2e6) {     // a mark every two million steps, as far as the line goes
       make("text", { x: x(s), y: H - 2, "text-anchor": s ? "middle" : "start" }, "lg-axis").textContent = s ? (s / 1e6) + " million steps" : "step 0";
-    });
+    }
     function say(i) {
       var r = runs[i];
       $$(".lg-run", svg).forEach(function (g, k) { g.classList.toggle("is-on", k === i); });
       runs.forEach(function (o, k) { o.row.classList.toggle("is-lit", k === i); });
-      if (read) read.textContent = r.name + ": steps " + N(r.a) + " → " + N(r.b) + ", " + r.shown + " positions shown, " + r.passes +
+      if (read) read.textContent = r.name + ": steps " + N(r.a) + " → " + N(r.b) + ", " + r.shown + " positions shown, " + r.passesText +
         " passes over " + r.from.replace(/^.*: /, "").replace(/ positions$/, "") + " positions" + (r.elo ? "; its network " + r.elo + " Elo against the one before" : "") + ".";
     }
     $$(".lg-run", svg).forEach(function (g, i) {

@@ -76,10 +76,11 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 N = "{:,}".format
 KINDS = ("sprt", "fixed", "gauntlet", "tune", "datagen")
 # fields of gauntlet.json that are written by hand and kept when the same gauntlet is read again:
-#   title    the figure's heading, e.g. "Against twelve rated engines" (default: "The development build, against … engines")
+#   title    the figure's heading, e.g. "v6.7.0, against eleven engines" (default: "The development build of <day>, against … engines")
+#   release  the release whose search and network the gauntlet rated, e.g. "v6.7.0": the figure's text says so
 #   since    a sentence shown after the figure's text: what the engine has become since the gauntlet
 #   noteEnd  a sentence added to the note under the rows
-HAND_WRITTEN = ("title", "since", "noteEnd")
+HAND_WRITTEN = ("title", "release", "since", "noteEnd")
 
 
 def fetch(url, via):

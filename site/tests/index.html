@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/tests/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=32"></script>
+  <script src="/assets/js/theme.js?v=33"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,12 +24,12 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=32">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=32">
-  <script src="/assets/js/site.js?v=32" defer></script>
-  <script src="/assets/js/cells.js?v=32" defer></script>
-  <script src="/assets/js/wallview.js?v=32" defer></script>
-  <script src="/assets/js/tests.js?v=32" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=33">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=33">
+  <script src="/assets/js/site.js?v=33" defer></script>
+  <script src="/assets/js/cells.js?v=33" defer></script>
+  <script src="/assets/js/wallview.js?v=33" defer></script>
+  <script src="/assets/js/tests.js?v=33" defer></script>
 </head>
 <body class="page-tests">
   <!-- @sprite -->
@@ -114,9 +114,9 @@
         <dl class="totals totals-hero totals-3">
           <div><dt>SPRTs run</dt><dd class="num"><span data-odo>100</span></dd></div>
           <div><dt>Passed</dt><dd class="num is-lit"><span data-odo>65</span></dd></div>
-          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>2,094,314</span></dd></div>
+          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>2,174,056</span></dd></div>
         </dl>
-        <p class="statline">OpenBench's list holds 220 runs, 2 of them not finished: 100 SPRTs, 99 fixed-length matches, 7 gauntlets, 11 SPSA tuning runs and 3 runs that play the engine against itself for training data. The SPRTs played 1,047,242 of the games, the tuning runs 567,360, the matches 197,746, the gauntlets 55,042 and the training-data runs 222,314; another 4,610 were played in runs since deleted from the list.</p>
+        <p class="statline">OpenBench's list holds 224 runs, 2 of them not finished: 101 SPRTs, 100 fixed-length matches, 8 gauntlets, 12 SPSA tuning runs and 3 runs that play the engine against itself for training data. The SPRTs played 1,047,242 of the games, the tuning runs 570,944, the matches 201,342, the gauntlets 63,918 and the training-data runs 286,000; another 4,610 were played in runs since deleted from the list.</p>
         <figure class="wall-fig" data-wall data-src="/assets/data/wall.json">
           <canvas class="wall-canvas" aria-hidden="true"></canvas>
           <figcaption class="wall-cap">
@@ -159,8 +159,8 @@
             <!-- @tests-rows -->
             <li class="trow is-pass" id="t319" data-status="pass">
               <div class="trow-label">
-                <a class="trow-title" href="https://bench.luminexchess.com/test/319/">gen768u_01q, the first network with a feature table for each phase of the game, against gen768t_05q</a>
-                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/319/">Test 319</a> · network · 5,520 games</p>
+                <a class="trow-title" href="https://github.com/changcheng967/Luminex/pull/152">gen768u_01q, V6&#x27;s first network: a feature table for each phase of the game, against gen768t_05q</a>
+                <p class="trow-meta"><a href="https://bench.luminexchess.com/test/319/">Test 319</a> · #152 · 5,520 games</p>
               </div>
               <svg class="trow-plot" viewBox="0 0 340 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                 <line class="tp-grid" x1="0" x2="0" y1="0" y2="28"/>
@@ -174,7 +174,7 @@
                 </g>
               </svg>
               <p class="trow-value num">+7.49 ± 4.44</p>
-              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; not on main yet</span></p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; released in v6.7.0</span></p>
             </li>
             <li class="trow is-fail" id="t310" data-status="fail">
               <div class="trow-label">
@@ -421,7 +421,7 @@
                 </g>
               </svg>
               <p class="trow-value num">−2.66 ± 3.59</p>
-              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed; gen768t_05q stays on main</span></p>
+              <p class="trow-status st-fail"><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg><span>Failed; gen768t_05q stayed on main</span></p>
             </li>
             <li class="trow is-stop" id="t291" data-status="stop">
               <div class="trow-label">
@@ -516,7 +516,7 @@
                 </g>
               </svg>
               <p class="trow-value num">+9.86 ± 5.07</p>
-              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; on main</span></p>
+              <p class="trow-status st-pass"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Passed; since replaced by gen768u_01q</span></p>
             </li>
             <li class="trow is-pass" id="t204" data-status="pass">
               <div class="trow-label">
@@ -2063,8 +2063,8 @@
 
         <div class="record-notes prose">
           <p class="note"><b>Merged without a passing test.</b> Six changes: #5 repaired correctness bugs at a measured cost; #10, #11 and the retuned constants in #57 landed inside the error margin; #69 was stopped undecided at +1.29 ± 2.38 after 24,230 games and went in as a no-regression change; #132, six search fixes, was stopped undecided at +2.09 ± 2.14 after 23,648 games and merged on the owner's decision. Every other change that failed was closed or dropped.</p>
-          <p class="note"><b>Not in the record.</b> Test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped). The fixed-length matches, which are not SPRTs: v6.6.0 against v6.5.1 (<a href="https://bench.luminexchess.com/test/131/">test 131</a>) and main of 20 November against v6.6.0 (<a href="https://bench.luminexchess.com/test/178/">test 178</a>) are on <a href="/#strength">the home page</a>, gen768t_04q against gen768t_03q at 60+0.6 (<a href="https://bench.luminexchess.com/test/201/">test 201</a>) is on <a href="/engine/#next-network">the engine page</a>, and the rest were release checks and measurements: from test 216 on, most measure a change to the search against the same commit at its defaults, and a few something else, such as Hash 64 against 16 (<a href="https://bench.luminexchess.com/test/311/">test 311</a>) or twice the thinking time (<a href="https://bench.luminexchess.com/test/314/">test 314</a>). Test 64, a match of a fixed 3,006 games, is listed all the same. The SEE rewrite, at +127.32, runs off the chart.</p>
-          <p class="note"><b>Tuning and gauntlets.</b> Four SPSA runs of 80,000 games each retuned search constants; the last of them, for gen768r_04q (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>), moved no margin beyond noise and was not adopted (<a href="https://bench.luminexchess.com/test/84/">test 84</a>). Three since have tuned how wide the search is on V5's networks, each replacing the one before; the last, <a href="https://bench.luminexchess.com/tune/196/">tune 196</a> on gen768t_03q, finished its 80,000 games. <a href="https://bench.luminexchess.com/tune/290/">Tune 290</a> then retuned the pruning margins, their depth caps and the cut-node reduction together, 80,000 games on gen768t_05q; the change built on its values stopped undecided at +0.84 ± 1.61 after 45,226 games (<a href="https://bench.luminexchess.com/test/291/">test 291</a>) and was closed. Tunes 300 and 302 ran as knockout factorials instead: the first switched seventeen of the search's heuristics off in combinations to price each one, and found ProbCut costing Elo as it stood; the second priced seventeen other shapes for the search at once. Three of those shapes then had SPRTs of their own: a quiescence check of each ProbCut capture passed as <a href="https://bench.luminexchess.com/test/308/">test 308</a>, a third ply of singular extension as <a href="https://bench.luminexchess.com/test/309/">test 309</a>, and reverse futility pruning to depth 12 failed as <a href="https://bench.luminexchess.com/test/310/">test 310</a>. Gauntlets rate a build against other engines instead of testing a change: the newest gave <!--@g:rating-->3640 ± 8<!--/@g:rating--> on the CCRL Blitz scale for main of <!--@g:day-->23 November<!--/@g:day--> (<a href="/#gauntlet">the gauntlet</a>).</p>
+          <p class="note"><b>Not in the record.</b> Test 59, a network trained on a filtered dump that had learned that material is worth almost nothing (6 wins and 79 losses when it was stopped). The fixed-length matches, which are not SPRTs: v6.7.0 against v6.6.0 (<a href="https://bench.luminexchess.com/test/321/">test 321</a>) is on <a href="/#strength">the home page</a>, as v6.6.0 against v6.5.1 (<a href="https://bench.luminexchess.com/test/131/">test 131</a>) and main of 20 November against v6.6.0 (<a href="https://bench.luminexchess.com/test/178/">test 178</a>) were before it; gen768t_04q against gen768t_03q (<a href="https://bench.luminexchess.com/test/201/">test 201</a>) and gen768u_01q against gen768t_05q (<a href="https://bench.luminexchess.com/test/320/">test 320</a>), both at 60+0.6, are on <a href="/engine/#next-network">the engine page</a>; and the rest were release checks and measurements: from test 216 on, most measure a change to the search against the same commit at its defaults, and a few something else, such as Hash 64 against 16 (<a href="https://bench.luminexchess.com/test/311/">test 311</a>) or twice the thinking time (<a href="https://bench.luminexchess.com/test/314/">test 314</a>). Test 64, a match of a fixed 3,006 games, is listed all the same. The SEE rewrite, at +127.32, runs off the chart.</p>
+          <p class="note"><b>Tuning and gauntlets.</b> Four SPSA runs of 80,000 games each retuned search constants; the last of them, for gen768r_04q (<a href="https://bench.luminexchess.com/tune/83/">tune 83</a>), moved no margin beyond noise and was not adopted (<a href="https://bench.luminexchess.com/test/84/">test 84</a>). Three since have tuned how wide the search is on V5's networks, each replacing the one before; the last, <a href="https://bench.luminexchess.com/tune/196/">tune 196</a> on gen768t_03q, finished its 80,000 games. <a href="https://bench.luminexchess.com/tune/290/">Tune 290</a> then retuned the pruning margins, their depth caps and the cut-node reduction together, 80,000 games on gen768t_05q; the change built on its values stopped undecided at +0.84 ± 1.61 after 45,226 games (<a href="https://bench.luminexchess.com/test/291/">test 291</a>) and was closed. Tunes 300 and 302 ran as knockout factorials instead: the first switched seventeen of the search's heuristics off in combinations to price each one, and found ProbCut costing Elo as it stood; the second priced seventeen other shapes for the search at once. Three of those shapes then had SPRTs of their own: a quiescence check of each ProbCut capture passed as <a href="https://bench.luminexchess.com/test/308/">test 308</a>, a third ply of singular extension as <a href="https://bench.luminexchess.com/test/309/">test 309</a>, and reverse futility pruning to depth 12 failed as <a href="https://bench.luminexchess.com/test/310/">test 310</a>. Gauntlets rate a build against other engines instead of testing a change: the newest gave <!--@g:rating-->3662 ± 8<!--/@g:rating--> on the CCRL Blitz scale for v6.7.0's search and network, main of <!--@g:day-->27 November<!--/@g:day--> (<a href="/#gauntlet">the gauntlet</a>).</p>
           <p class="note"><b>The count of games</b> is OpenBench's own count of every game played, the tuning runs, the gauntlets and the games played to make training data included.</p>
           <p>
             <a class="link" href="https://bench.luminexchess.com"><span>Every test, live on bench.luminexchess.com</span><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
@@ -2109,7 +2109,7 @@
         </div>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the development build's rating, from a gauntlet of <!--@g:games-->9,024<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->eleven<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings, played by main of <!--@g:day-->23 November<!--/@g:day--> with the <!--@g:network-->gen768t_05q<!--/@g:network--> network. The release, v6.6.0, was rated 3471 ± 16 by an earlier gauntlet. Neither is a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> v6.7.0's rating, from a gauntlet of <!--@g:games-->8,876<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->eleven<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings, played by main of <!--@g:day-->27 November<!--/@g:day--> with the <!--@g:network-->gen768u_01q<!--/@g:network--> network: the search and network v6.7.0 was released with. It is not a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>

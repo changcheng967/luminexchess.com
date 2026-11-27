@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=32"></script>
+  <script src="/assets/js/theme.js?v=33"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -27,15 +27,15 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=32">
-  <link rel="stylesheet" href="/assets/css/home.css?v=32">
-  <script src="/assets/js/site.js?v=32" defer></script>
-  <script src="/assets/js/cells.js?v=32" defer></script>
-  <script src="/assets/js/ride.js?v=32" defer></script>
-  <script src="/assets/js/knight.js?v=32" defer></script>
-  <script src="/assets/js/home.js?v=32" defer></script>
-  <script src="/assets/js/board.js?v=32" defer></script>
-  <script src="/assets/js/lichess.js?v=32" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=33">
+  <link rel="stylesheet" href="/assets/css/home.css?v=33">
+  <script src="/assets/js/site.js?v=33" defer></script>
+  <script src="/assets/js/cells.js?v=33" defer></script>
+  <script src="/assets/js/ride.js?v=33" defer></script>
+  <script src="/assets/js/knight.js?v=33" defer></script>
+  <script src="/assets/js/home.js?v=33" defer></script>
+  <script src="/assets/js/board.js?v=33" defer></script>
+  <script src="/assets/js/lichess.js?v=33" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -45,7 +45,7 @@
     "applicationCategory": "GameApplication",
     "applicationSubCategory": "Chess engine",
     "operatingSystem": "Windows, Linux, macOS",
-    "softwareVersion": "6.6.0",
+    "softwareVersion": "6.7.0",
     "license": "https://www.gnu.org/licenses/gpl-3.0.html",
     "url": "https://luminexchess.com/",
     "downloadUrl": "https://github.com/changcheng967/Luminex/releases/latest",
@@ -141,7 +141,7 @@
           <div class="hero-copy">
             <div class="hero-knight" data-knight-fx="/assets/img/knight-glow.png" aria-hidden="true"></div>
             <a class="pill hero-pill" href="/download/">
-              <b>v6.6.0</b>
+              <b>v6.7.0</b>
               <span>is out, its network inside every binary</span>
               <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
             </a>
@@ -153,7 +153,7 @@
             <div class="hero-cta">
               <a class="btn btn-primary" href="/download/">
                 <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
-                <span>Download <span data-release-tag>v6.6.0</span></span>
+                <span>Download <span data-release-tag>v6.7.0</span></span>
               </a>
               <a class="btn btn-ghost" href="https://github.com/changcheng967/Luminex">
                 <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
@@ -161,8 +161,8 @@
               </a>
             </div>
             <dl class="proof">
-            <div><dt>The development build of <!--@g:day-->23 November<!--/@g:day--><a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo><!--@g:n-->3640<!--/@g:n--></span><span class="u">± <!--@g:e-->8<!--/@g:e--></span></dd></div>
-            <div><dt>v6.6.0 over v6.5.1</dt><dd><span class="proof-n" data-odo>+246.55</span><span class="u">± 13.37</span></dd></div>
+            <div><dt>v6.7.0, CCRL Blitz scale<a class="fn-ref" href="#fn-elo" aria-describedby="fn-elo-label">*</a></dt><dd><span class="proof-n" data-odo><!--@g:n-->3662<!--/@g:n--></span><span class="u">± <!--@g:e-->8<!--/@g:e--></span></dd></div>
+            <div><dt>v6.7.0 over v6.6.0</dt><dd><span class="proof-n" data-odo>+314.92</span><span class="u">± 14.52</span></dd></div>
             </dl>
           </div>
         </div>
@@ -202,7 +202,7 @@
               </article>
               <article class="scale" data-scale="4">
                 <p class="kicker">Every game</p>
-                <h2 class="scale-n"><span class="scale-num" data-wall-games>2,094,314</span> <span class="scale-unit">games</span></h2>
+                <h2 class="scale-n"><span class="scale-num" data-wall-games>2,174,056</span> <span class="scale-unit">games</span></h2>
                 <p class="scale-text">Every cell is one game the bench has played: each test of a change, each tuning run, each gauntlet, each game the engine played against itself for training data. No change to the engine's play ships until its games can tell a gain from noise.</p>
                 <a class="link" href="/tests/"><span>Every test, with its result</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                 <div class="ride-still" data-still></div>
@@ -215,7 +215,7 @@
             <li><button type="button" data-go="1"><b data-count="plies">161</b><span>positions</span></button></li>
             <li><button type="button" data-go="2"><b data-count="match">800</b><span>games</span></button></li>
             <li><button type="button" data-go="3"><b>9,602</b><span>games</span></button></li>
-            <li><button type="button" data-go="4"><b data-wall-games>2,094,314</b><span>games</span></button></li>
+            <li><button type="button" data-go="4"><b data-wall-games>2,174,056</b><span>games</span></button></li>
           </ol>
         </div>
       </div>
@@ -226,147 +226,146 @@
         <header class="sec-head">
           <p class="kicker"><span class="kicker-n">1.</span> Strength</p>
           <h2 id="strength-title" class="h-l">Where it stands</h2>
-          <p class="lede">The development build, main of <!--@g:day-->23 November<!--/@g:day-->, is rated by a gauntlet: <!--@g:games-->9,024<!--/@g:games--> games against <!--@g:count-->eleven<!--/@g:count--> engines that CCRL rates put it at <!--@g:rating-->3640 ± 8<!--/@g:rating--> on the CCRL Blitz scale. The release, v6.6.0, scored +246.55 ± 13.37 Elo against v6.5.1, the release before it.</p>
+          <p class="lede">v6.7.0, released on 27 November, is rated by a gauntlet of its own search and network: <!--@g:games-->8,876<!--/@g:games--> games against <!--@g:count-->eleven<!--/@g:count--> engines that CCRL rates put it at <!--@g:rating-->3662 ± 8<!--/@g:rating--> on the CCRL Blitz scale. It scored +314.92 ± 14.52 Elo against v6.6.0, the release before it.</p>
         </header>
 
         <figure class="card gnt" id="gauntlet" data-gauntlet aria-labelledby="gauntlet-title">
           <!-- @gauntlet -->
             <figcaption class="gnt-head">
               <div class="gnt-score-box">
-                <p class="fact-label" id="gauntlet-title">The development build of 23 November, against eleven engines</p>
-                <p class="gnt-num num"><span data-odo>3640</span><span class="gnt-pm">± 8</span></p>
+                <p class="fact-label" id="gauntlet-title">v6.7.0, against eleven engines</p>
+                <p class="gnt-num num"><span data-odo>3662</span><span class="gnt-pm">± 8</span></p>
                 <p class="gnt-on">on the CCRL Blitz scale</p>
-                <p class="gnt-also"><span class="num">3527 ± 10</span> on the CCRL 40/15 scale, from the 8,222 games against the ten opponents that list rates</p>
+                <p class="gnt-also"><span class="num">3544 ± 11</span> on the CCRL 40/15 scale, from the 8,060 games against the ten opponents that list rates</p>
               </div>
               <div class="gnt-text">
-                <p>Main of 23 November at 3ba03c8, with the gen768t_05q network, played 800 games against each of eleven engines that CCRL rates, at 10+0.1 on one thread: 9,024 games, none lost on time and no crash. The rating is the one at which the points expected against all eleven equal the points scored.</p>
-                <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between 3620 and 3653, where the games by themselves would leave ± 3. More opponents near Luminex would narrow it; more games would not.</p>
-                <p class="gnt-since">Since then main has gained six more search fixes, merged on the owner&#x27;s decision after their SPRT was stopped undecided at +2.09 ± 2.14 Elo (test 286), a change to the accumulators&#x27; memory layout that searches the same trees 1.8% faster on the test workers (#133), and five search changes that each passed an SPRT, at +2.93 ± 2.33 (test 293), +9.06 ± 5.01 (test 296), +1.57 ± 1.06 (test 303), +15.13 ± 6.56 (test 308) and +3.30 ± 2.56 (test 309). No gauntlet has rated them yet.</p>
-                <a class="link" href="https://bench.luminexchess.com/gauntlet/7/"><span>Gauntlet 7 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <p>Main of 27 November at a81c73d, with the gen768u_01q network, the search and network v6.7.0 was released with, played 800 games against each of eleven engines that CCRL rates, at 10+0.1 on one thread: 8,876 games, none lost on time and no crash. The rating is the one at which the points expected against all eleven equal the points scored.</p>
+                <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between 3634 and 3682, where the games by themselves would leave ± 3. More opponents near Luminex would narrow it; more games would not.</p>
+                <a class="link" href="https://bench.luminexchess.com/gauntlet/8/"><span>Gauntlet 8 on OpenBench</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               </div>
             </figcaption>
             <p class="legend gnt-legend"><span><i class="k-w"></i>Luminex wins</span><span><i class="k-d"></i>Draws</span><span><i class="k-l"></i>Opponent wins</span><span class="of-plot"><i class="k-dot"></i>The rating one opponent's games imply, with its 95% interval</span><span class="of-plot"><i class="k-band"></i>The fitted rating and its interval</span></p>
-            <div class="gnt-cols" aria-hidden="true"><span>Opponent · CCRL Blitz</span><span>Results for Luminex</span><span>Score</span><svg class="gnt-axis" viewBox="0 0 200 14" focusable="false"><text x="0" y="10" text-anchor="middle">3600</text><text x="142.86" y="10" text-anchor="middle">3650</text></svg><span>Implies</span></div>
+            <div class="gnt-cols" aria-hidden="true"><span>Opponent · CCRL Blitz</span><span>Results for Luminex</span><span>Score</span><svg class="gnt-axis" viewBox="0 0 200 14" focusable="false"><text x="88.89" y="10" text-anchor="middle">3650</text><text x="200" y="10" text-anchor="middle">3700</text></svg><span>Implies</span></div>
             <ol class="gnt-rows" aria-label="Results against eleven rated engines, strongest first, with Luminex where its rating puts it">
               <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/274/">PlentyChess b-v8.0.0</a> <span class="gnt-rating num">3773</span></span>
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/322/">PlentyChess b-v8.0.0</a> <span class="gnt-rating num">3773</span></span>
                 <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 808 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="12" height="10"/><rect class="wdl-d" x="12" width="365" height="10"/><rect class="wdl-l" x="377" width="431" height="10"/></svg>
-                  <span class="gnt-games">+12 =365 −431<span class="gnt-n"> · 808 games</span></span>
+                  <svg class="wdl" viewBox="0 0 808 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="10" height="10"/><rect class="wdl-d" x="10" width="416" height="10"/><rect class="wdl-l" x="426" width="382" height="10"/></svg>
+                  <span class="gnt-games">+10 =416 −382<span class="gnt-n"> · 808 games</span></span>
                 </span>
-                <span class="gnt-score num">24.1%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="105.71" x2="168.57" y1="10" y2="10"/><circle class="gf-dot" cx="137.14" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3648 <span class="gnt-err">± 11</span></span>
+                <span class="gnt-score num">27%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="104.44" x2="144.44" y1="10" y2="10"/><circle class="gf-dot" cx="124.44" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3666 <span class="gnt-err">± 9</span></span>
               </li>
               <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/275/">Obsidian v16.0</a> <span class="gnt-rating num">3746</span></span>
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/323/">Obsidian v16.0</a> <span class="gnt-rating num">3746</span></span>
                 <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 812 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="13" height="10"/><rect class="wdl-d" x="13" width="399" height="10"/><rect class="wdl-l" x="412" width="400" height="10"/></svg>
-                  <span class="gnt-games">+13 =399 −400<span class="gnt-n"> · 812 games</span></span>
+                  <svg class="wdl" viewBox="0 0 816 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="22" height="10"/><rect class="wdl-d" x="22" width="439" height="10"/><rect class="wdl-l" x="461" width="355" height="10"/></svg>
+                  <span class="gnt-games">+22 =439 −355<span class="gnt-n"> · 816 games</span></span>
                 </span>
-                <span class="gnt-score num">26.2%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="65.71" x2="122.86" y1="10" y2="10"/><circle class="gf-dot" cx="94.29" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3633 <span class="gnt-err">± 10</span></span>
-              </li>
-              <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/276/">Berserk 14</a> <span class="gnt-rating num">3737</span></span>
-                <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 806 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="21" height="10"/><rect class="wdl-d" x="21" width="367" height="10"/><rect class="wdl-l" x="388" width="418" height="10"/></svg>
-                  <span class="gnt-games">+21 =367 −418<span class="gnt-n"> · 806 games</span></span>
-                </span>
-                <span class="gnt-score num">25.4%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="28.57" x2="85.71" y1="10" y2="10"/><circle class="gf-dot" cx="57.14" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3620 <span class="gnt-err">± 10</span></span>
-              </li>
-              <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/277/">Clover v9.1</a> <span class="gnt-rating num">3726</span></span>
-                <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 808 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="23" height="10"/><rect class="wdl-d" x="23" width="454" height="10"/><rect class="wdl-l" x="477" width="331" height="10"/></svg>
-                  <span class="gnt-games">+23 =454 −331<span class="gnt-n"> · 808 games</span></span>
-                </span>
-                <span class="gnt-score num">30.9%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="85.71" x2="137.14" y1="10" y2="10"/><circle class="gf-dot" cx="111.43" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3639 <span class="gnt-err">± 9</span></span>
-              </li>
-              <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/278/">Quanticade Cronus-3.0</a> <span class="gnt-rating num">3716</span></span>
-                <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 820 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="58" height="10"/><rect class="wdl-d" x="58" width="468" height="10"/><rect class="wdl-l" x="526" width="294" height="10"/></svg>
-                  <span class="gnt-games">+58 =468 −294<span class="gnt-n"> · 820 games</span></span>
-                </span>
-                <span class="gnt-score num">35.6%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="122.86" x2="174.29" y1="10" y2="10"/><circle class="gf-dot" cx="148.57" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3652 <span class="gnt-err">± 9</span></span>
-              </li>
-              <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/279/">Renegade v1.3.0</a> <span class="gnt-rating num">3694</span></span>
-                <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 802 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="66" height="10"/><rect class="wdl-d" x="66" width="458" height="10"/><rect class="wdl-l" x="524" width="278" height="10"/></svg>
-                  <span class="gnt-games">+66 =458 −278<span class="gnt-n"> · 802 games</span></span>
-                </span>
-                <span class="gnt-score num">36.8%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="74.29" x2="125.71" y1="10" y2="10"/><circle class="gf-dot" cx="100" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3635 <span class="gnt-err">± 9</span></span>
-              </li>
-              <li class="gnt-row is-lum">
-                <span class="gnt-name">Luminex <span class="gnt-rating num">3640 ± 8</span></span>
-                <span class="gnt-result"><span class="gnt-games">The rating that fits all eleven</span></span>
-                <span class="gnt-score"></span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="91.43" x2="137.14" y1="10" y2="10"/><path class="gf-pool" d="M108.79 10L114.29 4L119.79 10L114.29 16Z"/></svg>
-                <span class="gnt-implied num">3640 <span class="gnt-err">± 8</span></span>
-              </li>
-              <li class="gnt-row is-under">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/280/">Altair v7.0.0</a> <span class="gnt-rating num">3579</span></span>
-                <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 836 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="360" height="10"/><rect class="wdl-d" x="360" width="389" height="10"/><rect class="wdl-l" x="749" width="87" height="10"/></svg>
-                  <span class="gnt-games">+360 =389 −87<span class="gnt-n"> · 836 games</span></span>
-                </span>
-                <span class="gnt-score num">66.3%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="122.86" x2="180" y1="10" y2="10"/><circle class="gf-dot" cx="151.43" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3653 <span class="gnt-err">± 10</span></span>
-              </li>
-              <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/281/">Elixir v3.0</a> <span class="gnt-rating num">3567</span></span>
-                <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 852 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="357" height="10"/><rect class="wdl-d" x="357" width="459" height="10"/><rect class="wdl-l" x="816" width="36" height="10"/></svg>
-                  <span class="gnt-games">+357 =459 −36<span class="gnt-n"> · 852 games</span></span>
-                </span>
-                <span class="gnt-score num">68.8%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="125.71" x2="177.14" y1="10" y2="10"/><circle class="gf-dot" cx="151.43" cy="10" r="4.5"/></svg>
+                <span class="gnt-score num">29.6%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="75.56" x2="115.56" y1="10" y2="10"/><circle class="gf-dot" cx="95.56" cy="10" r="4.5"/></svg>
                 <span class="gnt-implied num"><span class="gnt-says">implies </span>3653 <span class="gnt-err">± 9</span></span>
               </li>
               <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/282/">Patricia 5</a> <span class="gnt-rating num">3539</span></span>
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/324/">Berserk 14</a> <span class="gnt-rating num">3737</span></span>
                 <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 864 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="404" height="10"/><rect class="wdl-d" x="404" width="374" height="10"/><rect class="wdl-l" x="778" width="86" height="10"/></svg>
-                  <span class="gnt-games">+404 =374 −86<span class="gnt-n"> · 864 games</span></span>
+                  <svg class="wdl" viewBox="0 0 800 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="24" height="10"/><rect class="wdl-d" x="24" width="413" height="10"/><rect class="wdl-l" x="437" width="363" height="10"/></svg>
+                  <span class="gnt-games">+24 =413 −363<span class="gnt-n"> · 800 games</span></span>
                 </span>
-                <span class="gnt-score num">68.4%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="34.29" x2="97.14" y1="10" y2="10"/><circle class="gf-dot" cx="65.71" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3623 <span class="gnt-err">± 11</span></span>
+                <span class="gnt-score num">28.8%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="44.44" x2="88.89" y1="10" y2="10"/><circle class="gf-dot" cx="66.67" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3640 <span class="gnt-err">± 10</span></span>
               </li>
               <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/283/">Rice 8.0.0</a> <span class="gnt-rating num">3530</span></span>
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/325/">Clover v9.1</a> <span class="gnt-rating num">3726</span></span>
                 <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 816 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="449" height="10"/><rect class="wdl-d" x="449" width="334" height="10"/><rect class="wdl-l" x="783" width="33" height="10"/></svg>
-                  <span class="gnt-games">+449 =334 −33<span class="gnt-n"> · 816 games</span></span>
+                  <svg class="wdl" viewBox="0 0 810 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="38" height="10"/><rect class="wdl-d" x="38" width="512" height="10"/><rect class="wdl-l" x="550" width="260" height="10"/></svg>
+                  <span class="gnt-games">+38 =512 −260<span class="gnt-n"> · 810 games</span></span>
                 </span>
-                <span class="gnt-score num">75.5%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="117.14" x2="180" y1="10" y2="10"/><circle class="gf-dot" cx="148.57" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3652 <span class="gnt-err">± 11</span></span>
+                <span class="gnt-score num">36.3%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="106.67" x2="142.22" y1="10" y2="10"/><circle class="gf-dot" cx="124.44" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3666 <span class="gnt-err">± 8</span></span>
               </li>
               <li class="gnt-row">
-                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/284/">Smallbrain 7.0.0</a> <span class="gnt-rating num">3454</span></span>
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/326/">Quanticade Cronus-3.0</a> <span class="gnt-rating num">3716</span></span>
                 <span class="gnt-result">
-                  <svg class="wdl" viewBox="0 0 800 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="541" height="10"/><rect class="wdl-d" x="541" width="238" height="10"/><rect class="wdl-l" x="779" width="21" height="10"/></svg>
-                  <span class="gnt-games">+541 =238 −21<span class="gnt-n"> · 800 games</span></span>
+                  <svg class="wdl" viewBox="0 0 804 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="73" height="10"/><rect class="wdl-d" x="73" width="514" height="10"/><rect class="wdl-l" x="587" width="217" height="10"/></svg>
+                  <span class="gnt-games">+73 =514 −217<span class="gnt-n"> · 804 games</span></span>
                 </span>
-                <span class="gnt-score num">82.5%</span>
-                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="91.43" width="45.71" height="20"/><line class="gf-fit" x1="114.29" x2="114.29" y2="20"/><line class="gf-whisk" x1="22.86" x2="102.86" y1="10" y2="10"/><circle class="gf-dot" cx="62.86" cy="10" r="4.5"/></svg>
-                <span class="gnt-implied num"><span class="gnt-says">implies </span>3622 <span class="gnt-err">± 14</span></span>
+                <span class="gnt-score num">41%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="131.11" x2="166.67" y1="10" y2="10"/><circle class="gf-dot" cx="148.89" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3677 <span class="gnt-err">± 8</span></span>
+              </li>
+              <li class="gnt-row">
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/327/">Renegade v1.3.0</a> <span class="gnt-rating num">3694</span></span>
+                <span class="gnt-result">
+                  <svg class="wdl" viewBox="0 0 816 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="94" height="10"/><rect class="wdl-d" x="94" width="486" height="10"/><rect class="wdl-l" x="580" width="236" height="10"/></svg>
+                  <span class="gnt-games">+94 =486 −236<span class="gnt-n"> · 816 games</span></span>
+                </span>
+                <span class="gnt-score num">41.3%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="82.22" x2="122.22" y1="10" y2="10"/><circle class="gf-dot" cx="102.22" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3656 <span class="gnt-err">± 9</span></span>
+              </li>
+              <li class="gnt-row is-lum">
+                <span class="gnt-name">Luminex <span class="gnt-rating num">3662 ± 8</span></span>
+                <span class="gnt-result"><span class="gnt-games">The rating that fits all eleven</span></span>
+                <span class="gnt-score"></span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="97.78" x2="133.33" y1="10" y2="10"/><path class="gf-pool" d="M110.06 10L115.56 4L121.06 10L115.56 16Z"/></svg>
+                <span class="gnt-implied num">3662 <span class="gnt-err">± 8</span></span>
+              </li>
+              <li class="gnt-row is-under">
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/328/">Altair v7.0.0</a> <span class="gnt-rating num">3579</span></span>
+                <span class="gnt-result">
+                  <svg class="wdl" viewBox="0 0 802 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="409" height="10"/><rect class="wdl-d" x="409" width="343" height="10"/><rect class="wdl-l" x="752" width="50" height="10"/></svg>
+                  <span class="gnt-games">+409 =343 −50<span class="gnt-n"> · 802 games</span></span>
+                </span>
+                <span class="gnt-score num">72.4%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="135.56" x2="184.44" y1="10" y2="10"/><circle class="gf-dot" cx="160" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3682 <span class="gnt-err">± 11</span></span>
+              </li>
+              <li class="gnt-row">
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/329/">Elixir v3.0</a> <span class="gnt-rating num">3567</span></span>
+                <span class="gnt-result">
+                  <svg class="wdl" viewBox="0 0 814 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="409" height="10"/><rect class="wdl-d" x="409" width="371" height="10"/><rect class="wdl-l" x="780" width="34" height="10"/></svg>
+                  <span class="gnt-games">+409 =371 −34<span class="gnt-n"> · 814 games</span></span>
+                </span>
+                <span class="gnt-score num">73%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="120" x2="164.44" y1="10" y2="10"/><circle class="gf-dot" cx="142.22" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3674 <span class="gnt-err">± 10</span></span>
+              </li>
+              <li class="gnt-row">
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/330/">Patricia 5</a> <span class="gnt-rating num">3539</span></span>
+                <span class="gnt-result">
+                  <svg class="wdl" viewBox="0 0 802 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="458" height="10"/><rect class="wdl-d" x="458" width="302" height="10"/><rect class="wdl-l" x="760" width="42" height="10"/></svg>
+                  <span class="gnt-games">+458 =302 −42<span class="gnt-n"> · 802 games</span></span>
+                </span>
+                <span class="gnt-score num">75.9%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="88.89" x2="142.22" y1="10" y2="10"/><circle class="gf-dot" cx="115.56" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3662 <span class="gnt-err">± 12</span></span>
+              </li>
+              <li class="gnt-row">
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/331/">Rice 8.0.0</a> <span class="gnt-rating num">3530</span></span>
+                <span class="gnt-result">
+                  <svg class="wdl" viewBox="0 0 802 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="458" height="10"/><rect class="wdl-d" x="458" width="318" height="10"/><rect class="wdl-l" x="776" width="26" height="10"/></svg>
+                  <span class="gnt-games">+458 =318 −26<span class="gnt-n"> · 802 games</span></span>
+                </span>
+                <span class="gnt-score num">76.9%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="84.44" x2="133.33" y1="10" y2="10"/><circle class="gf-dot" cx="108.89" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3659 <span class="gnt-err">± 11</span></span>
+              </li>
+              <li class="gnt-row">
+                <span class="gnt-name"><a href="https://bench.luminexchess.com/test/332/">Smallbrain 7.0.0</a> <span class="gnt-rating num">3454</span></span>
+                <span class="gnt-result">
+                  <svg class="wdl" viewBox="0 0 802 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="573" height="10"/><rect class="wdl-d" x="573" width="206" height="10"/><rect class="wdl-l" x="779" width="23" height="10"/></svg>
+                  <span class="gnt-games">+573 =206 −23<span class="gnt-n"> · 802 games</span></span>
+                </span>
+                <span class="gnt-score num">84.3%</span>
+                <svg class="gnt-forest" viewBox="0 0 200 20" aria-hidden="true" focusable="false"><rect class="gf-band" x="97.78" width="35.56" height="20"/><line class="gf-fit" x1="115.56" x2="115.56" y2="20"/><line class="gf-whisk" x1="20" x2="86.67" y1="10" y2="10"/><circle class="gf-dot" cx="53.33" cy="10" r="4.5"/></svg>
+                <span class="gnt-implied num"><span class="gnt-says">implies </span>3634 <span class="gnt-err">± 15</span></span>
               </li>
             </ol>
-            <p class="note gnt-note">Opponent ratings are CCRL Blitz values for one CPU. The gaps in these games are wider than the list's: one Elo point here is worth 0.63 points of the list, which the fit measures from the same games.</p>
+            <p class="note gnt-note">Opponent ratings are CCRL Blitz values for one CPU. The gaps in these games are wider than the list's: one Elo point here is worth 0.62 points of the list, which the fit measures from the same games.</p>
           <!-- /@gauntlet -->
         </figure>
 
@@ -377,66 +376,24 @@
           </div>
           <div class="preview-part">
             <div class="preview-head">
-              <h3 class="h-m">Main of 20 November against v6.6.0</h3>
-              <p>Main with gen768t_02q, three networks before today's, against the release with gen768r_06q: 10,024 games at 10+0.1 (<a href="https://bench.luminexchess.com/test/178/">test 178</a>).</p>
-            </div>
-            <div class="rung" role="group" aria-label="Main of 20 November against v6.6.0 at 10+0.1: 5,776 wins, 3,929 draws and 319 losses">
-              <span class="rung-name">10+0.1 <span class="rung-rating num">10,024 games</span></span>
-              <span class="rung-result">
-                <svg class="wdl" viewBox="0 0 10024 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="5776" height="10"/><rect class="wdl-d" x="5776" width="3929" height="10"/><rect class="wdl-l" x="9705" width="319" height="10"/></svg>
-                <span class="rung-games">+5,776 =3,929 −319</span>
-              </span>
-              <span class="rung-score num">77%</span>
-              <span class="rung-elo num">+212.07 <span class="rung-pm">± 5.22</span></span>
-            </div>
-          </div>
-          <div class="preview-part">
-            <div class="preview-head">
-              <h3 class="h-m">v6.6.0 against v6.5.1</h3>
-              <p>The new network, the time management and the search work, measured together at 10+0.1, the time control of the tests (<a href="https://bench.luminexchess.com/test/131/">test 131</a>). This is self-play, not a rating: gains in self-play usually shrink against other engines, which only a gauntlet measures.</p>
-              <a class="link" href="/download/"><span>Download v6.6.0</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <h3 class="h-m">v6.7.0 against v6.6.0</h3>
+              <p>The new network, gen768u_01q, and the search work since v6.6.0, measured together at 10+0.1, the time control of the tests (<a href="https://bench.luminexchess.com/test/321/">test 321</a>). This is self-play, not a rating: gains in self-play usually shrink against other engines, which only a gauntlet measures.</p>
+              <a class="link" href="/download/"><span>Download v6.7.0</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
               <a class="link" href="/tests/"><span>Every change behind it, with its test</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
-            <div class="rung" role="group" aria-label="v6.6.0 against v6.5.1 at 10+0.1: 1,292 wins, 653 draws and 65 losses">
+            <div class="rung" role="group" aria-label="v6.7.0 against v6.6.0 at 10+0.1: 1,467 wins, 522 draws and 21 losses">
               <span class="rung-name">10+0.1 <span class="rung-rating num">2,010 games</span></span>
               <span class="rung-result">
-                <svg class="wdl" viewBox="0 0 2010 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="1292" height="10"/><rect class="wdl-d" x="1292" width="653" height="10"/><rect class="wdl-l" x="1945" width="65" height="10"/></svg>
-                <span class="rung-games">+1,292 =653 −65</span>
+                <svg class="wdl" viewBox="0 0 2010 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="1467" height="10"/><rect class="wdl-d" x="1467" width="522" height="10"/><rect class="wdl-l" x="1989" width="21" height="10"/></svg>
+                <span class="rung-games">+1,467 =522 −21</span>
               </span>
-              <span class="rung-score num">81%</span>
-              <span class="rung-elo num">+246.55 <span class="rung-pm">± 13.37</span></span>
+              <span class="rung-score num">86%</span>
+              <span class="rung-elo num">+314.92 <span class="rung-pm">± 14.52</span></span>
             </div>
           </div>
         </aside>
         <!-- @cci -->
-        <figure class="card cci" aria-labelledby="cci-title">
-          <figcaption class="cci-head">
-            <p class="fact-label" id="cci-title">On an independent list</p>
-            <h3 class="h-m">The Computer Chess Index rates v6.6.0</h3>
-            <p class="cci-sub">Its own games against other engines, on the E-cores of an Intel Core Ultra 7 265T, at three time controls, on a scale of its own: these figures compare with the other engines on its list, not with CCRL's. Its page of 27 November.</p>
-          </figcaption>
-          <ol class="cci-cells">
-            <li class="cci-cell">
-              <p class="cci-tc mono">Short · 8+0.08</p>
-              <p class="cci-num num"><span class="cci-elo">2853</span><span class="cci-pm">± 34</span></p>
-              <p class="cci-rank mono">#125 of 297 engines on the list</p>
-              <p class="cci-more mono">264 games · +303 over v6.5.1</p>
-            </li>
-            <li class="cci-cell">
-              <p class="cci-tc mono">Long · 60+0.6</p>
-              <p class="cci-num num"><span class="cci-elo">3198</span><span class="cci-pm">± 28</span></p>
-              <p class="cci-rank mono">#121 of 291 engines on the list</p>
-              <p class="cci-more mono">352 games · +235 over v6.5.1</p>
-            </li>
-            <li class="cci-cell">
-              <p class="cci-tc mono">Very long · 144+1.12</p>
-              <p class="cci-num num"><span class="cci-elo">3329</span><span class="cci-pm">± 35</span></p>
-              <p class="cci-rank mono">#116 of 283 engines on the list</p>
-              <p class="cci-more mono">220 games · +239 over v6.5.1</p>
-            </li>
-          </ol>
-          <p class="cci-foot"><a class="link" href="https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md"><span>Luminex on the CCI</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a> <a class="link" href="https://github.com/computer-chess-index/cci/blob/main/lists/CCIRatings.csv"><span>The whole list</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-        </figure>
+        <p class="note strength-note">The Computer Chess Index, an independent rating list with a scale of its own, has rated Luminex up to v6.6.0; v6.7.0 is not on its page of 27 November yet. <a class="link" href="https://github.com/computer-chess-index/cci/blob/main/engines/Luminex.md"><span>Luminex on the CCI</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
         <!-- /@cci -->
         <!-- @lichess -->
         <figure class="card lch" id="lichess" data-lichess aria-labelledby="lichess-title">
@@ -447,56 +404,47 @@
           </figcaption>
           <div class="lch-grid">
             <div class="lch-game">
-              <p class="lch-state" data-l="state"><span class="lch-dot" aria-hidden="true"></span><span data-l="state-text">Its last game, 27 November at 16:20 UTC</span></p>
-              <p class="lch-player" data-l="top"><a class="lch-name" href="https://lichess.org/@/OnechessBot">OnechessBot</a><span class="lch-title">BOT</span><span class="lch-rating num">2924</span><span class="lch-clock num" data-l="top-clock"></span></p>
+              <p class="lch-state" data-l="state"><span class="lch-dot" aria-hidden="true"></span><span data-l="state-text">Its last game, 27 November at 23:19 UTC</span></p>
+              <p class="lch-player" data-l="top"><a class="lch-name" href="https://lichess.org/@/NeuroSoCute">NeuroSoCute</a><span class="lch-title">BOT</span><span class="lch-rating num">2990</span><span class="lch-diff num">+1</span><span class="lch-clock num" data-l="top-clock"></span></p>
               <div class="lch-frame">
-                <div class="board" data-l="board" role="img" aria-label="The last position of luminexbot against OnechessBot">
-                  <svg class="pc b x2 y6" data-p="bK" data-sq="f7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-K"/></svg>
-                  <svg class="pc b x2 y5" data-p="bP" data-sq="f6" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                  <svg class="pc b x4 y4" data-p="bP" data-sq="d5" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                  <svg class="pc b x1 y4" data-p="bP" data-sq="g5" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                  <svg class="pc b x0 y4" data-p="bP" data-sq="h5" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                  <svg class="pc w x7 y3" data-p="wR" data-sq="a4" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-R"/></svg>
-                  <svg class="pc b x6 y2" data-p="bN" data-sq="b3" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-N"/></svg>
-                  <svg class="pc w x5 y2" data-p="wB" data-sq="c3" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-B"/></svg>
-                  <svg class="pc b x4 y2" data-p="bR" data-sq="d3" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-R"/></svg>
-                  <svg class="pc w x2 y2" data-p="wP" data-sq="f3" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                  <svg class="pc w x1 y2" data-p="wP" data-sq="g3" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                  <svg class="pc w x6 y1" data-p="wP" data-sq="b2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
-                  <svg class="pc w x2 y1" data-p="wK" data-sq="f2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-K"/></svg>
-                  <svg class="pc w x0 y1" data-p="wP" data-sq="h2" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
+                <div class="board" data-l="board" role="img" aria-label="The last position of luminexbot against NeuroSoCute">
+                  <svg class="pc w x5 y1" data-p="wP" data-sq="f7" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-P"/></svg>
+                  <svg class="pc w x2 y2" data-p="wQ" data-sq="c6" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-Q"/></svg>
+                  <svg class="pc w x3 y3" data-p="wK" data-sq="d5" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-K"/></svg>
+                  <svg class="pc b x7 y3" data-p="bK" data-sq="h5" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-K"/></svg>
+                  <svg class="pc b x4 y5" data-p="bQ" data-sq="e3" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-Q"/></svg>
                 </div>
               </div>
-              <p class="lch-player is-bot" data-l="bottom"><a class="lch-name" href="https://lichess.org/@/luminexbot">luminexbot</a><span class="lch-title">BOT</span><span class="lch-rating num">2901</span><span class="lch-clock num" data-l="bottom-clock"></span></p>
-              <p class="lch-about" data-l="about">Blitz 3+2, rated · Ruy Lopez: Berlin Defense, Rio Gambit Accepted</p>
+              <p class="lch-player is-bot" data-l="bottom"><a class="lch-name" href="https://lichess.org/@/luminexbot">luminexbot</a><span class="lch-title">BOT</span><span class="lch-rating num">3003</span><span class="lch-clock num" data-l="bottom-clock"></span></p>
+              <p class="lch-about" data-l="about">Bullet 1+1, rated · Queen&#x27;s Gambit Declined: Exchange Variation</p>
               <p class="lch-end" data-l="end">A draw</p>
-              <a class="link" data-l="watch" href="https://lichess.org/bItM1sDC"><span>This game on Lichess</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="link" data-l="watch" href="https://lichess.org/UWiJXcZo"><span>This game on Lichess</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
             <div class="lch-side">
               <ol class="lch-perfs">
                 <li class="lch-perf" data-perf="bullet">
                   <p class="lch-tc mono">Bullet</p>
-                  <p class="lch-num num"><span class="lch-elo" data-l="rating">3014</span></p>
-                  <p class="lch-more mono"><span data-l="games">84</span> games</p>
+                  <p class="lch-num num"><span class="lch-elo" data-l="rating">3003</span></p>
+                  <p class="lch-more mono"><span data-l="games">111</span> games</p>
                 </li>
                 <li class="lch-perf" data-perf="blitz">
                   <p class="lch-tc mono">Blitz</p>
-                  <p class="lch-num num"><span class="lch-elo" data-l="rating">2901</span></p>
-                  <p class="lch-more mono"><span data-l="games">141</span> games</p>
+                  <p class="lch-num num"><span class="lch-elo" data-l="rating">2908</span></p>
+                  <p class="lch-more mono"><span data-l="games">152</span> games</p>
                 </li>
                 <li class="lch-perf" data-perf="rapid">
                   <p class="lch-tc mono">Rapid</p>
-                  <p class="lch-num num"><span class="lch-elo" data-l="rating">2952</span></p>
-                  <p class="lch-more mono"><span data-l="games">38</span> games</p>
+                  <p class="lch-num num"><span class="lch-elo" data-l="rating">2951</span></p>
+                  <p class="lch-more mono"><span data-l="games">40</span> games</p>
                 </li>
               </ol>
               <div class="lch-record">
-                <p class="lch-rec"><b><span data-l="all">280</span> games</b> against other accounts: <span data-l="win">97</span> wins, <span data-l="draw">155</span> draws, <span data-l="loss">28</span> losses</p>
-                <svg class="wdl lch-wdl" viewBox="0 0 280 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="97" height="10"/><rect class="wdl-d" x="97" width="155" height="10"/><rect class="wdl-l" x="252" width="28" height="10"/></svg>
+                <p class="lch-rec"><b><span data-l="all">321</span> games</b> against other accounts: <span data-l="win">116</span> wins, <span data-l="draw">172</span> draws, <span data-l="loss">33</span> losses</p>
+                <svg class="wdl lch-wdl" viewBox="0 0 321 10" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="wdl-w" x="0" width="116" height="10"/><rect class="wdl-d" x="116" width="172" height="10"/><rect class="wdl-l" x="288" width="33" height="10"/></svg>
                 <div class="lch-field" data-l="field" hidden></div>
               </div>
               <p class="lch-foot"><a class="link" href="https://lichess.org/@/luminexbot"><span>luminexbot on Lichess</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a> <a class="link" href="https://lichess.org/@/luminexbot/all"><span>Every game it has played</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-              <p class="lch-read mono" data-l="read">Read from Lichess on 27 November 2026, 16:32 UTC</p>
+              <p class="lch-read mono" data-l="read">Read from Lichess on 27 November 2026, 23:31 UTC</p>
             </div>
           </div>
         </figure>
@@ -538,7 +486,7 @@
         <dl class="totals totals-3">
           <div><dt>SPRTs run</dt><dd class="num"><span data-odo>100</span></dd></div>
           <div><dt>Passed</dt><dd class="num is-lit"><span data-odo>65</span></dd></div>
-          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>2,094,314</span></dd></div>
+          <div><dt>OpenBench games</dt><dd class="num"><span data-odo>2,174,056</span></dd></div>
         </dl>
 
         <figure class="card strip" data-strip>
@@ -969,7 +917,7 @@
                 <line class="sbar-ci" x1="807.14" x2="807.14" y1="139.92" y2="155.5"/>
                 <path class="sbar-fill" d="M806.4 165.5V148.45Q806.4 147.71 807.14 147.71H807.14Q807.88 147.71 807.88 148.45V165.5Z"/>
               </a>
-              <a class="sbar is-pass" href="/tests/#t264" aria-label="Test 264, gen768t_05q, V5&#x27;s fifth run: gen768t_04 trained 2,693,718 steps further, with t91 back beside six Leela files no run had used, against gen768t_04q: +9.86 ± 5.07 Elo over 3,876 games. Passed; on main." data-test="264" data-title="gen768t_05q, V5&#x27;s fifth run: gen768t_04 trained 2,693,718 steps further, with t91 back beside six Leela files no run had used, against gen768t_04q" data-text="+9.86 ± 5.07" data-games="3,876" data-label="Passed; on main">
+              <a class="sbar is-pass" href="/tests/#t264" aria-label="Test 264, gen768t_05q, V5&#x27;s fifth run: gen768t_04 trained 2,693,718 steps further, with t91 back beside six Leela files no run had used, against gen768t_04q: +9.86 ± 5.07 Elo over 3,876 games. Passed; since replaced by gen768u_01q." data-test="264" data-title="gen768t_05q, V5&#x27;s fifth run: gen768t_04 trained 2,693,718 steps further, with t91 back beside six Leela files no run had used, against gen768t_04q" data-text="+9.86 ± 5.07" data-games="3,876" data-label="Passed; since replaced by gen768u_01q">
                 <rect class="sbar-hit" x="811.88" y="14" width="9.48" height="202"/>
                 <line class="sbar-ci" x1="816.62" x2="816.62" y1="146.65" y2="159.45"/>
                 <path class="sbar-fill" d="M815.88 165.5V153.79Q815.88 153.05 816.62 153.05H816.62Q817.36 153.05 817.36 153.79V165.5Z"/>
@@ -994,7 +942,7 @@
                 <line class="sbar-ci" x1="854.54" x2="854.54" y1="162.41" y2="166.47"/>
                 <path class="sbar-fill" d="M853.8 165.5V165.18Q853.8 164.44 854.54 164.44H854.54Q855.28 164.44 855.28 165.18V165.5Z"/>
               </a>
-              <a class="sbar is-fail is-neg" href="/tests/#t292" aria-label="Test 292, gen768t_06q, V5&#x27;s sixth run: gen768t_05 trained 2,631,204 steps further, against gen768t_05q: −2.66 ± 3.59 Elo over 9,422 games. Failed; gen768t_05q stays on main." data-test="292" data-title="gen768t_06q, V5&#x27;s sixth run: gen768t_05 trained 2,631,204 steps further, against gen768t_05q" data-text="−2.66 ± 3.59" data-games="9,422" data-label="Failed; gen768t_05q stays on main">
+              <a class="sbar is-fail is-neg" href="/tests/#t292" aria-label="Test 292, gen768t_06q, V5&#x27;s sixth run: gen768t_05 trained 2,631,204 steps further, against gen768t_05q: −2.66 ± 3.59 Elo over 9,422 games. Failed; gen768t_05q stayed on main." data-test="292" data-title="gen768t_06q, V5&#x27;s sixth run: gen768t_05 trained 2,631,204 steps further, against gen768t_05q" data-text="−2.66 ± 3.59" data-games="9,422" data-label="Failed; gen768t_05q stayed on main">
                 <rect class="sbar-hit" x="859.28" y="14" width="9.48" height="202"/>
                 <line class="sbar-ci" x1="864.02" x2="864.02" y1="164.33" y2="173.39"/>
                 <path class="sbar-fill" d="M863.28 165.5V168.12Q863.28 168.86 864.02 168.86H864.02Q864.76 168.86 864.76 168.12V165.5Z"/>
@@ -1059,7 +1007,7 @@
                 <line class="sbar-ci" x1="977.78" x2="977.78" y1="163.3" y2="169.31"/>
                 <path class="sbar-fill" d="M977.04 165.5V165.57Q977.04 166.31 977.78 166.31H977.78Q978.52 166.31 978.52 165.57V165.5Z"/>
               </a>
-              <a class="sbar is-pass" href="/tests/#t319" aria-label="Test 319, gen768u_01q, the first network with a feature table for each phase of the game, against gen768t_05q: +7.49 ± 4.44 Elo over 5,520 games. Passed; not on main yet." data-test="319" data-title="gen768u_01q, the first network with a feature table for each phase of the game, against gen768t_05q" data-text="+7.49 ± 4.44" data-games="5,520" data-label="Passed; not on main yet">
+              <a class="sbar is-pass" href="/tests/#t319" aria-label="Test 319, gen768u_01q, V6&#x27;s first network: a feature table for each phase of the game, against gen768t_05q: +7.49 ± 4.44 Elo over 5,520 games. Passed; released in v6.7.0." data-test="319" data-title="gen768u_01q, V6&#x27;s first network: a feature table for each phase of the game, against gen768t_05q" data-text="+7.49 ± 4.44" data-games="5,520" data-label="Passed; released in v6.7.0">
                 <rect class="sbar-hit" x="982.52" y="14" width="9.48" height="202"/>
                 <line class="sbar-ci" x1="987.26" x2="987.26" y1="150.44" y2="161.65"/>
                 <path class="sbar-fill" d="M986.52 165.5V156.78Q986.52 156.04 987.26 156.04H987.26Q988 156.04 988 156.78V165.5Z"/>
@@ -1170,20 +1118,20 @@
       <div class="wrap">
         <header class="sec-head">
           <p class="kicker"><span class="kicker-n">4.</span> Chronicle</p>
-          <h2 id="history-title" class="h-l">From first commit to 3640</h2>
-          <p class="lede">Ten months and 1,779 commits, from a handcrafted engine to a neural one, and every step since November measured on OpenBench</p>
+          <h2 id="history-title" class="h-l">From first commit to 3662</h2>
+          <p class="lede">Ten months and 1,782 commits, from a handcrafted engine to a neural one, and every step since November measured on OpenBench</p>
         </header>
 
         <div class="chron" data-chron>
-          <figure class="card climb" data-climb data-goal="3600" data-points="[{&quot;v&quot;: &quot;v5.16&quot;, &quot;d&quot;: &quot;Aug 2026&quot;, &quot;elo&quot;: 2500, &quot;t&quot;: &quot;The handcrafted peak: the classical evaluation, tuned by distillation&quot;}, {&quot;v&quot;: &quot;v6.1&quot;, &quot;d&quot;: &quot;Sep 2026&quot;, &quot;elo&quot;: 2800, &quot;t&quot;: &quot;A 768-wide network becomes the default and NNUE is on for everyone&quot;}, {&quot;v&quot;: &quot;v6.3&quot;, &quot;d&quot;: &quot;Oct 2026&quot;, &quot;elo&quot;: 3030, &quot;t&quot;: &quot;A network trained on Leela positions labeled by Stockfish&quot;}, {&quot;v&quot;: &quot;v6.4&quot;, &quot;d&quot;: &quot;5 Nov 2026&quot;, &quot;elo&quot;: 3030, &quot;t&quot;: &quot;OpenBench arrives: +78.64 ± 20.56 Elo over v6.3 in self-play, the ladder estimate unchanged&quot;}, {&quot;v&quot;: &quot;v6.5&quot;, &quot;d&quot;: &quot;6 Nov 2026&quot;, &quot;elo&quot;: 3255, &quot;t&quot;: &quot;A day of SPRT-tested search work: +145.35 ± 12.02 Elo over v6.4 and Stash 32 beaten&quot;}, {&quot;v&quot;: &quot;v6.6&quot;, &quot;d&quot;: &quot;14 Nov 2026&quot;, &quot;elo&quot;: 3471, &quot;pm&quot;: 16, &quot;t&quot;: &quot;Rated by a gauntlet of 9,602 games against twelve engines that CCRL rates, and +246.55 ± 13.37 Elo over v6.5.1&quot;}, {&quot;v&quot;: &quot;main&quot;, &quot;d&quot;: &quot;18 Nov 2026&quot;, &quot;elo&quot;: 3559, &quot;pm&quot;: 12, &quot;t&quot;: &quot;The development build, rated by a gauntlet of 8,814 games against eleven engines that CCRL rates&quot;}, {&quot;v&quot;: &quot;main&quot;, &quot;d&quot;: &quot;20 Nov 2026&quot;, &quot;elo&quot;: 3590, &quot;pm&quot;: 11, &quot;t&quot;: &quot;The development build, rated by a gauntlet of 8,846 games against eleven engines that CCRL rates&quot;}, {&quot;v&quot;: &quot;main&quot;, &quot;d&quot;: &quot;22 Nov 2026&quot;, &quot;elo&quot;: 3611, &quot;pm&quot;: 8, &quot;t&quot;: &quot;The development build, rated by a gauntlet of 8,888 games against eleven engines that CCRL rates&quot;}, {&quot;v&quot;: &quot;main&quot;, &quot;d&quot;: &quot;23 Nov 2026&quot;, &quot;elo&quot;: 3640, &quot;pm&quot;: 8, &quot;t&quot;: &quot;The development build, rated by a gauntlet of 9,024 games against eleven engines that CCRL rates&quot;}]" aria-labelledby="climb-title">
+          <figure class="card climb" data-climb data-goal="3600" data-points="[{&quot;v&quot;: &quot;v5.16&quot;, &quot;d&quot;: &quot;Aug 2026&quot;, &quot;elo&quot;: 2500, &quot;t&quot;: &quot;The handcrafted peak: the classical evaluation, tuned by distillation&quot;}, {&quot;v&quot;: &quot;v6.1&quot;, &quot;d&quot;: &quot;Sep 2026&quot;, &quot;elo&quot;: 2800, &quot;t&quot;: &quot;A 768-wide network becomes the default and NNUE is on for everyone&quot;}, {&quot;v&quot;: &quot;v6.3&quot;, &quot;d&quot;: &quot;Oct 2026&quot;, &quot;elo&quot;: 3030, &quot;t&quot;: &quot;A network trained on Leela positions labeled by Stockfish&quot;}, {&quot;v&quot;: &quot;v6.4&quot;, &quot;d&quot;: &quot;5 Nov 2026&quot;, &quot;elo&quot;: 3030, &quot;t&quot;: &quot;OpenBench arrives: +78.64 ± 20.56 Elo over v6.3 in self-play, the ladder estimate unchanged&quot;}, {&quot;v&quot;: &quot;v6.5&quot;, &quot;d&quot;: &quot;6 Nov 2026&quot;, &quot;elo&quot;: 3255, &quot;t&quot;: &quot;A day of SPRT-tested search work: +145.35 ± 12.02 Elo over v6.4 and Stash 32 beaten&quot;}, {&quot;v&quot;: &quot;v6.6&quot;, &quot;d&quot;: &quot;14 Nov 2026&quot;, &quot;elo&quot;: 3471, &quot;pm&quot;: 16, &quot;t&quot;: &quot;Rated by a gauntlet of 9,602 games against twelve engines that CCRL rates, and +246.55 ± 13.37 Elo over v6.5.1&quot;}, {&quot;v&quot;: &quot;main&quot;, &quot;d&quot;: &quot;18 Nov 2026&quot;, &quot;elo&quot;: 3559, &quot;pm&quot;: 12, &quot;t&quot;: &quot;The development build, rated by a gauntlet of 8,814 games against eleven engines that CCRL rates&quot;}, {&quot;v&quot;: &quot;main&quot;, &quot;d&quot;: &quot;20 Nov 2026&quot;, &quot;elo&quot;: 3590, &quot;pm&quot;: 11, &quot;t&quot;: &quot;The development build, rated by a gauntlet of 8,846 games against eleven engines that CCRL rates&quot;}, {&quot;v&quot;: &quot;main&quot;, &quot;d&quot;: &quot;22 Nov 2026&quot;, &quot;elo&quot;: 3611, &quot;pm&quot;: 8, &quot;t&quot;: &quot;The development build, rated by a gauntlet of 8,888 games against eleven engines that CCRL rates&quot;}, {&quot;v&quot;: &quot;main&quot;, &quot;d&quot;: &quot;23 Nov 2026&quot;, &quot;elo&quot;: 3640, &quot;pm&quot;: 8, &quot;t&quot;: &quot;The development build, rated by a gauntlet of 9,024 games against eleven engines that CCRL rates&quot;}, {&quot;v&quot;: &quot;v6.7&quot;, &quot;d&quot;: &quot;27 Nov 2026&quot;, &quot;elo&quot;: 3662, &quot;pm&quot;: 8, &quot;t&quot;: &quot;Rated by a gauntlet of 8,876 games against eleven engines that CCRL rates, and +314.92 ± 14.52 Elo over v6.6.0&quot;}]" aria-labelledby="climb-title">
             <figcaption class="fig-head">
               <span class="fig-title" id="climb-title">Rating by release</span>
-              <span class="fig-sub">On the CCRL Blitz scale: the Stash ladder up to v6.5, gauntlets for v6.6 and for main · past the goal of 3600 since 22 November</span>
+              <span class="fig-sub">On the CCRL Blitz scale: the Stash ladder up to v6.5, gauntlets since v6.6, of the releases and of main between them · past the goal of 3600 since 22 November</span>
             </figcaption>
-            <p class="climb-now"><span class="climb-num num" data-climb-odo>3640</span><span class="climb-pm num" data-climb-pm>± 8</span><span class="climb-at" data-climb-at>main · 23 Nov 2026</span></p>
+            <p class="climb-now"><span class="climb-num num" data-climb-odo>3662</span><span class="climb-pm num" data-climb-pm>± 8</span><span class="climb-at" data-climb-at>v6.7 · 27 Nov 2026</span></p>
             <div class="climb-plot" data-climb-plot></div>
-            <p class="climb-text" data-climb-text>The development build, rated by a gauntlet of 9,024 games against eleven engines that CCRL rates</p>
-            <div class="sr-only"><table><caption>Blitz rating by release, then of main</caption><thead><tr><th>Release</th><th>Date</th><th>Estimate</th></tr></thead><tbody><tr><td>v5.16</td><td>Aug 2026</td><td>≈2500</td></tr><tr><td>v6.1</td><td>Sep 2026</td><td>≈2800</td></tr><tr><td>v6.3</td><td>Oct 2026</td><td>≈3030</td></tr><tr><td>v6.4</td><td>5 Nov 2026</td><td>≈3030</td></tr><tr><td>v6.5</td><td>6 Nov 2026</td><td>≈3255</td></tr><tr><td>v6.6</td><td>14 Nov 2026</td><td>3471 ± 16, by a gauntlet</td></tr><tr><td>main</td><td>18 Nov 2026</td><td>3559 ± 12, by a gauntlet</td></tr><tr><td>main</td><td>20 Nov 2026</td><td>3590 ± 11, by a gauntlet</td></tr><tr><td>main</td><td>22 Nov 2026</td><td>3611 ± 8, by a gauntlet</td></tr><tr><td>main</td><td>23 Nov 2026</td><td>3640 ± 8, by a gauntlet</td></tr></tbody></table></div>
+            <p class="climb-text" data-climb-text>Rated by a gauntlet of 8,876 games against eleven engines that CCRL rates, and +314.92 ± 14.52 Elo over v6.6.0</p>
+            <div class="sr-only"><table><caption>Blitz rating by release, and of main between releases</caption><thead><tr><th>Release</th><th>Date</th><th>Estimate</th></tr></thead><tbody><tr><td>v5.16</td><td>Aug 2026</td><td>≈2500</td></tr><tr><td>v6.1</td><td>Sep 2026</td><td>≈2800</td></tr><tr><td>v6.3</td><td>Oct 2026</td><td>≈3030</td></tr><tr><td>v6.4</td><td>5 Nov 2026</td><td>≈3030</td></tr><tr><td>v6.5</td><td>6 Nov 2026</td><td>≈3255</td></tr><tr><td>v6.6</td><td>14 Nov 2026</td><td>3471 ± 16, by a gauntlet</td></tr><tr><td>main</td><td>18 Nov 2026</td><td>3559 ± 12, by a gauntlet</td></tr><tr><td>main</td><td>20 Nov 2026</td><td>3590 ± 11, by a gauntlet</td></tr><tr><td>main</td><td>22 Nov 2026</td><td>3611 ± 8, by a gauntlet</td></tr><tr><td>main</td><td>23 Nov 2026</td><td>3640 ± 8, by a gauntlet</td></tr><tr><td>v6.7</td><td>27 Nov 2026</td><td>3662 ± 8, by a gauntlet</td></tr></tbody></table></div>
           </figure>
 
           <ol class="timeline" data-timeline>
@@ -1249,15 +1197,19 @@
             </li>
             <li class="tl" data-pt="9">
               <time datetime="2026-11-23">Nov 2026</time>
-              <div class="tl-body"><h3>Main, 23 November <span class="tl-elo num">3640</span></h3><p>Two changes fit the network to OpenBench's new EPYC 7702 workers, both computing exactly what main computed: its small layers in vector steps, +6.02 ± 3.82 Elo (<a href="https://bench.luminexchess.com/test/203/">test 203</a>), and half the vector multiplies of its second layer, +14.09 ± 6.17 on top of it (<a href="https://bench.luminexchess.com/test/204/">test 204</a>). Seventeen defects in the search were fixed in two batches, +10.57 ± 5.33 (<a href="https://bench.luminexchess.com/test/265/">test 265</a>) and +15.91 ± 6.80 (<a href="https://bench.luminexchess.com/test/273/">test 273</a>), and gen768t_05q, V5's fifth run with t91 back, scored +9.86 ± 5.07 against gen768t_04q (<a href="https://bench.luminexchess.com/test/264/">test 264</a>); it has been main's network since 23 November (<a href="https://github.com/changcheng967/Luminex/pull/130">#130</a>). A gauntlet of 9,024 games against eleven engines that CCRL rates puts this build, main at 3ba03c8, at 3640 ± 8.</p></div>
+              <div class="tl-body"><h3>Main, 23 November <span class="tl-elo num">3640</span></h3><p>Two changes fit the network to OpenBench's new EPYC 7702 workers, both computing exactly what main computed: its small layers in vector steps, +6.02 ± 3.82 Elo (<a href="https://bench.luminexchess.com/test/203/">test 203</a>), and half the vector multiplies of its second layer, +14.09 ± 6.17 on top of it (<a href="https://bench.luminexchess.com/test/204/">test 204</a>). Seventeen defects in the search were fixed in two batches, +10.57 ± 5.33 (<a href="https://bench.luminexchess.com/test/265/">test 265</a>) and +15.91 ± 6.80 (<a href="https://bench.luminexchess.com/test/273/">test 273</a>), and gen768t_05q, V5's fifth run with t91 back, scored +9.86 ± 5.07 against gen768t_04q (<a href="https://bench.luminexchess.com/test/264/">test 264</a>); it became main's network on 23 November (<a href="https://github.com/changcheng967/Luminex/pull/130">#130</a>). A gauntlet of 9,024 games against eleven engines that CCRL rates puts this build, main at 3ba03c8, at 3640 ± 8.</p></div>
             </li>
-            <li class="tl is-next" data-pt="9">
+            <li class="tl" data-pt="10">
               <time datetime="2026-11-23">Nov 2026</time>
-              <div class="tl-body"><h3>Six more fixes, and speed</h3><p>Six more defects in the search were fixed; their SPRT was stopped undecided at +2.09 ± 2.14 Elo after 23,648 games (<a href="https://bench.luminexchess.com/test/286/">test 286</a>) and the fixes merged on the owner's decision (<a href="https://github.com/changcheng967/Luminex/pull/132">#132</a>). The accumulators' stack is spaced so that no store lands on an address a load just ahead shares its low twelve bits with: the same trees, 1.8% faster on the test workers (<a href="https://github.com/changcheng967/Luminex/pull/133">#133</a>). Every build warning is gone, and the engine's output is tidier: it names its network at the first search instead of at start-up, repeats the search's last line after a ponder hit, and numbers the best line of MultiPV as the first (<a href="https://github.com/changcheng967/Luminex/pull/135">#135</a>). No gauntlet has rated them yet.</p></div>
+              <div class="tl-body"><h3>Six more fixes, and speed</h3><p>Six more defects in the search were fixed; their SPRT was stopped undecided at +2.09 ± 2.14 Elo after 23,648 games (<a href="https://bench.luminexchess.com/test/286/">test 286</a>) and the fixes merged on the owner's decision (<a href="https://github.com/changcheng967/Luminex/pull/132">#132</a>). The accumulators' stack is spaced so that no store lands on an address a load just ahead shares its low twelve bits with: the same trees, 1.8% faster on the test workers (<a href="https://github.com/changcheng967/Luminex/pull/133">#133</a>). Every build warning is gone, and the engine's output is tidier: it names its network at the first search instead of at start-up, repeats the search's last line after a ponder hit, and numbers the best line of MultiPV as the first (<a href="https://github.com/changcheng967/Luminex/pull/135">#135</a>).</p></div>
             </li>
-            <li class="tl is-next" data-pt="9">
+            <li class="tl" data-pt="10">
               <time datetime="2026-11-26">Nov 2026</time>
-              <div class="tl-body"><h3>A sharper search, its sources credited</h3><p>Five changes to the search passed their SPRTs, each against the engine before it. Good captures after the first move are reduced: +2.93 ± 2.33 Elo (<a href="https://bench.luminexchess.com/test/293/">test 293</a>, <a href="https://github.com/changcheng967/Luminex/pull/137">#137</a>). Quiet checks are reduced too, and a cut node without a hash move takes a deeper internal iterative reduction: +9.06 ± 5.01 together (<a href="https://bench.luminexchess.com/test/296/">test 296</a>, <a href="https://github.com/changcheng967/Luminex/pull/138">#138</a>). Three defects from the search's fourth audit are fixed: +1.57 ± 1.06 (<a href="https://bench.luminexchess.com/test/303/">test 303</a>, <a href="https://github.com/changcheng967/Luminex/pull/140">#140</a>). ProbCut checks each capture in quiescence search before its reduced search: +15.13 ± 6.56 (<a href="https://bench.luminexchess.com/test/308/">test 308</a>, <a href="https://github.com/changcheng967/Luminex/pull/141">#141</a>). A singular move is extended a third ply when its rivals fail far low: +3.30 ± 2.56 (<a href="https://bench.luminexchess.com/test/309/">test 309</a>, <a href="https://github.com/changcheng967/Luminex/pull/149">#149</a>). The bench is now a fingerprint of the search, 44 positions searched to depth 10 that count the same on every build; the one order for tied root moves it needed passed as no regression (<a href="https://bench.luminexchess.com/test/305/">test 305</a>, <a href="https://github.com/changcheng967/Luminex/pull/139">#139</a>), and CI checks each commit's Bench line against it (<a href="https://github.com/changcheng967/Luminex/pull/146">#146</a>). The license now credits Stash, by Morgan Houppin, beside Stockfish for the code that derives from it (<a href="https://github.com/changcheng967/Luminex/pull/143">#143</a>). The pins, the slider attack tables, the move list and the legal-move filter were replaced with code of Luminex's own (<a href="https://github.com/changcheng967/Luminex/pull/144">#144</a>), and so was the UCI layer, which now declares only the options it uses (<a href="https://github.com/changcheng967/Luminex/pull/145">#145</a>): both search exactly as before. The engine can also load networks with a feature table for each phase of the game, an idea the Triumviratus engine published first, for networks still in training (<a href="https://github.com/changcheng967/Luminex/pull/148">#148</a>). No gauntlet has rated them yet.</p></div>
+              <div class="tl-body"><h3>A sharper search, its sources credited</h3><p>Five changes to the search passed their SPRTs, each against the engine before it. Good captures after the first move are reduced: +2.93 ± 2.33 Elo (<a href="https://bench.luminexchess.com/test/293/">test 293</a>, <a href="https://github.com/changcheng967/Luminex/pull/137">#137</a>). Quiet checks are reduced too, and a cut node without a hash move takes a deeper internal iterative reduction: +9.06 ± 5.01 together (<a href="https://bench.luminexchess.com/test/296/">test 296</a>, <a href="https://github.com/changcheng967/Luminex/pull/138">#138</a>). Three defects from the search's fourth audit are fixed: +1.57 ± 1.06 (<a href="https://bench.luminexchess.com/test/303/">test 303</a>, <a href="https://github.com/changcheng967/Luminex/pull/140">#140</a>). ProbCut checks each capture in quiescence search before its reduced search: +15.13 ± 6.56 (<a href="https://bench.luminexchess.com/test/308/">test 308</a>, <a href="https://github.com/changcheng967/Luminex/pull/141">#141</a>). A singular move is extended a third ply when its rivals fail far low: +3.30 ± 2.56 (<a href="https://bench.luminexchess.com/test/309/">test 309</a>, <a href="https://github.com/changcheng967/Luminex/pull/149">#149</a>). The bench is now a fingerprint of the search, 44 positions searched to depth 10 that count the same on every build; the one order for tied root moves it needed passed as no regression (<a href="https://bench.luminexchess.com/test/305/">test 305</a>, <a href="https://github.com/changcheng967/Luminex/pull/139">#139</a>), and CI checks each commit's Bench line against it (<a href="https://github.com/changcheng967/Luminex/pull/146">#146</a>). The license now credits Stash, by Morgan Houppin, beside Stockfish for the code that derives from it (<a href="https://github.com/changcheng967/Luminex/pull/143">#143</a>). The pins, the slider attack tables, the move list and the legal-move filter were replaced with code of Luminex's own (<a href="https://github.com/changcheng967/Luminex/pull/144">#144</a>), and so was the UCI layer, which now declares only the options it uses (<a href="https://github.com/changcheng967/Luminex/pull/145">#145</a>): both search exactly as before. The engine can also load networks with a feature table for each phase of the game, an idea the Triumviratus engine published first (<a href="https://github.com/changcheng967/Luminex/pull/148">#148</a>).</p></div>
+            </li>
+            <li class="tl" data-pt="10">
+              <time datetime="2026-11-27">Nov 2026</time>
+              <div class="tl-body"><h3>v6.7 <span class="tl-elo num">3662</span></h3><p>gen768u_01q, the first network of V6, holds its piece-square table once for each phase of the game, chosen by the men on the board: +7.49 ± 4.44 Elo against gen768t_05q at 10+0.1 (<a href="https://bench.luminexchess.com/test/319/">test 319</a>) and +6.60 ± 5.95 at 60+0.6 (<a href="https://bench.luminexchess.com/test/320/">test 320</a>, <a href="https://github.com/changcheng967/Luminex/pull/152">#152</a>). Its relation inputs are credited as the threat inputs other engines had first (<a href="https://github.com/changcheng967/Luminex/pull/153">#153</a>). v6.7.0 carries it and all the search work since v6.6.0, one binary a platform built by clang 23: +314.92 ± 14.52 Elo over v6.6.0 (<a href="https://bench.luminexchess.com/test/321/">test 321</a>), and a gauntlet of 8,876 games against eleven engines that CCRL rates puts it at 3662 ± 8 (<a href="https://bench.luminexchess.com/gauntlet/8/">gauntlet 8</a>).</p></div>
             </li>
           </ol>
         </div>
@@ -1271,36 +1223,36 @@
             <p class="kicker"><span class="kicker-n">5.</span> Get it</p>
             <h2 id="download-title" class="h-l">Your move</h2>
             <p class="lede">
-              <span data-release-name>Luminex v6.6.0</span>, released <time data-release-date datetime="2026-11-14">14 November 2026</time>. Free under the GPL v3. The network is inside the program, so there is nothing else to download or place.
+              <span data-release-name>Luminex v6.7.0</span>, released <time data-release-date datetime="2026-11-27">27 November 2026</time>. Free under the GPL v3. The network is inside the program, so there is nothing else to download or place.
             </p>
           </div>
           <div class="cta-knight" data-knight-fx="/assets/img/knight-glow.png" aria-hidden="true"></div>
         </div>
         <div class="cta-dl">
-          <a class="dl" data-os="windows" data-asset="luminex-windows-x86-64-modern.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-windows-x86-64-modern.exe">
+          <a class="dl" data-os="windows" data-asset="luminex-windows-x86-64.exe" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-windows-x86-64.exe">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-window"/></svg></span>
             <span class="dl-os">Windows</span>
-            <span class="dl-variant">AVX2, for most PCs from 2013 on</span>
-            <span class="dl-file mono"><span data-file>luminex-windows-x86-64-modern.exe</span> <span class="dl-size" data-size>73 MB</span></span>
+            <span class="dl-variant">x86-64 with POPCNT; it picks the best kernels the processor has</span>
+            <span class="dl-file mono"><span data-file>luminex-windows-x86-64.exe</span> <span class="dl-size" data-size>123 MB</span></span>
             <span class="dl-go" aria-hidden="true"><svg class="icon"><use href="#i-download"/></svg></span>
           </a>
-          <a class="dl" data-os="linux" data-asset="luminex-linux-x86-64-modern" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-linux-x86-64-modern">
+          <a class="dl" data-os="linux" data-asset="luminex-linux-x86-64" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-linux-x86-64">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg></span>
             <span class="dl-os">Linux</span>
-            <span class="dl-variant">AVX2, for Ubuntu 24.04 and newer</span>
-            <span class="dl-file mono"><span data-file>luminex-linux-x86-64-modern</span> <span class="dl-size" data-size>73 MB</span></span>
+            <span class="dl-variant">x86-64-v2, for Ubuntu 22.04 and newer</span>
+            <span class="dl-file mono"><span data-file>luminex-linux-x86-64</span> <span class="dl-size" data-size>123 MB</span></span>
             <span class="dl-go" aria-hidden="true"><svg class="icon"><use href="#i-download"/></svg></span>
           </a>
-          <a class="dl" data-os="mac" data-asset="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.6.0/luminex-macos-arm64">
+          <a class="dl" data-os="mac" data-asset="luminex-macos-arm64" href="https://github.com/changcheng967/Luminex/releases/download/v6.7.0/luminex-macos-arm64">
             <span class="dl-icon"><svg class="icon" aria-hidden="true"><use href="#i-command"/></svg></span>
             <span class="dl-os">macOS</span>
             <span class="dl-variant">Apple silicon, macOS 13.3 or newer</span>
-            <span class="dl-file mono"><span data-file>luminex-macos-arm64</span> <span class="dl-size" data-size>73 MB</span></span>
+            <span class="dl-file mono"><span data-file>luminex-macos-arm64</span> <span class="dl-size" data-size>123 MB</span></span>
             <span class="dl-go" aria-hidden="true"><svg class="icon"><use href="#i-download"/></svg></span>
           </a>
         </div>
         <p class="cta-more">
-          <a class="link" href="/download/"><span>Older processors and systems, the network file, build instructions and questions</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="link" href="/download/"><span>The network file, build instructions and questions</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <a class="link" href="/download/#dev"><span>The development build</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </p>
       </div>
@@ -1342,7 +1294,7 @@
         </div>
       </div>
       <div class="ftr-base">
-        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> the development build's rating, from a gauntlet of <!--@g:games-->9,024<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->eleven<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings, played by main of <!--@g:day-->23 November<!--/@g:day--> with the <!--@g:network-->gen768t_05q<!--/@g:network--> network. The release, v6.6.0, was rated 3471 ± 16 by an earlier gauntlet. Neither is a rating-list figure.</p>
+        <p id="fn-elo"><span id="fn-elo-label">* Strength:</span> v6.7.0's rating, from a gauntlet of <!--@g:games-->8,876<!--/@g:games--> games at <!--@g:tc-->10+0.1<!--/@g:tc--> against <!--@g:count-->eleven<!--/@g:count--> engines with <!--@g:list-->CCRL Blitz<!--/@g:list--> ratings, played by main of <!--@g:day-->27 November<!--/@g:day--> with the <!--@g:network-->gen768u_01q<!--/@g:network--> network: the search and network v6.7.0 was released with. It is not a rating-list figure.</p>
         <p>Set in Bodoni Moda, Schibsted Grotesk and Fragment Mono, all under the SIL Open Font License. The pieces and diagrams are drawn for this site.</p>
         <p>© 2025–2026 Chang Cheng</p>
       </div>

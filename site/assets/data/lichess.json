@@ -2,17 +2,17 @@
  "note": "Luminex's Lichess account as the home page's card shows it before it reads Lichess live (assets/js/lichess.js). Written by tools/lichess.py; run tools/stamp.py site afterwards.",
  "href": "https://lichess.org/@/luminexbot",
  "name": "luminexbot",
- "read": "2026-11-27T16:32:40Z",
- "readText": "27 November 2026, 16:32 UTC",
+ "read": "2026-11-27T23:31:33Z",
+ "readText": "27 November 2026, 23:31 UTC",
  "created": "2026-04-25",
  "perfs": [
   {
    "key": "bullet",
    "name": "Bullet",
-   "rating": 3014,
+   "rating": 3003,
    "rd": 45,
-   "prog": 18,
-   "games": 84,
+   "prog": 1,
+   "games": 111,
    "prov": false,
    "history": [
     [
@@ -57,7 +57,7 @@
     ],
     [
      "2026-11-27",
-     3014
+     3003
     ]
    ],
    "href": "https://lichess.org/@/luminexbot/perf/bullet"
@@ -65,10 +65,10 @@
   {
    "key": "blitz",
    "name": "Blitz",
-   "rating": 2901,
+   "rating": 2908,
    "rd": 45,
-   "prog": 5,
-   "games": 141,
+   "prog": 7,
+   "games": 152,
    "prov": false,
    "history": [
     [
@@ -121,7 +121,7 @@
     ],
     [
      "2026-11-27",
-     2901
+     2908
     ]
    ],
    "href": "https://lichess.org/@/luminexbot/perf/blitz"
@@ -129,10 +129,10 @@
   {
    "key": "rapid",
    "name": "Rapid",
-   "rating": 2952,
-   "rd": 62,
-   "prog": 19,
-   "games": 38,
+   "rating": 2951,
+   "rd": 61,
+   "prog": 14,
+   "games": 40,
    "prov": false,
    "history": [
     [
@@ -169,19 +169,19 @@
     ],
     [
      "2026-11-27",
-     2952
+     2951
     ]
    ],
    "href": "https://lichess.org/@/luminexbot/perf/rapid"
   }
  ],
  "count": {
-  "all": 280,
-  "win": 97,
-  "draw": 155,
-  "loss": 28
+  "all": 321,
+  "win": 116,
+  "draw": 172,
+  "loss": 33
  },
- "since": 1795796074459,
+ "since": 1795821137675,
  "fields": [
   "id",
   "created",
@@ -199,29 +199,29 @@
   "opening"
  ],
  "last": {
-  "id": "bItM1sDC",
-  "fen": "8/5k2/5p2/3p2pp/R7/1nBr1PP1/1P3K1P/8 w - - 8 1",
-  "lm": "c1b3",
+  "id": "UWiJXcZo",
+  "fen": "8/5P2/2Q5/3K3k/8/4q3/8/8 b - - 100 1",
+  "lm": "e6d5",
   "status": "draw",
   "winner": "",
-  "speed": "blitz",
-  "clock": "3+2",
+  "speed": "bullet",
+  "clock": "1+1",
   "rated": true,
-  "side": "b",
+  "side": "w",
   "white": {
-   "name": "OnechessBot",
+   "name": "luminexbot",
    "title": "BOT",
-   "rating": 2924,
+   "rating": 3003,
    "diff": 0
   },
   "black": {
-   "name": "luminexbot",
+   "name": "NeuroSoCute",
    "title": "BOT",
-   "rating": 2901,
-   "diff": 0
+   "rating": 2990,
+   "diff": 1
   },
-  "end": 1795796455,
-  "opening": "Ruy Lopez: Berlin Defense, Rio Gambit Accepted"
+  "end": 1795821554,
+  "opening": "Queen's Gambit Declined: Exchange Variation"
  },
  "games": [
   ["C8KoRoYh",1783435715,"b","1+0","b","L",1,"maia9","BOT",1786,3000,-700,"mate","Indian Defense"],
@@ -503,6 +503,47 @@
   ["KnafATD8",1795790976,"z","3+2","b","D",1,"OnechessBot","BOT",2927,2897,1,"draw","Queen's Gambit Declined: Ragozin Defense"],
   ["B3MjS3mT",1795791863,"z","3+1","w","D",0,"tuvn88888","BOT",2949,2898,null,"draw","Caro-Kann Defense: Classical Variation"],
   ["SB23oBsM",1795794245,"z","5+0","w","W",1,"rustduck","BOT",2745,2898,3,"resign","Queen's Gambit Declined: Ragozin Defense"],
-  ["bItM1sDC",1795796074,"z","3+2","b","D",1,"OnechessBot","BOT",2924,2901,0,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"]
+  ["bItM1sDC",1795796074,"z","3+2","b","D",1,"OnechessBot","BOT",2924,2901,0,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["CGRRzZbk",1795799793,"z","3+0","b","D",1,"Stockfish_bot2","BOT",2710,2901,-2,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["ekWPCiug",1795799983,"z","3+0","w","W",1,"Stockfish_bot2","BOT",2713,2899,3,"outoftime","Sicilian Defense: Nyezhmetdinov-Rossolimo Attack"],
+  ["YHhvmbN3",1795800306,"z","1+3","b","W",1,"CalibanBot","BOT",2667,2902,2,"mate","English Opening: King's English Variation, Four Knights Variation, Fianchetto Line"],
+  ["zdpqwpPj",1795801289,"b","½+0","b","L",1,"Space_BOT","BOT",3159,3014,-4,"mate","Ruy Lopez: Berlin Defense, Anti-Berlin Variation"],
+  ["dP39O0Qt",1795801331,"b","½+0","w","D",1,"Space_BOT","BOT",3163,3010,2,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["i0sEXnUC",1795801367,"b","½+0","b","L",1,"Space_BOT","BOT",3160,3012,-3,"mate","English Opening: Four Knights System, Nimzowitsch Variation"],
+  ["lUExOk8i",1795801412,"b","½+0","w","L",1,"Space_BOT","BOT",3164,3009,-3,"outoftime","Queen's Gambit Declined: Exchange Variation"],
+  ["GTz9XGCy",1795801504,"z","3+1","b","D",1,"slava20267","BOT",3000,2904,1,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["qxeRl4Tx",1795802343,"z","5+3","b","D",1,"StockFishV19","BOT",2926,2905,0,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["171x8QgE",1795803315,"z","2+5","b","D",1,"Odiodin_ansf","BOT",2777,2905,-2,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["J6by5Q5j",1795806389,"b","2+1","w","D",1,"slava20267","BOT",2979,3006,-1,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["WySPr4Dd",1795807081,"b","½+0","b","D",1,"PingYourKing","BOT",3118,3005,2,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["2F0nWwBJ",1795807110,"b","½+0","w","L",1,"PingYourKing","BOT",3099,3007,-4,"mate","Catalan Opening"],
+  ["Ga5JEXwW",1795807162,"b","½+0","b","L",1,"PingYourKing","BOT",3137,3003,-3,"mate","Ruy Lopez: Berlin Defense, Anti-Berlin Variation"],
+  ["pOYCMzEg",1795807204,"z","3+1","w","D",1,"jpg-bot","BOT",2951,2903,1,"draw","Catalan Opening"],
+  ["6vprDjjB",1795808057,"z","3+3","b","D",0,"Botkill-v18x","BOT",2911,2904,null,"draw","English Opening: King's English Variation"],
+  ["pby4ubsG",1795808949,"z","5+2","w","D",1,"pierreai","BOT",2886,2904,-1,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["Zn6LWDTr",1795809944,"b","½+0","b","D",1,"Alehkine_cat","BOT",3076,3000,1,"draw","Ruy Lopez: Berlin Defense, Anti-Berlin Variation"],
+  ["BTQ581Z0",1795810050,"b","2+1","b","D",1,"SmotherfishBot2","BOT",3029,3001,1,"draw","Queen's Gambit Declined: Ragozin Defense"],
+  ["RXVJAw9s",1795811362,"r","15+0","b","D",1,"Minimaxpro","BOT",2763,2952,-6,"draw","Four Knights Game: Spanish Variation, Rubinstein Variation"],
+  ["hRsCWNY8",1795814087,"b","½+0","b","W",1,"Arnav-Aayush","",2019,3002,0,"mate","Van't Kruijs Opening"],
+  ["A3NwgdjO",1795814117,"b","½+0","w","W",1,"Arnav-Aayush","",2018,3002,0,"resign","Zukertort Opening: Queen's Gambit Invitation"],
+  ["csHIPebp",1795814133,"b","½+0","b","W",1,"Arnav-Aayush","",2018,3002,0,"mate","Nimzo-Larsen Attack: Modern Variation"],
+  ["mfoGLwHo",1795814183,"b","1+0","b","W",1,"Arnav-Aayush","",2018,3002,0,"mate","Mieses Opening"],
+  ["LwUo0uQ8",1795814273,"b","½+0","w","W",1,"Arnav-Aayush","",2018,3002,0,"resign","Horwitz Defense"],
+  ["Lw9qpfWo",1795814299,"b","½+0","b","W",1,"Arnav-Aayush","",2018,3002,0,"resign","Van't Kruijs Opening"],
+  ["9HPFFi7q",1795814326,"b","½+0","w","W",1,"Arnav-Aayush","",2018,3002,0,"resign","French Defense: Queen's Knight"],
+  ["YeZZi5jk",1795814352,"b","½+0","b","W",1,"Arnav-Aayush","",2018,3002,0,"resign","Hungarian Opening"],
+  ["5QcXgE5C",1795814373,"b","½+0","w","W",1,"Arnav-Aayush","",2018,3002,0,"mate","Modern Defense: Standard Line"],
+  ["jAYGf6M1",1795814402,"b","½+0","b","W",1,"Arnav-Aayush","",2018,3002,0,"resign","Queen's Pawn Game: Chigorin Variation"],
+  ["XmMg9Dd0",1795814440,"b","½+0","w","W",1,"Arnav-Aayush","",2018,3002,0,"mate","Modern Defense: Standard Line"],
+  ["DfZox2QQ",1795814471,"b","½+0","b","W",1,"Arnav-Aayush","",2018,3002,0,"mate","King's Knight Opening: Normal Variation"],
+  ["ID548q5f",1795814505,"b","½+0","w","W",1,"Arnav-Aayush","",2018,3002,0,"resign","Goldsmith Defense"],
+  ["ejDvvtr6",1795814534,"b","½+0","b","W",1,"Arnav-Aayush","",2018,3002,0,"resign","Hungarian Opening"],
+  ["GekaTXPY",1795814568,"b","½+0","w","W",1,"Arnav-Aayush","",2018,3002,0,"mate","Zukertort Opening: Dutch Variation"],
+  ["Hr1XS6Nl",1795814845,"z","3+2","w","D",1,"tuvn88888","BOT",2956,2903,1,"draw","Sicilian Defense: Modern Variations, Main Line"],
+  ["ozkkUFT3",1795815717,"b","½+0","w","D",1,"Alehkine_cat","BOT",3072,3002,1,"draw","Ruy Lopez: Berlin Defense, Rio Gambit Accepted"],
+  ["UFShb58x",1795815838,"z","3+3","b","D",1,"caiporaBot","BOT",2893,2904,0,"draw","Italian Game: Classical Variation"],
+  ["0ABx6oft",1795818758,"z","5+3","w","W",1,"Vektr64","BOT",3000,2904,4,"mate","Petrov's Defense"],
+  ["g50zNKqA",1795819743,"r","10+2","w","W",1,"Godelia-bot","BOT",2730,2946,5,"resign","Queen's Gambit Accepted: Central Variation, McDonnell Defense"],
+  ["UWiJXcZo",1795821137,"b","1+1","w","D",1,"NeuroSoCute","BOT",2990,3003,0,"draw","Queen's Gambit Declined: Exchange Variation"]
  ]
 }

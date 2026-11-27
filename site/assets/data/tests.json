@@ -12,15 +12,15 @@
  "tests": [
   {
    "test": 319,
-   "title": "gen768u_01q, the first network with a feature table for each phase of the game, against gen768t_05q",
-   "href": "https://bench.luminexchess.com/test/319/",
-   "ref": "network",
+   "title": "gen768u_01q, V6's first network: a feature table for each phase of the game, against gen768t_05q",
+   "href": "https://github.com/changcheng967/Luminex/pull/152",
+   "ref": "#152",
    "games": 5520,
    "elo": 7.49,
    "ci": 4.44,
    "text": "+7.49 ± 4.44",
    "status": "pass",
-   "label": "Passed; not on main yet"
+   "label": "Passed; released in v6.7.0"
   },
   {
    "test": 310,
@@ -176,7 +176,7 @@
    "ci": 3.59,
    "text": "−2.66 ± 3.59",
    "status": "fail",
-   "label": "Failed; gen768t_05q stays on main"
+   "label": "Failed; gen768t_05q stayed on main"
   },
   {
    "test": 291,
@@ -236,7 +236,7 @@
    "ci": 5.07,
    "text": "+9.86 ± 5.07",
    "status": "pass",
-   "label": "Passed; on main"
+   "label": "Passed; since replaced by gen768u_01q"
   },
   {
    "test": 204,

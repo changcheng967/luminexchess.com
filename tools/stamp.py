@@ -314,10 +314,12 @@ def region_gauntlet(g, indent):
     ] if other else []) + [
         '  </div>',
         '  <div class="gnt-text">',
-        # the commit too: main moves on the same day, and the rating belongs to this one build
-        '    <p>Main of %s at %s, with the %s network, played %d games against each of %s engines that CCRL rates, at %s on one thread: '
+        # the commit too: main moves on the same day, and the rating belongs to this one build. A gauntlet of a
+        # release's search and network ("release" in the data file) says so
+        '    <p>Main of %s at %s, with the %s network%s, played %d games against each of %s engines that CCRL rates, at %s on one thread: '
         '%s games%s. The rating is the one at which the points expected against all %s equal the points scored.</p>'
-        % (day, esc(g["sha"][:7]), esc(g["network"]), g["each"], count, esc(g["tc"]), "{:,}".format(g["games"]), clean, count),
+        % (day, esc(g["sha"][:7]), esc(g["network"]), (", the search and network %s was released with" % esc(g["release"])) if g.get("release") else "",
+           g["each"], count, esc(g["tc"]), "{:,}".format(g["games"]), clean, count),
         '    <p>The ± is mostly the opponents disagreeing: taken alone, each implies a rating between %d and %d, '
         'where the games by themselves would leave ± %d. More opponents near Luminex would narrow it; more games would not.</p>'
         % (min(implied), max(implied), g["fromGames"]),
@@ -364,8 +366,10 @@ def region_cci(c, indent):
     cells = c.get("cells") or []
     link = '<a class="link" href="%s"><span>Luminex on the CCI</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>' % esc(c["href"])
     if not cells:
-        text = ("has rated Luminex up to v%s; v%s is not on it yet." % (esc(c["newest"]), esc(c["version"])) if c.get("newest")
-                else "has not played Luminex yet.")
+        # dated, like the figure: the list adds games every day, and a new release reaches it later
+        day = re.sub(r" \d{4}$", "", c["generated"])
+        text = ("has rated Luminex up to v%s; v%s is not on its page of %s yet." % (esc(c["newest"]), esc(c["version"]), day) if c.get("newest")
+                else "has not played Luminex yet (its page of %s)." % day)
         return '%s<p class="note strength-note">The Computer Chess Index, an independent rating list with a scale of its own, %s %s</p>' % (indent, text, link)
     core = re.search(r"^(.*?) \(.*\) - (\w)-Core$", c.get("machineName") or "")
     where = ("the %s-cores of an Intel Core %s" % (core.group(2), esc(core.group(1))) if core
