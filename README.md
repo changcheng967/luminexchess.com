@@ -5,13 +5,14 @@ The website of [Luminex](https://github.com/changcheng967/Luminex), an open-sour
 `site/` is the whole website: plain HTML, CSS and JavaScript with no build step and no
 third-party requests, apart from one call a page to the GitHub API for the latest release
 and, on the download page, the current development build (the pages carry the current
-release's links as a fallback).
+release's links as a fallback), and Lichess's public API while the home page's Lichess card
+is on screen (the card carries a copy of everything it shows, taken at the last build).
 
 ## Pages
 
 | Address | File | What it holds |
 |---|---|---|
-| `/` | `site/index.html` | The ride (a real position pulled back to every game the bench has played), the strength (the newest gauntlet, and the release against the one before it), the method, three scenes from inside the engine, the chronicle with the rating chart, downloads |
+| `/` | `site/index.html` | The ride (a real position pulled back to every game the bench has played), the strength (the newest gauntlet, the release against the one before it, the Computer Chess Index, and the bot luminexbot live on Lichess), the method, three scenes from inside the engine, the chronicle with the rating chart, downloads |
 | `/games/` | `site/games/index.html` | The game viewer: the two wins in gauntlet 3 against Obsidian v16.0 and Berserk 14, with both engines' scores |
 | `/tests/` | `site/tests/index.html` | The record of every SPRT, and what is not in it |
 | `/engine/` | `site/engine/index.html` | A search growing in light behind the title; real searches replayed live; the six parts, each a moving glyph; the search explained step by step; speed, felt; the clock, with a simulator of the engine's own time manager; the network, its inputs and V5's relations lit on a board, its generations; training, its runs drawn as a lineage |
@@ -44,7 +45,11 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
   (a recorded session replayed at the engine's pace); `home.js` (the ride's sections: the ladder
   drawn from the gauntlet's rows, the four steps running the strip's newest tests, the chronicle),
   `viewer.js` (with the games page's field of every game), `tests.js` (with the river of every
-  test), `engine.js` and `notfound.js` belong to one page each.
+  test), `engine.js` and `notfound.js` belong to one page each. `lichess.js` is the home
+  page's Lichess card: while it is on screen it reads the bot account from Lichess's public
+  API (ratings, the games since the copy, and the game in progress, streamed move by move)
+  over the copy the page carries, one request at a time, and reads nothing when the card is
+  off screen or the tab hidden.
 - Animations move `transform` and `opacity` only. The Content Security Policy allows no
   inline styles, so scripts place things by setting CSS custom properties
   (`element.style.setProperty`).
@@ -100,8 +105,9 @@ discipline does).
   a region with `<!-- @name -->` and `<!-- /@name -->`; the tool rewrites what is between
   them: the icon sprite, header and footer from `tools/parts/`, the starting position's
   pieces, the test charts and rows from `site/assets/data/tests.json`, the gauntlet
-  figure from `site/assets/data/gauntlet.json`, and the figure for the Computer Chess Index
-  from `site/assets/data/cci.json`. Inside a sentence, a value between
+  figure from `site/assets/data/gauntlet.json`, the figure for the Computer Chess Index
+  from `site/assets/data/cci.json`, and the Lichess card's still form from
+  `site/assets/data/lichess.json`. Inside a sentence, a value between
   `<!--@g:key-->` and `<!--/@g:key-->` is filled from `gauntlet.json` too (keys: `rating`,
   `n`, `e`, `games`, `day`, `count`, `tc`, `list`, `network`), so the pages and the
   footer quote the newest gauntlet without an edit. It then reports anything the Content
@@ -137,6 +143,12 @@ discipline does).
   draws and losses, read-only from the bench server's database through `ssh oracle`, for the
   wall of games (the home page's ride and the tests page). Run it with `bench_update.py --write`
   so the wall's cells and the count of games beside it come from the same moment.
+- `tools/lichess.py` takes the copy of the bot account luminexbot that the home page's Lichess
+  card carries, `site/assets/data/lichess.json`: its ratings with their histories, every game
+  it has played against another account (as Lichess counts them on its profile, so games
+  against Lichess's own computer are left out) and the last game's final position. `--check`
+  says how far the copy is behind Lichess. It reads Lichess from this machine, one request at
+  a time. Then run `tools/stamp.py`.
 - `tools/select_games.py` and `tools/export_games.py` choose and write the two games in
   `site/assets/data/` (`games.json` and the PGN); their docstrings name the archive the
   current games come from.
@@ -230,7 +242,7 @@ console.
   every line that still quotes the gauntlet before; history may stay (the chronicle, the
   block of the network that was rated), anything else is stale. Three fields of
   `gauntlet.json` are written by hand and kept when the same gauntlet is read again:
-  `title` (the figure's heading; without it, "The development build, against … engines"),
+  `title` (the figure's heading; without it, "The development build of <day>, against … engines"),
   `since` (a sentence after the figure's text: what the engine has become since) and
   `noteEnd` (a sentence added to the note under the rows). A new gauntlet starts without
   them.
@@ -253,6 +265,12 @@ console.
   given only when that list's row carries the same ratings. While any range is wider than
   ± 60 it calls them early readings (`EARLY` in `tools/stamp.py`); before the list has played
   the release it is a sentence that says so. It is the one place the site quotes CCI.
+- **Lichess.** The card reads Lichess live, so only its copy goes stale: run
+  `tools/lichess.py`, then `tools/stamp.py`, with every update of the site. Its ratings are
+  Lichess's own, against other bots; the card says they do not compare with CCRL's. The card
+  watches, it never plays: nothing on the site plays against the engine. Lichess answers a
+  HeadlessChrome agent's game list with 404, so automated page checks answer lichess.org from
+  the copy, and a live game is checked with an ordinary agent.
 - **Strength.** The release's match against the one before it and the rating chart's
   points (`data-points`) are in `site/index.html`; the gauntlet figure comes from
   `gauntlet.json`; the footnote is in `tools/parts/footer.html`.

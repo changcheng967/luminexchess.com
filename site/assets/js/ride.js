@@ -477,7 +477,7 @@
     if (st === 1) return "Each frame is a position · the bar under it is Luminex's own score";
     if (st === 2) return "Lit: a win · dim: a draw · dark: a loss";
     if (st === 3) return "Strongest opponent first · " + touch + " a field for its score";
-    if (st === 4) return Lux.finePointer ? "Point at the wall to read a run" : "Lit: wins · violet: tuning runs · touch for a run";
+    if (st === 4) return Lux.finePointer ? "Point at the wall to read a run" : "Lit: wins · violet: tuning and training data · touch for a run";
     return "";
   }
   function lastBy(who, k) { for (var i = k; i >= 0; i--) if (game.plies[i].by === who) return game.plies[i]; return game.plies[0]; }

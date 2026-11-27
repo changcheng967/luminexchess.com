@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/download/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=31"></script>
+  <script src="/assets/js/theme.js?v=32"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,10 +24,10 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=31">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=31">
-  <script src="/assets/js/site.js?v=31" defer></script>
-  <script src="/assets/js/term.js?v=31" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=32">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=32">
+  <script src="/assets/js/site.js?v=32" defer></script>
+  <script src="/assets/js/term.js?v=32" defer></script>
 </head>
 <body class="page-download">
   <!-- @sprite -->
@@ -216,7 +216,7 @@ go movetime 2000</code></pre>
           </div>
           <div class="howto-step">
             <h3 class="h-m">Or build it</h3>
-            <p>With CMake 3.20 or newer and a C++23 compiler: clang 23 builds every release, about a quarter faster in games than gcc 14 (add <code>-DCMAKE_CXX_COMPILER=clang++-23</code> to the first <code>cmake</code> line), and GCC 13, Clang 15 or MSVC 2022 and newer also compile it. This builds the development branch with its network inside, as the releases are built. For the release itself, run <code>git checkout v6.6.0</code> after cloning; the release predates <code>ci.sh</code>, so fetch its network with <code>bash .github/scripts/fetch-net.sh</code> instead.</p>
+            <p>With CMake 3.20 or newer and clang 23, which the development branch needs: it builds the development builds and the test workers' engines, about a quarter faster in games than gcc 14. This builds the development branch with its network inside, as the releases are built. For the release itself, run <code>git checkout v6.6.0</code> after cloning; its source also builds with GCC 13 or MSVC 2022, as its own binaries were, and it predates <code>ci.sh</code>, so fetch its network with <code>bash .github/scripts/fetch-net.sh</code> instead.</p>
             <div class="code">
               <button class="copy" type="button" data-copy="build-demo" aria-label="Copy the build commands">
                 <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy-say" aria-hidden="true">Copy</span>
@@ -224,7 +224,7 @@ go movetime 2000</code></pre>
 <pre id="build-demo"><code>git clone https://github.com/changcheng967/Luminex.git
 cd Luminex
 bash .github/scripts/ci.sh fetch-net
-cmake -B build -DCMAKE_BUILD_TYPE=Release -DLUMINEX_EMBED_PINNED=ON
+cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++-23 -DLUMINEX_EMBED_PINNED=ON
 cmake --build build --config Release</code></pre>
             </div>
           </div>
@@ -254,13 +254,13 @@ cmake --build build --config Release</code></pre>
             </details>
             <details>
               <summary><span>Does it support Chess960 or endgame tablebases?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>Not yet. Luminex plays standard chess only, and it does not probe Syzygy tablebases. It accepts the <code>SyzygyPath</code> option so interfaces don't complain, then plays endgames with search and evaluation alone.</p>
+              <p>Not yet. Luminex plays standard chess only, and it does not probe Syzygy tablebases: it plays endgames with search and evaluation alone. v6.6.0 accepts a <code>SyzygyPath</code> option so interfaces don't complain; since 26 November the development build declares only the options it uses, and answers any other with an <code>info string</code> line (<a href="https://github.com/changcheng967/Luminex/pull/145">#145</a>).</p>
             </details>
           </div>
           <div class="faq-col">
             <details>
               <summary><span>Can it play weaker, for practice?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-              <p>Not yet. <code>Skill Level</code>, <code>UCI_LimitStrength</code> and <code>UCI_Elo</code> are accepted for compatibility but have no effect, so Luminex always plays at full strength.</p>
+              <p>Not yet: Luminex always plays at full strength. v6.6.0 accepts <code>Skill Level</code>, <code>UCI_LimitStrength</code> and <code>UCI_Elo</code> for compatibility, with no effect; the development build no longer declares them.</p>
             </details>
             <details>
               <summary><span>How strong is it, really?</span><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -306,6 +306,7 @@ cmake --build build --config Release</code></pre>
           <a href="https://github.com/changcheng967/Luminex">GitHub</a>
           <a href="https://github.com/changcheng967/Luminex/releases">Releases</a>
           <a href="https://bench.luminexchess.com">OpenBench</a>
+          <a href="https://lichess.org/@/luminexbot">On Lichess</a>
           <a href="https://huggingface.co/datasets/xushawn/t91-lgs">Training data</a>
         </nav>
         <div class="ftr-bits" aria-hidden="true">

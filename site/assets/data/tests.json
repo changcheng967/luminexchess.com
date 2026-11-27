@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "26 November 2026",
+ "asOf": "27 November 2026",
  "leftOff": [
   59
  ],
@@ -10,6 +10,42 @@
   "max": 120
  },
  "tests": [
+  {
+   "test": 319,
+   "title": "gen768u_01q, the first network with a feature table for each phase of the game, against gen768t_05q",
+   "href": "https://bench.luminexchess.com/test/319/",
+   "ref": "network",
+   "games": 5520,
+   "elo": 7.49,
+   "ci": 4.44,
+   "text": "+7.49 ± 4.44",
+   "status": "pass",
+   "label": "Passed; not on main yet"
+  },
+  {
+   "test": 310,
+   "title": "Prune by reverse futility up to depth 12, not 8",
+   "href": "https://bench.luminexchess.com/test/310/",
+   "ref": "search",
+   "games": 19148,
+   "elo": -0.64,
+   "ci": 2.38,
+   "text": "−0.64 ± 2.38",
+   "status": "fail",
+   "label": "Failed"
+  },
+  {
+   "test": 309,
+   "title": "Extend a singular move a third ply when its rivals fail far low",
+   "href": "https://github.com/changcheng967/Luminex/pull/149",
+   "ref": "#149",
+   "games": 16544,
+   "elo": 3.3,
+   "ci": 2.56,
+   "text": "+3.30 ± 2.56",
+   "status": "pass",
+   "label": "Passed"
+  },
   {
    "test": 308,
    "title": "Check ProbCut's captures in quiescence search before its reduced search",
@@ -57,6 +93,30 @@
    "text": "+1.57 ± 1.06",
    "status": "pass",
    "label": "Passed"
+  },
+  {
+   "test": 299,
+   "title": "Reduce late quiet moves a ply more where every move is expected to fail low",
+   "href": "https://bench.luminexchess.com/test/299/",
+   "ref": "search",
+   "games": 1280,
+   "elo": 5.43,
+   "ci": 8.95,
+   "text": "+5.43 ± 8.95",
+   "status": "stop",
+   "label": "Stopped, unresolved"
+  },
+  {
+   "test": 298,
+   "title": "Reduce every late capture by at least one ply",
+   "href": "https://bench.luminexchess.com/test/298/",
+   "ref": "search",
+   "games": 1920,
+   "elo": 0.72,
+   "ci": 7.81,
+   "text": "+0.72 ± 7.81",
+   "status": "stop",
+   "label": "Stopped, unresolved"
   },
   {
    "test": 296,
@@ -139,7 +199,7 @@
    "elo": 2.09,
    "ci": 2.14,
    "text": "+2.09 ± 2.14",
-   "status": "stop",
+   "status": "merged",
    "label": "Stopped undecided; merged on the owner's decision"
   },
   {

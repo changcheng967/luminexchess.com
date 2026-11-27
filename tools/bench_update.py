@@ -74,7 +74,7 @@ CCI_LIST = "https://github.com/computer-chess-index/cci/blob/main/lists/CCIRatin
 CCI_LIST_RAW = "https://raw.githubusercontent.com/computer-chess-index/cci/main/lists/CCIRatings.csv"
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 N = "{:,}".format
-KINDS = ("sprt", "fixed", "gauntlet", "tune")
+KINDS = ("sprt", "fixed", "gauntlet", "tune", "datagen")
 # fields of gauntlet.json that are written by hand and kept when the same gauntlet is read again:
 #   title    the figure's heading, e.g. "Against twelve rated engines" (default: "The development build, against … engines")
 #   since    a sentence shown after the figure's text: what the engine has become since the gauntlet
@@ -114,7 +114,10 @@ def workloads(pages):
             g = re.search(r"Games: (\d+) W: (\d+) L: (\d+) D: (\d+)", t)
             tune = re.search(r"(\d+)/(\d+) Games Played", t)
             elo = re.search(r"Elo: (-?[\d.]+) \+- ([\d.]+)", t)
-            kind = "gauntlet" if key[0] == "gauntlet" else ("sprt" if llr else ("tune" if tune else "fixed"))
+            # a data-generation run (its page is /datagen/N/) plays the engine against itself to make
+            # positions to train on: games, but no match and no measurement
+            kind = ("gauntlet" if key[0] == "gauntlet" else "datagen" if key[0] == "datagen"
+                    else ("sprt" if llr else ("tune" if tune else "fixed")))
             w = {"id": key[1], "section": section, "kind": kind,
                  "games": int(g.group(1)) if g else (int(tune.group(1)) if tune else 0),
                  "wld": tuple(int(x) for x in g.groups()[1:]) if g else None,
@@ -489,12 +492,12 @@ def main():
     passed = [w for w in done if w["status"] == "pass"]
     running = [w for w in ws.values() if w["section"] != "Finished"]
 
-    print("workloads on the list: %d  (%d SPRTs, %d fixed-length matches, %d gauntlets, %d tuning runs; %d not finished)"
-          % (len(ws), len(kinds["sprt"]), len(kinds["fixed"]), len(kinds["gauntlet"]), len(kinds["tune"]), len(running)))
+    print("workloads on the list: %d  (%d SPRTs, %d fixed-length matches, %d gauntlets, %d tuning runs, %d data-generation runs; %d not finished)"
+          % (len(ws), len(kinds["sprt"]), len(kinds["fixed"]), len(kinds["gauntlet"]), len(kinds["tune"]), len(kinds["datagen"]), len(running)))
     print("SPRTs finished: %d  (passed %d, failed %d, stopped %d)"
           % (len(done), len(passed), sum(w["status"] == "fail" for w in done), sum(w["status"] == "stop" for w in done)))
-    print("games: %s by the bench's own count; %s on the list (SPRTs %s, tunes %s, matches %s, gauntlets %s); %s in runs since deleted"
-          % (N(played), N(listed), N(games["sprt"]), N(games["tune"]), N(games["fixed"]), N(games["gauntlet"]), N(gone)))
+    print("games: %s by the bench's own count; %s on the list (SPRTs %s, tunes %s, matches %s, gauntlets %s, data generation %s); %s in runs since deleted"
+          % (N(played), N(listed), N(games["sprt"]), N(games["tune"]), N(games["fixed"]), N(games["gauntlet"]), N(games["datagen"]), N(gone)))
     if gone < 0:
         sys.exit("The list holds more games than the bench has counted: read the pages again.")
 
@@ -598,6 +601,10 @@ def main():
         parts.append(count(len(kinds["gauntlet"]), "gauntlet", "gauntlets"))
         played_by.append("the gauntlets %s" % N(games["gauntlet"]))
     parts.append(count(len(kinds["tune"]), "SPSA tuning run", "SPSA tuning runs"))
+    if kinds["datagen"]:
+        parts.append(count(len(kinds["datagen"]), "run that plays the engine against itself for training data",
+                           "runs that play the engine against itself for training data"))
+        played_by.append("the training-data runs %s" % N(games["datagen"]))
     still = "" if not running else (", one of them not finished" if len(running) == 1 else ", %d of them not finished" % len(running))
     rest = "" if not gone else "; another %s were played in runs since deleted from the list" % N(gone)
     line = ("OpenBench's list holds %d runs%s: %s and %s. %s and %s%s."

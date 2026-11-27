@@ -16,8 +16,10 @@ What a cell's colour can mean, by the kind of run ("k"):
     g   one opponent's match of a gauntlet: a win is Luminex's
     t   a tuning run (SPSA): two settings of the same engine against each other; the site
         does not colour these by result
+    d   a data-generation run: the engine against itself, making positions to train on;
+        not coloured by result either
 and its state ("s"): p passed, f failed, r still running, x deleted since, - finished
-(a match or a tuning run has no verdict).
+(a match, a tuning run or a data-generation run has no verdict).
 
 Only the counts are data. Within a run the site scatters the results with a seeded
 shuffle: the bench's stored games do not line up with its counts game for game (test 117
@@ -73,11 +75,11 @@ def main():
             continue
         assert r["w"] + r["d"] + r["l"] == r["games"], r
         total += r["games"]
-        kind = {"SPRT": "s", "SPSA": "t"}.get(r["mode"], "g" if r["gauntlet"] else "m")
+        kind = {"SPRT": "s", "SPSA": "t", "DATAGEN": "d"}.get(r["mode"], "g" if r["gauntlet"] else "m")
         state = "x" if r["deleted"] else ("p" if r["passed"] else "f" if r["failed"] else "r" if not r["finished"] else "-")
         if kind == "s":
             label = listed.get(r["id"], {}).get("title", "")
-        elif kind == "t":
+        elif kind in ("t", "d"):
             label = ""
         else:
             label = opp.get(r["id"]) or (r["base"] if r["base"] != r["dev"] else "")

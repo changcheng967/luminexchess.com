@@ -397,7 +397,7 @@
 
     // pause when the viewer leaves the screen or the tab is hidden
     if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) { if (!entries[0].isIntersecting) stop(); }).observe(root);
+      new IntersectionObserver(function (entries) { if (!entries[entries.length - 1].isIntersecting) stop(); }).observe(root);
     }
     document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); });
     root.classList.add("is-loaded");

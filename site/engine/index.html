@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/engine/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=31"></script>
+  <script src="/assets/js/theme.js?v=32"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -24,16 +24,16 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=31">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=31">
-  <script src="/assets/js/site.js?v=31" defer></script>
-  <script src="/assets/js/board.js?v=31" defer></script>
-  <script src="/assets/js/cells.js?v=31" defer></script>
-  <script src="/assets/js/inputs.js?v=31" defer></script>
-  <script src="/assets/js/engine.js?v=31" defer></script>
-  <script src="/assets/js/clock.js?v=31" defer></script>
-  <script src="/assets/js/think.js?v=31" defer></script>
-  <script src="/assets/js/tree.js?v=31" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=32">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=32">
+  <script src="/assets/js/site.js?v=32" defer></script>
+  <script src="/assets/js/board.js?v=32" defer></script>
+  <script src="/assets/js/cells.js?v=32" defer></script>
+  <script src="/assets/js/inputs.js?v=32" defer></script>
+  <script src="/assets/js/engine.js?v=32" defer></script>
+  <script src="/assets/js/clock.js?v=32" defer></script>
+  <script src="/assets/js/think.js?v=32" defer></script>
+  <script src="/assets/js/tree.js?v=32" defer></script>
 </head>
 <body class="page-engine">
   <!-- @sprite -->
@@ -127,7 +127,7 @@
         <header class="sec-head" data-rise>
           <p class="kicker"><span class="kicker-n">1.</span> Thinking</p>
           <h2 id="think-title" class="h-l">Watch it think</h2>
-          <p class="lede">Real searches by main's engine, replayed at their own pace. Each iteration searches one ply deeper; the line it expects lights the board, and the counters run as fast as the engine ran.</p>
+          <p class="lede">Real searches by main's engine of 24 November, replayed at their own pace. Each iteration searches one ply deeper; the line it expects lights the board, and the counters run as fast as the engine ran.</p>
         </header>
         <figure data-rise class="card think" data-think data-src="/assets/data/think.json" aria-labelledby="think-pos">
           <div class="think-top">
@@ -175,7 +175,7 @@
           <div class="spec-row" data-rise>
             <svg class="spec-g g-net" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><g class="gn-wires"><path d="M14 8 70 14M14 18 70 14M14 28 70 24M14 38 70 34M14 48 70 44M70 14 126 20M70 24 126 20M70 34 126 32M70 44 126 32M126 20 170 22M126 32 170 30M170 22 206 28M170 30 206 28"/></g><g class="gn-c gn-c0"><rect x="11" y="5" width="6" height="6"/><rect x="11" y="15" width="6" height="6"/><rect x="11" y="25" width="6" height="6"/><rect x="11" y="35" width="6" height="6"/><rect x="11" y="45" width="6" height="6"/></g><g class="gn-c gn-c1"><rect x="67" y="11" width="6" height="6"/><rect x="67" y="21" width="6" height="6"/><rect x="67" y="31" width="6" height="6"/><rect x="67" y="41" width="6" height="6"/></g><g class="gn-c gn-c2"><rect x="123" y="17" width="6" height="6"/><rect x="123" y="29" width="6" height="6"/></g><g class="gn-c gn-c3"><rect x="167" y="19" width="6" height="6"/><rect x="167" y="27" width="6" height="6"/></g><g class="gn-c gn-c4"><rect x="202" y="24" width="8" height="8"/></g></svg>
             <dt><span class="spec-n num">01</span>Neural evaluation</dt>
-            <dd>A 768-wide HalfKAv2_hm network with 32 king buckets and eight output buckets, chosen by the number of pieces. Its int16 accumulators follow every move incrementally, and the int8 layers behind them run on AVX-512 VNNI, AVX2 or NEON.</dd>
+            <dd>A 768-wide HalfKAv2_hm network with 32 king buckets and eight output buckets, chosen by the number of pieces. Its int16 accumulators follow every move incrementally, and the int8 layers behind them have kernels for AVX-512 VNNI, AVX-512, AVX-VNNI, AVX2, SSE and NEON, every one giving the same evaluation.</dd>
           </div>
           <div class="spec-row" data-rise>
             <svg class="spec-g g-search" viewBox="0 0 220 56" aria-hidden="true" focusable="false"><path class="gs-e" d="M110 6 40 28M110 6 85 28M110 6 135 28M110 6 180 28M40 28 25 50M40 28 55 50M85 28 75 50M85 28 95 50M135 28 125 50M135 28 145 50M180 28 170 50M180 28 195 50"/><path class="gs-pv" d="M110 6 40 28 55 50"/><path class="gs-cut" d="M180 28 170 50M180 28 195 50M110 6 180 28M135 28 145 50"/><g class="gs-x"><path d="m176 36 8 8m0-8-8 8M139 38l6 6m0-6-6 6"/></g><rect class="gs-root" x="106" y="2" width="8" height="8"/><rect class="gs-leaf" x="51" y="46" width="8" height="8"/></svg>
@@ -203,7 +203,7 @@
             <dd>Load it in Cute Chess, Arena, Banksia, En Croissant or any other UCI interface. MultiPV, pondering, win/draw/loss output and Polyglot opening books are built in.</dd>
           </div>
         </dl>
-        <p class="note spec-origins">Where the parts come from: some of the foundations derive from <a href="https://github.com/official-stockfish/Stockfish">Stockfish</a>, and the correction history, the history pruning rule, several search constants and the hand-crafted evaluation's feature set from <a href="https://github.com/mhouppin/stash-bot">Stash</a>, by Morgan Houppin. Both are free under the GPL v3, as Luminex is, and the <a href="https://github.com/changcheng967/Luminex/blob/main/LICENSE">LICENSE</a> credits them. The engine is being rewritten as its own design, a piece at a time, each piece held to the same bench and perft or to an SPRT: the first step made the pins, the slider attack tables, the move list and the legal-move filter Luminex's own (<a href="https://github.com/changcheng967/Luminex/pull/144">#144</a>).</p>
+        <p class="note spec-origins">Where the parts come from: some of the foundations derive from <a href="https://github.com/official-stockfish/Stockfish">Stockfish</a>, and the correction history, the history pruning rule, several search constants and the hand-crafted evaluation's feature set from <a href="https://github.com/mhouppin/stash-bot">Stash</a>, by Morgan Houppin. Both are free under the GPL v3, as Luminex is, and the <a href="https://github.com/changcheng967/Luminex/blob/main/LICENSE">LICENSE</a> credits them. Parts that derive from them are being replaced one at a time, each held to the same bench and perft or to an SPRT: so far the pins, the slider attack tables, the move list and the legal-move filter (<a href="https://github.com/changcheng967/Luminex/pull/144">#144</a>), and the UCI layer (<a href="https://github.com/changcheng967/Luminex/pull/145">#145</a>).</p>
       </div>
     </section>
 
@@ -312,11 +312,11 @@
         <figure data-rise class="card speed">
           <figcaption class="fig-head">
             <span class="fig-title">Speed in test games</span>
-            <span class="fig-sub">Nodes per second on one thread of the test workers, in the games of test 174 at 10+0.1, with V5's first network</span>
+            <span class="fig-sub">Nodes per second on one thread of an Intel Xeon Platinum 8562Y+, the test workers of 19 November, in the games of test 174 at 10+0.1, with V5's first network</span>
           </figcaption>
           <p class="speed-fig num">1.30<span class="totals-u">million</span></p>
           <p class="speed-live" data-live hidden><span class="speed-live-n num" data-live-nodes>0</span><span class="speed-live-t">nodes at that pace since you opened this page</span></p>
-          <p class="note">gen768t_01q, the first V5 network, on four workers that build it with clang 23: 1.20, 1.32, 1.33 and 1.35 million by worker (<a href="https://bench.luminexchess.com/test/174/">test 174</a>). The same games' gen768s_03q side ran at 1.65 million: the relation inputs cost about a fifth of the speed, and the network more than makes up for it, +73.37 ± 14.20 Elo. gen768t_02q kept pace with it in the games of <a href="https://bench.luminexchess.com/test/176/">test 176</a>, and gen768t_03q, 04q and 05q, main's network since 23 November, have the same shape and size.</p>
+          <p class="note">gen768t_01q, the first V5 network, on four Xeon workers that build it with clang 23: 1.20, 1.32, 1.33 and 1.35 million by worker (<a href="https://bench.luminexchess.com/test/174/">test 174</a>). The same games' gen768s_03q side ran at 1.65 million: the relation inputs cost about a fifth of the speed, and the network more than makes up for it, +73.37 ± 14.20 Elo. gen768t_02q kept pace with it in the games of <a href="https://bench.luminexchess.com/test/176/">test 176</a>, and gen768t_03q, 04q and 05q, main's network since 23 November, have the same shape and size. The test workers are AMD EPYC 7702s now, whose cores are slower: main searched 0.92 million nodes a second on them in the games of <a href="https://bench.luminexchess.com/test/303/">test 303</a>.</p>
         </figure>
       </div>
     </section>
@@ -510,7 +510,7 @@
 
         <div class="gens-head">
           <h3 class="h-m" id="generations">Five generations of one design</h3>
-          <p>The accumulators have kept their shape since gen768; what changes from one generation to the next is mostly what stands behind them. Their specifications share one file in the engine repository, <a href="https://github.com/changcheng967/Luminex/blob/main/docs/NNUE.md">docs/NNUE.md</a>, a section each; the runs behind them are in the <a href="https://github.com/changcheng967/Luminex-NNUE/blob/main/docs/DEVLOG.md">development log</a> of Luminex-NNUE, the trainer's own repository, which also covers the 512-wide networks that came before.</p>
+          <p>The accumulators have kept their shape since gen768; what changes from one generation to the next is mostly what stands behind them. Their specifications share one file in the engine repository, <a href="https://github.com/changcheng967/Luminex/blob/main/docs/NNUE.md">docs/NNUE.md</a>, a section each. The runs up to V4 are in the <a href="https://github.com/changcheng967/Luminex-NNUE/blob/main/docs/DEVLOG.md">development log</a> of Luminex-NNUE, the trainer's own repository, which also covers the 512-wide networks that came before; each V5 run is in the pull request that brought its network to main (<a href="https://github.com/changcheng967/Luminex/pull/112">#112</a>, <a href="https://github.com/changcheng967/Luminex/pull/115">#115</a>, <a href="https://github.com/changcheng967/Luminex/pull/123">#123</a>, <a href="https://github.com/changcheng967/Luminex/pull/128">#128</a>, <a href="https://github.com/changcheng967/Luminex/pull/130">#130</a>).</p>
           <p class="legend gens-legend"><span><i class="k-add"></i>New in this generation</span><span><i class="k-plan"></i>Specified, not built</span><span><i class="k-keep"></i>Carried over</span></p>
         </div>
         <ol class="gens" data-gens aria-labelledby="generations">
@@ -670,6 +670,7 @@
           <a href="https://github.com/changcheng967/Luminex">GitHub</a>
           <a href="https://github.com/changcheng967/Luminex/releases">Releases</a>
           <a href="https://bench.luminexchess.com">OpenBench</a>
+          <a href="https://lichess.org/@/luminexbot">On Lichess</a>
           <a href="https://huggingface.co/datasets/xushawn/t91-lgs">Training data</a>
         </nav>
         <div class="ftr-bits" aria-hidden="true">

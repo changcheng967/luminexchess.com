@@ -180,7 +180,7 @@
       if (!motion) return;
       if ("IntersectionObserver" in window) {
         new IntersectionObserver(function (es) {
-          visible = es[0].isIntersecting;
+          visible = es[es.length - 1].isIntersecting;   // the last entry is where it is now
           if (visible) kick();
         }).observe(canvas);
       }

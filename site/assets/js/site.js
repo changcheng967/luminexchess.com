@@ -93,18 +93,21 @@
   window.addEventListener("scroll", request, { passive: true });
   window.addEventListener("resize", request);
 
+  /* The observer can hand over several changes of one element at once (out, then back in, while
+     the page was busy): the last entry is where the element is now, so both helpers read that. */
+  function now(entries) { return entries[entries.length - 1].isIntersecting; }
   /* run fn once, when the element first comes on screen */
   Lux.onVisible = function (element, fn, threshold) {
     if (!("IntersectionObserver" in window)) { fn(); return; }
     var io = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) { io.disconnect(); fn(); }
+      if (now(entries)) { io.disconnect(); fn(); }
     }, { threshold: threshold == null ? 0.25 : threshold });
     io.observe(element);
   };
   /* call fn(true/false) as the element enters and leaves the screen */
   Lux.whileVisible = function (element, fn, threshold) {
     if (!("IntersectionObserver" in window)) { fn(true); return; }
-    new IntersectionObserver(function (entries) { fn(entries[0].isIntersecting); }, { threshold: threshold || 0 }).observe(element);
+    new IntersectionObserver(function (entries) { fn(now(entries)); }, { threshold: threshold || 0 }).observe(element);
   };
 
   /* ---------- arriving at an anchor ----------
@@ -116,7 +119,7 @@
      (scroll-behavior: smooth, which the stylesheet keys on is-settled) starts only after that, so
      an arrival never flies over the whole page towards a place that is about to move. */
   (function arrival() {
-    var target = null, over = false, watch = null, timer = 0, lastY = 0;
+    var target = null, over = false, watch = null, timer = 0, lastY = 0, lastTop = 0;
     var loaded = document.readyState === "complete", waits = 0;
     var inputs = ["wheel", "touchstart", "pointerdown", "keydown"];
     // the browser's own place for an anchor: its top below the page's scroll-padding and its scroll-margin
@@ -124,6 +127,7 @@
       if (over || !target) return;
       target.scrollIntoView();
       lastY = window.scrollY;
+      lastTop = target.getBoundingClientRect().top;
     }
     function end() {
       if (over) return;
@@ -134,8 +138,14 @@
       window.removeEventListener("scroll", moved);
       root.classList.add("is-settled");
     }
-    // a scroll that is neither ours nor one of the browser's small corrections is the visitor's (a dragged scrollbar)
-    function moved() { if (Math.abs(window.scrollY - lastY) > 48) end(); }
+    // a scroll that is neither ours nor one of the browser's small corrections is the visitor's (a dragged
+    // scrollbar). The browser also scrolls by itself when something above the target changes size (scroll
+    // anchoring), but then the target stays where it was on the screen; a dragged scrollbar moves it.
+    function moved() {
+      if (Math.abs(window.scrollY - lastY) <= 48) return;
+      if (target && Math.abs(target.getBoundingClientRect().top - lastTop) <= 48) { lastY = window.scrollY; return; }
+      end();
+    }
     // everything has loaded and no scene is still waiting for its data: a moment more for late fonts, then done
     function calm() {
       if (over || waits || !loaded) return;

@@ -558,7 +558,7 @@
     pipe.classList.add("is-live");
     var hint = el("p", "try pipe-try");
     hint.setAttribute("aria-hidden", "true");
-    [["try-n", "02 · To try"], ["", "Point at a bar in the strip below"], ["", "·"], ["", "the four steps run that test"]]
+    [["try-n", "03 · To try"], ["", "Point at a bar in the strip below"], ["", "·"], ["", "the four steps run that test"]]
       .forEach(function (h) { hint.appendChild(el("span", h[0], h[1])); });
     pipe.parentNode.insertBefore(hint, pipe.nextSibling);
 

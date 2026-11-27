@@ -19,9 +19,12 @@ Regions:
                              it was measured, and a row for every opponent
     cci                      the note under "Where it stands": what the Computer Chess
                              Index, an independent rating list, says about the release
+    lichess                  the card "In public, on Lichess" in "Where it stands": the
+                             bot account's last game, ratings and record, as read last
 The three tests-* regions are drawn from site/assets/data/tests.json, the gauntlet
 from site/assets/data/gauntlet.json (written by tools/bench_update.py --gauntlet N),
-the cci note from site/assets/data/cci.json (tools/bench_update.py --cci).
+the cci note from site/assets/data/cci.json (tools/bench_update.py --cci), the
+Lichess card from site/assets/data/lichess.json (tools/lichess.py).
 
 Values: inside a sentence, <!--@g:rating-->3471 ± 16<!--/@g:rating--> is filled from
 gauntlet.json as well, so the pages and the footer quote the newest gauntlet without
@@ -297,8 +300,10 @@ def region_gauntlet(g, indent):
     out = [
         '<figcaption class="gnt-head">',
         '  <div class="gnt-score-box">',
-        # the heading is the data file's ("title") when it has one: a release is not "the development build"
-        '    <p class="fact-label" id="gauntlet-title">%s</p>' % esc(g.get("title") or "The development build, against %s engines" % count),
+        # the heading is the data file's ("title") when it has one: a release is not "the development build".
+        # It names the day of the rated build, since main goes on changing after a gauntlet.
+        '    <p class="fact-label" id="gauntlet-title">%s</p>' % esc(g.get("title") or "The development build of %s, against %s engines"
+                                                                   % (re.sub(r" \d{4}$", "", g["date"]), count)),
         '    <p class="gnt-num num"><span data-odo>%d</span><span class="gnt-pm">± %d</span></p>' % (g["rating"], g["error"]),
         '    <p class="gnt-on">on the %s scale</p>' % esc(g["list"]),
     ] + ([
@@ -399,6 +404,131 @@ def region_cci(c, indent):
     return "\n".join(indent + line for chunk in out for line in chunk.split("\n"))
 
 
+LICHESS_SPEEDS = {"ultraBullet": "UltraBullet", "bullet": "Bullet", "blitz": "Blitz", "rapid": "Rapid",
+                  "classical": "Classical", "correspondence": "Correspondence"}
+MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August", "September",
+          "October", "November", "December")
+
+
+def lichess_outcome(status, winner, me, opponent):
+    """How a game on Lichess ended, said from Luminex's side (assets/js/lichess.js says it the same way)."""
+    if not winner:
+        return "A draw by stalemate" if status == "stalemate" else "A draw"
+    won = winner[0] == me
+    if status == "mate":
+        return "Luminex won by checkmate" if won else "Luminex was checkmated"
+    if status == "resign":
+        return ("Luminex won: %s resigned" % opponent) if won else "Luminex resigned"
+    if status == "outoftime":
+        return "Luminex won on time" if won else "Luminex lost on time"
+    if status == "timeout":
+        return ("Luminex won: %s left the game" % opponent) if won else "Luminex lost: it left the game"
+    return "Luminex won" if won else "Luminex lost"
+
+
+def lichess_board(fen, flipped, indent):
+    """The pieces of a position as the board's markup carries them, seen from the side at the bottom."""
+    out = []
+    for r, row in enumerate(fen.split(" ")[0].split("/")):
+        f = 0
+        for ch in row:
+            if ch.isdigit():
+                f += int(ch)
+                continue
+            colour, p = ("w", ch) if ch.isupper() else ("b", ch.upper())
+            x, y = (7 - f, 7 - r) if flipped else (f, r)
+            out.append('%s<svg class="pc %s x%d y%d" data-p="%s%s" data-sq="%s%d" viewBox="0 0 45 45" aria-hidden="true" focusable="false"><use href="#p-%s"/></svg>'
+                       % (indent, colour, x, y, colour, p, "abcdefgh"[f], 8 - r, p))
+            f += 1
+    return "\n".join(out)
+
+
+def region_lichess(l, indent):
+    """The card "In public, on Lichess" in "Where it stands": Luminex's bot account, as tools/lichess.py read it.
+
+    This is the card's still form: the last game's final position with its two players, the rating Lichess
+    gives the account at each time control it has played, its record, and when the copy was read.
+    assets/js/lichess.js reads Lichess live over all of it while the card is on screen, and adds what needs
+    a script: the game in progress, each rating's last thirty days and a square for every game.
+    """
+    last, c = l.get("last"), l["count"]
+    arrow = '<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>'
+
+    def link(href, text, hook=""):
+        return '<a class="link"%s href="%s"><span>%s</span>%s</a>' % (' data-l="%s"' % hook if hook else "", esc(href), esc(text), arrow)
+
+    def who(p, hook, bot=False):
+        rating = "" if p.get("rating") is None else '<span class="lch-rating num">%d</span>' % p["rating"]
+        if p.get("diff"):
+            d = p["diff"]
+            rating += '<span class="lch-diff num%s">%s%d</span>' % (" is-down" if d < 0 else "", "+" if d > 0 else "−", abs(d))
+        title = '<span class="lch-title">%s</span>' % esc(p["title"]) if p.get("title") else ""
+        return ('<p class="lch-player%s" data-l="%s"><a class="lch-name" href="https://lichess.org/@/%s">%s</a>%s%s'
+                '<span class="lch-clock num" data-l="%s-clock"></span></p>'
+                % (" is-bot" if bot else "", hook, esc(p["name"]), esc(p["name"]), title, rating, hook))
+
+    game = []
+    if last:
+        me = last["side"]
+        us, them = (last["white"], last["black"]) if me == "w" else (last["black"], last["white"])
+        when = datetime.datetime.fromtimestamp(last["end"], datetime.timezone.utc)
+        about = "%s %s, %s" % (LICHESS_SPEEDS.get(last["speed"], last["speed"]), esc(last["clock"]), "rated" if last["rated"] else "casual")
+        if last.get("opening"):
+            about += " · " + esc(last["opening"])
+        game = [
+            '<div class="lch-game">',
+            '  <p class="lch-state" data-l="state"><span class="lch-dot" aria-hidden="true"></span>'
+            '<span data-l="state-text">Its last game, %d %s at %s UTC</span></p>' % (when.day, MONTHS[when.month - 1], when.strftime("%H:%M")),
+            '  ' + who(them, "top"),
+            '  <div class="lch-frame">',
+            '    <div class="board" data-l="board" role="img" aria-label="The last position of luminexbot against %s">' % esc(them["name"]),
+            *lichess_board(last["fen"], me == "b", "      ").split("\n"),
+            '    </div>',
+            '  </div>',
+            '  ' + who(us, "bottom", bot=True),
+            '  <p class="lch-about" data-l="about">%s</p>' % about,
+            '  <p class="lch-end" data-l="end">%s</p>' % esc(lichess_outcome(last["status"], last["winner"], me, them["name"])),
+            '  ' + link("https://lichess.org/" + last["id"], "This game on Lichess", "watch"),
+            '</div>',
+        ]
+    perfs = []
+    for p in l["perfs"]:
+        perfs += ['<li class="lch-perf" data-perf="%s">' % esc(p["key"]),
+                  '  <p class="lch-tc mono">%s</p>' % esc(p["name"]),
+                  '  <p class="lch-num num"><span class="lch-elo" data-l="rating">%d%s</span></p>' % (p["rating"], "?" if p["prov"] else ""),
+                  '  <p class="lch-more mono"><span data-l="games">%s</span> games</p>' % "{:,}".format(p["games"]),
+                  '</li>']
+    n = max(c["all"], 1)
+    wdl = ('<svg class="wdl lch-wdl" viewBox="0 0 %d 10" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
+           '<rect class="wdl-w" x="0" width="%d" height="10"/><rect class="wdl-d" x="%d" width="%d" height="10"/>'
+           '<rect class="wdl-l" x="%d" width="%d" height="10"/></svg>'
+           % (n, c["win"], c["win"], c["draw"], c["win"] + c["draw"], c["loss"]))
+    counts = tuple("{:,}".format(c[k]) for k in ("all", "win", "draw", "loss"))
+    out = ['<figure class="card lch" id="lichess" data-lichess aria-labelledby="lichess-title">',
+           '  <figcaption class="lch-head">',
+           '    <p class="fact-label" id="lichess-title">In public, on Lichess</p>',
+           '    <h3 class="h-m">luminexbot plays other bots there</h3>',
+           '    <p class="lch-sub">A development build of main, on 16 threads of an AMD EPYC 7702. Its ratings are Lichess&#x27;s own, '
+           'from games against other bots: they compare with ratings on Lichess, not with CCRL&#x27;s.</p>',
+           '  </figcaption>',
+           '  <div class="lch-grid">'] + ["    " + g for g in game] + [
+           '    <div class="lch-side">',
+           '      <ol class="lch-perfs">'] + ["        " + p for p in perfs] + [
+           '      </ol>',
+           '      <div class="lch-record">',
+           '        <p class="lch-rec"><b><span data-l="all">%s</span> games</b> against other accounts: '
+           '<span data-l="win">%s</span> wins, <span data-l="draw">%s</span> draws, <span data-l="loss">%s</span> losses</p>' % counts,
+           '        ' + wdl,
+           '        <div class="lch-field" data-l="field" hidden></div>',
+           '      </div>',
+           '      <p class="lch-foot">%s %s</p>' % (link(l["href"], "luminexbot on Lichess"), link(l["href"] + "/all", "Every game it has played")),
+           '      <p class="lch-read mono" data-l="read">Read from Lichess on %s</p>' % esc(l["readText"]),
+           '    </div>',
+           '  </div>',
+           '</figure>']
+    return "\n".join(indent + line for chunk in out for line in chunk.split("\n"))
+
+
 # ---------------------------------------------------------------- stamping
 
 REGION = re.compile(r"(?P<indent>[ \t]*)<!-- @(?P<name>[\w-]+) -->.*?<!-- /@(?P=name) -->", re.S)
@@ -422,7 +552,7 @@ def gauntlet_values(g):
     }
 
 
-def stamp(text, page_url, data, gauntlet=None, cci=None):
+def stamp(text, page_url, data, gauntlet=None, cci=None, lichess=None):
     def fill(m):
         name, indent = m.group("name"), m.group("indent")
         if name in ("sprite", "footer"):
@@ -445,6 +575,10 @@ def stamp(text, page_url, data, gauntlet=None, cci=None):
             if cci is None:
                 raise SystemExit("@cci in %s, but assets/data/cci.json is missing" % page_url)
             body = region_cci(cci, indent)
+        elif name == "lichess":
+            if lichess is None:
+                raise SystemExit("@lichess in %s, but assets/data/lichess.json is missing" % page_url)
+            body = region_lichess(lichess, indent)
         else:
             raise SystemExit("unknown region @%s in %s" % (name, page_url))
         return "%s<!-- @%s -->\n%s\n%s<!-- /@%s -->" % (indent, name, body, indent, name)
@@ -554,6 +688,10 @@ def main():
     if os.path.exists(os.path.join(root, "assets", "data", "cci.json")):
         with open(os.path.join(root, "assets", "data", "cci.json"), encoding="utf-8") as fh:
             cci = json.load(fh)
+    lichess = None
+    if os.path.exists(os.path.join(root, "assets", "data", "lichess.json")):
+        with open(os.path.join(root, "assets", "data", "lichess.json"), encoding="utf-8") as fh:
+            lichess = json.load(fh)
     bad = 0
     for folder, _, files in os.walk(root):
         for name in sorted(files):
@@ -564,7 +702,7 @@ def main():
             url = "/" + (rel[:-len("index.html")] if rel.endswith("index.html") else rel)
             with open(path, encoding="utf-8") as fh:
                 before = fh.read()
-            after = stamp(before, url, data, gauntlet, cci)
+            after = stamp(before, url, data, gauntlet, cci, lichess)
             if after != before:
                 with open(path, "w", encoding="utf-8", newline="\n") as fh:
                     fh.write(after)

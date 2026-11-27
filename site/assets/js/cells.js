@@ -28,11 +28,12 @@
   }
 
   // a run's cells: w wins, d draws and l losses in a fixed scattered order.
-  // A tuning run plays two settings of one engine against each other, so its
-  // cells say only whether a game was decided.
+  // A tuning run plays two settings of one engine against each other, and a
+  // data-generation run plays the engine against itself to make training
+  // positions, so their cells say only whether a game was decided.
   function scatter(run) {
     var w = run.w, d = run.d, l = run.l, n = w + d + l, a = new Uint8Array(n), i;
-    var tune = run.k === "t";
+    var tune = run.k === "t" || run.k === "d";
     if (run.k === "u") return new Uint8Array(n).fill(GONE);          // results not kept
     for (i = 0; i < d; i++) a[i] = tune ? TUNE_DRAW : DRAW;
     for (i = d; i < d + w; i++) a[i] = tune ? TUNE : WIN;
@@ -250,6 +251,7 @@
     var N = function (v) { return v.toLocaleString("en-US"); }, n = N(r.n) + " games";
     if (r.k === "u") return n + " of runs since removed from the bench, their results not kept";
     if (r.k === "t") return "Run " + r.id + " · a tuning run" + (r.s === "x" ? ", deleted since" : "") + " · " + n;
+    if (r.k === "d") return "Run " + r.id + " · training data: the engine against itself" + (r.s === "x" ? ", deleted since" : "") + " · " + n;
     var wdl = N(r.w) + " won, " + N(r.d) + " drawn, " + N(r.l) + " lost";
     if (r.k === "g") return "Test " + r.id + " · gauntlet, against " + r.t + " · " + wdl;
     if (r.k === "m") return "Test " + r.id + " · a match" + (r.t ? " against " + r.t : "") + (r.s === "x" ? ", deleted since" : "") + " · " + wdl;
@@ -260,7 +262,7 @@
   function runHref(r, rowExists) {
     if (r.s === "x") return null;
     if (r.k === "s" && rowExists) return "/tests/#t" + r.id;
-    return "https://bench.luminexchess.com/" + (r.k === "t" ? "tune" : "test") + "/" + r.id + "/";
+    return "https://bench.luminexchess.com/" + (r.k === "t" ? "tune" : r.k === "d" ? "datagen" : "test") + "/" + r.id + "/";
   }
 
   Lux.cells = {
