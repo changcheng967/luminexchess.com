@@ -223,7 +223,9 @@ body:has(.hdr:not(.is-away)) .thead { top: 56px; }      /* step below the header
   .scrolly.is-live .steps { padding-block: 8svh 30svh; }
 }
 
-.speed-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 84px); align-items: center; }
+.speed-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 84px); align-items: start; }
+/* the figure for the engine as it stands keeps beside the list of what made it faster */
+@media (min-width: 901px) { .speed-grid > .speed { position: sticky; top: calc(var(--hdr) + 32px); margin-top: clamp(40px, 6vw, 96px); } }
 .speed-grid .sec-head { margin-bottom: 0; grid-template-columns: minmax(0, 1fr); }
 .speed-grid .sec-head .lede { justify-self: start; }
 .speed-grid .lede a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 4px; }
@@ -236,8 +238,24 @@ body:has(.hdr:not(.is-away)) .thead { top: 56px; }      /* step below the header
 .bar-track { width: 100%; height: 12px; border-radius: 0 4px 4px 0; background: var(--line-2); }
 .bar-fill { fill: var(--lumen); }
 .bar-value { text-align: right; font-weight: 600; }
+/* the changes that made the same search faster, one bar each on a scale of 0 to 10% */
+.speed-main { display: grid; gap: clamp(28px, 4vw, 40px); align-content: start; }
+.speed-steps { margin: 0; }
+.speed-steps .bars { gap: 18px; }
+.speed-steps .bar { grid-template-columns: minmax(8rem, 12.5rem) minmax(0, 1fr) 3.4rem; row-gap: 6px; }
+.speed-steps .bar-label { color: var(--ink); font-weight: 500; line-height: 1.3; }
+.speed-steps .bar-value { color: var(--accent); }
+.bar-meta { grid-column: 1 / -1; font-size: 0.8rem; line-height: 1.5; color: var(--faint); }
+.bar-meta a { color: var(--muted); }
+.speed-steps .note { margin-top: 22px; }
+.motion .speed-steps[data-rise] .bar-fill { transform-box: fill-box; transform-origin: 0 50%; transform: scaleX(0.001); transition: transform 1s var(--ease); }
+.motion .speed-steps[data-rise] .bar:nth-child(2) .bar-fill { transition-delay: 0.08s; }
+.motion .speed-steps[data-rise] .bar:nth-child(3) .bar-fill { transition-delay: 0.16s; }
+.motion .speed-steps[data-rise] .bar:nth-child(4) .bar-fill { transition-delay: 0.24s; }
+.motion .speed-steps[data-rise] .bar:nth-child(5) .bar-fill { transition-delay: 0.32s; }
+.motion .speed-steps[data-rise].is-in .bar-fill { transform: none; }
 @media (max-width: 900px) { .speed-grid { grid-template-columns: 1fr; } }
-@media (max-width: 520px) { .bar { grid-template-columns: 1fr auto; } .bar-track { grid-column: 1 / -1; grid-row: 2; } }
+@media (max-width: 520px) { .bar, .speed-steps .bar { grid-template-columns: 1fr auto; } .bar-track { grid-column: 1 / -1; grid-row: 2; } }
 
 /* the clock: measure, solve, stop, and what each earned in games */
 .clock-scene { overflow: hidden; }

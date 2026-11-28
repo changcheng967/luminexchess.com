@@ -95,10 +95,16 @@
 .ride-steps button[aria-current] b { color: var(--accent); }
 .odo-v.is-reset .odo-r { transition: none; }
 
-/* on a wide window the hero lies over the ride's first scale: its words on the left, the board on the right */
+/* on a wide window the hero lies over the ride's first scale: its words on the left, the board on the right.
+   The words stop 40px short of where ride.js lets the drawing begin (max(47vw, min(50vw, 700px))). */
 @media (min-width: 900px) {
   .motion .ride.is-live:not(.is-plain) .hero { position: absolute; left: 0; right: 0; top: 0; pointer-events: none; }
-  .motion .ride.is-live:not(.is-plain) .hero-copy { pointer-events: auto; }
+  .motion .ride.is-live:not(.is-plain) .hero-copy {
+    pointer-events: auto; container-type: inline-size;
+    width: min(620px, calc(max(47vw, min(50vw, 700px)) - max(var(--gutter), (100vw - var(--wrap)) / 2) - 40px));
+  }
+  /* its longest line, "before it plays", is about 6.4em: the title keeps to three lines in that column */
+  .motion .ride.is-live:not(.is-plain) .hero-title { font-size: clamp(3rem, min(14.5cqi, 5.5vw), 6rem); }
   .motion .ride.is-live:not(.is-plain) .scale-0 { display: none; }
 }
 /* on a narrow one the drawing takes the top half, the words the bottom */
@@ -134,7 +140,7 @@
 .gnt-text p { max-width: 66ch; font-size: 0.98rem; color: var(--muted); }
 .gnt-text .link { font-size: 0.92rem; }
 .gnt-legend { margin: 0; }
-.gnt-cols, .gnt-row { display: grid; grid-template-columns: minmax(180px, 1.2fr) minmax(0, 1.5fr) 3.6rem minmax(170px, 1fr) 5.4rem; gap: 16px; align-items: center; padding-inline: 16px; }
+.gnt-cols, .gnt-row { display: grid; grid-template-columns: minmax(200px, 1.5fr) minmax(0, 1.2fr) 3.6rem minmax(170px, 1fr) 5.4rem; gap: 16px; align-items: center; padding-inline: 16px; }
 .gnt-cols { align-items: end; margin-bottom: -8px; font: 400 0.75rem/1.33 var(--mono); color: var(--faint); }
 .gnt-cols span:nth-child(3), .gnt-cols span:last-child, .gnt-score, .gnt-implied { text-align: right; }
 .gnt-axis { display: block; width: 100%; height: auto; overflow: visible; }
@@ -146,10 +152,11 @@
 .gnt-row.is-lum { background: rgba(var(--lumen-rgb), 0.09); border-color: rgba(var(--lumen-rgb), 0.5); }
 .gnt-row.is-lum + .gnt-row { border-top-color: rgba(var(--lumen-rgb), 0.5); }
 .gnt-row.is-lum::before { content: ""; position: absolute; left: -1px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: var(--r-cell); background: var(--lumen); box-shadow: 0 0 12px rgba(var(--lumen-rgb), 0.7); transform: translateX(-14px); }
-.gnt-name { min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.gnt-name a { display: inline-block; min-height: 24px; line-height: 24px; vertical-align: middle; }
+/* a long name gives way, never the rating beside it */
+.gnt-name { display: flex; align-items: baseline; gap: 8px; min-width: 0; font-weight: 600; white-space: nowrap; }
+.gnt-name a { display: inline-block; min-width: 0; min-height: 24px; line-height: 24px; overflow: hidden; text-overflow: ellipsis; }
 .gnt-name a:hover { color: var(--accent); }
-.gnt-rating { margin-left: 8px; font-weight: 400; color: var(--muted); }
+.gnt-rating { flex: none; font-weight: 400; color: var(--muted); }
 .is-lum .gnt-rating { color: var(--accent); }
 .gnt-result { display: grid; gap: 8px; min-width: 0; }
 .gnt-games { font: 400 0.75rem/1.2 var(--mono); color: var(--faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -164,16 +171,15 @@
 .gf-pool { fill: var(--ink); }
 .is-lum .gf-band { fill: rgba(var(--lumen-rgb), 0.3); }
 .gnt-note { max-width: 88ch; }
-@media (max-width: 860px) {
+/* below about 1000px the five columns would cut the longer names: each opponent takes a block of its own */
+@media (max-width: 980px) {
   .gnt-head { grid-template-columns: minmax(0, 1fr); }
   .gnt-cols { display: none; }
   .gnt-legend .of-plot { display: none; }
   .gnt-row { grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px 12px; height: 104px; padding-inline: 12px; align-content: center; }
   .gnt-row.is-lum::before { display: none; }
   .gnt-result { display: contents; }
-  .gnt-name { grid-area: 1 / 1 / 2 / 4; display: flex; align-items: baseline; gap: 8px; overflow: visible; }
-  .gnt-name a { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-  .gnt-rating { flex: none; margin-left: 0; }
+  .gnt-name { grid-area: 1 / 1 / 2 / 4; }
   .gnt-row .wdl { grid-area: 2 / 1 / 3 / 3; }
   .gnt-score { grid-area: 2 / 3; min-width: 3.1rem; line-height: 1.1; }
   .gnt-games { grid-area: 3 / 1; }
@@ -316,7 +322,8 @@
   .rung { grid-template-columns: 1fr auto auto; grid-template-rows: auto auto; gap: 8px 12px; height: 96px; align-content: center; }
   .rung-result { grid-column: 1 / -1; grid-row: 2; }
 }
-@media (max-width: 360px) { .rung-pm { display: block; margin-top: 2px; font-size: 0.8rem; text-align: right; } }
+/* a three-figure Elo with its interval does not fit one line beside the name and the score on a phone */
+@media (max-width: 460px) { .rung-pm { display: block; margin-top: 2px; font-size: 0.8rem; text-align: right; } }
 
 /* ---------- 3. method: four squares on a rank, and every test ---------- */
 .pipe { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: clamp(48px, 7vw, 88px); border: 1px solid var(--line); border-radius: var(--r-l); overflow: hidden; }
@@ -347,7 +354,7 @@
 .strip { margin: 0; padding: clamp(24px, 3vw, 40px); }
 .strip .fig-head { margin-bottom: 20px; }
 .strip-scroll { overflow-x: auto; margin-inline: -8px; padding: 2px 8px 8px; scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; }
-.strip-svg { display: block; width: 100%; min-width: max(780px, calc(var(--bars, 60) * 25.4px)); height: auto; overflow: visible; }
+.strip-svg { display: block; width: 100%; min-width: max(780px, calc(var(--bars, 60) * 24px + 52px)); height: auto; overflow: visible; }
 .strip-axis { display: none; }
 .strip.has-axis .strip-axis { display: block; position: absolute; left: 0; top: 0; pointer-events: none; }
 .strip-axis::before { content: ""; position: absolute; left: 0; top: calc(var(--t, 0px) - 12px); width: calc(clamp(24px, 3vw, 40px) + 3.4rem); height: calc(var(--b, 0px) - var(--t, 0px) + 24px); background: var(--bg-2); }
@@ -431,6 +438,8 @@
 .motion .c-pt :is(rect, .c-elo) { transition: opacity 0.3s var(--ease); }
 .motion .c-pt:not(.is-on) :is(rect, .c-elo) { opacity: 0; }
 .c-pt.is-now rect { fill: var(--lumen); filter: drop-shadow(0 0 6px rgba(var(--lumen-rgb), 0.8)); }
+.c-pt .c-elo.is-hidden { opacity: 0; }
+.climb.is-crowded .c-date, .climb.is-crowded .c-pt.is-main .c-ver { display: none; }
 .climb-text { min-height: 3.1em; margin-top: 8px; font-size: 0.93rem; color: var(--muted); }
 .motion .climb .draw, .motion .climb .draw > * { transition: transform 0.5s var(--ease); }
 .draw { overflow: hidden; }

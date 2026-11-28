@@ -73,6 +73,9 @@
     placeAxis();
     ends();
     window.addEventListener("resize", function () { placeAxis(); ends(); });
+    // the caption above the drawing rewraps when the web fonts arrive, which moves the scale's ticks
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeAxis);
+    if (window.ResizeObserver) new ResizeObserver(function () { placeAxis(); }).observe(fig);
 
     // one tooltip, shared by every bar; the same details are in each bar's label
     var tip = el("div", "tip");
@@ -113,7 +116,7 @@
     function shown(p) { return p.pm ? String(p.elo) : "≈" + p.elo; }
 
     // The chart is drawn at the size it is shown, so its labels are never scaled down.
-    var W, H, Lm = 42, Rm = 22, T = 28, B = 52, PAD, draw, groups;
+    var W, H, Lm = 42, Rm = 22, T = 28, B = 52, PAD, draw, groups, labels, labelY;
     var minV = Math.min.apply(null, pts.map(function (p) { return p.elo; }));
     var lo = Math.floor((minV - 200) / 100) * 100, hi = Math.ceil((Math.max(goal, pts[pts.length - 1].elo) + 100) / 100) * 100;
     function x(i) { return Lm + PAD + i * (W - Lm - Rm - 2 * PAD) / (pts.length - 1); }
@@ -153,13 +156,22 @@
 
       var top = svgEl("svg", { viewBox: box, role: "img", "aria-labelledby": "climb-title" });
       var slot = (W - Lm - Rm - 2 * PAD) / (pts.length - 1);      // dates lose their year where the points stand close
+      // Too close for a version and a date under every point: the dates go (the line above the chart
+      // dates the point in focus), the development builds keep only their square, and the releases'
+      // names take two rows in turn.
+      var crowded = slot < 58, nRel = 0;
+      fig.classList.toggle("is-crowded", crowded);
+      labels = []; labelY = [];
       groups = pts.map(function (p, i) {
-        var gEl = svgEl("g", {}, "c-pt");
-        gEl.appendChild(svgEl("rect", { x: x(i) - 6, y: y(p.elo) - 6, width: 12, height: 12, rx: 2 }));   // a square of the board
+        var gEl = svgEl("g", {}, "c-pt" + (p.v === "main" ? " is-main" : ""));
+        var sq = p.v === "main" ? 9 : 12;     // a square of the board; a development build's is smaller than a release's
+        gEl.appendChild(svgEl("rect", { x: x(i) - sq / 2, y: y(p.elo) - sq / 2, width: sq, height: sq, rx: 2 }));
         var ly = y(p.elo) - 15;
         if (goal && y(goal) > ly - 14 && y(goal) < ly + 4) ly = y(p.elo) + 25;      // it would sit on the goal line: below its point instead
         var te = svgEl("text", { x: x(i), y: ly, "text-anchor": "middle" }, "c-elo"); te.textContent = shown(p); gEl.appendChild(te);
-        var tv = svgEl("text", { x: x(i), y: H - B + 22, "text-anchor": "middle" }, "c-ver"); tv.textContent = p.v; gEl.appendChild(tv);
+        labels.push(te); labelY.push(ly);
+        var row = crowded && p.v !== "main" ? (nRel++ % 2) * 15 : 0;
+        var tv = svgEl("text", { x: x(i), y: H - B + 22 + row, "text-anchor": "middle" }, "c-ver"); tv.textContent = p.v; gEl.appendChild(tv);
         var td = svgEl("text", { x: x(i), y: H - B + 39, "text-anchor": "middle" }, "c-date"); td.textContent = slot < 104 ? p.d.replace(/ \d{4}$/, "") : p.d; gEl.appendChild(td);
         top.appendChild(gEl);
         return gEl;
@@ -170,9 +182,29 @@
 
     var numEl = $("[data-climb-odo]", fig), pmEl = $("[data-climb-pm]", fig), atEl = $("[data-climb-at]", fig), textEl = $("[data-climb-text]", fig);
     var last = pts.length - 1;
+    // A rating that would touch one already written stays unwritten: the point in focus is written
+    // first, then the newest, the first and the releases from the newest back, then the rest.
+    // Each figure is a run of 13px monospace digits, 0.6em a character.
+    function declutter(f) {
+      var order = [f, last, 0], placed = [], k;
+      for (k = last; k >= 0; k--) if (pts[k].v !== "main") order.push(k);
+      for (k = last; k >= 0; k--) order.push(k);
+      var done = {};
+      order.forEach(function (i) {
+        if (i < 0 || done[i]) return;
+        done[i] = 1;
+        if (i > f) { labels[i].classList.remove("is-hidden"); return; }   // not reached yet: unlit with its point
+        var w = labels[i].textContent.length * 7.8,
+            bx = { l: x(i) - w / 2 - 4, r: x(i) + w / 2 + 4, t: labelY[i] - 12, b: labelY[i] + 4 };
+        var hit = placed.some(function (o) { return bx.l < o.r && bx.r > o.l && bx.t < o.b && bx.b > o.t; });
+        labels[i].classList.toggle("is-hidden", hit);
+        if (!hit) placed.push(bx);
+      });
+    }
     function still() {
       draw.style.setProperty("--draw", "1");
       groups.forEach(function (gEl, i) { gEl.classList.add("is-on"); gEl.classList.toggle("is-now", i === last); });
+      declutter(last);
     }
     var timeline = $("[data-timeline]"), sticky = window.matchMedia("(min-width: 941px)");
     var redraw = null, drawnAt = W, resizeTimer = 0;
@@ -199,6 +231,7 @@
       fig.classList.toggle("is-none", a < 0);
       draw.style.setProperty("--draw", a < 0 ? "0" : ((x(i) + (i === last ? Rm + PAD : 3)) / W).toFixed(4));
       groups.forEach(function (gEl, k) { gEl.classList.toggle("is-on", k <= i); gEl.classList.toggle("is-now", k === i); });
+      declutter(a < 0 ? -1 : i);
       if (a < 0) {
         odo.set("—");
         if (pmEl) pmEl.textContent = "";

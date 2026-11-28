@@ -646,7 +646,7 @@
             frag.appendChild(w);
           });
           h.replaceChild(frag, c);
-        } else if (c.nodeType === 1) {
+        } else if (c.nodeType === 1 && c.nodeName !== "BR") {   // a line break stays one: inside a word's box it would not break
           var box = document.createElement("span");
           box.className = "w"; box.style.setProperty("--i", i++);
           h.insertBefore(box, c); box.appendChild(c);

@@ -2,17 +2,17 @@
  "note": "Luminex's Lichess account as the home page's card shows it before it reads Lichess live (assets/js/lichess.js). Written by tools/lichess.py; run tools/stamp.py site afterwards.",
  "href": "https://lichess.org/@/luminexbot",
  "name": "luminexbot",
- "read": "2026-11-27T23:31:33Z",
- "readText": "27 November 2026, 23:31 UTC",
+ "read": "2026-11-28T01:55:06Z",
+ "readText": "28 November 2026, 01:55 UTC",
  "created": "2026-04-25",
  "perfs": [
   {
    "key": "bullet",
    "name": "Bullet",
-   "rating": 3003,
+   "rating": 3002,
    "rd": 45,
-   "prog": 1,
-   "games": 111,
+   "prog": 0,
+   "games": 112,
    "prov": false,
    "history": [
     [
@@ -58,6 +58,10 @@
     [
      "2026-11-27",
      3003
+    ],
+    [
+     "2026-11-28",
+     3002
     ]
    ],
    "href": "https://lichess.org/@/luminexbot/perf/bullet"
@@ -65,10 +69,10 @@
   {
    "key": "blitz",
    "name": "Blitz",
-   "rating": 2908,
+   "rating": 2910,
    "rd": 45,
-   "prog": 7,
-   "games": 152,
+   "prog": 8,
+   "games": 154,
    "prov": false,
    "history": [
     [
@@ -121,7 +125,11 @@
     ],
     [
      "2026-11-27",
-     2908
+     2907
+    ],
+    [
+     "2026-11-28",
+     2910
     ]
    ],
    "href": "https://lichess.org/@/luminexbot/perf/blitz"
@@ -129,10 +137,10 @@
   {
    "key": "rapid",
    "name": "Rapid",
-   "rating": 2951,
-   "rd": 61,
-   "prog": 14,
-   "games": 40,
+   "rating": 2956,
+   "rd": 60,
+   "prog": 7,
+   "games": 41,
    "prov": false,
    "history": [
     [
@@ -170,18 +178,22 @@
     [
      "2026-11-27",
      2951
+    ],
+    [
+     "2026-11-28",
+     2956
     ]
    ],
    "href": "https://lichess.org/@/luminexbot/perf/rapid"
   }
  ],
  "count": {
-  "all": 321,
-  "win": 116,
-  "draw": 172,
+  "all": 325,
+  "win": 118,
+  "draw": 174,
   "loss": 33
  },
- "since": 1795821137675,
+ "since": 1795828325171,
  "fields": [
   "id",
   "created",
@@ -199,29 +211,29 @@
   "opening"
  ],
  "last": {
-  "id": "UWiJXcZo",
-  "fen": "8/5P2/2Q5/3K3k/8/4q3/8/8 b - - 100 1",
-  "lm": "e6d5",
-  "status": "draw",
-  "winner": "",
-  "speed": "bullet",
-  "clock": "1+1",
+  "id": "ZMgyIZ98",
+  "fen": "8/8/8/8/8/6K1/8/5R1k b - - 52 1",
+  "lm": "f8f1",
+  "status": "mate",
+  "winner": "white",
+  "speed": "rapid",
+  "clock": "10+2",
   "rated": true,
   "side": "w",
   "white": {
    "name": "luminexbot",
    "title": "BOT",
-   "rating": 3003,
-   "diff": 0
+   "rating": 2951,
+   "diff": 5
   },
   "black": {
-   "name": "NeuroSoCute",
+   "name": "rust-in-pieces-nnue",
    "title": "BOT",
-   "rating": 2990,
-   "diff": 1
+   "rating": 2727,
+   "diff": -2
   },
-  "end": 1795821554,
-  "opening": "Queen's Gambit Declined: Exchange Variation"
+  "end": 1795829819,
+  "opening": "Sicilian Defense: Modern Variations, Main Line"
  },
  "games": [
   ["C8KoRoYh",1783435715,"b","1+0","b","L",1,"maia9","BOT",1786,3000,-700,"mate","Indian Defense"],
@@ -544,6 +556,10 @@
   ["UFShb58x",1795815838,"z","3+3","b","D",1,"caiporaBot","BOT",2893,2904,0,"draw","Italian Game: Classical Variation"],
   ["0ABx6oft",1795818758,"z","5+3","w","W",1,"Vektr64","BOT",3000,2904,4,"mate","Petrov's Defense"],
   ["g50zNKqA",1795819743,"r","10+2","w","W",1,"Godelia-bot","BOT",2730,2946,5,"resign","Queen's Gambit Accepted: Central Variation, McDonnell Defense"],
-  ["UWiJXcZo",1795821137,"b","1+1","w","D",1,"NeuroSoCute","BOT",2990,3003,0,"draw","Queen's Gambit Declined: Exchange Variation"]
+  ["UWiJXcZo",1795821137,"b","1+1","w","D",1,"NeuroSoCute","BOT",2990,3003,0,"draw","Queen's Gambit Declined: Exchange Variation"],
+  ["ZTfsFBuZ",1795821835,"z","5+3","b","D",1,"RustyRival","BOT",2865,2908,-1,"draw","Italian Game: Giuoco Piano"],
+  ["NC0iWx6Q",1795824090,"z","3+2","w","W",1,"VanguardOpen","BOT",2758,2907,3,"mate","Sicilian Defense: Open"],
+  ["c6I8bMXv",1795826870,"b","1.5+1","w","D",1,"NeuroSoCute","BOT",2996,3003,-1,"draw","King's Indian Defense: Normal Variation, King's Knight Variation"],
+  ["ZMgyIZ98",1795828325,"r","10+2","w","W",1,"rust-in-pieces-nnue","BOT",2727,2951,5,"mate","Sicilian Defense: Modern Variations, Main Line"]
  ]
 }

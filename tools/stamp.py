@@ -111,9 +111,12 @@ def bar_path(x, w, y0, y1, r=4.0):
 def region_tests_strip(data, indent):
     tests = sorted(data["tests"], key=lambda t: t["test"])
     lo, hi = data["axis"]["min"], data["axis"]["max"]
-    W, H, L, R, T, B = 1000, 250, 44, 8, 14, 34
+    # A bar a 24px column, so a finger can pick one: the drawing is as wide as its bars need and
+    # home.css gives it that width in pixels (L + R + 24 a bar), so it is drawn at its own scale,
+    # 250px high, and scrolls sideways in a frame narrower than that.
+    slot, L, R, T, B, H = 24, 44, 8, 14, 34, 250
+    W = L + R + slot * len(tests)
     ph = H - T - B
-    slot = (W - L - R) / len(tests)
     bw = min(13.0, slot - 8)
 
     def y(v):

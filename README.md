@@ -53,6 +53,10 @@ Addresses from the time the site was one page still work: `/#strength`, `/#testi
 - Animations move `transform` and `opacity` only. The Content Security Policy allows no
   inline styles, so scripts place things by setting CSS custom properties
   (`element.style.setProperty`).
+- On a window 900 px or wider the home page's opening lies over the ride's first scale.
+  `ride.js` (`layout()`) lets the drawing begin at `max(47vw, min(50vw, 700px))`, and
+  `home.css` stops the opening's words 40 px short of that line and sizes its title to the
+  column that leaves (`cqi`), so the words never run under the board: change both together.
 - A link from another page to an anchor (`/#gauntlet`) arrives while the page is still
   taking its size: the home page's opening gets its scroll track, thousands of pixels, only
   when its game file is here. `site.js` therefore keeps the target in place until the page
@@ -104,7 +108,9 @@ discipline does).
 - `tools/stamp.py site` keeps the repeated parts in step and checks the pages. A page marks
   a region with `<!-- @name -->` and `<!-- /@name -->`; the tool rewrites what is between
   them: the icon sprite, header and footer from `tools/parts/`, the starting position's
-  pieces, the test charts and rows from `site/assets/data/tests.json`, the gauntlet
+  pieces, the test charts and rows from `site/assets/data/tests.json` (the home page's
+  strip is drawn at its own scale, a 24 px column a test, 250 px high, and scrolls
+  sideways in a narrower frame), the gauntlet
   figure from `site/assets/data/gauntlet.json`, the figure for the Computer Chess Index
   from `site/assets/data/cci.json`, and the Lichess card's still form from
   `site/assets/data/lichess.json`. Inside a sentence, a value between

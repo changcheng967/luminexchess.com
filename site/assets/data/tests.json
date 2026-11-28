@@ -1,6 +1,6 @@
 {
  "note": "The SPRT record shown on luminexchess.com. Edit this file, then run: python -I tools/stamp.py site",
- "asOf": "27 November 2026",
+ "asOf": "28 November 2026",
  "leftOff": [
   59
  ],
@@ -10,6 +10,18 @@
   "max": 120
  },
  "tests": [
+  {
+   "test": 334,
+   "title": "Order quiet moves by a continuation history four plies back too, an idea of Stockfish's",
+   "href": "https://bench.luminexchess.com/test/334/",
+   "ref": "search",
+   "games": 6260,
+   "elo": 0.28,
+   "ci": 4.13,
+   "text": "+0.28 ± 4.13",
+   "status": "stop",
+   "label": "Stopped, unresolved"
+  },
   {
    "test": 319,
    "title": "gen768u_01q, V6's first network: a feature table for each phase of the game, against gen768t_05q",
