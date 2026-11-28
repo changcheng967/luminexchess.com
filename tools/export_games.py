@@ -12,14 +12,19 @@ The first game is also the one the home page plays as it scrolls; its start posi
 has to be reachable from the initial array by the moves in the home page's data-book
 attribute (this script prints them for the first game).
 
-The current games are Luminex's only wins against Obsidian v16.0 and Berserk 14 in
-gauntlet 3 (tests 116 and 117 on bench.luminexchess.com, 13 and 14 November 2026):
+The current games are two of v6.7.0's wins in gauntlet 8 (27 November 2026), against
+its two highest rated opponents: Obsidian v16.0 (test 323, game 745 of the bench's
+PGN archive 323.946.321, the 105th of that file) and PlentyChess b-v8.0.0 (test 322,
+the 68th game of 322.942.1). The archives are /opt/openbench/Media/PGNs/<test>.pgn.tar
+on the bench server; their last few games can be ones the bench did not count, so both
+are taken from the counted part. Each game was cut out into its own file:
 
     python -X utf8 -I tools/export_games.py site/assets/data/games.json \
-        site/assets/data/luminex-gauntlet-wins.pgn luminex_win_test116.pgn luminex_win_test117.pgn
+        site/assets/data/luminex-gauntlet-wins.pgn luminex_win_test323.pgn luminex_win_test322.pgn
 
-Before them the page showed two wins against Stash 37 from a 100-game match of
-10 November 2026 (commit 6323ef0 and earlier have that data and its captions).
+Before them the page showed Luminex's only wins against Obsidian v16.0 and Berserk 14 in
+gauntlet 3 (tests 116 and 117; commit ebe5588 and earlier have that data and its
+captions), and before those two wins against Stash 37 (commit 6323ef0 and earlier).
 """
 import json
 import os
@@ -32,54 +37,61 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import select_games  # noqa: E402
 
 # what both games share, in the words the PGN and the pages use
-BUILD = "main of 13 November 2026 (a42d22ac) with the gen768r_05q network"
+BUILD = "v6.7.0's search and network: main of 27 November 2026 at a81c73d with gen768u_01q"
 CLOCK = "10+0.1"          # the bench's time control; a worker scales it to its own speed
+GAUNTLET = 8
 
 SHOWCASE = [
     {
         "id": 0,
         "opponent": "Obsidian v16.0",
-        "test": 116,
-        "games": 800, "wins": 1, "draws": 133, "losses": 666,
-        "title": "A rook for a rook by move ten",
-        "opening": "a two-move book opening (c4 and b4 against ...e5 and ...b5)",
-        "story": "Luminex's only win in 800 games against Obsidian v16.0 (3746 on CCRL Blitz): "
-                 "1 win, 133 draws, 666 losses. Obsidian's queen took the rook on a1, Luminex's bishop the rook on h8. "
-                 "From move 6 both engines scored White ahead; mate came on move 83.",
+        "test": 323,
+        "games": 816, "wins": 22, "draws": 439, "losses": 355,
+        "title": "A queen on h3, and mate in three",
+        "opening": "a two-move book opening (d4 and h3 against ...Nf6 and ...h6)",
+        "story": "One of Luminex's 22 wins in 816 games against Obsidian v16.0 (3746 on CCRL Blitz): "
+                 "22 wins, 439 draws, 355 losses. For thirty moves both engines scored the game within 0.9 of level. "
+                 "From move 33 Luminex scored itself ahead, up to +4.0, while Obsidian scored itself at worst −1.4. "
+                 "Then 47.Qxe6 took a pawn and Obsidian scored itself +2.4; Luminex gave its queen on h3 and "
+                 "announced mate in three. It came on move 49.",
         "moments": {
-            6: "6.Nxe5: Luminex takes a pawn. Its own score goes from +0.2 to +1.5, Obsidian's from +0.2 to −1.1.",
-            9: "7...Qxa1: Obsidian's queen takes the rook in the corner. Its own score is still −1.0.",
-            14: "10.Bxh8: the bishop takes a rook back. Luminex +2.3, Obsidian −1.3 for itself.",
-            24: "15.Rxd1: the queens are off and the material is level. Luminex scores itself +3.8, Obsidian −1.7.",
-            84: "45.Nxg7: two knights and a pawn against a knight. Luminex +8.9, Obsidian −3.0.",
-            146: "76.f7: Luminex announces mate in 10. Obsidian's next score is −6.6.",
-            150: "78.f8=Q+: the pawn queens with check. Now Obsidian sees the mate too.",
-            160: "83.Ng4#: checkmate, by a knight.",
+            50: "28.Nxf7: Obsidian gives a knight for the pawn on f7 and scores itself −0.2. "
+                "Luminex takes, and scores itself +0.6.",
+            61: "33...Bxc5: the material is level again. Luminex scores itself +1.1, Obsidian −0.4.",
+            63: "34...gxf6: a pawn more. Luminex +1.4, Obsidian −0.5.",
+            69: "37...Rc4: Luminex +2.1. Obsidian still scores itself −0.4.",
+            83: "44...Rc4: Luminex scores itself +4.0. Obsidian's reply scores −1.2.",
+            88: "47.Qxe6: Obsidian's queen takes the pawn back, and Obsidian scores itself +2.4.",
+            89: "47...Qxh3+: Luminex gives its queen and announces mate in three.",
+            90: "48.gxh3: Obsidian takes the queen, and sees the mate.",
+            93: "49...R8g2#: checkmate, by the two rooks.",
         },
     },
     {
         "id": 1,
-        "opponent": "Berserk 14",
-        "test": 117,
-        "games": 802, "wins": 1, "draws": 145, "losses": 656,
-        "title": "Level for twenty moves, then a knight on e6",
-        "opening": "a two-move book opening (b3 and c4 against ...c6 and ...e6)",
-        "story": "Luminex's only win in 802 games against Berserk 14 (3737 on CCRL Blitz): "
-                 "1 win, 145 draws, 656 losses. For twenty moves Berserk scored the game within 0.4 of level. "
-                 "Then 21.Nxe6 gave a knight for a pawn: Luminex scored itself +4.4, and Berserk's own score "
-                 "went from +0.1 to −2.2 in one move. Mate came on move 103.",
+        "opponent": "PlentyChess b-v8.0.0",
+        "test": 322,
+        "games": 808, "wins": 10, "draws": 416, "losses": 382,
+        "title": "A rook on e4, then a queen against a rook",
+        "opening": "a two-move book opening (Nc3 and f3 against ...e6 and ...Bc5)",
+        "story": "One of Luminex's 10 wins in 808 games against PlentyChess b-v8.0.0, the highest rated engine of "
+                 "the gauntlet (3773 on CCRL Blitz): 10 wins, 416 draws, 382 losses. From move 16 Luminex scored itself "
+                 "about a pawn ahead; at 28...Bh5 its score jumped to +4.5, while PlentyChess scored itself −1.0. "
+                 "Luminex gave a rook for the bishop on e4, took a rook back on g2, and gave its last rook to queen "
+                 "the f-pawn on move 65. PlentyChess saw the mate on move 108; it came on move 121.",
         "moments": {
-            35: "20...Rfd8: twenty moves in, Berserk scores itself +0.1 and Luminex scores itself +0.5.",
-            36: "21.Nxe6: Luminex gives a knight for a pawn and scores itself +4.4. Berserk's reply scores −2.2.",
-            40: "23.Qxf6: the queen takes a bishop, and the pinned g-pawn cannot take back. "
-                "Luminex is a pawn up: +4.4, against Berserk's −2.1.",
-            60: "33.Qxc5: the queens come off. A rook ending with a pawn more: Luminex +6.1, Berserk −1.8.",
-            135: "70...h1=Q: Berserk queens first, and loses its rook to 71.Rxd8.",
-            142: "74.a8=Q: Luminex queens too. Luminex +13.4, Berserk −12.8.",
-            152: "79.Rxd4: a rook and two pawns against a bare king. Two moves later Berserk is counting the moves "
-                 "to mate; Luminex, scoring the ending with its network alone, takes twenty moves to queen a pawn. "
-                 "Since 17 November main scores a bare king by rule (#92).",
-            200: "103.Rd1#: checkmate.",
+            27: "16...Bg6: Luminex scores itself +1.1. PlentyChess scores itself −0.2.",
+            51: "28...Bh5: Luminex's score jumps from +1.7 to +4.5. PlentyChess's reply scores −1.8 for itself.",
+            57: "31...Rxe4: Luminex gives a rook for the bishop on e4 and scores itself +3.7. "
+                "PlentyChess takes back, at −1.9.",
+            65: "35...Bxg2+: the bishop takes a rook on g2; after 36.Qxg2 the material is level again. "
+                "Luminex +4.6, PlentyChess −1.9.",
+            75: "40...cxd5: the queens are off: a rook ending with a pawn more. Luminex +5.8, PlentyChess −1.9.",
+            125: "65...f1=Q: Luminex let its rook go to queen the pawn: a queen against a rook. "
+                 "Luminex +11.6, PlentyChess −4.1.",
+            209: "107...Qe7+: Luminex scores the ending a known win. PlentyChess's reply sees mate in 22.",
+            223: "114...Kxb7: the king takes the rook. Mate in 10.",
+            237: "121...Qe7#: checkmate.",
         },
     },
 ]
@@ -159,7 +171,7 @@ def main():
             h = g.headers
             lum_white = h["White"].startswith("Luminex")
             worker_clock = h.get("TimeControl")
-            h["Event"] = "Luminex gauntlet 3, test %d: %d games against %s" % (spec["test"], spec["games"], spec["opponent"])
+            h["Event"] = "Luminex gauntlet %d, test %d: %d games against %s" % (GAUNTLET, spec["test"], spec["games"], spec["opponent"])
             h["Site"] = "https://bench.luminexchess.com/test/%d/" % spec["test"]
             h["White"] = "Luminex" if lum_white else spec["opponent"]
             h["Black"] = spec["opponent"] if lum_white else "Luminex"
@@ -167,8 +179,8 @@ def main():
                 h.pop(key, None)
             g.comment = (f"{spec['title']}. Luminex ({BUILD}) against {spec['opponent']}, one thread, "
                          f"the bench's {CLOCK} scaled to the worker's speed ({worker_clock}). "
-                         f"Luminex's only win of the {spec['games']} games of test {spec['test']}: "
-                         f"{spec['wins']} win, {spec['draws']} draws, {spec['losses']} losses. "
+                         f"One of Luminex's {spec['wins']} wins in the {spec['games']} games of test {spec['test']}: "
+                         f"{spec['wins']} wins, {spec['draws']} draws, {spec['losses']} losses. "
                          "Each move's comment is the moving engine's own score, from its side's point of view, "
                          "and its search depth.")
             print(g, file=fh, end="\n\n")

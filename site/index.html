@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://luminexchess.com/">
   <meta name="theme-color" content="#050a14">
   <meta name="color-scheme" content="light dark">
-  <script src="/assets/js/theme.js?v=34"></script>
+  <script src="/assets/js/theme.js?v=35"></script>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/mark-64.png">
@@ -27,15 +27,15 @@
   <link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/fragment-mono.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/site.css?v=34">
-  <link rel="stylesheet" href="/assets/css/home.css?v=34">
-  <script src="/assets/js/site.js?v=34" defer></script>
-  <script src="/assets/js/cells.js?v=34" defer></script>
-  <script src="/assets/js/ride.js?v=34" defer></script>
-  <script src="/assets/js/knight.js?v=34" defer></script>
-  <script src="/assets/js/home.js?v=34" defer></script>
-  <script src="/assets/js/board.js?v=34" defer></script>
-  <script src="/assets/js/lichess.js?v=34" defer></script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=35">
+  <link rel="stylesheet" href="/assets/css/home.css?v=35">
+  <script src="/assets/js/site.js?v=35" defer></script>
+  <script src="/assets/js/cells.js?v=35" defer></script>
+  <script src="/assets/js/ride.js?v=35" defer></script>
+  <script src="/assets/js/knight.js?v=35" defer></script>
+  <script src="/assets/js/home.js?v=35" defer></script>
+  <script src="/assets/js/board.js?v=35" defer></script>
+  <script src="/assets/js/lichess.js?v=35" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -134,8 +134,8 @@
     <!-- the ride: one canvas that pulls back, as the page scrolls, from one position to every game
          the bench has played. The words beside it are the page; the drawing needs scripts. -->
     <section class="ride" id="top" data-ride
-             data-src="/assets/data/games.json" data-gauntlet="/assets/data/gauntlet-3.json" data-wall="/assets/data/wall.json"
-             data-ply="14" data-test="116" aria-labelledby="hero-title">
+             data-src="/assets/data/games.json" data-gauntlet="/assets/data/gauntlet-8.json" data-wall="/assets/data/wall.json"
+             data-ply="89" data-test="323" aria-labelledby="hero-title">
       <div class="hero" data-hero>
         <div class="wrap">
           <div class="hero-copy">
@@ -177,26 +177,26 @@
               <article class="scale scale-0" data-scale="0">
                 <p class="kicker">One position</p>
                 <h2 class="scale-n"><span class="scale-num">1</span> <span class="scale-unit">position</span></h2>
-                <p class="scale-text">Move 10 of a real game: Luminex against Obsidian v16.0, on 14 November 2026. Touch a piece and the squares it attacks light up, the way the engine holds them: as sixty-four bits.</p>
+                <p class="scale-text">Move 47 of a real game: Obsidian v16.0 against Luminex, on 27 November 2026. Luminex has just given its queen on h3, and sees mate in three. Touch a piece and the squares it attacks light up, the way the engine holds them: as sixty-four bits.</p>
                 <div class="ride-still" data-still></div>
               </article>
               <article class="scale" data-scale="1">
                 <p class="kicker">One game</p>
-                <h2 class="scale-n"><span class="scale-num" data-count="plies">161</span> <span class="scale-unit">positions</span></h2>
-                <p class="scale-text">Pull back, and that position is one frame of a game. Under every frame is Luminex's own score for it. From move 6 both engines scored White ahead; mate came on move 83.</p>
+                <h2 class="scale-n"><span class="scale-num" data-count="plies">94</span> <span class="scale-unit">positions</span></h2>
+                <p class="scale-text">Pull back, and that position is one frame of a game. Under every frame is Luminex's own score for it. From move 33 Luminex scored itself ahead while Obsidian scored itself at worst −1.4; at move 47 Obsidian scored itself +2.4, and mate came on move 49.</p>
                 <a class="link" href="/games/"><span>Replay it move by move</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                 <div class="ride-still" data-still></div>
               </article>
               <article class="scale" data-scale="2">
                 <p class="kicker">One match</p>
-                <h2 class="scale-n"><span class="scale-num" data-count="match">800</span> <span class="scale-unit">games</span></h2>
-                <p class="scale-text">That game is the one lit cell. Against Obsidian v16.0, rated 3746 on CCRL Blitz, Luminex won once, drew 133 times and lost 666. A lit cell is a win, a dim one a draw, a dark one a loss.</p>
+                <h2 class="scale-n"><span class="scale-num" data-count="match">816</span> <span class="scale-unit">games</span></h2>
+                <p class="scale-text">That game is one of the 22 lit cells. Against Obsidian v16.0, rated 3746 on CCRL Blitz, Luminex won 22 games, drew 439 and lost 355. A lit cell is a win, a dim one a draw, a dark one a loss.</p>
                 <div class="ride-still" data-still></div>
               </article>
               <article class="scale" data-scale="3">
                 <p class="kicker">One gauntlet</p>
-                <h2 class="scale-n"><span class="scale-num">9,602</span> <span class="scale-unit">games</span></h2>
-                <p class="scale-text">The gauntlet this game was played in, gauntlet 3: twelve engines that CCRL rates, about 800 games against each. The stronger the opponent, the darker its field.</p>
+                <h2 class="scale-n"><span class="scale-num">8,876</span> <span class="scale-unit">games</span></h2>
+                <p class="scale-text">The gauntlet this game was played in, gauntlet 8: eleven engines that CCRL rates, about 800 games against each. The stronger the opponent, the darker its field.</p>
                 <a class="link" href="#strength"><span>Where it stands today</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
                 <div class="ride-still" data-still></div>
               </article>
@@ -212,9 +212,9 @@
           <p class="ride-readout" data-readout aria-hidden="true"></p>
           <ol class="ride-steps" aria-label="The five scales of the drawing">
             <li><button type="button" data-go="0"><b>1</b><span>position</span></button></li>
-            <li><button type="button" data-go="1"><b data-count="plies">161</b><span>positions</span></button></li>
-            <li><button type="button" data-go="2"><b data-count="match">800</b><span>games</span></button></li>
-            <li><button type="button" data-go="3"><b>9,602</b><span>games</span></button></li>
+            <li><button type="button" data-go="1"><b data-count="plies">94</b><span>positions</span></button></li>
+            <li><button type="button" data-go="2"><b data-count="match">816</b><span>games</span></button></li>
+            <li><button type="button" data-go="3"><b>8,876</b><span>games</span></button></li>
             <li><button type="button" data-go="4"><b data-wall-games>2,193,020</b><span>games</span></button></li>
           </ol>
         </div>

@@ -104,6 +104,11 @@
       var n = Math.ceil(Math.abs(m) / 2);   // mate scores are stored in plies
       return { text: (m > 0 ? "+M" : "−M") + n, meta: m > 0 ? "mates in " + n : "mated in " + n, cp: m > 0 ? 3000 : -3000 };
     }
+    // from 15000 the engine is not counting pawns: it has found an ending it knows is won (VALUE_KNOWN_WIN)
+    if (Math.abs(p.cp) >= 15000) {
+      var won = p.cp * s > 0;
+      return { text: won ? "won" : "lost", meta: (won ? "a known win" : "a known loss") + ", depth " + p.depth, cp: won ? 3000 : -3000 };
+    }
     var v = (p.cp * s) / 100;
     return { text: (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(2), meta: "depth " + p.depth, cp: p.cp * s };
   }
@@ -407,11 +412,11 @@
     load(want >= 1 && want <= games.length ? want - 1 : 0);
   }
 
-  /* ---------- the hero: every game of both matches, two of them lit ----------
+  /* ---------- the hero: every game of both matches, their wins lit ----------
      One square a game, in boards of eight by eight, dark and light like a real board: dark for a loss,
      half lit for a draw, lit for a win. The order inside a match is the seeded scatter every field of
      cells uses (the bench keeps counts, not an order), the same picture as the field beside each game.
-     The one win of each match is a button that opens its game. */
+     The first win of each match stands for the game shown, and is a button that opens it. */
   function heroField() {
     var box = document.querySelector("[data-gfield]");
     if (!box || !Lux.cells) return;
@@ -419,7 +424,7 @@
     if (ms.some(function (m) { return !m; })) return;
     box.hidden = false;
     box.setAttribute("role", "group");
-    box.setAttribute("aria-label", "Every game of both matches, one square a game; the two wins are buttons");
+    box.setAttribute("aria-label", "Every game of both matches, one square a game; a win of each, the game shown below, is a button");
     var parts = games.map(function (g, i) {
       var m = g.match, opp = g.white === "Luminex" ? g.black : g.white;
       var wrap = el("div", "gf-match"), frame = el("div", "gf-frame"), cv = el("canvas", "gf-canvas");
@@ -440,14 +445,15 @@
       frame.appendChild(btn);
       var cap = el("p", "gf-cap");
       cap.appendChild(el("b", "", opp));
-      cap.appendChild(el("span", "", m.games.toLocaleString("en-US") + " games · " + m.wins + " win · " + m.draws + " draws · " + m.losses + " losses"));
+      cap.appendChild(el("span", "", m.games.toLocaleString("en-US") + " games · " + m.wins + (m.wins === 1 ? " win · " : " wins · ") +
+                                     m.draws + " draws · " + m.losses + " losses"));
       wrap.appendChild(frame); wrap.appendChild(cap);
       box.appendChild(wrap);
       return { cv: cv, btn: btn, cells: cells, win: win, frame: frame };
     });
     var hint = el("p", "try gf-try");
     hint.setAttribute("aria-hidden", "true");
-    [["try-n", "01 · To try"], ["", "Find the two lights"], ["", "·"], ["", "each one opens its game"]]
+    [["try-n", "01 · To try"], ["", "Find the two ringed lights"], ["", "·"], ["", "each one opens its game"]]
       .forEach(function (h) { hint.appendChild(el("span", h[0], h[1])); });
     box.appendChild(hint);
 
@@ -476,12 +482,12 @@
       var n = Math.min(p.cells.length, upTo);
       for (var k = 0; k < n; k++) {
         var v = p.cells[k], q = xy(k, L);
-        c.fillStyle = (q[2] ? pal.alt : pal.css)[v === C.WIN ? C.DRAW : v];   // the win is the button's to light
+        c.fillStyle = (q[2] ? pal.alt : pal.css)[k === p.win ? C.DRAW : v];   // the game's own square is the button's to light
         c.fillRect(q[0] + gap / 2, q[1] + gap / 2, L.cs - gap, L.cs - gap);
       }
     }
     function all() { parts.forEach(function (p) { paint(p, Infinity); }); }
-    // the boards fill in one after another, then the two wins light
+    // the boards fill in one after another, then the two games' own squares light
     function grow(now) {
       if (!t0) t0 = now;
       var f = Math.min(1, (now - t0) / 1400), done = true;

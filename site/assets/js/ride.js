@@ -4,8 +4,8 @@
      0  one position      a board from a real game; a piece under the pointer
                           lights the squares it attacks
      1  one game          every position of that game, as frames of a film
-     2  one match         the 800 games of its match; the game is the lit cell
-     3  one gauntlet      twelve matches, the games that rate the release
+     2  one match         the games of its match; the game is one of the lit cells
+     3  one gauntlet      its matches, the games that rate the release
      4  every game        the wall: one cell for every game on the bench
 
    Scales 0 to 3 are one nested drawing (the board is a frame of the film, the
@@ -95,6 +95,7 @@
     if (/#$/.test(p.san)) return "checkmate";
     if (p.mate !== null && p.mate !== undefined) { var m = p.mate * sgn; return (m > 0 ? "mates in " : "mated in ") + Math.ceil(Math.abs(m) / 2); }
     if (p.cp === null || p.cp === undefined) return "";
+    if (Math.abs(p.cp) >= 15000) return p.cp * sgn > 0 ? "a known win" : "a known loss";
     var v = p.cp * sgn / 100;
     return (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(2);
   }

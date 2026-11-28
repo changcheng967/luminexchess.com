@@ -1,10 +1,10 @@
 /* luminexchess.com: the engine page's opening, a search growing in light.
 
    The tree is drawn, not recorded: no engine stores every node it visits. What drives it is real:
-   the first search in think.json (main's engine on 21.Nxe6 against Berserk 14). Each of its
+   the first search in think.json (v6.7.0 on 28...Bh5 against PlentyChess b-v8.0.0). Each of its
    iterations adds a level, at the pace the engine reached it; the root's bright branch is the
    engine's best move of the moment, so the light jumps when the engine changes its mind (at
-   depth 8 it finds the knight sacrifice); the counter under the tree is the engine's own.
+   depth 17 the bishop to h5 comes back for good); the counter under the tree is the engine's own.
    Without motion the finished tree is drawn once. */
 (function () {
   "use strict";

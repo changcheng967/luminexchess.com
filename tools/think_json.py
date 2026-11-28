@@ -14,17 +14,20 @@ P = json.load(open(positions, encoding="utf-8"))
 R = json.load(open(raw, encoding="utf-8"))
 G = json.load(open(games_path, encoding="utf-8"))
 
+# Each story is checked by hand against the recording it describes (raw.json): depths, nodes and scores as the engine printed them.
 STORY = {
-    "21.Nxe6": ("21.Nxe6 v Berserk 14",
-                "Through depth 7 the engine plays a quiet move and scores itself a little worse. At depth 8, after 18,039 nodes, "
-                "it finds the knight for a pawn, 21.Nxe6, and its score jumps from −0.50 to +3.77; the move holds for every iteration "
-                "after it, to depth 34. In the game against Berserk 14 it played the same move."),
-    "6.Nxe5": ("6.Nxe5 v Obsidian v16.0",
-               "Through depth 7 the engine develops the bishop. At depth 8 it sees 6.Nxe5, the pawn the game took, at +3.10; it changes "
-               "its mind once, at depth 23, and comes back to the knight at depth 24."),
-    "76.f7": ("76.f7 v Obsidian v16.0",
-              "The pawn goes first from depth 1. From depth 9 the line queens it, and the engine scores the ending a known win, an "
-              "ending it settles by its material. At depth 22 it finds mate in 16, and at depth 25 mate in 15."),
+    "28...Bh5": ("28...Bh5 v PlentyChess b-v8.0.0",
+                 "The bishop to h5 leads from depth 7 to 9, then gives way to ...a4, scored +1.1 to +1.7. At depth 17, after "
+                 "615,662 nodes, it comes back and the score jumps from +1.51 to +4.24; it holds to depth 31. In the game "
+                 "against PlentyChess b-v8.0.0 it played the same move, at +4.53."),
+    "31...Rxe4": ("31...Rxe4 v PlentyChess b-v8.0.0",
+                  "From depth 2 to 9 the queen goes to f6 or e6, scored +0.23 to +1.17. At depth 10, after 31,171 nodes, the "
+                  "engine sees the rook for the bishop on e4, and its score jumps from +0.92 to +4.17; the move holds to depth 33. "
+                  "In the game it gave the rook the same way."),
+    "47...Qxh3+": ("47...Qxh3+ v Obsidian v16.0",
+                   "The queen takes on h3 from the first iteration, scored level through depth 3. At depth 4, after 309 nodes, "
+                   "the engine sees mate in three, and every iteration after it says the same, to depth 87. In the game, "
+                   "Obsidian v16.0 had just scored itself +2.4, and Luminex played the same move."),
 }
 
 
@@ -95,7 +98,8 @@ for pos, res in zip(P, R["results"]):
     tab, story = STORY[pos["label"]]
     searches.append({
         "tab": tab,
-        "title": "%s v %s, after %s: White to move" % (g["white"], g["black"], move_label(g, pos["ply"])),
+        "title": "%s v %s, after %s: %s to move" % (g["white"], g["black"], move_label(g, pos["ply"]),
+                                                    "White" if board.turn == chess.WHITE else "Black"),
         "story": story,
         "fen": board.fen(),
         "last": pos["last"],
@@ -111,7 +115,7 @@ for pos, res in zip(P, R["results"]):
     })
     print(tab, "|", len(lines), "lines | best", searches[-1]["bestSan"], "| end", lines[-1]["time"], "ms |", searches[-1]["title"])
 
-json.dump({"engine": "Luminex dev-20261124-100de92c",
-           "about": "main's development build of 24 November 2026 (100de92), with gen768t_05q inside; one thread of an Intel Core Ultra 9 275HX, "
+json.dump({"engine": "Luminex 6.7.0",
+           "about": "v6.7.0's release build for Linux, with gen768u_01q inside; one thread of an Intel Xeon Platinum 8269CY, "
                     "Hash 64 MB, go movetime 10000",
            "searches": searches}, open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))

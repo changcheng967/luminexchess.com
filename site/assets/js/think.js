@@ -168,7 +168,8 @@
     S.end = Math.max(S.end || 0, iters[iters.length - 1].time, S.lines[S.lines.length - 1].time);
     shown = -1; elapsed = 0;
     $$("[role=tab]", tabsEl).forEach(function (t, k) { t.setAttribute("aria-selected", k === i ? "true" : "false"); t.tabIndex = k === i ? 0 : -1; });
-    board.instant(function () { board.set(S.fen, false); });
+    // the side the engine is thinking for sits at the bottom
+    board.instant(function () { board.setFlipped(S.fen.split(" ")[1] === "b"); board.set(S.fen, false); });
     board.mark(S.last || null);
     if (capEl) capEl.textContent = S.story;
     if (el.pos) el.pos.textContent = S.title;

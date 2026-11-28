@@ -95,14 +95,17 @@ discipline does).
 
 ## Tools
 
-- `tools/think_record.py ENGINE tools/think_positions.json raw.json` records main's engine
+- `tools/think_record.py ENGINE tools/think_positions.json raw.json` records the engine
   thinking on the showcase positions (`go movetime 10000`, one thread, Hash 64; every line kept),
   and `tools/think_json.py tools/think_positions.json raw.json site/assets/data/games.json
   site/assets/data/think.json` turns that into the engine page's replays: the engine's own lines,
   each line's time as nodes / nps (the lines carry none), the moves in notation by python-chess,
   and the search's real end. The stories under each replay are in `think_json.py` and are checked
-  against the recording by hand. Record with main's development build (its network inside) and
-  name the machine in `about`. The opening's tree (`tree.js`) reads the first search; the download
+  against the recording by hand. Record with the release's own binary (its network inside), on
+  the test box rather than this laptop, and name the machine in `about` and in the engine page's
+  lede; the replays since 28 November 2026 are v6.7.0's Linux build on one thread of mscope's
+  Xeon Platinum 8269CY. The positions come from the games in `games.json`; the board turns to
+  the side the engine is thinking for. The opening's tree (`tree.js`) reads the first search; the download
   page's terminal (`term.js`) replays each search as a session, from the `position` command the
   recording sent to the `bestmove` (with its `ponder`) the engine answered.
 - `tools/stamp.py site` keeps the repeated parts in step and checks the pages. A page marks
@@ -135,10 +138,11 @@ discipline does).
   default (`--via ""` fetches from this machine). The count of games is the bench's own
   (its Users page), which includes games of workloads deleted later; the sum over the
   listed workloads does not.
-  The home page's ride does not read `gauntlet.json`: it zooms out from a game of gauntlet 3 to
-  that gauntlet's twelve matches, so it draws `site/assets/data/gauntlet-3.json`, a copy kept as
+  The home page's ride does not read `gauntlet.json`: it zooms out from a game of gauntlet 8 to
+  that gauntlet's eleven matches, so it draws `site/assets/data/gauntlet-8.json`, a copy kept as
   it was. A new gauntlet changes the strength figure, the footnote and every `@g` value, not the
-  ride. Before writing a new gauntlet, drop `previous` from the file if the figure should not set
+  ride; new showcase games change the ride too (its first game, `data-ply`, `data-test`, the
+  copy of their gauntlet and the five scales' words). Before writing a new gauntlet, drop `previous` from the file if the figure should not set
   the older rating beside the new one (it did not on 19 November).
 - `tools/serve.py site 8137` serves the site locally with the headers from `site/_headers`.
 - `tools/logo_assets.py ../Luminex/luminex.jpg site` draws the marks, icons, favicon, the
@@ -157,7 +161,10 @@ discipline does).
   a time. Then run `tools/stamp.py`.
 - `tools/select_games.py` and `tools/export_games.py` choose and write the two games in
   `site/assets/data/` (`games.json` and the PGN); their docstrings name the archive the
-  current games come from.
+  current games come from. Since 28 November 2026 they are two of v6.7.0's wins in gauntlet 8,
+  against Obsidian v16.0 and PlentyChess b-v8.0.0, its two highest rated opponents. The first
+  game is also the home page's ride and the engine page's network inputs; the replays search
+  positions of both.
 
 ## Hosting
 
